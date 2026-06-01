@@ -1,0 +1,2447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETH/USDT - TradingView</title>
+    <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #1e222d;
+            --bg-secondary: #2a3040;
+            --bg-tertiary: #333a4a;
+            --bg-chart: #131722;
+            --border-color: #333a4a;
+            --text-primary: #d1d5db;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-green: #26a69a;
+            --accent-red: #ef5350;
+            --accent-blue: #58a6ff;
+            --accent-yellow: #f59e0b;
+            --hover-bg: #2a3040;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .logo-btn:hover {
+            background: var(--hover-bg);
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            letter-spacing: 0.5px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 300px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 6px 28px 6px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 12px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .symbol-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 12px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+
+        .symbol-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .symbol-separator {
+            width: 1px;
+            height: 14px;
+            background: var(--border-color);
+        }
+
+        .price-display {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .current-price {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            color: var(--accent-green);
+            letter-spacing: -0.5px;
+        }
+
+        .price-change {
+            font-size: 12px;
+            color: var(--accent-green);
+            font-weight: 500;
+        }
+
+        .price-change.negative {
+            color: var(--accent-red);
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: var(--bg-tertiary);
+            padding: 2px;
+            border-radius: 4px;
+        }
+
+        .timeframe-btn {
+            padding: 5px 14px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .timeframe-btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .timeframe-btn.active {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .tool-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            transition: all 0.15s;
+        }
+
+        .tool-btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .tool-btn.active {
+            background: var(--hover-bg);
+            color: var(--accent-blue);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .left-panel {
+            width: 40px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 8px 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .panel-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.15s;
+        }
+
+        .panel-btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .panel-btn.active {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .panel-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 8px 0;
+        }
+
+        .chart-container {
+            flex: 1;
+            background: var(--bg-chart);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 12px;
+            background: rgba(42, 48, 64, 0.8);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chart-title {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .chart-actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        .mini-btn {
+            padding: 4px 10px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .mini-btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        #chart {
+            flex: 1;
+            width: 100%;
+            min-height: 500px;
+        }
+
+        .crosshair-info {
+            position: absolute;
+            top: 40px;
+            right: 12px;
+            background: rgba(30, 34, 45, 0.95);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            z-index: 20;
+            display: none;
+        }
+
+        .crosshair-info.active {
+            display: block;
+        }
+
+        .crosshair-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 4px;
+        }
+
+        .crosshair-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .crosshair-label {
+            color: var(--text-muted);
+        }
+
+        .crosshair-value {
+            color: var(--text-primary);
+        }
+
+        .crosshair-value.up {
+            color: var(--accent-green);
+        }
+
+        .crosshair-value.down {
+            color: var(--accent-red);
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .range-btn {
+            padding: 4px 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.15s;
+        }
+
+        .range-btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .range-btn.active {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .footer-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .playback-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .playback-btn {
+            width: 26px;
+            height: 26px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+
+        .playback-btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .playback-btn.playing {
+            color: var(--accent-green);
+        }
+
+        .speed-select {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .speed-select:hover {
+            color: var(--text-primary);
+        }
+
+        .speed-select:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .date-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .date-selector label {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .date-selector input {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .date-selector input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .date-selector button {
+            padding: 4px 10px;
+            border: none;
+            background: var(--accent-blue);
+            color: white;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .date-selector button:hover {
+            opacity: 0.9;
+        }
+
+        .data-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+        }
+
+        .status-dot.loading {
+            background: var(--accent-yellow);
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-dot.error {
+            background: var(--accent-red);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .time-display {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: var(--text-secondary);
+        }
+
+        .stats-panel {
+            width: 220px;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            padding: 12px;
+            overflow-y: auto;
+        }
+
+        .stats-section {
+            margin-bottom: 16px;
+        }
+
+        .stats-title {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(51, 58, 74, 0.5);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+        }
+
+        .stat-value {
+            color: var(--text-primary);
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-weight: 500;
+        }
+
+        .stat-value.positive {
+            color: var(--accent-green);
+        }
+
+        .stat-value.negative {
+            color: var(--accent-red);
+        }
+
+        .separator {
+            height: 1px;
+            background: var(--border-color);
+            margin: 12px 0;
+        }
+
+        .indicators-panel {
+            margin-top: 16px;
+        }
+
+        .indicator-btn {
+            width: 100%;
+            padding: 6px 8px;
+            border: none;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-bottom: 4px;
+            text-align: left;
+            transition: all 0.15s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .indicator-btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .indicator-btn.active {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .stats-panel {
+                width: 180px;
+            }
+
+            .search-bar {
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-panel {
+                display: none;
+            }
+
+            .timeframe-btn {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+
+            .header-right {
+                display: none;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .symbol-info {
+                padding: 4px 8px;
+            }
+
+            .current-price {
+                font-size: 16px;
+            }
+        }
+        
+        /* 价格轴设置面板样式 */
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(51, 58, 74, 0.5);
+        }
+        
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        
+        .setting-select {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        .setting-select:hover {
+            border-color: var(--accent-blue);
+        }
+        
+        .setting-range {
+            width: 100px;
+            margin: 0 8px;
+            cursor: pointer;
+        }
+        
+        .setting-value {
+            font-size: 11px;
+            color: var(--text-primary);
+            font-family: 'Consolas', 'Monaco', monospace;
+            min-width: 35px;
+            text-align: right;
+        }
+        
+        /* 切换开关样式 */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-tertiary);
+            transition: 0.3s;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 2px;
+            bottom: 2px;
+            background-color: var(--text-muted);
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+            background-color: white;
+        }
+        
+        /* 绘图右键菜单样式 */
+        .menu-item {
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background 0.15s;
+            font-size: 13px;
+        }
+        
+        .menu-item:hover {
+            background: #3a4050;
+        }
+        
+        .delete-item:hover {
+            background: rgba(239, 83, 80, 0.2);
+            color: #ef5350;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+                <div class="logo-section">
+                    <div class="logo">TradingView</div>
+                </div>
+                <div class="symbol-info">
+                    <span class="symbol-name">ETH/USDT</span>
+                    <span class="symbol-separator"></span>
+                    <div class="price-display">
+                        <span class="current-price" id="current-price">$0.00</span>
+                        <span class="price-change" id="price-change">+0.00%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-center">
+                <button class="timeframe-btn active" data-interval="15m">15m</button>
+                <button class="timeframe-btn" data-interval="1h">1h</button>
+                <button class="timeframe-btn" data-interval="4h">4h</button>
+                <button class="timeframe-btn" data-interval="1d">1d</button>
+            </div>
+
+            <div class="header-right">
+                <button class="tool-btn" id="btn-add-marker" title="添加标记点">📍</button>
+                <button class="tool-btn" id="btn-add-priceline" title="添加价格线">—</button>
+                <button class="tool-btn" id="btn-draw-rectangle" title="绘制矩形">▢</button>
+                <button class="tool-btn" id="btn-draw-trendline" title="绘制趋势线">↗</button>
+                <button class="tool-btn" id="btn-draw-fibonacci" title="绘制斐波那契">∅</button>
+                <button class="tool-btn" id="btn-clear-drawings" title="清除所有绘图">🗑️</button>
+            </div>
+    </div>
+
+    <div class="main-content">
+        <div class="left-panel">
+            <button class="panel-btn active" title="图表">📈</button>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">ETH/USDT · Binance · 15分钟</div>
+                <div class="chart-actions">
+                    <button class="mini-btn" id="zoom-in">+ 放大</button>
+                    <button class="mini-btn" id="zoom-out">− 缩小</button>
+                    <button class="mini-btn" id="reset-view">↺ 重置</button>
+                    <button class="mini-btn active" id="toggle-auto-scale">📐 自动</button>
+                    <button class="mini-btn">TradingView</button>
+                    <button class="mini-btn">Binance</button>
+                </div>
+            </div>
+
+            <div id="chart"></div>
+            <div class="crosshair-info" id="crosshair-info">
+                <div class="crosshair-row">
+                    <span class="crosshair-label">时间</span>
+                    <span class="crosshair-value" id="crosshair-time">--:--:--</span>
+                </div>
+                <div class="crosshair-row">
+                    <span class="crosshair-label">开盘</span>
+                    <span class="crosshair-value" id="crosshair-open">$0.00</span>
+                </div>
+                <div class="crosshair-row">
+                    <span class="crosshair-label">最高</span>
+                    <span class="crosshair-value" id="crosshair-high">$0.00</span>
+                </div>
+                <div class="crosshair-row">
+                    <span class="crosshair-label">最低</span>
+                    <span class="crosshair-value" id="crosshair-low">$0.00</span>
+                </div>
+                <div class="crosshair-row">
+                    <span class="crosshair-label">收盘</span>
+                    <span class="crosshair-value" id="crosshair-close">$0.00</span>
+                </div>
+                <div class="crosshair-row">
+                    <span class="crosshair-label">成交量</span>
+                    <span class="crosshair-value" id="crosshair-volume">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stats-section">
+                <div class="stats-title">行情数据</div>
+                <div class="stat-row">
+                    <span class="stat-label">开盘</span>
+                    <span class="stat-value" id="stat-open">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">最高</span>
+                    <span class="stat-value" id="stat-high">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">最低</span>
+                    <span class="stat-value" id="stat-low">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">收盘</span>
+                    <span class="stat-value" id="stat-close">$0.00</span>
+                </div>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="stats-section">
+                <div class="stats-title">24小时</div>
+                <div class="stat-row">
+                    <span class="stat-label">最高</span>
+                    <span class="stat-value" id="stat-high24">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">最低</span>
+                    <span class="stat-value" id="stat-low24">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">成交量</span>
+                    <span class="stat-value" id="stat-volume">0 ETH</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">涨跌幅</span>
+                    <span class="stat-value" id="stat-change">0.00%</span>
+                </div>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="indicators-panel">
+                <div class="stats-title">指标</div>
+                <button class="indicator-btn" id="indicator-ema">EMA (20) <span>📊</span></button>
+            </div>
+            
+            <div class="separator"></div>
+            
+            <div class="price-settings-panel">
+                <div class="stats-title">价格轴设置</div>
+                
+                <!-- 价格模式 -->
+                <div class="setting-row">
+                    <span class="setting-label">价格模式</span>
+                    <select class="setting-select" id="price-mode">
+                        <option value="0">Normal (线性)</option>
+                        <option value="1">Logarithmic (对数)</option>
+                        <option value="2">Percentage (百分比)</option>
+                        <option value="3">IndexedTo100 (指数)</option>
+                    </select>
+                </div>
+                
+                <!-- 价格轴边距 -->
+                <div class="setting-row">
+                    <span class="setting-label">上边距</span>
+                    <input type="range" class="setting-range" id="scale-margin-top" min="0" max="0.5" step="0.01" value="0.1">
+                    <span class="setting-value" id="scale-margin-top-value">0.10</span>
+                </div>
+                
+                <div class="setting-row">
+                    <span class="setting-label">下边距</span>
+                    <input type="range" class="setting-range" id="scale-margin-bottom" min="0" max="0.5" step="0.01" value="0.1">
+                    <span class="setting-value" id="scale-margin-bottom-value">0.10</span>
+                </div>
+                
+                <!-- 反转价格轴 -->
+                <div class="setting-row">
+                    <span class="setting-label">反转价格轴</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="invert-scale">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-left">
+        </div>
+
+        <div class="footer-center">
+            <div class="playback-controls">
+                <button class="playback-btn" id="playback-reset" title="重置">⏮</button>
+                <button class="playback-btn" id="playback-step-back" title="后退">◀</button>
+                <button class="playback-btn" id="playback-play" title="播放/暂停">▶</button>
+                <button class="playback-btn" id="playback-step-forward" title="前进">▶▶</button>
+                <select class="speed-select" id="playback-speed">
+                    <option value="1">1x</option>
+                    <option value="2" selected>2x</option>
+                    <option value="5">5x</option>
+                    <option value="10">10x</option>
+                    <option value="20">20x</option>
+                </select>
+            </div>
+            <div class="date-selector" style="margin-left: 20px;">
+                <label for="playback-date">从:</label>
+                <input type="date" id="playback-date">
+                <button id="set-playback-date">确定</button>
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <div class="data-status">
+                <span class="status-dot" id="status-dot"></span>
+                <span id="status-text">实时数据</span>
+            </div>
+            <div class="time-display" id="current-time">--:--:--</div>
+            <div>Binance · ETH/USDT</div>
+        </div>
+    </div>
+
+    <script>
+        let chart;
+        let candlestickSeries;
+        let volumeSeries;
+        let smaSeries = null;
+        let allData = [];
+        let playbackIndex = 0;
+        let isPlaying = false;
+        let playbackInterval = null;
+        let playbackSpeed = 2;
+        
+        // 官方支持的功能变量
+        let markers = [];
+        let priceLines = [];
+        let markerMode = false;
+        let priceLineMode = false;
+        let currentMarkerPosition = null;
+        
+        let autoScaleEnabled = true;
+        
+        // 价格轴设置变量
+        let currentPriceMode = 0; // 0 = Normal
+        let scaleMarginTop = 0.1;
+        let scaleMarginBottom = 0.1;
+        let invertScale = false;
+        
+        // 绘图工具变量
+        let activeDrawingTool = null;
+        let drawingStartData = null; // 使用数据坐标 { time, price }
+        let currentEndData = null;    // 使用数据坐标 { time, price }
+        let isDrawing = false;
+        let isDraggingDrawing = false;
+        let isResizingDrawing = false;
+        let selectedDrawing = null;
+        let selectedHandle = null;
+        let dragOffset = null;
+        let drawingObjects = []; // 每个绘图使用数据坐标 { type, start: {time, price}, end: {time, price} }
+        let drawingCanvas = null;
+
+        function updateTimeDisplay() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('zh-CN', { hour12: false });
+        }
+
+        function updateStatus(status, text) {
+            const dot = document.getElementById('status-dot');
+            dot.className = `status-dot ${status}`;
+            document.getElementById('status-text').textContent = text;
+        }
+
+        function calculateSMA(data, period = 20) {
+            const emaData = [];
+            const multiplier = 2 / (period + 1);
+            
+            // 第一个 EMA 值使用 SMA 作为起点
+            let sum = 0;
+            for (let i = 0; i < period; i++) {
+                sum += data[i].close;
+            }
+            let emaValue = sum / period;
+            emaData.push({
+                time: data[period - 1].time,
+                value: emaValue
+            });
+            
+            // 计算后续的 EMA 值
+            for (let i = period; i < data.length; i++) {
+                emaValue = (data[i].close * multiplier) + (emaValue * (1 - multiplier));
+                emaData.push({
+                    time: data[i].time,
+                    value: emaValue
+                });
+            }
+            
+            return emaData;
+        }
+
+        async function loadLocalData() {
+            loadDataForInterval('15m');
+        }
+        
+        async function loadDataForInterval(interval) {
+            updateStatus('loading', `加载 ${interval} 数据...`);
+
+            try {
+                const response = await fetch(`data/${interval}.json`);
+
+                if (!response.ok) {
+                    // 如果请求失败，使用 15m 数据作为默认数据
+                    console.warn(`${interval}.json 不存在，使用 15m 数据`);
+                    loadDefaultData();
+                    return;
+                }
+
+                const data = await response.json();
+
+                if (data.length === 0) {
+                    loadDefaultData();
+                    return;
+                }
+
+                allData = data;
+                playbackIndex = allData.length - 1;
+
+                updateChart();
+                updateStats();
+                initializeDatePicker();
+                updateStatus('realtime', `本地数据 ${interval} (${allData.length.toLocaleString()} 根)`);
+
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                loadDefaultData();
+            }
+        }
+        
+        function loadDefaultData() {
+            // 使用 15m 数据作为默认数据
+            fetch('data/15m.json')
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        allData = data;
+                        playbackIndex = allData.length - 1;
+                        updateChart();
+                        updateStats();
+                        initializeDatePicker();
+                        updateStatus('realtime', `本地数据 (${allData.length.toLocaleString()} 根) - 当前仅支持 15m`);
+                    }
+                })
+                .catch(error => {
+                    console.error('加载默认数据失败:', error);
+                    updateStatus('error', '加载失败');
+                });
+        }
+
+        function fetchInitialData() {
+            loadLocalData();
+        }
+
+        function updateChart(fitContent = true) {
+            if (allData.length === 0) return;
+
+            const visibleData = allData.slice(0, playbackIndex + 1);
+
+            const candleData = visibleData.map(d => ({
+                time: d.time,
+                open: d.open,
+                high: d.high,
+                low: d.low,
+                close: d.close
+            }));
+
+            const volumeData = visibleData.map(d => ({
+                time: d.time,
+                value: d.volume,
+                color: d.close >= d.open ? '#26a69a' : '#ef5350'
+            }));
+
+            candlestickSeries.setData(candleData);
+            volumeSeries.setData(volumeData);
+
+            if (smaSeries) {
+                const smaData = calculateSMA(visibleData, 20);
+                smaSeries.setData(smaData);
+            }
+
+            if (fitContent) {
+                chart.timeScale().fitContent();
+            }
+        }
+        
+        // 回放专用更新函数 - 只更新最后一根K线，提高性能
+        function updateChartForPlayback() {
+            if (playbackIndex < 0 || playbackIndex >= allData.length) return;
+            
+            const currentData = allData[playbackIndex];
+            
+            // 只更新最后一根K线的数据
+            const candleData = {
+                time: currentData.time,
+                open: currentData.open,
+                high: currentData.high,
+                low: currentData.low,
+                close: currentData.close
+            };
+            
+            const volumeData = {
+                time: currentData.time,
+                value: currentData.volume,
+                color: currentData.close >= currentData.open ? '#26a69a' : '#ef5350'
+            };
+            
+            // 使用 update 方法而不是 setData，只更新变化的数据
+            candlestickSeries.update(candleData);
+            volumeSeries.update(volumeData);
+            
+            // 更新 SMA（如果启用）
+            if (smaSeries && playbackIndex >= 19) {
+                const visibleData = allData.slice(0, playbackIndex + 1);
+                const smaData = calculateSMA(visibleData, 20);
+                if (smaData.length > 0) {
+                    smaSeries.update(smaData[smaData.length - 1]);
+                }
+            }
+        }
+
+        function updateStats() {
+            if (allData.length === 0) return;
+
+            const currentCandle = allData[playbackIndex];
+            const firstCandle = allData[0];
+
+            const priceChange = currentCandle.close - firstCandle.open;
+            const priceChangePercent = (priceChange / firstCandle.open) * 100;
+            const isPositive = priceChange >= 0;
+
+            document.getElementById('current-price').textContent = `$${currentCandle.close.toFixed(2)}`;
+
+            const changeEl = document.getElementById('price-change');
+            changeEl.className = `price-change ${isPositive ? '' : 'negative'}`;
+            changeEl.textContent = `${isPositive ? '+' : ''}${priceChangePercent.toFixed(2)}%`;
+
+            document.getElementById('stat-open').textContent = `$${currentCandle.open.toFixed(2)}`;
+            document.getElementById('stat-high').textContent = `$${currentCandle.high.toFixed(2)}`;
+            document.getElementById('stat-low').textContent = `$${currentCandle.low.toFixed(2)}`;
+            document.getElementById('stat-close').textContent = `$${currentCandle.close.toFixed(2)}`;
+
+            const recentData = allData.slice(-96);
+            const high24h = Math.max(...recentData.map(d => d.high));
+            const low24h = Math.min(...recentData.map(d => d.low));
+            const volume24h = recentData.reduce((sum, d) => sum + d.volume, 0);
+
+            document.getElementById('stat-high24').textContent = `$${high24h.toFixed(2)}`;
+            document.getElementById('stat-low24').textContent = `$${low24h.toFixed(2)}`;
+            document.getElementById('stat-volume').textContent = `${(volume24h / 1000).toFixed(1)}K ETH`;
+            document.getElementById('stat-change').textContent = `${isPositive ? '+' : ''}${priceChangePercent.toFixed(2)}%`;
+            document.getElementById('stat-change').className = `stat-value ${isPositive ? 'positive' : 'negative'}`;
+        }
+
+        function startPlayback() {
+            if (isPlaying) return;
+
+            isPlaying = true;
+            document.getElementById('playback-play').textContent = '⏸';
+            document.getElementById('playback-play').classList.add('playing');
+
+            const baseInterval = 1000;
+            playbackInterval = setInterval(() => {
+                if (playbackIndex < allData.length - 1) {
+                    playbackIndex++;
+                    // 只更新必要的数据，不重新设置整个数据集
+                    updateChartForPlayback();
+                    updateStats();
+                } else {
+                    stopPlayback();
+                }
+            }, baseInterval / playbackSpeed);
+        }
+
+        function stopPlayback() {
+            isPlaying = false;
+            document.getElementById('playback-play').textContent = '▶';
+            document.getElementById('playback-play').classList.remove('playing');
+
+            if (playbackInterval) {
+                clearInterval(playbackInterval);
+                playbackInterval = null;
+            }
+        }
+
+        function togglePlayback() {
+            if (isPlaying) {
+                stopPlayback();
+            } else {
+                if (playbackIndex >= allData.length - 1) {
+                    playbackIndex = 0;
+                }
+                startPlayback();
+            }
+        }
+
+        function stepForward() {
+            if (playbackIndex < allData.length - 1) {
+                playbackIndex++;
+                updateChart();
+                updateStats();
+            }
+        }
+
+        function stepBackward() {
+            if (playbackIndex > 0) {
+                playbackIndex--;
+                updateChart();
+                updateStats();
+            }
+        }
+
+        function resetPlayback() {
+            stopPlayback();
+            playbackIndex = 0;
+            updateChart();
+            updateStats();
+        }
+
+        function setPlaybackDate() {
+            if (allData.length === 0) return;
+            
+            const dateInput = document.getElementById('playback-date');
+            const selectedDate = dateInput.value;
+            
+            if (!selectedDate) {
+                alert('请选择日期');
+                return;
+            }
+            
+            const targetDate = new Date(selectedDate);
+            targetDate.setHours(0, 0, 0, 0);
+            
+            let foundIndex = -1;
+            for (let i = 0; i < allData.length; i++) {
+                const candleDate = new Date(allData[i].time * 1000);
+                candleDate.setHours(0, 0, 0, 0);
+                
+                if (candleDate.getTime() >= targetDate.getTime()) {
+                    foundIndex = i;
+                    break;
+                }
+            }
+            
+            if (foundIndex === -1) {
+                alert('未找到该日期的数据');
+                return;
+            }
+            
+            stopPlayback();
+            playbackIndex = foundIndex;
+            updateChart();
+            updateStats();
+        }
+
+        function initializeDatePicker() {
+            if (allData.length === 0) return;
+            
+            const dateInput = document.getElementById('playback-date');
+            
+            const firstDate = new Date(allData[0].time * 1000);
+            const lastDate = new Date(allData[allData.length - 1].time * 1000);
+            
+            dateInput.min = formatDateForInput(firstDate);
+            dateInput.max = formatDateForInput(lastDate);
+            dateInput.value = formatDateForInput(firstDate);
+        }
+
+        function formatDateForInput(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function initChart() {
+            const container = document.getElementById('chart');
+            chart = LightweightCharts.createChart(container, {
+                layout: {
+                    background: { type: 'solid', color: '#131722' },
+                    textColor: '#d1d5db',
+                },
+                grid: {
+                    vertLines: { visible: false },
+                    horzLines: { visible: false },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    visible: true,
+                    borderColor: '#333a4a',
+                    autoScale: true,
+                    scaleMargins: {
+                        top: 0.1,
+                        bottom: 0.1,
+                    },
+                },
+                leftPriceScale: {
+                    visible: false,
+                },
+                timeScale: {
+                    borderColor: '#333a4a',
+                    timeVisible: true,
+                    minBarSpacing: 1,
+                },
+                handleScroll: true,
+                handleScale: true,
+            });
+
+            candlestickSeries = chart.addCandlestickSeries({
+                upColor: '#26a69a',
+                downColor: '#ef5350',
+                borderUpColor: '#26a69a',
+                borderDownColor: '#ef5350',
+                wickUpColor: '#26a69a',
+                wickDownColor: '#ef5350',
+            });
+
+            volumeSeries = chart.addHistogramSeries({
+                color: '#26a69a',
+                priceFormat: {
+                    type: 'volume',
+                },
+                priceScaleId: '',
+            });
+
+            volumeSeries.priceScale().applyOptions({
+                scaleMargins: {
+                    top: 0.85,
+                    bottom: 0,
+                },
+            });
+
+            chart.subscribeCrosshairMove((param) => {
+                const crosshairInfo = document.getElementById('crosshair-info');
+
+                if (param.time) {
+                    crosshairInfo.classList.add('active');
+
+                    const date = new Date(param.time * 1000);
+                    document.getElementById('crosshair-time').textContent = date.toLocaleString('zh-CN');
+
+                    if (param.seriesData.get(candlestickSeries)) {
+                        const data = param.seriesData.get(candlestickSeries);
+                        document.getElementById('crosshair-open').textContent = `$${data.open.toFixed(2)}`;
+                        document.getElementById('crosshair-high').textContent = `$${data.high.toFixed(2)}`;
+                        document.getElementById('crosshair-low').textContent = `$${data.low.toFixed(2)}`;
+                        document.getElementById('crosshair-close').textContent = `$${data.close.toFixed(2)}`;
+
+                        const closeEl = document.getElementById('crosshair-close');
+                        closeEl.className = `crosshair-value ${data.close >= data.open ? 'up' : 'down'}`;
+                    }
+
+                    if (param.seriesData.get(volumeSeries)) {
+                        const volumeData = param.seriesData.get(volumeSeries);
+                        document.getElementById('crosshair-volume').textContent = volumeData.value.toFixed(0);
+                    }
+                } else {
+                    crosshairInfo.classList.remove('active');
+                }
+            });
+
+            chart.subscribeClick(handleChartClick);
+            
+            // 监听图表可视范围变化（缩放、拖动），自动重绘画布
+            chart.timeScale().subscribeVisibleTimeRangeChange(() => {
+                redrawCanvas();
+            });
+            
+            window.addEventListener('resize', () => {
+                const rect = container.getBoundingClientRect();
+                chart.applyOptions({
+                    width: rect.width,
+                    height: rect.height,
+                });
+            });
+            
+            // 初始化绘图Canvas覆盖层
+            setTimeout(initDrawingCanvas, 100);
+
+        }
+
+        function toggleIndicator(indicatorType) {
+            if (indicatorType === 'ema') {
+                if (smaSeries) {
+                    chart.removeSeries(smaSeries);
+                    smaSeries = null;
+                    document.getElementById('indicator-ema').classList.remove('active');
+                } else {
+                    smaSeries = chart.addLineSeries({
+                        color: '#58a6ff',
+                        lineWidth: 2,
+                    });
+                    document.getElementById('indicator-ema').classList.add('active');
+                    updateChart();
+                }
+            }
+        }
+        
+        function toggleAutoScale() {
+            autoScaleEnabled = !autoScaleEnabled;
+            const btn = document.getElementById('toggle-auto-scale');
+            
+            if (autoScaleEnabled) {
+                btn.classList.add('active');
+                btn.textContent = '📐 自动';
+                chart.priceScale().applyOptions({ autoScale: true });
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '📐 手动';
+                chart.priceScale().applyOptions({ autoScale: false });
+            }
+        }
+
+        // === Lightweight Charts 官方支持的基本功能 ===
+        
+        // 1. Series Markers (系列标记) - 在 K 线上添加标记点
+        function toggleMarkerMode() {
+            markerMode = !markerMode;
+            priceLineMode = false;
+            activeDrawingTool = null;
+            
+            const markerBtn = document.getElementById('btn-add-marker');
+            const priceLineBtn = document.getElementById('btn-add-priceline');
+            const drawingBtns = ['btn-draw-rectangle', 'btn-draw-trendline', 'btn-draw-fibonacci'];
+            drawingBtns.forEach(id => document.getElementById(id).classList.remove('active'));
+            
+            if (markerMode) {
+                markerBtn.classList.add('active');
+                priceLineBtn.classList.remove('active');
+            } else {
+                markerBtn.classList.remove('active');
+            }
+        }
+
+        function addMarker(time, price) {
+            const marker = {
+                time: time,
+                position: price > allData[allData.length-1].close ? 'aboveBar' : 'belowBar',
+                color: price > allData[allData.length-1].close ? '#219653' : '#ef5350',
+                shape: price > allData[allData.length-1].close ? 'arrowUp' : 'arrowDown',
+                text: price > allData[allData.length-1].close ? 'BUY' : 'SELL',
+                size: 1
+            };
+            
+            markers.push(marker);
+            candlestickSeries.setMarkers(markers);
+        }
+
+        // 2. Price Lines (价格线) - 添加水平价格线
+        function togglePriceLineMode() {
+            priceLineMode = !priceLineMode;
+            markerMode = false;
+            activeDrawingTool = null;
+            
+            const markerBtn = document.getElementById('btn-add-marker');
+            const priceLineBtn = document.getElementById('btn-add-priceline');
+            const drawingBtns = ['btn-draw-rectangle', 'btn-draw-trendline', 'btn-draw-fibonacci'];
+            drawingBtns.forEach(id => document.getElementById(id).classList.remove('active'));
+            
+            if (priceLineMode) {
+                priceLineBtn.classList.add('active');
+                markerBtn.classList.remove('active');
+            } else {
+                priceLineBtn.classList.remove('active');
+            }
+        }
+        
+        // === 绘图工具系统 ===
+        
+        // 选择绘图工具
+        function selectDrawingTool(toolType) {
+            const tools = ['btn-draw-rectangle', 'btn-draw-trendline', 'btn-draw-fibonacci'];
+            
+            tools.forEach(id => {
+                document.getElementById(id).classList.remove('active');
+            });
+            
+            document.getElementById('btn-add-marker').classList.remove('active');
+            document.getElementById('btn-add-priceline').classList.remove('active');
+            markerMode = false;
+            priceLineMode = false;
+            
+            if (activeDrawingTool === toolType) {
+                activeDrawingTool = null;
+                drawingStartPoint = null;
+            } else {
+                activeDrawingTool = toolType;
+                const btnId = `btn-draw-${toolType}`;
+                document.getElementById(btnId).classList.add('active');
+                drawingStartPoint = null;
+            }
+        }
+        
+        // === 使用Canvas覆盖层实现自由绘图 ===
+        
+        // 初始化绘图Canvas覆盖层
+        function initDrawingCanvas() {
+            const chartContainer = document.getElementById('chart');
+            if (!chartContainer) return;
+            
+            const existingCanvas = document.getElementById('drawing-canvas');
+            if (existingCanvas) {
+                existingCanvas.remove();
+            }
+            
+            const canvas = document.createElement('canvas');
+            canvas.id = 'drawing-canvas';
+            canvas.style.position = 'absolute';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.pointerEvents = 'none'; // 默认为none，只在需要时改为auto
+            canvas.style.zIndex = '10';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            chartContainer.appendChild(canvas);
+            
+            drawingCanvas = canvas;
+            resizeDrawingCanvas();
+            
+            // 我们使用容器本身来监听事件，然后决定如何处理
+            chartContainer.addEventListener('mousemove', handleContainerMouseMove, true);
+            chartContainer.addEventListener('mousedown', handleContainerMouseDown, true);
+            chartContainer.addEventListener('mouseup', handleContainerMouseUp, true);
+            chartContainer.addEventListener('mouseleave', handleContainerMouseUp, true);
+            chartContainer.addEventListener('contextmenu', handleContainerContextMenu, true);
+            
+            window.addEventListener('resize', resizeDrawingCanvas);
+        }
+        
+        // 容器鼠标移动处理 - 决定是否拦截事件
+        function handleContainerMouseMove(e) {
+            if (!drawingCanvas) return;
+            
+            const rect = drawingCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // 更新光标样式并决定是否需要拦截事件
+            let shouldIntercept = false;
+            
+            if (isDrawing) {
+                // 正在绘图中，拦截
+                shouldIntercept = true;
+                drawingCanvas.style.cursor = 'crosshair';
+            } else if (isDraggingDrawing || isResizingDrawing) {
+                // 正在拖动或调整，拦截
+                shouldIntercept = true;
+            } else if (!activeDrawingTool) {
+                // 检查是否悬停在绘图或控制点上
+                const handleResult = findClickedHandle(x, y);
+                if (handleResult) {
+                    drawingCanvas.style.cursor = 'pointer';
+                    shouldIntercept = true;
+                } else {
+                    const clickedDrawing = findClickedDrawing(x, y);
+                    if (clickedDrawing) {
+                        drawingCanvas.style.cursor = 'move';
+                        shouldIntercept = true;
+                    } else {
+                        drawingCanvas.style.cursor = 'default';
+                    }
+                }
+            } else if (activeDrawingTool) {
+                // 有绘图工具激活
+                drawingCanvas.style.cursor = 'crosshair';
+                shouldIntercept = true;
+            }
+            
+            // 更新pointerEvents
+            drawingCanvas.style.pointerEvents = shouldIntercept ? 'auto' : 'none';
+            
+            // 如果正在绘图，更新预览
+            if (isDrawing) {
+                const dataPoint = screenToData(x, y);
+                if (dataPoint.time && dataPoint.price) {
+                    currentEndData = dataPoint;
+                    redrawCanvas();
+                }
+            }
+            
+            // 如果是在拖动或调整大小，继续处理
+            if (isDraggingDrawing || isResizingDrawing) {
+                const dataPoint = screenToData(x, y);
+                if (dataPoint.time && dataPoint.price) {
+                    if (isResizingDrawing && selectedDrawing && selectedHandle) {
+                        if (selectedHandle.id === 'start') {
+                            selectedDrawing.start = dataPoint;
+                        } else if (selectedHandle.id === 'end') {
+                            selectedDrawing.end = dataPoint;
+                        }
+                        redrawCanvas();
+                    } else if (isDraggingDrawing && selectedDrawing) {
+                        const dx = dataPoint.time - dragOffset.time;
+                        const dy = dataPoint.price - dragOffset.price;
+                        
+                        selectedDrawing.start.time += dx;
+                        selectedDrawing.start.price += dy;
+                        selectedDrawing.end.time += dx;
+                        selectedDrawing.end.price += dy;
+                        
+                        dragOffset = dataPoint;
+                        redrawCanvas();
+                    }
+                }
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
+        
+        // 容器鼠标按下处理
+        function handleContainerMouseDown(e) {
+            if (!drawingCanvas) return;
+            
+            const rect = drawingCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const dataPoint = screenToData(x, y);
+            if (!dataPoint.time || !dataPoint.price) return;
+            
+            let shouldIntercept = false;
+            
+            // 检查是否点击了控制点（用于调整大小）
+            if (!activeDrawingTool) {
+                const handleResult = findClickedHandle(x, y);
+                if (handleResult) {
+                    selectedDrawing = handleResult.drawing;
+                    selectedHandle = handleResult.handle;
+                    isResizingDrawing = true;
+                    shouldIntercept = true;
+                } else {
+                    // 检查是否点击了绘图（用于移动）
+                    const clickedDrawing = findClickedDrawing(x, y);
+                    if (clickedDrawing) {
+                        selectedDrawing = clickedDrawing;
+                        isDraggingDrawing = true;
+                        dragOffset = dataPoint;
+                        shouldIntercept = true;
+                    }
+                }
+            }
+            
+            // 如果有激活的绘图工具，开始绘图
+            if (activeDrawingTool) {
+                drawingStartData = dataPoint;
+                isDrawing = true;
+                shouldIntercept = true;
+            }
+            
+            if (shouldIntercept) {
+                drawingCanvas.style.pointerEvents = 'auto';
+                e.preventDefault();
+                e.stopPropagation();
+            } else {
+                drawingCanvas.style.pointerEvents = 'none';
+            }
+        }
+        
+        // 容器鼠标释放处理
+        function handleContainerMouseUp(e) {
+            if (!drawingCanvas) return;
+            
+            if (isDraggingDrawing || isDrawing || isResizingDrawing) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            // 完成绘图
+            if (isDrawing && drawingStartData && currentEndData) {
+                const drawing = {
+                    type: activeDrawingTool,
+                    start: { time: drawingStartData.time, price: drawingStartData.price },
+                    end: { time: currentEndData.time, price: currentEndData.price }
+                };
+                
+                drawingObjects.push(drawing);
+                activeDrawingTool = null;
+                
+                ['btn-draw-rectangle', 'btn-draw-trendline', 'btn-draw-fibonacci'].forEach(id => {
+                    document.getElementById(id).classList.remove('active');
+                });
+                
+                redrawCanvas();
+            }
+            
+            // 重置状态
+            isDraggingDrawing = false;
+            isResizingDrawing = false;
+            isDrawing = false;
+            selectedDrawing = null;
+            selectedHandle = null;
+            dragOffset = null;
+            drawingStartData = null;
+            currentEndData = null;
+            
+            // 恢复默认pointerEvents
+            drawingCanvas.style.pointerEvents = 'none';
+        }
+        
+        // 处理右键菜单
+        function handleContainerContextMenu(e) {
+            if (!drawingCanvas) return;
+            
+            const rect = drawingCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // 检查是否点击了绘图
+            const clickedDrawing = findClickedDrawing(x, y);
+            if (clickedDrawing) {
+                e.preventDefault();
+                e.stopPropagation();
+                // 直接保存到全局变量，确保引用正确
+                window.selectedDrawingForDelete = clickedDrawing;
+                showDeleteMenu(e.clientX, e.clientY, clickedDrawing);
+            }
+        }
+        
+        // 显示删除菜单
+        function showDeleteMenu(x, y, drawing) {
+            // 移除已存在的菜单
+            const existingMenu = document.getElementById('drawing-context-menu');
+            if (existingMenu) {
+                existingMenu.remove();
+            }
+            
+            const menu = document.createElement('div');
+            menu.id = 'drawing-context-menu';
+            
+            const deleteItem = document.createElement('div');
+            deleteItem.className = 'menu-item delete-item';
+            deleteItem.textContent = '🗑️ 删除绘图';
+            deleteItem.style.color = '#d1d5db';
+            
+            // 保存当前选中的绘图
+            selectedDrawing = drawing;
+            
+            // 添加点击事件
+            deleteItem.addEventListener('click', (e) => {
+                e.stopPropagation();
+                deleteSelectedDrawing(menu);
+            });
+            
+            menu.appendChild(deleteItem);
+            
+            // 添加样式
+            menu.style.cssText = `
+                position: fixed;
+                left: ${x}px;
+                top: ${y}px;
+                background: #2a3040;
+                border: 1px solid #333a4a;
+                border-radius: 6px;
+                padding: 6px 0;
+                z-index: 10000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                min-width: 120px;
+            `;
+            
+            document.body.appendChild(menu);
+            
+            // 点击其他地方关闭菜单
+            const closeMenu = (event) => {
+                if (!menu.contains(event.target)) {
+                    menu.remove();
+                    document.removeEventListener('click', closeMenu);
+                    selectedDrawing = null;
+                }
+            };
+            
+            setTimeout(() => {
+                document.addEventListener('click', closeMenu);
+            }, 0);
+        }
+        
+        // 删除选中的绘图
+        function deleteSelectedDrawing(menu) {
+            // 优先使用全局变量保存的绘图引用
+            const drawingToDelete = window.selectedDrawingForDelete || selectedDrawing;
+            
+            if (drawingToDelete) {
+                // 使用JSON字符串比较来查找匹配的绘图
+                const targetJson = JSON.stringify({
+                    type: drawingToDelete.type,
+                    start: drawingToDelete.start,
+                    end: drawingToDelete.end
+                });
+                
+                let foundIndex = -1;
+                for (let i = 0; i < drawingObjects.length; i++) {
+                    const objJson = JSON.stringify({
+                        type: drawingObjects[i].type,
+                        start: drawingObjects[i].start,
+                        end: drawingObjects[i].end
+                    });
+                    if (objJson === targetJson) {
+                        foundIndex = i;
+                        break;
+                    }
+                }
+                
+                if (foundIndex > -1) {
+                    drawingObjects.splice(foundIndex, 1);
+                    console.log('绘图删除成功，剩余绘图数量:', drawingObjects.length);
+                } else {
+                    console.log('未找到匹配的绘图对象');
+                }
+                
+                selectedDrawing = null;
+                selectedHandle = null;
+                window.selectedDrawingForDelete = null;
+                redrawCanvas();
+            } else {
+                console.log('没有选中的绘图可删除');
+            }
+            
+            // 关闭菜单
+            if (menu) {
+                menu.remove();
+            }
+        }
+        
+        function resizeDrawingCanvas() {
+            if (!drawingCanvas) return;
+            const rect = drawingCanvas.parentElement.getBoundingClientRect();
+            drawingCanvas.width = rect.width;
+            drawingCanvas.height = rect.height;
+            redrawCanvas();
+        }
+        
+        // 将屏幕坐标转换为图表数据坐标
+        function screenToData(x, y) {
+            const time = chart.timeScale().coordinateToTime(x);
+            const price = candlestickSeries.coordinateToPrice(y);
+            return { time, price };
+        }
+        
+        // 将图表数据坐标转换为屏幕坐标
+        function dataToScreen(time, price) {
+            const x = chart.timeScale().timeToCoordinate(time);
+            const y = candlestickSeries.priceToCoordinate(price);
+            return { x, y };
+        }
+        
+        function findClickedHandle(x, y, threshold = 12) {
+            for (let i = drawingObjects.length - 1; i >= 0; i--) {
+                const drawing = drawingObjects[i];
+                const handles = getDrawingHandles(drawing);
+                
+                for (const handle of handles) {
+                    const dx = x - handle.x;
+                    const dy = y - handle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance <= threshold) {
+                        return { drawing, handle };
+                    }
+                }
+            }
+            return null;
+        }
+        
+        function getDrawingHandles(drawing) {
+            const startScreen = dataToScreen(drawing.start.time, drawing.start.price);
+            const handles = [
+                { id: 'start', x: startScreen.x, y: startScreen.y }
+            ];
+            
+            if (drawing.type === 'rectangle' || drawing.type === 'fibonacci') {
+                const endScreen = dataToScreen(drawing.end.time, drawing.end.price);
+                handles.push(
+                    { id: 'end', x: endScreen.x, y: endScreen.y }
+                );
+            } else if (drawing.type === 'trendline') {
+                const endScreen = dataToScreen(drawing.end.time, drawing.end.price);
+                handles.push(
+                    { id: 'end', x: endScreen.x, y: endScreen.y }
+                );
+            }
+            
+            return handles;
+        }
+        
+        function findClickedDrawing(x, y, threshold = 10) {
+            for (let i = drawingObjects.length - 1; i >= 0; i--) {
+                const drawing = drawingObjects[i];
+                if (isPointInDrawing(x, y, drawing, threshold)) {
+                    return drawing;
+                }
+            }
+            return null;
+        }
+        
+        function isPointInDrawing(x, y, drawing, threshold) {
+            const startScreen = dataToScreen(drawing.start.time, drawing.start.price);
+            const endScreen = dataToScreen(drawing.end.time, drawing.end.price);
+            
+            if (drawing.type === 'trendline') {
+                const dist = pointToLineDistance(x, y, startScreen.x, startScreen.y, endScreen.x, endScreen.y);
+                return dist < threshold;
+            } else if (drawing.type === 'rectangle') {
+                const left = Math.min(startScreen.x, endScreen.x);
+                const right = Math.max(startScreen.x, endScreen.x);
+                const top = Math.min(startScreen.y, endScreen.y);
+                const bottom = Math.max(startScreen.y, endScreen.y);
+                return x >= left - threshold && x <= right + threshold &&
+                       y >= top - threshold && y <= bottom + threshold;
+            } else if (drawing.type === 'fibonacci') {
+                const minX = Math.min(startScreen.x, endScreen.x);
+                const maxX = Math.max(startScreen.x, endScreen.x);
+                const minY = Math.min(startScreen.y, endScreen.y);
+                const maxY = Math.max(startScreen.y, endScreen.y);
+                return x >= minX - threshold && x <= maxX + threshold &&
+                       y >= minY - threshold && y <= maxY + threshold;
+            }
+            return false;
+        }
+        
+        function pointToLineDistance(px, py, x1, y1, x2, y2) {
+            const A = px - x1;
+            const B = py - y1;
+            const C = x2 - x1;
+            const D = y2 - y1;
+            const dot = A * C + B * D;
+            const lenSq = C * C + D * D;
+            let param = -1;
+            if (lenSq !== 0) param = dot / lenSq;
+            let xx, yy;
+            if (param < 0) {
+                xx = x1; yy = y1;
+            } else if (param > 1) {
+                xx = x2; yy = y2;
+            } else {
+                xx = x1 + param * C; yy = y1 + param * D;
+            }
+            const dx = px - xx;
+            const dy = py - yy;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+        
+        function redrawCanvas() {
+            if (!drawingCanvas) return;
+            
+            const ctx = drawingCanvas.getContext('2d');
+            if (!ctx) return;
+            
+            ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+            
+            drawingObjects.forEach(drawing => {
+                drawShape(ctx, drawing);
+                drawHandles(ctx, drawing);
+            });
+            
+            if (isDrawing && drawingStartData && currentEndData) {
+                const tempDrawing = {
+                    type: activeDrawingTool,
+                    start: { time: drawingStartData.time, price: drawingStartData.price },
+                    end: { time: currentEndData.time, price: currentEndData.price }
+                };
+                drawShape(ctx, tempDrawing);
+            }
+        }
+        
+        function drawHandles(ctx, drawing) {
+            const handles = getDrawingHandles(drawing);
+            
+            handles.forEach(handle => {
+                // 绘制控制点背景
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(handle.x, handle.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // 绘制控制点边框
+                ctx.strokeStyle = '#58a6ff';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(handle.x, handle.y, 8, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                // 绘制控制点中心
+                ctx.fillStyle = '#58a6ff';
+                ctx.beginPath();
+                ctx.arc(handle.x, handle.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+        
+        function drawShape(ctx, drawing) {
+            ctx.save();
+            
+            // 将数据坐标转换为屏幕坐标
+            const startScreen = dataToScreen(drawing.start.time, drawing.start.price);
+            const endScreen = dataToScreen(drawing.end.time, drawing.end.price);
+            
+            switch (drawing.type) {
+                case 'rectangle':
+                    drawRectangle(ctx, startScreen.x, startScreen.y, endScreen.x, endScreen.y);
+                    break;
+                case 'trendline':
+                    drawTrendline(ctx, startScreen.x, startScreen.y, endScreen.x, endScreen.y);
+                    break;
+                case 'fibonacci':
+                    drawFibonacci(ctx, startScreen.x, startScreen.y, endScreen.x, endScreen.y, startScreen, endScreen);
+                    break;
+            }
+            
+            ctx.restore();
+        }
+        
+        function drawRectangle(ctx, x1, y1, x2, y2) {
+            const left = Math.min(x1, x2);
+            const right = Math.max(x1, x2);
+            const top = Math.min(y1, y2);
+            const bottom = Math.max(y1, y2);
+            
+            ctx.fillStyle = 'rgba(88, 166, 255, 0.2)';
+            ctx.fillRect(left, top, right - left, bottom - top);
+            
+            ctx.strokeStyle = '#58a6ff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(left, top, right - left, bottom - top);
+        }
+        
+        function drawTrendline(ctx, x1, y1, x2, y2) {
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+        }
+        
+        function drawFibonacci(ctx, x1, y1, x2, y2, startScreen, endScreen) {
+            const isUp = y2 < y1;
+            const high = isUp ? y1 : y2;
+            const low = isUp ? y2 : y1;
+            const diff = high - low;
+            const minX = Math.min(x1, x2);
+            const maxX = Math.max(x1, x2);
+            
+            const levels = [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1];
+            
+            levels.forEach((level, i) => {
+                const y = isUp ? low + diff * level : high - diff * level;
+                
+                ctx.strokeStyle = i === 0 || i === levels.length - 1 ? '#ef5350' : '#58a6ff';
+                ctx.lineWidth = i === 0 || i === levels.length - 1 ? 2 : 1;
+                ctx.setLineDash(i === 0 || i === levels.length - 1 ? [] : [5, 5]);
+                
+                ctx.beginPath();
+                ctx.moveTo(minX, y);
+                ctx.lineTo(maxX, y);
+                ctx.stroke();
+                
+                ctx.setLineDash([]);
+                ctx.fillStyle = ctx.strokeStyle;
+                ctx.font = '11px monospace';
+                ctx.fillText((level * 100).toFixed(0) + '%', maxX + 5, y - 3);
+            });
+            
+            // 绘制趋势线
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([]);
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+        }
+        
+        // 清除所有标记和绘图
+        function clearAllMarkersAndDrawings() {
+            markers = [];
+            candlestickSeries.setMarkers([]);
+            
+            priceLines.forEach(line => {
+                candlestickSeries.removePriceLine(line);
+            });
+            priceLines = [];
+            
+            drawingObjects = [];
+            isDrawing = false;
+            isDraggingDrawing = false;
+            isResizingDrawing = false;
+            selectedDrawing = null;
+            selectedHandle = null;
+            dragOffset = null;
+            drawingStartData = null;
+            currentEndData = null;
+            activeDrawingTool = null;
+            markerMode = false;
+            priceLineMode = false;
+            
+            // 重绘画布
+            redrawCanvas();
+            
+            document.getElementById('btn-add-marker').classList.remove('active');
+            document.getElementById('btn-add-priceline').classList.remove('active');
+            document.getElementById('btn-draw-rectangle').classList.remove('active');
+            document.getElementById('btn-draw-trendline').classList.remove('active');
+            document.getElementById('btn-draw-fibonacci').classList.remove('active');
+        }
+
+        function addPriceLine(price) {
+            const priceLine = candlestickSeries.createPriceLine({
+                price: price,
+                color: '#219653',
+                lineWidth: 1,
+                lineStyle: 1,
+                axisLabelVisible: true,
+                axisLabelColor: '#219653',
+                title: `$${price.toFixed(2)}`
+            });
+            
+            priceLines.push(priceLine);
+        }
+
+        // 清除所有标记
+        function clearAllMarkers() {
+            markers = [];
+            candlestickSeries.setMarkers([]);
+            
+            priceLines.forEach(line => {
+                candlestickSeries.removePriceLine(line);
+            });
+            priceLines = [];
+            
+            markerMode = false;
+            priceLineMode = false;
+            document.getElementById('btn-add-marker').classList.remove('active');
+            document.getElementById('btn-add-priceline').classList.remove('active');
+        }
+
+        // 处理图表点击事件
+        function handleChartClick(param) {
+            if (markerMode && param.time && param.seriesData.get(candlestickSeries)) {
+                const candle = param.seriesData.get(candlestickSeries);
+                addMarker(param.time, candle.close);
+                markerMode = false;
+                document.getElementById('btn-add-marker').classList.remove('active');
+            } else if (priceLineMode && param.seriesData.get(candlestickSeries)) {
+                const candle = param.seriesData.get(candlestickSeries);
+                addPriceLine(candle.close);
+                priceLineMode = false;
+                document.getElementById('btn-add-priceline').classList.remove('active');
+            } else if (activeDrawingTool) {
+                handleDrawingClick(param);
+            } else if (param.time) {
+                // 点击 K 线显示确认对话框
+                showPlaybackConfirmDialog(param.time);
+            }
+        }
+        
+        // 显示回放确认对话框
+        function showPlaybackConfirmDialog(time) {
+            // 移除已存在的对话框
+            const existingDialog = document.getElementById('playback-confirm-dialog');
+            if (existingDialog) {
+                existingDialog.remove();
+            }
+            
+            const dialog = document.createElement('div');
+            dialog.id = 'playback-confirm-dialog';
+            
+            // 创建对话框内容
+            dialog.innerHTML = `
+                <div style="background: #2a3040; border: 1px solid #333a4a; border-radius: 8px; padding: 16px; min-width: 300px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+                    <div style="font-size: 14px; font-weight: 600; color: #d1d5db; margin-bottom: 12px;">确认回放</div>
+                    <div style="font-size: 12px; color: #8b949e; margin-bottom: 16px;">
+                        从这根 K 线开始回放吗？
+                    </div>
+                    <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                        <button id="confirm-cancel" style="padding: 6px 14px; background: #333a4a; color: #d1d5db; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                            取消
+                        </button>
+                        <button id="confirm-play" style="padding: 6px 14px; background: #58a6ff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                            开始回放
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // 设置样式
+            dialog.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 10000;
+            `;
+            
+            document.body.appendChild(dialog);
+            
+            // 添加事件监听
+            document.getElementById('confirm-cancel').addEventListener('click', () => {
+                dialog.remove();
+            });
+            
+            document.getElementById('confirm-play').addEventListener('click', () => {
+                dialog.remove();
+                jumpToTime(time);
+            });
+            
+            // 点击外部关闭对话框
+            const closeDialog = (event) => {
+                if (!dialog.contains(event.target)) {
+                    dialog.remove();
+                    document.removeEventListener('click', closeDialog);
+                }
+            };
+            
+            setTimeout(() => {
+                document.addEventListener('click', closeDialog);
+            }, 0);
+        }
+        
+        // 跳转到指定时间点
+        function jumpToTime(time) {
+            // 查找对应的 K 线索引
+            let targetIndex = -1;
+            for (let i = 0; i < allData.length; i++) {
+                if (allData[i].time === time) {
+                    targetIndex = i;
+                    break;
+                }
+            }
+            
+            if (targetIndex !== -1) {
+                // 停止当前播放
+                stopPlayback();
+                
+                // 设置回放位置
+                playbackIndex = targetIndex;
+                
+                // 更新图表和统计数据，不强制适应内容
+                updateChart(false);
+                updateStats();
+                
+                console.log('跳转到 K 线:', targetIndex + 1, '/', allData.length);
+            }
+        }
+        
+        // === 价格轴设置功能 ===
+        
+        // 切换价格模式
+        function changePriceMode(mode) {
+            currentPriceMode = parseInt(mode);
+            
+            const priceScale = chart.priceScale('right');
+            
+            // Lightweight Charts 4.1 中的价格模式常量
+            // 0 = Normal, 1 = Logarithmic, 2 = Percentage, 3 = IndexedTo100
+            priceScale.applyOptions({
+                mode: currentPriceMode
+            });
+        }
+        
+        // 更新价格轴边距
+        function updateScaleMargins() {
+            scaleMarginTop = parseFloat(document.getElementById('scale-margin-top').value);
+            scaleMarginBottom = parseFloat(document.getElementById('scale-margin-bottom').value);
+            
+            document.getElementById('scale-margin-top-value').textContent = scaleMarginTop.toFixed(2);
+            document.getElementById('scale-margin-bottom-value').textContent = scaleMarginBottom.toFixed(2);
+            
+            chart.priceScale('right').applyOptions({
+                scaleMargins: {
+                    top: scaleMarginTop,
+                    bottom: scaleMarginBottom
+                }
+            });
+        }
+        
+        // 反转价格轴
+        function toggleInvertScale() {
+            invertScale = document.getElementById('invert-scale').checked;
+            
+            chart.priceScale('right').applyOptions({
+                invertScale: invertScale
+            });
+        }
+
+
+        function setupEventListeners() {
+            document.getElementById('zoom-in').addEventListener('click', () => {
+                chart.timeScale().zoomIn();
+            });
+
+            document.getElementById('zoom-out').addEventListener('click', () => {
+                chart.timeScale().zoomOut();
+            });
+
+            document.getElementById('reset-view').addEventListener('click', () => {
+                chart.timeScale().fitContent();
+                if (autoScaleEnabled) {
+                    chart.priceScale().applyOptions({
+                        autoScale: true,
+                    });
+                }
+            });
+
+            document.getElementById('toggle-auto-scale').addEventListener('click', toggleAutoScale);
+
+            document.getElementById('playback-play').addEventListener('click', togglePlayback);
+            document.getElementById('playback-step-forward').addEventListener('click', stepForward);
+            document.getElementById('playback-step-back').addEventListener('click', stepBackward);
+            document.getElementById('playback-reset').addEventListener('click', resetPlayback);
+
+            document.getElementById('playback-speed').addEventListener('change', (e) => {
+                playbackSpeed = parseInt(e.target.value);
+                if (isPlaying) {
+                    stopPlayback();
+                    startPlayback();
+                }
+            });
+
+            document.getElementById('set-playback-date').addEventListener('click', setPlaybackDate);
+
+            document.getElementById('indicator-ema').addEventListener('click', () => toggleIndicator('ema'));
+            
+            // 时间级别切换事件监听
+            document.querySelectorAll('.timeframe-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.timeframe-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const interval = btn.dataset.interval;
+                    loadDataForInterval(interval);
+                });
+            });
+            
+            // 官方支持功能的事件监听
+            document.getElementById('btn-add-marker').addEventListener('click', toggleMarkerMode);
+            document.getElementById('btn-add-priceline').addEventListener('click', togglePriceLineMode);
+            
+            // 绘图工具的事件监听
+            document.getElementById('btn-draw-rectangle').addEventListener('click', () => selectDrawingTool('rectangle'));
+            document.getElementById('btn-draw-trendline').addEventListener('click', () => selectDrawingTool('trendline'));
+            document.getElementById('btn-draw-fibonacci').addEventListener('click', () => selectDrawingTool('fibonacci'));
+            document.getElementById('btn-clear-drawings').addEventListener('click', clearAllMarkersAndDrawings);
+            
+            // 价格轴设置的事件监听
+            document.getElementById('price-mode').addEventListener('change', (e) => {
+                changePriceMode(e.target.value);
+            });
+            
+            document.getElementById('scale-margin-top').addEventListener('input', updateScaleMargins);
+            document.getElementById('scale-margin-bottom').addEventListener('input', updateScaleMargins);
+            
+            document.getElementById('invert-scale').addEventListener('change', toggleInvertScale);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateTimeDisplay();
+            setInterval(updateTimeDisplay, 1000);
+
+            initChart();
+            setupEventListeners();
+            fetchInitialData();
+        });
+    </script>
+</body>
+</html>
