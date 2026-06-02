@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玩家场景创建 - Godot RPG 游戏开发学习笔记</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎮 Godot RPG 游戏开发学习笔记</h1>
+            <p>从零开始学习 Godot 4 开发 2D RPG 游戏</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="../01-基础知识/创建城镇.html">基础知识</a></li>
+            <li><a href="玩家场景创建.html" class="active">玩家系统</a></li>
+            <li><a href="../03-UI面板/创建面板ui.html">UI面板</a></li>
+            <li><a href="../04-物品系统/库存.html">物品系统</a></li>
+        </ul>
+    </nav>
+
+    <section class="container content">
+        <div class="back-nav">
+            <a href="../01-基础知识/创建城镇.html">← 基础知识</a>
+            <a href="../03-UI面板/创建面板ui.html">下一章：UI面板 →</a>
+        </div>
+
+        <h1>🎮 玩家场景创建</h1>
+
+        <h2>第一步：创建玩家节点结构</h2>
+
+        <p><img src="../images/局部截取_20260413_151538.png" alt="玩家场景结构"></p>
+
+        <p>创建 2D 角色节点，然后依次添加以下子节点：</p>
+
+        <div class="step">
+            <h3>1. 添加 Sprite2D 节点作为阴影</h3>
+            <p>为角色添加一个阴影效果，提升视觉表现。</p>
+        </div>
+
+        <div class="step">
+            <h3>2. 添加玩家精灵动画节点</h3>
+            <p>添加 <code>AnimatedSprite2D</code> 节点，用于播放角色的动画。</p>
+        </div>
+
+        <div class="step">
+            <h3>3. 添加碰撞节点</h3>
+            <p>添加 <code>CollisionShape2D</code> 节点，用于检测角色与环境的碰撞。</p>
+        </div>
+
+        <div class="step">
+            <h3>4. 添加相机节点</h3>
+            <p>添加 <code>Camera2D</code> 节点，让摄像机跟随角色移动。</p>
+        </div>
+
+        <div class="step">
+            <h3>5. 添加脚本</h3>
+            <p>为 <code>CharacterBody2D</code> 节点添加脚本。</p>
+        </div>
+
+        <h3>玩家脚本基础代码</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends CharacterBody2D
+class_name  Player
+
+@export_group("state")
+@export var max_health:float = 10.0
+@export var max_mana:float = 10.0
+@export var move_speed:float = 10.0
+@export var damage:float = 10.0
+@export var crit_chage:float = 0.0
+@export var crit_damage:float = 0.0
+
+@onready var anim_spirte: AnimatedSprite2D = $AnimSpirte
+
+var last_dir:String = "down"</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>extends CharacterBody2D</code> - 继承 CharacterBody2D 类，获得 2D 角色物理能力</li>
+            <li><code>class_name Player</code> - 定义这个节点类名为 Player，方便其他地方引用</li>
+            <li><code>@export_group("state")</code> - 导出一个属性分组，在编辑器中显示为"state"</li>
+            <li><code>@export var max_health:float</code> - 导出的属性值，可以在编辑器中修改</li>
+            <li><code>@onready var anim_spirte</code> - 当节点就绪后获取动画精灵节点的引用</li>
+            <li><code>var last_dir:String = "down"</code> - 记录角色最后朝向，初始为"down"</li>
+        </ul>
+
+        <hr>
+
+        <h2>第二步：创建有限状态机</h2>
+
+        <p>有限状态机（FSM）用于管理角色的不同状态，如待机、行走、攻击等。</p>
+
+        <h3>1. 创建 State 基类脚本</h3>
+
+        <p>先创建一个状态机脚本，命名为 <code>state.gd</code>。</p>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code># state.gd
+extends Node
+
+class_name State
+var fsm :FSM  # 创建变量来存储有限状态机的引用
+
+func  enter_state() -> void:
+    pass
+
+func process_state(delta:float) -> void:
+    pass
+
+func exite_state() -> void:
+    pass</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>class_name State</code> - 定义这个类为 State，方便其他地方引用</li>
+            <li><code>var fsm :FSM</code> - 存储对 FSM 状态机的引用，用于状态切换</li>
+            <li><code>enter_state()</code> - 进入状态时调用的函数</li>
+            <li><code>process_state(delta)</code> - 每帧处理的函数</li>
+            <li><code>exite_state()</code> - 退出状态时调用的函数</li>
+        </ul>
+
+        <h3>2. 创建 FSM 状态机管理器脚本</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends Node
+class_name FSM
+signal  on_state_transition(state_name:String) # 信号
+
+@export var initaial_state: NodePath  # 创建节点路径并存储当前状态
+
+var curr_state:State
+
+func _ready() -> void:
+    await owner.ready  # 等待所有者就绪，避免某些场景或节点未加载时的错误
+    for state :State in get_children():  # 遍历所有的子节点
+        state.fsm =self
+
+    curr_state =get_node(initaial_state)  # 当前状态引用=初始状态路径里面的节点
+    curr_state.enter_state()
+
+func transition_to(state_name:String) ->void:  # 状态转换函数
+    if not has_node(state_name):   				# 确保场景中存在此名称的节点
+        return
+    curr_state.exite_state()					# 退出当前状态
+    curr_state= get_node(state_name)			# 获取新状态
+    curr_state.enter_state()					# 进入新状态
+    on_state_transition.emit(curr_state.name)	# 状态转换信号分享名称</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>signal on_state_transition</code> - 定义一个信号，当状态转换时发出</li>
+            <li><code>@export var initial_state: NodePath</code> - 可以在编辑器中设置初始状态</li>
+            <li><code>await owner.ready</code> - 等待父节点准备完成</li>
+            <li><code>for state in get_children()</code> - 遍历所有子节点（状态节点）</li>
+            <li><code>transition_to(state_name)</code> - 切换到指定状态的函数</li>
+        </ul>
+
+        <p><img src="../images/局部截取_20260413_161612.png" alt="FSM 节点结构"></p>
+
+        <h3>3. 创建 PlayerState 基类脚本</h3>
+
+        <p>再创建一个玩家状态机脚本命名为 <code>player_state.gd</code>。</p>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends State
+
+class_name PlayerState
+
+var player :Player
+
+func _ready() -> void:
+    await  owner.ready
+    player =owner as Player</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>extends State</code> - 继承 State 基类</li>
+            <li><code>var player :Player</code> - 存储对 Player 节点的引用</li>
+            <li><code>player = owner as Player</code> - 将父节点转换为 Player 类型</li>
+        </ul>
+
+        <p><img src="../images/局部截取_20260413_162803.png" alt="状态节点结构"></p>
+
+        <h3>4. 创建具体状态节点</h3>
+
+        <p>在玩家场景下创建 FSM 节点，然后创建对应的待机、行走的攻击节点。</p>
+
+        <hr>
+
+        <h2>第三步：玩家移动动画</h2>
+
+        <p>先在玩家脚本中进行覆盖过程函数，添加是否移动函数、更新方向函数、动画播放函数。</p>
+
+        <h3>更新后的玩家脚本</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends CharacterBody2D
+class_name  Player
+@onready var fsm: FSM = $FSM
+
+@export_group("state")
+@export var max_health:float = 10.0
+@export var max_mana:float = 10.0
+@export var move_speed:float = 10.0
+@export var damage:float = 10.0
+@export var crit_chage:float = 0.0
+@export var crit_damage:float = 0.0
+
+@onready var anim_sprite: AnimatedSprite2D = $AnimSprite
+
+var last_dir:String = "down"
+
+func _process(delta: float) -> void:  # 覆盖过程函数
+    if fsm.curr_state:
+        fsm.curr_state.process_state(delta)
+
+func is_moving() -> bool:
+    var move_input = ["move_down", "move_up", "move_left", "move_right"]
+    for input in move_input:
+        if Input.is_action_pressed(input):
+            return true
+    return false
+
+func update_direction(input_vector: Vector2) -> void:
+    if input_vector == Vector2.ZERO:
+        return
+
+    if abs(input_vector.x) > abs(input_vector.y):   # abs 绝对值
+        last_dir = "right" if input_vector.x > 0 else "left"
+    else:
+        last_dir = "down" if input_vector.y > 0 else "up"
+
+func play_direction_anim(anim_name: String) -> void:
+    anim_sprite.play("%s_%s" % [anim_name, last_dir])  # 格式化字符串，替换内容值</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>func _process(delta)</code> - 每帧调用的函数，分发到当前状态处理</li>
+            <li><code>is_moving()</code> - 检测是否有移动输入，返回 true 或 false</li>
+            <li><code>update_direction(input_vector)</code> - 根据输入向量更新角色朝向</li>
+            <li><code>abs(input_vector.x)</code> - 取绝对值，比较 X 和 Y 轴的大小来确定主要方向</li>
+            <li><code>play_direction_anim(anim_name)</code> - 播放动画，格式为"动画名_朝向"</li>
+        </ul>
+
+        <h3>待机状态脚本</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends PlayerState
+
+class_name  PlayerStateIdle
+
+func enter_state() -> void:
+    player.play_direction_anim("idle")
+
+func _input(event: InputEvent) -> void:
+    if player.is_moving():
+        fsm.transition_to("Walk")</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>enter_state()</code> - 进入待机状态时播放 idle 动画</li>
+            <li><code>_input(event)</code> - 监听输入事件</li>
+            <li><code>if player.is_moving()</code> - 如果检测到移动，切换到 Walk 状态</li>
+        </ul>
+
+        <h3>行走状态脚本</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends PlayerState
+
+class_name  PlayerStateWalk
+
+func enter_state() -> void:
+    player.play_direction_anim("walk")
+
+func process_state(delta: float) -> void:
+    var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+
+    if input_vector == Vector2.ZERO:
+        fsm.transition_to("Idle")
+        return
+
+    player.update_direction(input_vector)
+    player.play_direction_anim("walk")
+
+    player.velocity = input_vector * player.move_speed
+    player.move_and_slide()</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>Input.get_vector()</code> - 获取方向键输入，返回 Vector2 向量</li>
+            <li><code>if input_vector == Vector2.ZERO</code> - 如果没有输入，回到 Idle 状态</li>
+            <li><code>player.update_direction()</code> - 更新角色朝向</li>
+            <li><code>player.velocity = input_vector * player.move_speed</code> - 设置移动速度</li>
+            <li><code>player.move_and_slide()</code> - 执行移动，自动处理碰撞</li>
+        </ul>
+
+        <hr>
+
+        <h2>第四步：生命组件</h2>
+
+        <h3>第一步：创建 HealthComponent 场景</h3>
+
+        <p>新创建为 Node，命名为 <code>HealthComponent</code>，然后添加脚本。</p>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends Node
+
+class_name HealthComponent
+
+var curr_health:float
+var max_health:float
+
+signal  on_dead
+signal  on_health_changed(curr_health:float)
+
+func setup(value:float)->void:
+    max_health =value
+    curr_health= value
+
+func take_damage(value:float)->void:
+    if curr_health <=0:
+        return
+    curr_health = max(curr_health-value,0)  # 取最大的值，当不等于负数就输入当前生命值，小于零就输入0
+    on_health_changed.emit(curr_health)
+
+    if curr_health<=0:
+        on_dead.emit()</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>var curr_health:float</code> - 当前生命值</li>
+            <li><code>var max_health:float</code> - 最大生命值</li>
+            <li><code>signal on_dead</code> - 死亡信号，当生命值降为0时发出</li>
+            <li><code>signal on_health_changed</code> - 生命值变化信号</li>
+            <li><code>setup(value)</code> - 初始化生命值</li>
+            <li><code>take_damage(value)</code> - 受到伤害，减少生命值</li>
+            <li><code>max(curr_health-value,0)</code> - 确保生命值不会低于0</li>
+        </ul>
+
+        <h3>第二步：创建 EventBus 全局信号</h3>
+
+        <p>新建一个文件夹命名为 <code>autoloads</code>，用于保存信号和事件。再文件夹里面创建一个脚本叫 <code>event_bus</code>。</p>
+
+        <p>然后点开设置添加全局变量（在项目设置中启用 Autoload）。</p>
+
+        <p><img src="../images/局部截取_20260413_191015.png" alt="Autoload 设置"></p>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends Node
+
+signal  on_player_created
+signal  on_player_health_update(curr:float,max:float)
+signal  on_player_mana_update(curr:float,max:float)</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>signal on_player_created</code> - 玩家创建完成信号</li>
+            <li><code>on_player_health_update</code> - 玩家生命值更新信号</li>
+            <li><code>on_player_mana_update</code> - 玩家魔法值更新信号</li>
+        </ul>
+
+        <h3>第三步：将健康组件集成到玩家脚本</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends CharacterBody2D
+class_name  Player
+@onready var fsm: FSM = $FSM
+
+@export_group("state")
+@export var max_health:float = 10.0
+@export var max_mana:float = 10.0
+@export var move_speed:float = 10.0
+@export var damage:float = 10.0
+@export var crit_chage:float = 0.0
+@export var crit_damage:float = 0.0
+@onready var health_component: HealthComponent = $HealthComponent
+
+@onready var anim_sprite: AnimatedSprite2D = $AnimSprite
+
+var last_dir:String = "down"
+var curr_mana :float
+
+func _process(delta: float) -> void:
+    if fsm.curr_state:
+        fsm.curr_state.process_state(delta)
+
+func is_moving() -> bool:
+    var move_input = ["move_down", "move_up", "move_left", "move_right"]
+    for input in move_input:
+        if Input.is_action_pressed(input):
+            return true
+    return false
+
+func update_direction(input_vector: Vector2) -> void:
+    if input_vector == Vector2.ZERO:
+        return
+    if abs(input_vector.x) > abs(input_vector.y):
+        last_dir = "right" if input_vector.x > 0 else "left"
+    else:
+        last_dir = "down" if input_vector.y > 0 else "up"
+
+func play_direction_anim(anim_name: String) -> void:
+    anim_sprite.play("%s_%s" % [anim_name, last_dir])
+
+func setup()->void:
+    reset_health()
+    reset_mana()
+
+func reset_health() ->void:
+    health_component.setup(max_health)
+    EventBus.on_player_health_update.emit(max_health,max_health)
+
+func reset_mana() ->void:
+    curr_mana=max_mana   # 敌人不使用法力值，只有玩家使用
+    EventBus.on_player_mana_update.emit(max_mana,max_mana)
+
+func use_mana(value:float) ->void:
+    curr_mana -=value
+    curr_mana =max(max_mana,0)
+    EventBus.on_player_mana_update.emit(curr_mana,max_mana)</code></pre>
+        </div>
+
+        <h4>新增代码解释：</h4>
+        <ul>
+            <li><code>@onready var health_component</code> - 获取 HealthComponent 组件引用</li>
+            <li><code>var curr_mana:float</code> - 当前法力值</li>
+            <li><code>setup()</code> - 初始化，设置生命和法力</li>
+            <li><code>reset_health()</code> - 重置生命值并发送信号</li>
+            <li><code>reset_mana()</code> - 重置法力值并发送信号</li>
+            <li><code>use_mana(value)</code> - 使用法力值</li>
+        </ul>
+
+        <hr>
+
+        <h2>第五步：添加经验系统</h2>
+
+        <h3>玩家属性扩展</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>@export_group("exp")
+@export var base_exp :float =100.0
+@export var exp_multiplier:float =2.0
+var curr_exp:float
+var next_level_exp:float
+var curr_level :int = 1
+var curr_points:int =0
+
+# 添加导出 经验值组，基础经验值，经验值倍数
+# 创建 当前经验值，下一级经验值，当前等级，当前点数</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>@export_group("exp")</code> - 导出经验值属性分组</li>
+            <li><code>base_exp</code> - 基础经验值，升级所需初始经验</li>
+            <li><code>exp_multiplier</code> - 经验值倍数，每级递增</li>
+            <li><code>curr_exp</code> - 当前经验值</li>
+            <li><code>next_level_exp</code> - 下一级所需经验值</li>
+            <li><code>curr_level</code> - 当前等级</li>
+            <li><code>curr_points</code> - 可分配的属性点数</li>
+        </ul>
+
+        <h3>添加信号（在 EventBus 中）</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>signal on_player_new_level(curr:float,new_level:float)
+signal on_player_stats_updated</code></pre>
+        </div>
+
+        <h3>添加经验值函数</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>func add_exp(value:float) ->void:
+    curr_exp +=value
+    while  curr_exp >=next_level_exp:
+        level_up()
+    EventBus.on_player_new_level.emit(curr_exp,next_level_exp)
+
+func level_up():
+    curr_exp -=next_level_exp
+    curr_level +=1
+    curr_points +=4
+    next_level_exp *=exp_multiplier
+    EventBus.on_player_stats_updated.emit()</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>add_exp(value)</code> - 添加经验值，自动检查是否可升级</li>
+            <li><code>while curr_exp >= next_level_exp</code> - 循环直到经验不足以升级</li>
+            <li><code>level_up()</code> - 升级处理</li>
+            <li><code>curr_exp -= next_level_exp</code> - 扣除升级所需经验</li>
+            <li><code>curr_points += 4</code> - 每级获得4点属性点</li>
+            <li><code>next_level_exp *= exp_multiplier</code> - 下一级所需经验增加</li>
+        </ul>
+
+        <hr>
+
+        <h2>第六步：攻击系统 - 攻击位置</h2>
+
+        <h3>1. 创建武器节点</h3>
+
+        <p>首先创建武器节点类型为 <code>Node2D</code>，由以下子节点组成：</p>
+        <ul>
+            <li><code>Sprite2D</code> - 武器图标</li>
+            <li><code>Area2D</code> - 攻击范围</li>
+            <li><code>CollisionShape2D</code> - 碰撞体</li>
+        </ul>
+
+        <p><img src="../images/局部截取_20260413_213259.png" alt="武器节点"></p>
+
+        <h3>2. 创建攻击位置标记</h3>
+
+        <p>创建存储攻击位置的 <code>Node2D</code> 节点，由四个 <code>Marker2D</code> 节点构成：<code>Down</code>、<code>Left</code>、<code>Right</code>、<code>UP</code>。</p>
+
+        <p><img src="../images/局部截取_20260413_213458.png" alt="攻击位置"></p>
+
+        <p><img src="../images/局部截取_20260413_213525.png" alt="攻击位置标记"></p>
+
+        <p>让四个点位对齐角色的手部位置。</p>
+
+        <h3>3. 添加攻击位置字典</h3>
+
+        <p>选中四个节点，右击选择"上%作为唯一名称访问"，将四个节点拖入对应位置。</p>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>@onready var attack_positions :Dictionary ={
+    "down":%Down,
+    "left":%Left,
+    "right":%Right,
+    "up":%UP
+}</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>%NodeName</code> - Godot 4 的唯一名称引用语法</li>
+            <li><code>Dictionary</code> - 字典，键为方向字符串，值为节点引用</li>
+        </ul>
+
+        <h3>4. 添加攻击状态切换</h3>
+
+        <p>在待机状态和行走状态中添加攻击键检测：</p>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code># 待机状态中使用
+func _input(event: InputEvent) -> void:
+    if event.is_action_pressed("attack"):
+        fsm.transition_to("Attack")
+        return
+    if player.is_moving():
+        fsm.transition_to("Walk")</code></pre>
+        </div>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code># 行走状态中使用
+func process_state(delta: float) -> void:
+    var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+
+    if Input.is_action_pressed("attack"):
+        fsm.transition_to("Attack")
+        return
+
+    if input_vector == Vector2.ZERO:
+        fsm.transition_to("Idle")
+        return
+
+    player.update_direction(input_vector)
+    player.play_direction_anim("walk")
+
+    player.velocity = input_vector * player.move_speed
+    player.move_and_slide()</code></pre>
+        </div>
+
+        <hr>
+
+        <h2>第七步：攻击状态</h2>
+
+        <h3>1. 设置武器属性</h3>
+
+        <p>先将武器的默认 <code>monitoring</code> 属性关闭，通过代码实现这个属性的启动和关闭。</p>
+
+        <h3>2. 添加武器引用和启用函数</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>@onready var enemy_area: Area2D = %EnemyAttackArea
+
+func enable_weapon_collison(value:bool) -> void:
+    enemy_area.monitoring =value</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>enemy_area.monitoring</code> - Area2D 的监测属性</li>
+            <li><code>= value</code> - 开启或关闭碰撞检测</li>
+        </ul>
+
+        <h3>3. 攻击状态脚本</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends PlayerState
+
+class_name PlayerStateAttack
+
+var weapon_rotations:Dictionary ={  # 武器旋转变量
+    "down":180.0,
+    "left":-90.0,
+    "up": 0.0,
+    "right":90.0
+}
+
+func enter_state() -> void:
+    player.play_direction_anim("attack")
+    position_weapon()
+    player.anim_sprite.animation_finished.connect(_on_animation_finished)
+
+func exite_state() -> void:
+    if player.anim_sprite.animation_finished.is_connected(_on_animation_finished):
+        player.anim_sprite.animation_finished.disconnect(_on_animation_finished)
+
+func position_weapon() ->void:
+    var dir_key:String =player.last_dir
+    var marker:Marker2D =player.attack_positions[dir_key]
+    player.weapon.global_position =marker.global_position
+    player.weapon.rotation_degrees =weapon_rotations[dir_key]
+    player.weapon.show()
+    player.enable_weapon_collison(true)
+
+func _on_animation_finished():
+    player.enable_weapon_collison(false)
+    player.weapon.hide()
+    fsm.transition_to("Idle")</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>weapon_rotations</code> - 字典，存储四个方向的武器旋转角度</li>
+            <li><code>enter_state()</code> - 进入攻击状态时调用，播放攻击动画，定位武器</li>
+            <li><code>animation_finished.connect()</code> - 连接动画完成信号</li>
+            <li><code>position_weapon()</code> - 根据朝向设置武器位置和旋转角度</li>
+            <li><code>player.weapon.show()</code> - 显示武器</li>
+            <li><code>enable_weapon_collison(true)</code> - 开启武器碰撞检测</li>
+            <li><code>_on_animation_finished()</code> - 动画播放完成时的回调</li>
+            <li><code>disconnect()</code> - 断开信号连接，避免重复调用</li>
+            <li><code>fsm.transition_to("Idle")</code> - 返回待机状态</li>
+        </ul>
+
+        <hr>
+
+        <h2>第八步：Town 场景</h2>
+
+        <p>在城镇场景中动态生成玩家：</p>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends Node2D
+class_name Town
+
+@export var player_scene: PackedScene
+
+func _ready() -> void:
+    create_player()
+
+func create_player() -> void:
+    var player: Player = player_scene.instantiate()  # 动态实例化玩家场景
+    add_child(player)                                 # 添加到场景树
+    player.setup()                                    # 初始化玩家属性
+    EventBus.on_player_created.emit()                 # 发出玩家创建完成信号</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>@export var player_scene: PackedScene</code> - 可在编辑器中指定玩家预制体</li>
+            <li><code>instantiate()</code> - 实例化预制体场景</li>
+            <li><code>add_child(player)</code> - 添加到场景树</li>
+            <li><code>player.setup()</code> - 初始化玩家属性</li>
+        </ul>
+
+        <div class="note">
+            <strong>💡 小贴士：</strong> 使用 PackedScene 和 instantiate() 可以方便地管理玩家预制体，在切换不同角色类型时极其灵活。
+        </div>
+
+        <div class="back-nav">
+            <a href="../01-基础知识/创建城镇.html">← 基础知识</a>
+            <a href="../03-UI面板/创建面板ui.html">下一章：UI面板 →</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>持续更新中...</p>
+        </div>
+    </footer>
+</body>
+</html>

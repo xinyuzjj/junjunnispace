@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建面板UI - Godot RPG 游戏开发学习笔记</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎮 Godot RPG 游戏开发学习笔记</h1>
+            <p>从零开始学习 Godot 4 开发 2D RPG 游戏</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="../01-基础知识/创建城镇.html">基础知识</a></li>
+            <li><a href="../02-玩家系统/玩家场景创建.html">玩家系统</a></li>
+            <li><a href="创建面板ui.html" class="active">UI面板</a></li>
+            <li><a href="../04-物品系统/库存.html">物品系统</a></li>
+        </ul>
+    </nav>
+
+    <section class="container content">
+        <div class="back-nav">
+            <a href="../02-玩家系统/玩家场景创建.html">← 玩家系统</a>
+            <a href="../04-物品系统/库存.html">下一章：物品系统 →</a>
+        </div>
+
+        <h1>🖼️ 创建面板UI</h1>
+
+        <hr>
+
+        <h2>第一章：主按钮</h2>
+
+        <h3>第一步：添加 CanvasLayer 节点</h3>
+
+        <p>在城镇场景中添加一个 <code>CanvasLayer</code> 节点。画布层会渲染在所有元素之上。</p>
+
+        <h3>第二步：添加 Panel 节点</h3>
+
+        <p>然后添加一个 <code>Panel</code> 节点作为主按钮的面板。根据需要设置尺寸。</p>
+
+        <p><img src="../images/局部截取_20260414_182358.png" alt="Panel 设置"></p>
+
+        <p>然后点击锚点预设，调整到想要设置的位置，并进行具体位置修改。</p>
+
+        <h3>第三步：添加 MarginContainer</h3>
+
+        <p>再给 Panel 节点添加一个子节点，边距容器节点 <code>MarginContainer</code>，在锚点预设中铺满。</p>
+
+        <h3>第四步：添加 HBoxContainer</h3>
+
+        <p>然后再给边距容器节点添加一个水平排列控件节点 <code>HBoxContainer</code> 子节点。</p>
+
+        <h3>第五步：添加 Button</h3>
+
+        <p>再给 <code>HBoxContainer</code> 节点添加 <code>Button</code> 子节点。根据具体大小设置 Button 子节点的像素大小。</p>
+
+        <p><img src="../images/局部截取_20260414_182817.png" alt="按钮设置"></p>
+
+        <h3>第六步：创建样式</h3>
+
+        <p>然后给面板和按钮创建样式。在 styles 中添加。</p>
+
+        <p><img src="../images/局部截取_20260414_182951.png" alt="创建样式"></p>
+
+        <h3>第七步：添加按钮图标</h3>
+
+        <p>然后给按钮节点添加一个纹理子节点 <code>TextureRect</code> 节点，然后添加图标。</p>
+
+        <p><img src="../images/局部截取_20260414_183307.png" alt="添加图标"></p>
+
+        <h3>第八步：添加 HUD 脚本</h3>
+
+        <p>然后给 <code>CanvasLayer</code> 节点添加一个脚本。导入需要的按钮信号到 HUD 里面。</p>
+
+        <p><img src="../images/局部截取_20260414_183448.png" alt="HUD 脚本"></p>
+
+        <hr>
+
+        <h2>第二章：库存面板</h2>
+
+        <h3>第一步：添加新的 HBox 容器</h3>
+
+        <p>在 HUD 节点下面创建一个新的 <code>HBox</code> 节点，命名为 <code>Panels</code>。然后修改最小尺寸大小。</p>
+
+        <p><img src="../images/局部截取_20260415_154033.png" alt="HBox 容器"></p>
+
+        <p><strong>HBox 节点用于创建整体的框架。</strong></p>
+
+        <h3>第二步：添加 PanelsContainer</h3>
+
+        <p>然后在 HBox 节点下面添加一个面板容器节点 <code>PanelsContainer</code>。面板容器节点与面板节点的区别在于它会根据子元素的大小自动拓展。</p>
+
+        <p><img src="../images/局部截取_20260415_154419.png" alt="PanelsContainer"></p>
+
+        <p>Y 值可以根据子元素自己调整。这样外面的大边框就完成了。</p>
+
+        <h3>第三步：往面板中添加格子、标题</h3>
+
+        <p>给创建的面板容器节点 <code>PanelsContainer</code> 添加一个边距容器子节点 <code>MarginContainer</code>。</p>
+
+        <p>再边距容器子节点添加一个 <code>VBox</code> 子节点。</p>
+
+        <p><strong>VBox 节点用于垂直对齐所有内容。</strong></p>
+
+        <p>然后在 VBox 节点中添加一个标签子节点 <code>Label</code>，内容写"库存"。</p>
+
+        <p>再给 VBox 节点添加一个网格容器子节点 <code>GridContainer</code>。</p>
+
+        <p><img src="../images/局部截取_20260415_155218.png" alt="网格容器"></p>
+
+        <p>修改网格容器的列数。</p>
+
+        <p>然后在网格容器节点 <code>GridContainer</code> 添加子节点，<code>Button</code> 节点作为槽位，设置它的大小。</p>
+
+        <p>如果槽位太靠近边框，可以在边距容器节点 <code>MarginContainer</code> 修改，添加边距。</p>
+
+        <p><img src="../images/局部截取_20260415_155453.png" alt="槽位设置"></p>
+
+        <h3>第四步：添加空隙</h3>
+
+        <p>然后添加 <code>Control</code> 控制节点为空节点用于添加空隙。还可以添加 <code>ColorRect</code> 节点给空隙添加颜色。</p>
+
+        <h3>第五步：添加金币显示</h3>
+
+        <p>再给 <code>VBox</code> 添加一个子节点为 <code>HBox</code>。</p>
+
+        <p>在 <code>HBox</code> 节点中添加 <code>TextureRect</code> 节点和 <code>Label</code> 节点。</p>
+
+        <ul>
+            <li><code>TextureRect</code> 节点用于添加上图标</li>
+            <li><code>Label</code> 节点用于添加数字</li>
+        </ul>
+
+        <h3>第六步：保存场景</h3>
+
+        <p>现在已经完成了库存面板。然后找到 <code>PanelsContainer</code> 节点，保存为一个场景，保存在 UI 文件夹里面。</p>
+
+        <p>然后找到场景点击进入，将 <code>Button</code> 节点保存为一个场景。</p>
+
+        <p>然后分别给 <code>PanelsContainer</code> 节点场景和 <code>Button</code> 节点场景添加脚本。</p>
+
+        <p><img src="../images/局部截取_20260415_160658.png" alt="保存场景1"></p>
+        <p><img src="../images/局部截取_20260415_160707.png" alt="保存场景2"></p>
+
+        <hr>
+
+        <h2>第三章：装备面板</h2>
+
+        <p>装备面板跟库存面板创建方式差不多。</p>
+
+        <p><img src="../images/局部截取_20260415_184624.png" alt="装备面板1"></p>
+        <p><img src="../images/局部截取_20260415_184634.png" alt="装备面板2"></p>
+        <p><img src="../images/局部截取_20260415_184732.png" alt="装备面板3"></p>
+
+        <hr>
+
+        <h2>第四章：属性面板</h2>
+
+        <p>面板的创建方式都差不多，但是因为属性面板的值有加点内容，所以要将需要改变的数字引入脚本中，还有添加按钮点击的 <code>Pressed</code> 信号。</p>
+
+        <p><img src="../images/局部截取_20260415_201120.png" alt="属性面板1"></p>
+        <p><img src="../images/局部截取_20260415_201135.png" alt="属性面板2"></p>
+        <p><img src="../images/局部截取_20260415_201152.png" alt="属性面板3"></p>
+
+        <h3>属性面板脚本代码</h3>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends PanelContainer
+
+class_name StatsPanels
+@onready var damage_label: Label = %DamageLabel
+@onready var hp_label: Label = %HpLabel
+@onready var vel_label: Label = %VeLLabel
+@onready var mana_label: Label = %ManaLabel
+@onready var crit_label: Label = %CritLabel
+@onready var crit_dmg_label: Label = %CritDMGLabel
+
+@onready var curr_level_label: Label = %CurrLevelLabel
+@onready var curr_points_label: Label = %CurrPointsLabel
+
+@onready var dex_points_label: Label = %DEXPointsLabel
+@onready var int_points_label: Label = %INTPointsLabel
+@onready var str_points_label: Label = %STRPointsLabel
+
+func _on_str_button_pressed() -> void:
+    pass
+
+func _on_dex_button_pressed() -> void:
+    pass
+
+func _on_int_button_pressed() -> void:
+    pass</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>extends PanelContainer</code> - 继承面板容器</li>
+            <li><code>@onready var ... = %LabelName</code> - 获取界面元素的引用</li>
+            <li><code>_on_str_button_pressed()</code> - 力量按钮点击回调</li>
+            <li><code>_on_dex_button_pressed()</code> - 敏捷按钮点击回调</li>
+            <li><code>_on_int_button_pressed()</code> - 智力按钮点击回调</li>
+        </ul>
+
+        <hr>
+
+        <h2>第五章：技能面板</h2>
+
+        <p>技能面板创建跟之前差不多，但是技能的按钮要单独拿出来进行创建一个场景，进行修改好并添加一个脚本。</p>
+
+        <p><img src="../images/局部截取_20260415_203853.png" alt="技能面板1"></p>
+        <p><img src="../images/局部截取_20260415_203915.png" alt="技能面板2"></p>
+        <p><img src="../images/局部截取_20260415_203931.png" alt="技能面板3"></p>
+
+        <hr>
+
+        <h2>第六章：技能快捷栏</h2>
+
+        <h3>第一步：创建技能按钮场景</h3>
+
+        <p>新创建一个场景，添加一个按钮节点，命名为 <code>EquippedSkillButton</code>。然后调节大小。</p>
+
+        <p>再添加子节点：<code>Panel</code> 用于做背景，<code>TextureRect</code> 用于做图标，<code>Label</code> 用于添加标签。</p>
+
+        <p>并且给按钮添加一个脚本。</p>
+
+        <p><img src="../images/局部截取_20260415_205349.png" alt="技能按钮1"></p>
+        <p><img src="../images/局部截取_20260415_205410.png" alt="技能按钮2"></p>
+
+        <h3>第二步：添加技能栏</h3>
+
+        <p><img src="../images/局部截取_20260415_205451.png" alt="技能栏1"></p>
+        <p><img src="../images/局部截取_20260415_205521.png" alt="技能栏2"></p>
+
+        <hr>
+
+        <h2>第七章：玩家UI</h2>
+
+        <p><img src="../images/局部截取_20260415_214857.png" alt="玩家UI1"></p>
+        <p><img src="../images/局部截取_20260415_214915.png" alt="玩家UI2"></p>
+
+        <h3>HUD 脚本代码</h3>
+
+        <p>HUD 脚本导入所有值，并添加面板点击可见。</p>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends CanvasLayer
+
+class_name HUD
+@onready var equipment_panels: EquipmentPanels = %EquipmentPanels
+@onready var stats_panels: StatsPanels = %StatsPanels
+@onready var skill_panels: SkillPanels = %SkillPanels
+@onready var inventory_panels: InventoryPanels = %InventoryPanels
+
+@onready var health_bar: ProgressBar = $HealthBar
+@onready var mana_bar: ProgressBar = $ManaBar
+@onready var exp_bar: ProgressBar = $EXPBar
+
+@onready var health_label: Label = %HealthLabel
+@onready var mana_label: Label = %ManaLabel
+
+func _ready() -> void:
+    EventBus.on_player_health_update.connect(_on_player_health_update)
+    EventBus.on_player_mana_update.connect(_on_player_mana_update)
+    EventBus.on_player_new_level.connect(_on_player_new_level)
+
+func _on_equipment_button_pressed() -> void:
+    equipment_panels.visible = not equipment_panels.visible
+
+func _on_inventory_button_pressed() -> void:
+    inventory_panels.visible = not inventory_panels.visible
+
+func _on_stats_button_pressed() -> void:
+    stats_panels.visible = not stats_panels.visible
+
+func _on_skill_button_pressed() -> void:
+    skill_panels.visible = not skill_panels.visible
+
+func _on_player_health_update(curr: float, max: float) -> void:
+    health_bar.value = curr / max
+    health_label.text = "%d / %d" % [curr, max]
+
+func _on_player_mana_update(curr: float, max: float) -> void:
+    mana_bar.value = curr / max
+    mana_label.text = "%d / %d" % [curr, max]
+
+func _on_player_new_level(curr: float, new_level: float) -> void:
+    exp_bar.value = curr / new_level</code></pre>
+        </div>
+
+        <h4>代码详解：</h4>
+
+        <ul>
+            <li><code>extends CanvasLayer</code> - 继承画布层，使 UI 始终在游戏内容之上</li>
+            <li><code>@onready var equipment_panels</code> - 获取装备面板引用</li>
+            <li><code>@onready var health_bar</code> - 获取血条 ProgressBar 引用</li>
+            <li><code>EventBus.on_player_health_update.connect()</code> - 连接生命值更新信号</li>
+            <li><code>equipment_panels.visible = not equipment_panels.visible</code> - 切换面板可见性</li>
+            <li><code>health_bar.value = curr / max</code> - 设置进度条值（0-1 之间）</li>
+            <li><code>health_label.text = "%d / %d" % [curr, max]</code> - 格式化显示数值</li>
+        </ul>
+
+        <h4>关于进度条和数值的解释：</h4>
+
+        <div class="note">
+            <p><strong><code>health_bar.value = curr / max</code>（进度条更新）：</strong></p>
+            <p>目的：计算当前生命值的百分比。</p>
+            <p>作用：如果你的 health_bar（TextureProgressBar 或 ProgressBar）的 max_value 设置为 1，那么这个计算会将血条填充满或缩短。</p>
+            <p>直观感：玩家一眼就能通过血条的长度判断生存状态，而不需要去读具体的数字。</p>
+        </div>
+
+        <div class="note">
+            <p><strong><code>health_label.text = "%d / %d" % [curr, max]</code>（文本更新）：</strong></p>
+            <p>目的：将数值格式化为字符串。</p>
+            <p>作用：%d 是占位符，表示整数。它会将浮点数（float）强制转换为整数显示，避免出现 95.4321 / 100 这种凌乱的 UI。</p>
+            <p>精确感：给玩家提供准确的剩余血量信息，比如"还剩 10 点血，还能扛一下"。</p>
+        </div>
+
+        <h3>Town 脚本</h3>
+
+        <p>然后可以将玩家场景保存在 Town 场景中，主要负责<strong>玩家实体的动态生成</strong>以及<strong>全局状态的同步</strong>，给 Town 添加一个脚本：</p>
+
+        <div class="code-block">
+            <div class="lang">gdscript</div>
+            <pre><code>extends Node2D
+class_name Town
+
+@export var player_scene: PackedScene
+# 你可以在 Godot 编辑器的检查器（Inspector）面板里，
+# 直接把不同的玩家预制体（比如"剑修玩家"或"法修玩家"）拖进去。
+# 这让你在切换测试不同角色时极其方便。
+
+func _ready() -> void:
+    create_player()
+
+func create_player() -> void:
+    var player: Player = player_scene.instantiate()
+    # 动态生命周期管理，在场景树里摆放一个 Player 节点更灵活
+    add_child(player)
+    player.setup()
+    # add_child 之后立即调用 setup() 可以确保玩家在正式开始行动前，属性已经加载完毕
+    EventBus.on_player_created.emit()</code></pre>
+        </div>
+
+        <h4>代码解释：</h4>
+        <ul>
+            <li><code>@export var player_scene: PackedScene</code> - 可在编辑器中指定玩家预制体</li>
+            <li><code>player_scene.instantiate()</code> - 实例化玩家场景</li>
+            <li><code>add_child(player)</code> - 将玩家添加到场景</li>
+            <li><code>player.setup()</code> - 初始化玩家属性</li>
+            <li><code>EventBus.on_player_created.emit()</code> - 发出创建完成信号</li>
+        </ul>
+
+        <div class="note">
+            <strong>💡 小贴士：</strong> 使用 PackedScene 和 instantiate() 可以方便地管理玩家预制体，在切换不同角色类型时极其灵活。你可以在编辑器中直接拖拽不同的玩家预制体到 Inspector 面板进行切换。
+        </div>
+
+        <div class="back-nav">
+            <a href="../02-玩家系统/玩家场景创建.html">← 玩家系统</a>
+            <a href="../04-物品系统/库存.html">下一章：物品系统 →</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>持续更新中...</p>
+        </div>
+    </footer>
+</body>
+</html>

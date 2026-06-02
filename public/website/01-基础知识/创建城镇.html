@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建城镇 - Godot RPG 游戏开发学习笔记</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎮 Godot RPG 游戏开发学习笔记</h1>
+            <p>从零开始学习 Godot 4 开发 2D RPG 游戏</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="创建城镇.html" class="active">基础知识</a></li>
+            <li><a href="../02-玩家系统/玩家场景创建.html">玩家系统</a></li>
+            <li><a href="../03-UI面板/创建面板ui.html">UI面板</a></li>
+            <li><a href="../04-物品系统/库存.html">物品系统</a></li>
+        </ul>
+    </nav>
+
+    <section class="container content">
+        <div class="back-nav">
+            <a href="../index.html">← 返回首页</a>
+            <a href="../02-玩家系统/玩家场景创建.html">下一章：玩家系统 →</a>
+        </div>
+
+        <h1>📍 创建城镇</h1>
+
+        <h2>第一步：创建基础场景</h2>
+
+        <p>先新建一个场景，然后创建一个 <code>Node2D</code> 节点，在节点下面创建 <code>TileMapLayer</code> 节点，添加上瓦片集，进行快捷使用。</p>
+
+        <div class="step">
+            <h3>1. 新建场景</h3>
+            <p>在 Godot 编辑器中创建一个新场景。</p>
+        </div>
+
+        <div class="step">
+            <h3>2. 添加 Node2D 节点</h3>
+            <p>在场景中创建一个 <code>Node2D</code> 节点作为根节点。</p>
+        </div>
+
+        <div class="step">
+            <h3>3. 添加 TileMapLayer 节点</h3>
+            <p>在 <code>Node2D</code> 节点下创建 <code>TileMapLayer</code> 节点。</p>
+        </div>
+
+        <div class="step">
+            <h3>4. 添加瓦片集</h3>
+            <p>为 <code>TileMapLayer</code> 添加瓦片集资源，这样就可以在编辑器中绘制地图了。</p>
+        </div>
+
+        <p><img src="../images/局部截取_20260414_145717.png" alt="创建 TileMapLayer"></p>
+
+        <p><img src="../images/局部截取_20260414_145728.png" alt="添加瓦片集"></p>
+
+        <h2>第二步：添加物理碰撞</h2>
+
+        <p>然后给添加的素材添加物理碰撞，这样角色就可以在地图上行走但不能穿过墙体。</p>
+
+        <div class="step">
+            <h3>1. 选择瓦片</h3>
+            <p>在 TileMap 编辑器中选择需要添加物理碰撞的瓦片。</p>
+        </div>
+
+        <div class="step">
+            <h3>2. 打开物理碰撞面板</h3>
+            <p>在瓦片编辑器中找到并打开物理(Physics)选项。</p>
+        </div>
+
+        <div class="step">
+            <h3>3. 绘制碰撞形状</h3>
+            <p>使用矩形或多边形工具为瓦片绘制碰撞形状。</p>
+        </div>
+
+        <p><img src="../images/局部截取_20260414_152057.png" alt="添加物理碰撞"></p>
+
+        <p><img src="../images/局部截取_20260414_152113.png" alt="物理碰撞设置"></p>
+
+        <h2>第三步：完善地图内容</h2>
+
+        <p>然后根据其他的图片集进行完善地图内容，添加更多的地形、建筑物、装饰物等元素。</p>
+
+        <p><img src="../images/局部截取_20260414_164424.png" alt="完善地图"></p>
+
+        <div class="note">
+            <strong>💡 小提示：</strong> 使用 TileMap 可以高效地创建大型 2D 游戏地图，合理的瓦片规划能让地图编辑更加便捷。
+        </div>
+
+        <div class="back-nav">
+            <a href="../index.html">← 返回首页</a>
+            <a href="../02-玩家系统/玩家场景创建.html">下一章：玩家系统 →</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>持续更新中...</p>
+        </div>
+    </footer>
+</body>
+</html>
