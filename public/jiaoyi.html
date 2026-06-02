@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ETH/USDT - TradingView</title>
     <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -1081,16 +1082,34 @@
             updateStatus('loading', `加载 ${interval} 数据...`);
 
             try {
-                const response = await fetch(`${interval}.json`);
-
-                if (!response.ok) {
-                    // 如果请求失败，使用 15m 数据作为默认数据
-                    console.warn(`${interval}.json 不存在，使用 15m 数据`);
-                    loadDefaultData();
-                    return;
+                // 先尝试加载压缩版本
+                let data = null;
+                if (interval === '15m') {
+                    try {
+                        const zipResponse = await fetch(`${interval}.json.zip`);
+                        if (zipResponse.ok) {
+                            const zip = await JSZip.loadAsync(zipResponse.blob());
+                            const jsonFile = zip.file(`${interval}.json`);
+                            if (jsonFile) {
+                                const jsonContent = await jsonFile.async('string');
+                                data = JSON.parse(jsonContent);
+                            }
+                        }
+                    } catch (zipError) {
+                        console.warn(`加载 ${interval}.json.zip 失败，尝试直接加载 json:`, zipError);
+                    }
                 }
 
-                const data = await response.json();
+                // 如果没有从 zip 加载到数据，尝试直接加载 json
+                if (!data) {
+                    const response = await fetch(`${interval}.json`);
+                    if (!response.ok) {
+                        console.warn(`${interval}.json 不存在，使用 15m 数据`);
+                        loadDefaultData();
+                        return;
+                    }
+                    data = await response.json();
+                }
 
                 if (data.length === 0) {
                     loadDefaultData();
@@ -1111,24 +1130,46 @@
             }
         }
         
-        function loadDefaultData() {
+        async function loadDefaultData() {
             // 使用 15m 数据作为默认数据
-            fetch('15m.json')
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.length > 0) {
-                        allData = data;
-                        playbackIndex = allData.length - 1;
-                        updateChart();
-                        updateStats();
-                        initializeDatePicker();
-                        updateStatus('realtime', `本地数据 (${allData.length.toLocaleString()} 根) - 当前仅支持 15m`);
+            let data = null;
+            try {
+                // 先尝试加载压缩版本
+                const zipResponse = await fetch('15m.json.zip');
+                if (zipResponse.ok) {
+                    const zip = await JSZip.loadAsync(zipResponse.blob());
+                    const jsonFile = zip.file('15m.json');
+                    if (jsonFile) {
+                        const jsonContent = await jsonFile.async('string');
+                        data = JSON.parse(jsonContent);
                     }
-                })
-                .catch(error => {
+                }
+            } catch (zipError) {
+                console.warn('加载压缩数据失败，尝试直接加载:', zipError);
+            }
+
+            // 如果压缩版本不行，尝试直接加载
+            if (!data) {
+                try {
+                    const response = await fetch('15m.json');
+                    if (response.ok) {
+                        data = await response.json();
+                    }
+                } catch (error) {
                     console.error('加载默认数据失败:', error);
-                    updateStatus('error', '加载失败');
-                });
+                    updateStatus('error', '数据加载失败');
+                    return;
+                }
+            }
+
+            if (data && data.length > 0) {
+                allData = data;
+                playbackIndex = allData.length - 1;
+                updateChart();
+                updateStats();
+                initializeDatePicker();
+                updateStatus('realtime', `本地数据 (${allData.length.toLocaleString()} 根) - 当前仅支持 15m`);
+            }
         }
 
         function fetchInitialData() {
