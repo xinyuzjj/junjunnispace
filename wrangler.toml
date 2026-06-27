@@ -1,11 +1,3 @@
 name = "junjuni-resource-sharing"
 main = "worker.js"
 compatibility_date = "2026-04-12"
-
-kv_namespaces = [
-  {
-    binding = "KV",
-    id = "",
-    preview_id = ""
-  }
-]
