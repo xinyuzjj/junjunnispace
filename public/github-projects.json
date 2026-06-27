@@ -1,0 +1,66 @@
+[
+  {
+    "name": "WEIX",
+    "description": "从 GitHub Trending 到全平台发布的内容分发管道。抓热点→存网盘→写文章→发微信→同步网站→多平台分发，一句话全自动搞定。",
+    "url": "https://github.com/xinyuzjj/WEIX",
+    "language": "Python",
+    "stars": 0,
+    "emoji": "🚀"
+  },
+  {
+    "name": "cocos-mcp-server",
+    "description": "Cocos Creator AI MCP Server — 让 AI 辅助开发 Cocos Creator 项目，支持场景管理、组件操作、资源管理。",
+    "url": "https://github.com/xinyuzjj/cocos-mcp-server",
+    "language": "TypeScript",
+    "stars": 9,
+    "emoji": "🎮"
+  },
+  {
+    "name": "ai-novel-generator",
+    "description": "基于 Electron 的 AI 小说生成器，支持多模型、章节管理、角色设定，一键生成完整小说。",
+    "url": "https://github.com/xinyuzjj/ai-novel-generator",
+    "language": "JavaScript",
+    "stars": 4,
+    "emoji": "📖"
+  },
+  {
+    "name": "superpowers-mcp",
+    "description": "增强型 MCP 工具集，为 AI Agent 提供超能力级别的扩展能力。",
+    "url": "https://github.com/xinyuzjj/superpowers-mcp",
+    "language": "Shell",
+    "stars": 3,
+    "emoji": "⚡"
+  },
+  {
+    "name": "hermes-skills",
+    "description": "Hermes Agent 技能库集合，包含增量解析、Lint 引擎、CLI 框架、GitHub 挖掘等多个技能包。",
+    "url": "https://github.com/xinyuzjj/hermes-skills",
+    "language": "Python",
+    "stars": 0,
+    "emoji": "🛠️"
+  },
+  {
+    "name": "code-analyzer",
+    "description": "端到端代码分析管道：增量解析 → AST 查询 → 声明式规则引擎 → 诊断/自动修复 → 多格式报告。",
+    "url": "https://github.com/xinyuzjj/code-analyzer",
+    "language": "Python",
+    "stars": 0,
+    "emoji": "🔍"
+  },
+  {
+    "name": "godot-mcp",
+    "description": "Godot 游戏引擎增强 MCP Server，支持场景管理、脚本编辑、项目分析。",
+    "url": "https://github.com/xinyuzjj/godot-mcp",
+    "language": "JavaScript",
+    "stars": 0,
+    "emoji": "🎯"
+  },
+  {
+    "name": "war3-rpg-platform",
+    "description": "魔兽争霸 3 RPG 平台 — 基于 Vue 的在线 RPG 地图管理与对战平台。",
+    "url": "https://github.com/xinyuzjj/war3-rpg-platform",
+    "language": "Vue",
+    "stars": 0,
+    "emoji": "⚔️"
+  }
+]
