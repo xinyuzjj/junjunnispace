@@ -5,7 +5,8 @@
     "url": "https://github.com/xinyuzjj/WEIX",
     "language": "Python",
     "stars": 0,
-    "emoji": "🚀"
+    "emoji": "🚀",
+    "icon": "/projects/weix.png"
   },
   {
     "name": "cocos-mcp-server",
@@ -13,7 +14,8 @@
     "url": "https://github.com/xinyuzjj/cocos-mcp-server",
     "language": "TypeScript",
     "stars": 9,
-    "emoji": "🎮"
+    "emoji": "🎮",
+    "icon": "/projects/cocos-mcp-server.png"
   },
   {
     "name": "ai-novel-generator",
@@ -21,7 +23,8 @@
     "url": "https://github.com/xinyuzjj/ai-novel-generator",
     "language": "JavaScript",
     "stars": 4,
-    "emoji": "📖"
+    "emoji": "📖",
+    "icon": "/projects/ai-novel-generator.png"
   },
   {
     "name": "superpowers-mcp",
@@ -29,7 +32,8 @@
     "url": "https://github.com/xinyuzjj/superpowers-mcp",
     "language": "Shell",
     "stars": 3,
-    "emoji": "⚡"
+    "emoji": "⚡",
+    "icon": "/projects/superpowers-mcp.png"
   },
   {
     "name": "hermes-skills",
@@ -37,7 +41,8 @@
     "url": "https://github.com/xinyuzjj/hermes-skills",
     "language": "Python",
     "stars": 0,
-    "emoji": "🛠️"
+    "emoji": "🛠️",
+    "icon": "/projects/hermes-skills.png"
   },
   {
     "name": "code-analyzer",
@@ -45,7 +50,8 @@
     "url": "https://github.com/xinyuzjj/code-analyzer",
     "language": "Python",
     "stars": 0,
-    "emoji": "🔍"
+    "emoji": "🔍",
+    "icon": "/projects/code-analyzer.png"
   },
   {
     "name": "godot-mcp",
@@ -53,7 +59,8 @@
     "url": "https://github.com/xinyuzjj/godot-mcp",
     "language": "JavaScript",
     "stars": 0,
-    "emoji": "🎯"
+    "emoji": "🎯",
+    "icon": "/projects/godot-mcp.png"
   },
   {
     "name": "war3-rpg-platform",
@@ -61,6 +68,7 @@
     "url": "https://github.com/xinyuzjj/war3-rpg-platform",
     "language": "Vue",
     "stars": 0,
-    "emoji": "⚔️"
+    "emoji": "⚔️",
+    "icon": "/projects/war3-rpg-platform.png"
   }
 ]
