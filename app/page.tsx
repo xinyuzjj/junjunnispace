@@ -185,6 +185,9 @@ export default function HomePage() {
                 <button className="px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100 transition-all duration-200 whitespace-nowrap text-sm font-medium">
                   筛选
                 </button>
+                <Link href="/game-resource" className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-violet-600 text-white hover:from-purple-700 hover:to-violet-700 transition-all duration-200 whitespace-nowrap text-sm font-medium shadow-md hover:shadow-lg flex items-center gap-1">
+                  🎮 游戏资源
+                </Link>
                 <Link href="/share" className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 whitespace-nowrap text-sm font-medium shadow-md hover:shadow-lg">
                   资源分享
                 </Link>
