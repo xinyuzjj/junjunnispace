@@ -212,7 +212,7 @@ export default function GameResourcePage() {
                     : 'bg-white text-slate-500 border border-slate-200 hover:border-purple-300 hover:text-purple-500 hover:bg-purple-50'
                 }`}
               >
-                全部 ({gameData?.count || 0})
+                全部
               </button>
               {categories.map(([cat, count]) => (
                 <button
@@ -224,7 +224,7 @@ export default function GameResourcePage() {
                       : 'bg-white text-slate-500 border border-slate-200 hover:border-purple-300 hover:text-purple-500 hover:bg-purple-50'
                   }`}
                 >
-                  {CATEGORY_ICON[cat] || '🎮'} {cat} ({count})
+                  {CATEGORY_ICON[cat] || '🎮'} {cat}
                 </button>
               ))}
             </div>

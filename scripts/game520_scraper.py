@@ -120,9 +120,12 @@ def download_links(html: str) -> dict[str, str]:
     return links
 
 
-def scrape(page: int = 1) -> list[dict]:
-    """抓取一页"""
-    url = LIST_URL if page == 1 else f"{LIST_URL}/page/{page}"
+def scrape(page: int = 1, order: str = "") -> list[dict]:
+    """抓取一页，order 可选 'hot' 按热度排行"""
+    if order == "hot":
+        url = f"{LIST_URL}?order=hot" if page == 1 else f"{LIST_URL}/page/{page}?order=hot"
+    else:
+        url = LIST_URL if page == 1 else f"{LIST_URL}/page/{page}"
     print(f"[P{page}] {url}")
 
     html = fetch(url)
