@@ -214,6 +214,55 @@ export default function HomePage() {
         </div>
       </header>
 
+      {/* ========== Mineradio 下载区 ========== */}
+      <section className="max-w-7xl mx-auto px-4 md:px-6 pt-8">
+        <div className="rounded-2xl overflow-hidden border border-purple-200 bg-gradient-to-br from-purple-50 via-white to-blue-50 shadow-sm">
+          <div className="flex flex-col md:flex-row items-center gap-6 p-6 md:p-8">
+            {/* 左侧图标 */}
+            <div className="flex-shrink-0">
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-purple-500/25">
+                <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+              </div>
+            </div>
+
+            {/* 中间信息 */}
+            <div className="flex-1 text-center md:text-left">
+              <div className="flex items-center gap-2 mb-1 justify-center md:justify-start">
+                <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Mineradio</h2>
+                <span className="px-2 py-0.5 rounded-md bg-purple-100 text-purple-700 text-xs font-bold">v1.1.1</span>
+              </div>
+              <p className="text-gray-600 text-sm mb-1">跨平台桌面音乐播放器，界面简洁优雅</p>
+              <p className="text-xs text-gray-400">文件大小：110 MB | 来源：GitHub Releases</p>
+            </div>
+
+            {/* 右侧下载按钮 */}
+            <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+              <a
+                href="https://pan.quark.cn/s/22a3fbeea5c0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 text-white font-semibold text-sm hover:from-red-600 hover:to-rose-700 transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2 whitespace-nowrap"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                夸克网盘下载
+              </a>
+              <a
+                href="https://pan.baidu.com/s/1F8mwBG7jjCHQN7wsSbD9WA?pwd=hexf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-sky-600 text-white font-semibold text-sm hover:from-blue-600 hover:to-sky-700 transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2 whitespace-nowrap"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                百度网盘下载
+                <span className="text-[10px] opacity-75 ml-1">pwd:hexf</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 主内容 */}
       <main className="max-w-7xl mx-auto px-4 md:px-6 py-6">
         <section>
