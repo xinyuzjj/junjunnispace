@@ -249,7 +249,7 @@ export default function HomePage() {
                 夸克网盘下载
               </a>
               <a
-                href="https://pan.baidu.com/s/1F8mwBG7jjCHQN7wsSbD9WA?pwd=hexf"
+                href="https://pan.baidu.com/s/1Ubr8_YfLS9uG5FlIg4W-ng?pwd=w8c9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-sky-600 text-white font-semibold text-sm hover:from-blue-600 hover:to-sky-700 transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2 whitespace-nowrap"
