@@ -1,7 +1,811 @@
 {
-  "updated": "2026-06-29 21:53:25",
-  "count": 100,
+  "updated": "2026-06-29 22:38:13",
+  "count": 150,
   "resources": [
+    {
+      "id": "7297cd43",
+      "name": "博德之门3 豪华版",
+      "category": "其他",
+      "desc": "豪华中文|V4.1.1.7209685+预购奖励+全DLC+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/ebd99b67a924",
+      "baiduLink": "https://pan.baidu.com/s/1rwronQedGIrdQT4YfW3oqw?pwd=a7wj",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "62634",
+      "sourceUrl": "https://www.gamer520.com/62634.html"
+    },
+    {
+      "id": "5e57e76c",
+      "name": "极限竞速 地平线5",
+      "category": "竞速",
+      "desc": "官方中文|V1.688.109-燃魂狂潮-炽热绽放+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/d85e972319a5",
+      "baiduLink": "https://pan.baidu.com/s/1Gl5AYtYhKTve2dB29irVCw?pwd=xn62",
+      "tags": [
+        "竞速"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "24210",
+      "sourceUrl": "https://www.gamer520.com/24210.html"
+    },
+    {
+      "id": "def405c9",
+      "name": "暗黑破坏神2 狱火重生 重制炼狱版",
+      "category": "其他",
+      "desc": "中字-国语|V3.2.92777-术士君临+术士MOD整合-永恒战火-英灵之魂+存档|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/7bf304ce34ae",
+      "baiduLink": "https://pan.baidu.com/s/1A0DkMv1hcSQI24BLLHhSDA?pwd=4xnh",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "22679",
+      "sourceUrl": "https://www.gamer520.com/22679.html"
+    },
+    {
+      "id": "bebef1c7",
+      "name": "卧龙 苍天陨落",
+      "category": "其他",
+      "desc": "数字豪华|中字-国语|V1.305-风起荆襄DLC+预购特典+全DLC+季票+联机+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/b6dc8be5718e",
+      "baiduLink": "https://pan.baidu.com/s/1ZuDBhVzLlLBoNl8UZhISUg?pwd=wgky",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "53877",
+      "sourceUrl": "https://www.gamer520.com/53877.html"
+    },
+    {
+      "id": "e1ad6ffc",
+      "name": "侠盗猎车手V 增强版",
+      "category": "其他",
+      "desc": "中字-国语|V1.0.1013.34-黑龙狂袭-怒血夺命+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/b59b2226d494",
+      "baiduLink": "https://pan.baidu.com/s/19A2eEFf94MuJKArBwoOMuA?pwd=t21w",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "40746",
+      "sourceUrl": "https://www.gamer520.com/40746.html"
+    },
+    {
+      "id": "b924791c",
+      "name": "双点校园",
+      "category": "其他",
+      "desc": "中字-国语|Build.20226581+Epic官中+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/5c20629acd2b",
+      "baiduLink": "https://pan.baidu.com/s/12aauBKnrHjxZk3cXJU6ZYQ?pwd=ut9w",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "55014",
+      "sourceUrl": "https://www.gamer520.com/55014.html"
+    },
+    {
+      "id": "d2713864",
+      "name": "消逝的光芒2 重装上阵版",
+      "category": "其他",
+      "desc": "豪华中文|Build.23851983-维勒多危机+夜狼进化包-末世孤影-破夜长灰+预购特典+全DLC+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/5c2b4b4da250",
+      "baiduLink": "https://pan.baidu.com/s/1WbZE-THIxabZZqCKYOvUjg?pwd=4cgv",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "39500",
+      "sourceUrl": "https://www.gamer520.com/39500.html"
+    },
+    {
+      "id": "bee591b8",
+      "name": "死亡细胞",
+      "category": "其他",
+      "desc": "豪华中文|Build.23762174-天罡-烈焰战士&虚空伙伴+全DLC-支持手柄|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/ef96a0fba726",
+      "baiduLink": "https://pan.baidu.com/s/1m2fdiaPiMRrmhWb-pATusQ?pwd=fvsp",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "22593",
+      "sourceUrl": "https://www.gamer520.com/22593.html"
+    },
+    {
+      "id": "212348b0",
+      "name": "拳皇15",
+      "category": "其他",
+      "desc": "豪华中文|V2.42.0_77476-终极登场+全DLC+预购特典+全季票+整合MOD|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "",
+      "baiduLink": "https://pan.baidu.com/s/1zbWtCswQAZrc5SYi8MXSvg",
+      "tags": [],
+      "netdisk": {
+        "showQuark": false,
+        "showBaidu": true
+      },
+      "sourcePostId": "27253",
+      "sourceUrl": "https://www.gamer520.com/27253.html"
+    },
+    {
+      "id": "6150bf47",
+      "name": "群星 银河版",
+      "category": "其他",
+      "desc": "官方中文|Build.23859066+游牧民族DLC+全DLC+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/3b69ccb69104",
+      "baiduLink": "https://pan.baidu.com/s/1k3dQ63YgUZIzWCz1Q-mf-Q?pwd=0pyq",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "43143",
+      "sourceUrl": "https://www.gamer520.com/43143.html"
+    },
+    {
+      "id": "8b0a6e82",
+      "name": "人渣 SCUM",
+      "category": "其他",
+      "desc": "官方中文|Build.23396999-狂热尸潮-厄运死神-季票+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/e4359530e988",
+      "baiduLink": "https://pan.baidu.com/s/1ifP-Q63EDWixqt7Clj7qUw?pwd=qbjx",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "40589",
+      "sourceUrl": "https://www.gamer520.com/40589.html"
+    },
+    {
+      "id": "f5e1f162",
+      "name": "诸天刷宝录 支持者版",
+      "category": "其他",
+      "desc": "官方中文|Build.21463282+四方神界DLC-神纹觉醒-万界逍遥+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/68363a2819c8",
+      "baiduLink": "https://pan.baidu.com/s/1QUL0gjAGjGF1iB720x4xVg?pwd=aacl",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "86932",
+      "sourceUrl": "https://www.gamer520.com/86932.html"
+    },
+    {
+      "id": "6171403f",
+      "name": "神话时代 重述高级版",
+      "category": "其他",
+      "desc": "中字-国语|V19.16313.0+黑曜石之镜DLC-全季票-新纪元+全DLC+季票|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/e7201c72fdfb",
+      "baiduLink": "https://pan.baidu.com/s/1AsYSAoEkNCbee3de9n1e9A?pwd=yrqs",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "81402",
+      "sourceUrl": "https://www.gamer520.com/81402.html"
+    },
+    {
+      "id": "c84b270a",
+      "name": "战锤40K 行商浪人",
+      "category": "其他",
+      "desc": "官方中文|V1.6.0.482+无限缪斯翁DLC+季票+预购特典+全DLC+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/59cd4fde046e",
+      "baiduLink": "https://pan.baidu.com/s/1umc55q7zmbHLRLlqS3_X9Q?pwd=5tmi",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "47313",
+      "sourceUrl": "https://www.gamer520.com/47313.html"
+    },
+    {
+      "id": "c916a4c4",
+      "name": "漫威蜘蛛侠2",
+      "category": "其他",
+      "desc": "豪华中文|V1.526.0.0Fix+全DLC+预购奖励+多国语言包+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/8a83dbe8db52",
+      "baiduLink": "https://pan.baidu.com/s/1POjBJ7MN44kq_x-dKwg-RA?pwd=rc3v",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "87941",
+      "sourceUrl": "https://www.gamer520.com/87941.html"
+    },
+    {
+      "id": "d56f78d2",
+      "name": "雾锁王国",
+      "category": "其他",
+      "desc": "豪华中文|Build.23178738-命运黑泉-黯夜战魂+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/e3dfa0f16781",
+      "baiduLink": "https://pan.baidu.com/s/1L2qAffuVxvw7dbFlz-kzVg?pwd=nzxj",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "71359",
+      "sourceUrl": "https://www.gamer520.com/71359.html"
+    },
+    {
+      "id": "3234ec4a",
+      "name": "英雄立志传 三国志",
+      "category": "其他",
+      "desc": "豪华中文|Build.23855631-朔天雷戟-铁骑崩云+预购特典+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/5ea904c27495",
+      "baiduLink": "https://pan.baidu.com/s/1Nln4BrhzAsKmN9zFSOGCyA?pwd=zldf",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "90550",
+      "sourceUrl": "https://www.gamer520.com/90550.html"
+    },
+    {
+      "id": "f9eb559a",
+      "name": "帝国时代2 重置决定版",
+      "category": "其他",
+      "desc": "中字-国语|Build.23768810+最后的酋长DLC+全DLC+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/886a7c5c03e6",
+      "baiduLink": "https://pan.baidu.com/s/1xe4hqyuKv4l0S2zCAcwuIQ?pwd=gf4j",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "40759",
+      "sourceUrl": "https://www.gamer520.com/40759.html"
+    },
+    {
+      "id": "44119006",
+      "name": "罪恶装备 奋战",
+      "category": "其他",
+      "desc": "豪华中文|Build.23016705+烈火重燃-瞬破流光-修罗夺魂+全DLC-支持手柄|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/542ffacf8238",
+      "baiduLink": "https://pan.baidu.com/s/12xikLW8rZf6kfQPGP3IDGw?pwd=k8q5",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "18640",
+      "sourceUrl": "https://www.gamer520.com/18640.html"
+    },
+    {
+      "id": "9a5b8ab7",
+      "name": "消逝的光芒 困兽 失地复苏决定版",
+      "category": "其他",
+      "desc": "中字-国语|V1.6.4.incl.DLC-噩梦+全DLC+预购奖励+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/2cf72cb7442f",
+      "baiduLink": "https://pan.baidu.com/s/1bi-fl4nY3VhrcJxMDqt0Pw?pwd=j0u0",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "99641",
+      "sourceUrl": "https://www.gamer520.com/99641.html"
+    },
+    {
+      "id": "d42dc2f3",
+      "name": "夜族崛起",
+      "category": "其他",
+      "desc": "官方中文|Build.23535612-巨蛇女王墨伽拉永恒统治包DCL-幽腐之秘-苍穹战纹+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/f2c90f3bbd9e",
+      "baiduLink": "https://pan.baidu.com/s/1UgNpAQLWtbcw1Jrk5fOPng?pwd=1btf",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "32134",
+      "sourceUrl": "https://www.gamer520.com/32134.html"
+    },
+    {
+      "id": "eaf7e6d5",
+      "name": "AI LIMIT 无限机兵",
+      "category": "其他",
+      "desc": "豪华中文|Build.23010530+厄瑞涅的战争熔炉DLC-黯潮逐魄-影殇剑决+预购特典+全DLC-支持手柄|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/e35fb4084da7",
+      "baiduLink": "https://pan.baidu.com/s/1xpl3S-Ba2JNUAi0xK4hxDA?pwd=k9vz",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "90467",
+      "sourceUrl": "https://www.gamer520.com/90467.html"
+    },
+    {
+      "id": "79491dfa",
+      "name": "杀戮尖塔2",
+      "category": "其他",
+      "desc": "豪华中文|Build.23811903+全DLC+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/53b046067b04",
+      "baiduLink": "https://pan.baidu.com/s/1D18-wg62oVWLlsqaZdeTbA?pwd=fgkt",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "109811",
+      "sourceUrl": "https://www.gamer520.com/109811.html"
+    },
+    {
+      "id": "da54e1c0",
+      "name": "幻想生活i 转圈圈的龙和偷取时间的少女",
+      "category": "其他",
+      "desc": "豪华中文|V2.1.2-幻界试炼+全DLC+预购特典+修改器-支持手柄|解压解压|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/7625f8e7ee56",
+      "baiduLink": "https://pan.baidu.com/s/1b5q5uq-81aN60mjqe-4gng?pwd=q6jp",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "93020",
+      "sourceUrl": "https://www.gamer520.com/93020.html"
+    },
+    {
+      "id": "3b41f13b",
+      "name": "破晓传说 黎明新程",
+      "category": "其他",
+      "desc": "豪华中文|Build.20823607-炎舞断罪-双界新生+预购特典+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/c575a8296b24",
+      "baiduLink": "https://pan.baidu.com/s/115dEQR1k-VSKtv8tGZR_zQ?pwd=dede",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "22275",
+      "sourceUrl": "https://www.gamer520.com/22275.html"
+    },
+    {
+      "id": "f7c67bab",
+      "name": "电锯甜心 重制(RePOP)",
+      "category": "其他",
+      "desc": "豪华中文|V1.20-血雨重生-斩梦之歌+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/d4c7a150cfc3",
+      "baiduLink": "https://pan.baidu.com/s/1XgxxIlHn0hrUGHG7ghlPUg?pwd=ukpa",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "81956",
+      "sourceUrl": "https://www.gamer520.com/81956.html"
+    },
+    {
+      "id": "64505ce1",
+      "name": "城市防线Z",
+      "category": "其他",
+      "desc": "豪华中文|Build.23907211-尸群绝壁-末日堡障+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/572184c790a6",
+      "baiduLink": "https://pan.baidu.com/s/1fJD_bKpc6xE-aQ8SyyZlTw?pwd=773s",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "98449",
+      "sourceUrl": "https://www.gamer520.com/98449.html"
+    },
+    {
+      "id": "7e6b446a",
+      "name": "帕格尼物语",
+      "category": "其他",
+      "desc": "豪华中文|Build.23891586+草原之歌DLC-部落联盟-繁荣之路-沙盒|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/49057e6cf390",
+      "baiduLink": "https://pan.baidu.com/s/1fosQaZBfmoxIxheCKSrapA?pwd=f95o",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "67792",
+      "sourceUrl": "https://www.gamer520.com/67792.html"
+    },
+    {
+      "id": "05e4ba96",
+      "name": "最后的加油站",
+      "category": "其他",
+      "desc": "官方中文|Build.23911460+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/88528ce1888e",
+      "baiduLink": "https://pan.baidu.com/s/1Nsgphe78NFwYoHdeFkRw4Q?pwd=m5il",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "112593",
+      "sourceUrl": "https://www.gamer520.com/112593.html"
+    },
+    {
+      "id": "30f2c720",
+      "name": "维拉克塔尔 Viractal",
+      "category": "其他",
+      "desc": "官方中文|Build.23778132+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/db7fc778af2a",
+      "baiduLink": "https://pan.baidu.com/s/14XgcNM1HddMeL1wXT3n-Cg?pwd=98xf",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "105686",
+      "sourceUrl": "https://www.gamer520.com/105686.html"
+    },
+    {
+      "id": "c335fbfd",
+      "name": "弈战征途",
+      "category": "其他",
+      "desc": "官方中文|Build.23906912+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/d0da80a30225",
+      "baiduLink": "https://pan.baidu.com/s/1F0NqC5LCi1nZds6AN4aTKg?pwd=lbhd",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "107233",
+      "sourceUrl": "https://www.gamer520.com/107233.html"
+    },
+    {
+      "id": "9484df4c",
+      "name": "刷屏至死 Death by Scrolling",
+      "category": "其他",
+      "desc": "官方中文|Build.22840358+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/a2169f6d1fc6",
+      "baiduLink": "https://pan.baidu.com/s/11d5JWPS-d1YuVq0o4fdu-w?pwd=10xn",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "101416",
+      "sourceUrl": "https://www.gamer520.com/101416.html"
+    },
+    {
+      "id": "12171a44",
+      "name": "雷霆孤影 VOIN",
+      "category": "其他",
+      "desc": "官方中文|Build.23802695-摧天裂地-破碎荣耀+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/8721a286e30f",
+      "baiduLink": "https://pan.baidu.com/s/1xWNnEwBLFSGxFvYSa8ElXw?pwd=n7i8",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "86124",
+      "sourceUrl": "https://www.gamer520.com/86124.html"
+    },
+    {
+      "id": "54f9b339",
+      "name": "潘多拉的玩具盒",
+      "category": "其他",
+      "desc": "官方中文|Build.23871691+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/608283958517",
+      "baiduLink": "https://pan.baidu.com/s/1LqAKN4hEx2R0TBkXDHtv-g?pwd=ea76",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "113814",
+      "sourceUrl": "https://www.gamer520.com/113814.html"
+    },
+    {
+      "id": "1f4ca5cf",
+      "name": "时空迷踪",
+      "category": "其他",
+      "desc": "官方中文|Build.23874512+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/55adb35cd1a3",
+      "baiduLink": "https://pan.baidu.com/s/1vArzu1HCIXf9ZM-8vH73hg?pwd=ol8l",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "115479",
+      "sourceUrl": "https://www.gamer520.com/115479.html"
+    },
+    {
+      "id": "d7ae1315",
+      "name": "御炮少女",
+      "category": "其他",
+      "desc": "官方中文|Build.23907225+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/62d88f2f5b1d",
+      "baiduLink": "https://pan.baidu.com/s/13chGy25KrQPoMeUQ_eR4Ug?pwd=x8ft",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "99310",
+      "sourceUrl": "https://www.gamer520.com/99310.html"
+    },
+    {
+      "id": "36748cf6",
+      "name": "三国义",
+      "category": "其他",
+      "desc": "豪华中文|Build.23899053+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/ca66ee88e853",
+      "baiduLink": "https://pan.baidu.com/s/1fFAT8lxnEUoZ-hbkD3qGhw?pwd=6o1i",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "116688",
+      "sourceUrl": "https://www.gamer520.com/116688.html"
+    },
+    {
+      "id": "bc8c119f",
+      "name": "生或死6 最后一战",
+      "category": "其他",
+      "desc": "豪华中文|Build.23652709+预购特典-幻樱千落三十一神座-全角色解锁-全DLC-支持手柄|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/126d8b531aa6",
+      "baiduLink": "https://pan.baidu.com/s/1Sx5cpRUYZysI4T81Qq2rnQ?pwd=28u1",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "116673",
+      "sourceUrl": "https://www.gamer520.com/116673.html"
+    },
+    {
+      "id": "f3308315",
+      "name": "极限竞速 地平线6 传奇版",
+      "category": "竞速",
+      "desc": "豪华中文|V382.893-黑域疾掠-寒流破界+预购特典+全DLC-支持手柄|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/21fa6f57b02e",
+      "baiduLink": "https://pan.baidu.com/s/1OG-YFj5ibhEDZfnD0EuVtQ?pwd=meaw",
+      "tags": [
+        "竞速"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "113322",
+      "sourceUrl": "https://www.gamer520.com/113322.html"
+    },
+    {
+      "id": "911431df",
+      "name": "奇迹时代4 高级版",
+      "category": "其他",
+      "desc": "豪华中文|V.1.015.003.123307+大法师的秘辛DLC-全扩展+全季票+全DLC+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/7c1e3e839f49",
+      "baiduLink": "https://pan.baidu.com/s/1rwKJikMFX5VrFgTopF3-cw?pwd=ix7y",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "57234",
+      "sourceUrl": "https://www.gamer520.com/57234.html"
+    },
+    {
+      "id": "fac0a815",
+      "name": "冰汽时代2",
+      "category": "其他",
+      "desc": "中字-国语|Build.23892248 +灰烬誓约DLC+全DLC+预购奖励+原生带-数字画册+中篇小说+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/9f08be169688",
+      "baiduLink": "https://pan.baidu.com/s/1rynZkBAT8Z1zTLlezbkrWg?pwd=0oxz",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "75343",
+      "sourceUrl": "https://www.gamer520.com/75343.html"
+    },
+    {
+      "id": "57ed7cde",
+      "name": "天外世界2 高级版",
+      "category": "其他",
+      "desc": "豪华中文|V1.2.0.0+全DLC+预购奖励包+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/644350b5aca9",
+      "baiduLink": "https://pan.baidu.com/s/1qPs1rtPs7wDVMoRGTNH69Q?pwd=7ddl",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "101242",
+      "sourceUrl": "https://www.gamer520.com/101242.html"
+    },
+    {
+      "id": "ba791f8b",
+      "name": "天外世界 太空人之选",
+      "category": "其他",
+      "desc": "官方中文|V2.5.9.0-异界天命+全DLC+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/cc6d684a8a25",
+      "baiduLink": "https://pan.baidu.com/s/16lrBW2UPh-Xiv9KNrwwxRw?pwd=wy0x",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "54164",
+      "sourceUrl": "https://www.gamer520.com/54164.html"
+    },
+    {
+      "id": "f1eba4cc",
+      "name": "战娘自走棋",
+      "category": "其他",
+      "desc": "官方中文|Build.23891761+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/7b19340cb92a",
+      "baiduLink": "https://pan.baidu.com/s/19803lgZmGlE315mbh6IEaQ?pwd=lf17",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "114531",
+      "sourceUrl": "https://www.gamer520.com/114531.html"
+    },
+    {
+      "id": "7259588c",
+      "name": "挂机升级打怪兽",
+      "category": "其他",
+      "desc": "官方中文|Build.23895038+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/ca7c087fc855",
+      "baiduLink": "https://pan.baidu.com/s/194WImeSmWaR67yTue4utRg?pwd=fkwx",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "113956",
+      "sourceUrl": "https://www.gamer520.com/113956.html"
+    },
+    {
+      "id": "9ebad984",
+      "name": "团战经理2",
+      "category": "其他",
+      "desc": "豪华中文|Build.23888546+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/54aa2580c60b",
+      "baiduLink": "https://pan.baidu.com/s/1TXQWkXIyx8MK0ZSiSBdPMg?pwd=qr3a",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "114271",
+      "sourceUrl": "https://www.gamer520.com/114271.html"
+    },
+    {
+      "id": "4835cddc",
+      "name": "末日幸存者",
+      "category": "其他",
+      "desc": "官方中文|Build.23887135-末世狂潮-枪火炼狱+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/071f440d8c31",
+      "baiduLink": "https://pan.baidu.com/s/1_y3zPZlaVwbHYE7921Fqug?pwd=041u",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "94901",
+      "sourceUrl": "https://www.gamer520.com/94901.html"
+    },
+    {
+      "id": "a940b813",
+      "name": "森灵旅社",
+      "category": "其他",
+      "desc": "官方中文|Build.23901771+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/d76abce9809c",
+      "baiduLink": "https://pan.baidu.com/s/107RbDyiO7g6elReld8cz4w?pwd=smnr",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "116458",
+      "sourceUrl": "https://www.gamer520.com/116458.html"
+    },
+    {
+      "id": "c922fb29",
+      "name": "最后的守护者",
+      "category": "其他",
+      "desc": "豪华中文|Build.23873679+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/72eec98b9102",
+      "baiduLink": "https://pan.baidu.com/s/1uWo40bESLZI6gWFI-EANtA?pwd=lqwo",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "104046",
+      "sourceUrl": "https://www.gamer520.com/104046.html"
+    },
+    {
+      "id": "9021acfb",
+      "name": "劫后公司",
+      "category": "其他",
+      "desc": "官方中文|Build.23879322-新增:场景编辑器-黑潮余生-灰烬家园+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/4168cf9d7da1",
+      "baiduLink": "https://pan.baidu.com/s/1005uGnsLZOMHmVJWLMjlVg?pwd=7s9c",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "94703",
+      "sourceUrl": "https://www.gamer520.com/94703.html"
+    },
     {
       "id": "256ef8e0",
       "name": "合金装备3 重制版",
