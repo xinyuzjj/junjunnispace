@@ -41,6 +41,7 @@ export default function HomePage() {
   const gameScrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [autoPaused, setAutoPaused] = useState(false);
 
   // 检查滚动位置，控制箭头显示
   const checkScroll = useCallback(() => {
@@ -49,6 +50,29 @@ export default function HomePage() {
     setCanScrollLeft(el.scrollLeft > 4);
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
   }, []);
+
+  // 自动滚动
+  useEffect(() => {
+    if (games.length === 0) return;
+    const el = gameScrollRef.current;
+    if (!el) return;
+
+    let timer: ReturnType<typeof setInterval>;
+    const startAuto = () => {
+      timer = setInterval(() => {
+        const cardEl = el.querySelector('[data-game-card]');
+        const step = cardEl ? cardEl.clientWidth + 12 : 180; // 卡片宽 + gap
+        // 如果快到末尾，重置到开头（无缝循环）
+        if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
+          el.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          el.scrollBy({ left: step, behavior: 'smooth' });
+        }
+      }, 3000); // 每3秒自动滚一张
+    };
+    if (!autoPaused) startAuto();
+    return () => clearInterval(timer);
+  }, [games.length, autoPaused]);
 
   useEffect(() => {
     checkScroll();
@@ -66,10 +90,12 @@ export default function HomePage() {
   const scrollGames = (dir: 'left' | 'right') => {
     const el = gameScrollRef.current;
     if (!el) return;
-    // 每次滚动约 2.5 个卡片宽度（移动端约 1.5 个）
     const cardWidth = el.querySelector('[data-game-card]')?.clientWidth || 176;
     const scrollAmount = dir === 'left' ? -cardWidth * 2.5 : cardWidth * 2.5;
     el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    // 手动点击后暂停5秒再恢复自动滚动
+    setAutoPaused(true);
+    setTimeout(() => setAutoPaused(false), 5000);
   };
 
   useEffect(() => {
@@ -231,8 +257,10 @@ export default function HomePage() {
                 {/* 卡片列表 */}
                 <div
                   ref={gameScrollRef}
-                  className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                  className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide snap-x snap-proximity [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                   style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' as any }}
+                  onMouseEnter={() => setAutoPaused(true)}
+                  onMouseLeave={() => setAutoPaused(false)}
                 >
                   {games.slice(0, 12).map(game => (
                     <Link
