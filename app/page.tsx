@@ -423,6 +423,37 @@ export default function HomePage() {
         </section>
       </main>
 
+      {/* ========== 微信公众号关注区 ========== */}
+      <section className="bg-gradient-to-r from-green-50 via-emerald-50 to-teal-50 border-y border-emerald-100">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-10">
+          <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-8 justify-center">
+            {/* 二维码 */}
+            <div className="shrink-0 rounded-2xl bg-white p-3 shadow-lg shadow-emerald-100/60 ring-1 ring-emerald-200/50 hover:shadow-xl transition-shadow duration-300">
+              <img
+                src="/wechat-qr.png"
+                alt="微信搜一搜「峻峻尼」关注公众号"
+                className="w-44 h-auto rounded-xl"
+              />
+            </div>
+            {/* 文案 */}
+            <div className="text-center sm:text-left max-w-xs">
+              <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                <svg className="w-7 h-7 text-green-500" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 4C5.36 4 2 6.69 2 10c0 1.89 1.08 3.56 2.78 4.66L4 17l2.5-1.5c.86.26 1.77.41 2.72.45A5.63 5.63 0 019 14c0-3.31 3.13-6 7-6 .55 0 1.09.06 1.61.16C16.79 5.18 13.47 4 9.5 4zm-2 5a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2zM16 9c-3.31 0-6 2.24-6 5s2.69 5 6 5c.67 0 1.32-.1 1.93-.27L20 20l-.62-1.87C20.95 17.22 22 15.71 22 14c0-2.76-2.69-5-6-5zm-2.5 3a1 1 0 110-2 1 1 0 010 2zm5 0a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                <h3 className="text-xl font-extrabold text-gray-800">关注公众号</h3>
+              </div>
+              <p className="text-base font-bold text-emerald-600 mb-1">峻峻尼</p>
+              <p className="text-sm text-gray-500 leading-relaxed mb-3">
+                扫码或微信搜索「峻峻尼」关注<br/>
+                获取最新资源推送、游戏更新和实用工具分享
+              </p>
+              <span className="inline-flex items-center gap-1 text-xs text-emerald-600/70 font-medium bg-white px-3 py-1.5 rounded-full border border-emerald-200 shadow-sm">
+                🔔 每日自动推送 · 永不遗漏
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 页脚 */}
       <footer className="border-t border-gray-200 py-8 px-6 md:px-8 bg-white mt-12">
         <div className="max-w-7xl mx-auto text-center">
