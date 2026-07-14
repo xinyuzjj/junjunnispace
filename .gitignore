@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scraper build artifacts / temp files
+scripts/__pycache__/
+public/game-resources-p*.json
+public/game-resources-orig.json
+public/game-resources-source.json
+quark_login_qr.png
+crawl_*.log
+.workbuddy/
