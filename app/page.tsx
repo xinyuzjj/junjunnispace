@@ -21,27 +21,40 @@ interface Project {
   icon: string;
 }
 
+interface Game {
+  id: string;
+  name: string;
+  category: string;
+  desc: string;
+  coverImage?: string;
+  quarkLink?: string;
+  baiduLink?: string;
+}
+
 export default function HomePage() {
   const [resources, setResources] = useState<Resource[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
   useEffect(() => {
     Promise.all([
-      fetch('/resources.json').then(res => res.json()),
-      fetch('/github-projects.json').then(res => res.json()),
+      fetch('/resources.json').then(res => res.json()).catch(() => []),
+      fetch('/github-projects.json').then(res => res.json()).catch(() => []),
+      fetch('/game-resources.json').then(res => res.json()).then(d => d.resources || []).catch(() => []),
     ])
-      .then(([resourcesData, projectsData]) => {
+      .then(([resourcesData, projectsData, gamesData]) => {
         setResources(resourcesData);
         setProjects(projectsData);
+        // 取有封面图的游戏，优先展示，最多12个
+        const withCover = gamesData.filter((g: Game) => g.coverImage && g.coverImage.startsWith('http'));
+        const featured = withCover.length >= 8 ? withCover : gamesData.slice(0, 12);
+        setGames(featured);
         setLoading(false);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, []);
 
   const filteredResources = resources.filter(item => {
@@ -66,114 +79,34 @@ export default function HomePage() {
     return colors[lang] || '#6b7280';
   };
 
+  // 统计数据
+  const stats = [
+    { label: 'PC 游戏', value: games.length || 276, icon: '🎮', color: 'from-purple-500 to-violet-600' },
+    { label: '精选资源', value: resources.length || 76, icon: '📦', color: 'from-blue-500 to-cyan-600' },
+    { label: '开源项目', value: projects.length || 8, icon: '⚡', color: 'from-emerald-500 to-teal-600' },
+    { label: '夸克/百度', value: '双链', icon: '☁️', color: 'from-orange-500 to-red-500' },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 relative font-sans">
-      {/* ========== 顶部 Hero: GitHub 开源项目展示 ========== */}
-      <section className="relative overflow-hidden">
-        {/* 渐变背景 */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900" />
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(139,92,246,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(59,130,246,0.3) 0%, transparent 50%)',
-        }} />
+      {/* ========== 顶部导航栏（固定在最顶部）========== */}
+      <header className="w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            {/* Logo */}
+            <Link href="/" className="text-xl font-bold text-red-600 flex items-center gap-2 shrink-0">
+              <span className="bg-gradient-to-r from-red-500 to-red-600 text-white px-2.5 py-1 rounded-lg text-sm font-extrabold shadow-sm">峻</span>
+              峻峻尼分享
+              <span className="text-xs text-gray-400 font-normal ml-1 hidden sm:inline">ARCHIVE</span>
+            </Link>
 
-        <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
-          {/* 标题区 */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <svg className="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              <span className="text-sm font-medium text-purple-300 tracking-wide uppercase">Open Source</span>
-            </div>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
-              我的 GitHub 开源项目
-            </h1>
-            <p className="text-purple-200/80 text-base max-w-xl mx-auto">
-              探索 AI Agent、游戏开发、内容分发等领域的开源作品
-            </p>
-          </div>
-
-          {/* 项目卡片网格 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {projects.map((project) => (
-              <a
-                key={project.name}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative p-5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 hover:border-purple-400/50 hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/20"
-              >
-                {/* 项目图标 */}
-                <div className="w-14 h-14 mb-4 rounded-xl overflow-hidden shadow-lg shadow-black/30 group-hover:shadow-purple-500/30 transition-shadow duration-300">
-                  <img
-                    src={project.icon}
-                    alt={project.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* 项目名称 */}
-                <h3 className="font-bold text-white text-sm mb-2 group-hover:text-purple-300 transition-colors">
-                  {project.name}
-                </h3>
-
-                {/* 描述 */}
-                <p className="text-xs text-gray-300/80 mb-4 line-clamp-2 leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* 底部信息 */}
-                <div className="flex items-center justify-between pt-3 border-t border-white/5">
-                  <div className="flex items-center gap-1.5">
-                    <span
-                      className="w-2.5 h-2.5 rounded-full ring-1 ring-white/20"
-                      style={{ backgroundColor: getLangColor(project.language) }}
-                    />
-                    <span className="text-xs text-gray-400">{project.language}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-xs text-gray-400">
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 .25a.75.75 0 01.673.418l3.058 6.197 6.839.994a.75.75 0 01.415 1.279l-4.948 4.823 1.168 6.811a.75.75 0 01-1.088.791L12 18.347l-6.117 3.216a.75.75 0 01-1.088-.79l1.168-6.812-4.948-4.823a.75.75 0 01.416-1.28l6.838-.993L11.327.668A.75.75 0 0112 .25z"/>
-                    </svg>
-                    <span>{project.stars}</span>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          {/* 底部链接 */}
-          <div className="text-center mt-8">
-            <a
-              href="https://github.com/xinyuzjj?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/10 text-sm text-purple-200 hover:bg-white/20 hover:border-purple-400/40 transition-all duration-300"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              查看全部项目 →
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ========== 顶部导航 ========== */}
-      <header className="w-full bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <Link href="/" className="text-xl font-bold text-red-600 flex items-center gap-2">
-                <span className="bg-red-600 text-white px-2 py-1 rounded text-sm">峻</span>
-                峻峻尼分享
-                <span className="text-xs text-gray-400 font-normal ml-2">ARCHIVE</span>
-              </Link>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-              <div className="relative flex-1 min-w-0 md:w-80">
+            {/* 搜索 + 按钮 */}
+            <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+              <div className="relative flex-1 min-w-0 md:w-64">
                 <input
                   type="text"
-                  placeholder="搜索关键词、链接或ID..."
-                  className="w-full px-4 py-2 pl-10 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm bg-gray-50 hover:bg-white transition-all duration-200"
+                  placeholder="搜索资源..."
+                  className="w-full px-4 py-2 pl-10 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-red-400/50 focus:border-red-400 text-sm bg-gray-50 hover:bg-white transition-all duration-200"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -181,48 +114,147 @@ export default function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <div className="flex flex-wrap gap-2">
-                <button className="px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100 transition-all duration-200 whitespace-nowrap text-sm font-medium">
-                  筛选
-                </button>
-                <Link href="/game-resource" className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-violet-600 text-white hover:from-purple-700 hover:to-violet-700 transition-all duration-200 whitespace-nowrap text-sm font-medium shadow-md hover:shadow-lg flex items-center gap-1">
-                  🎮 游戏资源
-                </Link>
-                <Link href="/share" className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 whitespace-nowrap text-sm font-medium shadow-md hover:shadow-lg">
-                  资源分享
-                </Link>
-                <span className="px-4 py-2 rounded-lg bg-green-500 text-white whitespace-nowrap text-sm font-medium shadow-md flex items-center gap-1.5">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 01.598.082l1.584.926a.272.272 0 00.14.045c.134 0 .24-.11.24-.245 0-.06-.024-.12-.04-.178l-.325-1.233a.492.492 0 01.178-.554C23.028 18.48 24 16.82 24 14.98c0-3.21-2.931-5.952-7.062-6.122zm-2.18 2.769c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.97-.982z"/></svg>
-                  <span>公众号：峻峻尼</span>
-                </span>
-                <a href="https://github.com/xinyuzjj" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-900 transition-all duration-200 whitespace-nowrap text-sm font-medium shadow-md hover:shadow-lg flex items-center gap-1">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <div className="flex items-center justify-start gap-3 mt-3 pt-3 border-t border-gray-100">
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-600">排序方式：</span>
-              <button
-                onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-                className="px-3 py-1 rounded-md text-xs bg-red-600 text-white hover:bg-red-700 transition-colors font-medium"
-              >
-                上传顺序 {sortOrder === 'asc' ? '↑' : '↓'}
-              </button>
+              <Link href="/game-resource" className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white hover:from-purple-700 hover:to-violet-700 transition-all duration-200 whitespace-nowrap text-sm font-medium shadow-md hover:shadow-lg flex items-center gap-1.5">
+                🎮 游戏库
+              </Link>
+              <a href="https://github.com/xinyuzjj" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-xl bg-gray-900 text-white hover:bg-gray-800 transition-all duration-200 text-sm font-medium shadow-md flex items-center gap-1.5">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                <span className="hidden sm:inline">GitHub</span>
+              </a>
             </div>
           </div>
         </div>
       </header>
 
-      {/* 主内容 */}
+      {/* ========== Hero 统计面板 ========== */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900" />
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: 'radial-gradient(circle at 25% 40%, rgba(139,92,246,0.4) 0%, transparent 55%), radial-gradient(circle at 75% 60%, rgba(59,130,246,0.3) 0%, transparent 50%)',
+        }} />
+
+        <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+          {/* 标题 + 统计卡片 */}
+          <div className="text-center mb-8">
+            <h1 className="text-2xl md:text-3xl font-extrabold text-white mb-2 tracking-tight">
+              峻峻尼<span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent"> 资源分享</span>
+            </h1>
+            <p className="text-indigo-200/70 text-sm">PC 游戏 · 开源项目 · 实用工具 · 夸克 / 百度双网盘</p>
+          </div>
+
+          {/* 数据统计卡片 */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-8">
+            {stats.map(s => (
+              <div key={s.label} className={`relative rounded-2xl bg-gradient-to-br ${s.color} p-4 md:p-5 text-white shadow-lg overflow-hidden group`}>
+                <div className="absolute -right-4 -top-4 text-5xl opacity-15 group-hover:opacity-25 transition-opacity">{s.icon}</div>
+                <div className="text-2xl md:text-3xl font-extrabold tabular-nums">{typeof s.value === 'number' ? s.value.toLocaleString() : s.value}</div>
+                <div className="text-xs md:text-sm opacity-85 mt-1">{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* 热门游戏横向滚动 */}
+          {games.length > 0 && (
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-base font-bold text-white/90 flex items-center gap-2">
+                  <span className="text-lg">🔥</span> 热门游戏推荐
+                </h2>
+                <Link href="/game-resource" className="text-xs text-purple-300 hover:text-white transition-colors flex items-center gap-1 group">
+                  查看全部 {games.length}+ 款
+                  <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </Link>
+              </div>
+              <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                {games.slice(0, 12).map(game => (
+                  <Link
+                    key={game.id}
+                    href={`/game-resource?id=${game.id}`}
+                    className="shrink-0 w-36 md:w-44 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 hover:border-purple-400/50 hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 overflow-hidden group"
+                  >
+                    {/* 封面图 */}
+                    <div className="aspect-[3/4] relative overflow-hidden bg-black/30">
+                      {game.coverImage?.startsWith('http') ? (
+                        <img
+                          src={game.coverImage}
+                          alt={game.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-4xl opacity-40">🎮</div>
+                      )}
+                      {/* 渐变遮罩 */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                      {/* 名称浮在底部 */}
+                      <div className="absolute bottom-0 left-0 right-0 p-2.5">
+                        <h3 className="text-xs md:text-sm font-bold text-white line-clamp-2 leading-tight drop-shadow">{game.name}</h3>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ========== 开源项目紧凑展示区 ========== */}
+      {projects.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 md:px-6 -mt-4 relative z-10 mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-base font-bold text-gray-700 flex items-center gap-2">
+              <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              开源项目
+            </h2>
+            <a href="https://github.com/xinyuzjj?tab=repositories" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-500 hover:text-purple-600 transition-colors flex items-center gap-1">
+              GitHub →
+            </a>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            {projects.map(p => (
+              <a
+                key={p.name}
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-gray-100 hover:border-purple-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+              >
+                <div className="w-9 h-9 rounded-lg overflow-hidden shrink-0 ring-1 ring-gray-100">
+                  <img src={p.icon} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-xs font-semibold text-gray-800 truncate group-hover:text-purple-600 transition-colors">{p.name}</h3>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: getLangColor(p.language) }} />
+                    <span className="text-[10px] text-gray-450 truncate">{p.language}</span>
+                    {p.stars > 0 && (
+                      <span className="text-[10px] text-gray-400 shrink-0 ml-auto flex items-center gap-0.5">
+                        ★{p.stars}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ========== 主内容：最新资源（保持原有样式不变）========== */}
       <main className="max-w-7xl mx-auto px-4 md:px-6 py-6">
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-gray-800">最新资源</h2>
-            <span className="text-sm text-gray-500">共 {filteredResources.length} 条记录</span>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                className="px-3 py-1.5 rounded-lg text-xs bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-red-300 hover:text-red-600 transition-colors font-medium cursor-pointer"
+              >
+                顺序 {sortOrder === 'asc' ? '↑' : '↓'}
+              </button>
+              <span className="text-sm text-gray-500">共 {filteredResources.length} 条记录</span>
+            </div>
           </div>
 
           {loading ? (
