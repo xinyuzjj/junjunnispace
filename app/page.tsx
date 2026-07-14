@@ -39,6 +39,17 @@ export default function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [wechatOpen, setWechatOpen] = useState(false);
+  const [showWechatModal, setShowWechatModal] = useState(false);
+
+  // 入站弹窗：首次访问显示公众号关注（localStorage 记录，关闭后不再弹）
+  useEffect(() => {
+    const hidden = localStorage.getItem('wb_wechat_modal_dismissed');
+    if (!hidden) {
+      // 延迟1秒再弹出，让页面先渲染完
+      const t = setTimeout(() => setShowWechatModal(true), 1000);
+      return () => clearTimeout(t);
+    }
+  }, []);
   const gameScrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -437,7 +448,7 @@ export default function HomePage() {
       <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
         {/* 展开后的二维码卡片 */}
         {wechatOpen && (
-          <div className="bg-white rounded-2xl shadow-2xl shadow-emerald-200/60 ring-1 ring-emerald-200/50 p-4 w-60 origin-bottom-right">
+          <div className="bg-white rounded-2xl shadow-2xl shadow-emerald-200/60 ring-1 ring-emerald-200/50 p-3 w-72 origin-bottom-right">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-1.5">
                 <svg className="w-5 h-5 text-green-500" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 4C5.36 4 2 6.69 2 10c0 1.89 1.08 3.56 2.78 4.66L4 17l2.5-1.5c.86.26 1.77.41 2.72.45A5.63 5.63 0 019 14c0-3.31 3.13-6 7-6 .55 0 1.09.06 1.61.16C16.79 5.18 13.47 4 9.5 4zm-2 5a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2zM16 9c-3.31 0-6 2.24-6 5s2.69 5 6 5c.67 0 1.32-.1 1.93-.27L20 20l-.62-1.87C20.95 17.22 22 15.71 22 14c0-2.76-2.69-5-6-5zm-2.5 3a1 1 0 110-2 1 1 0 010 2zm5 0a1 1 0 110-2 1 1 0 010 2z"/></svg>
@@ -451,15 +462,12 @@ export default function HomePage() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
-            <div className="bg-emerald-50 rounded-xl p-2 mb-2">
-              <img
-                src="/wechat-qr.png"
-                alt="微信搜一搜「峻峻尼」关注公众号"
-                className="w-full h-auto rounded-lg"
-              />
-            </div>
-            <p className="text-xs text-center text-emerald-600 font-medium mb-0.5">微信搜索「峻峻尼」关注</p>
-            <p className="text-[11px] text-center text-gray-400 leading-tight">每日推送最新资源 / 游戏更新</p>
+            <img
+              src="/wechat-qr-square.png"
+              alt="微信搜一搜「峻峻尼」关注公众号"
+              className="w-full h-auto rounded-xl border border-gray-100"
+            />
+            <p className="text-xs text-center text-emerald-600 font-medium mt-2">微信搜索「峻峻尼」关注</p>
           </div>
         )}
         {/* 触发按钮 */}
@@ -472,6 +480,85 @@ export default function HomePage() {
           <span className="text-sm font-bold pr-1 whitespace-nowrap">关注公众号</span>
         </button>
       </div>
+      {/* ========== 入站公众号关注弹窗 ========== */}
+      {showWechatModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          {/* 背景遮罩 */}
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => {
+              setShowWechatModal(false);
+              localStorage.setItem('wb_wechat_modal_dismissed', '1');
+            }}
+            aria-hidden="true"
+          />
+          {/* 弹窗卡片 */}
+          <div className="relative bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+            {/* 关闭按钮 */}
+            <button
+              onClick={() => {
+                setShowWechatModal(false);
+                localStorage.setItem('wb_wechat_modal_dismissed', '1');
+              }}
+              className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100/80 hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-colors"
+              aria-label="关闭"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+
+            {/* 顶部装饰条 */}
+            <div className="h-1.5 bg-gradient-to-r from-green-400 via-emerald-500 to-teal-400" />
+
+            {/* 内容区 */}
+            <div className="p-7 pt-5 flex flex-col items-center">
+              {/* 标题 */}
+              <div className="flex items-center gap-2 mb-1">
+                <svg className="w-7 h-7 text-green-500" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 4C5.36 4 2 6.69 2 10c0 1.89 1.08 3.56 2.78 4.66L4 17l2.5-1.5c.86.26 1.77.41 2.72.45A5.63 5.63 0 019 14c0-3.31 3.13-6 7-6 .55 0 1.09.06 1.61.16C16.79 5.18 13.47 4 9.5 4zm-2 5a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2zM16 9c-3.31 0-6 2.24-6 5s2.69 5 6 5c.67 0 1.32-.1 1.93-.27L20 20l-.62-1.87C20.95 17.22 22 15.71 22 14c0-2.76-2.69-5-6-5zm-2.5 3a1 1 0 110-2 1 1 0 010 2zm5 0a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                <h2 className="text-xl font-extrabold text-gray-900">关注公众号</h2>
+              </div>
+              <p className="text-base font-bold text-emerald-600 mb-0.5">峻峻尼</p>
+              <p className="text-sm text-gray-500 text-center mb-5 leading-relaxed">
+                扫码或微信搜索「峻峻尼」关注<br/>
+                每日推送最新游戏资源和更新
+              </p>
+
+              {/* 大二维码 */}
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-3 shadow-inner border border-green-100 mb-5">
+                <img
+                  src="/wechat-qr-square.png"
+                  alt="微信搜一搜「峻峻尼」关注"
+                  className="w-56 h-auto rounded-xl shadow-sm"
+                  draggable="false"
+                />
+              </div>
+
+              {/* 底部按钮组 */}
+              <div className="flex gap-3 w-full">
+                <button
+                  onClick={() => {
+                    setShowWechatModal(false);
+                    localStorage.setItem('wb_wechat_modal_dismissed', '1');
+                  }}
+                  className="flex-1 py-2.5 px-4 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors"
+                >
+                  稍后再说
+                </button>
+                <button
+                  onClick={() => {
+                    setShowWechatModal(false);
+                    localStorage.setItem('wb_wechat_modal_dismissed', '1');
+                  }}
+                  className="flex-1 py-2.5 px-4 text-sm font-semibold text-white bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-xl transition-colors shadow-md shadow-green-200"
+                >
+                  ✅ 已关注
+                </button>
+              </div>
+
+              <p className="text-xs text-gray-400 mt-3 text-center">扫码关注后，点击「已关注」关闭</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
