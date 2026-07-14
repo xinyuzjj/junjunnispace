@@ -51,27 +51,29 @@ export default function HomePage() {
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
   }, []);
 
-  // 自动滚动
+  // 自动滚动（丝滑连续滚动）
   useEffect(() => {
-    if (games.length === 0) return;
+    if (games.length === 0 || autoPaused) return;
     const el = gameScrollRef.current;
     if (!el) return;
 
-    let timer: ReturnType<typeof setInterval>;
-    const startAuto = () => {
-      timer = setInterval(() => {
-        const cardEl = el.querySelector('[data-game-card]');
-        const step = cardEl ? cardEl.clientWidth + 12 : 180; // 卡片宽 + gap
-        // 如果快到末尾，重置到开头（无缝循环）
-        if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
-          el.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          el.scrollBy({ left: step, behavior: 'smooth' });
-        }
-      }, 3000); // 每3秒自动滚一张
+    let rafId: number;
+    let lastTime = performance.now();
+    const SPEED = 45; // px/second 滚动速度，调大=更快
+
+    const tick = (now: number) => {
+      const dt = (now - lastTime) / 1000; // 秒
+      lastTime = now;
+      // 如果快到末尾，重置到开头（循环）
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
+        el.scrollLeft = 0;
+      } else {
+        el.scrollLeft += SPEED * dt;
+      }
+      rafId = requestAnimationFrame(tick);
     };
-    if (!autoPaused) startAuto();
-    return () => clearInterval(timer);
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, [games.length, autoPaused]);
 
   useEffect(() => {
@@ -248,16 +250,10 @@ export default function HomePage() {
                   <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                 </button>
 
-                {/* 左侧渐变遮罩（提示可向左滚） */}
-                <div
-                  className={`absolute left-0 top-0 bottom-3 w-8 md:w-12 z-10 pointer-events-none transition-opacity duration-300 bg-gradient-to-r from-slate-900/90 to-transparent ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`}
-                  aria-hidden="true"
-                />
-
                 {/* 卡片列表 */}
                 <div
                   ref={gameScrollRef}
-                  className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide snap-x snap-proximity [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                  className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                   style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' as any }}
                   onMouseEnter={() => setAutoPaused(true)}
                   onMouseLeave={() => setAutoPaused(false)}
@@ -291,12 +287,6 @@ export default function HomePage() {
                     </Link>
                   ))}
                 </div>
-
-                {/* 右侧渐变遮罩（提示可向右滚） */}
-                <div
-                  className={`absolute right-0 top-0 bottom-3 w-12 md:w-16 z-10 pointer-events-none transition-opacity duration-300 bg-gradient-to-l from-slate-900/90 to-transparent ${canScrollRight ? 'opacity-100' : 'opacity-0'}`}
-                  aria-hidden="true"
-                />
               </div>
             </div>
           )}
