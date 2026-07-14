@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 
 interface Resource {
@@ -38,6 +38,39 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const gameScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // 检查滚动位置，控制箭头显示
+  const checkScroll = useCallback(() => {
+    const el = gameScrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    checkScroll();
+    const el = gameScrollRef.current;
+    if (el) {
+      el.addEventListener('scroll', checkScroll, { passive: true });
+      window.addEventListener('resize', checkScroll, { passive: true });
+      return () => {
+        el.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
+      };
+    }
+  }, [games, checkScroll]);
+
+  const scrollGames = (dir: 'left' | 'right') => {
+    const el = gameScrollRef.current;
+    if (!el) return;
+    // 每次滚动约 2.5 个卡片宽度（移动端约 1.5 个）
+    const cardWidth = el.querySelector('[data-game-card]')?.clientWidth || 176;
+    const scrollAmount = dir === 'left' ? -cardWidth * 2.5 : cardWidth * 2.5;
+    el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     Promise.all([
@@ -153,46 +186,89 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* 热门游戏横向滚动 */}
+          {/* 热门游戏横向滚动轮播 */}
           {games.length > 0 && (
-            <div>
+            <div className="relative group/carousel">
+              {/* 标题行 */}
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-base font-bold text-white/90 flex items-center gap-2">
                   <span className="text-lg">🔥</span> 热门游戏推荐
                 </h2>
-                <Link href="/game-resource" className="text-xs text-purple-300 hover:text-white transition-colors flex items-center gap-1 group">
+                <Link href="/game-resource" className="text-xs text-purple-300 hover:text-white transition-colors flex items-center gap-1 group/link">
                   查看全部 {games.length}+ 款
-                  <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                  <svg className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </Link>
               </div>
-              <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                {games.slice(0, 12).map(game => (
-                  <Link
-                    key={game.id}
-                    href={`/game-resource?id=${game.id}`}
-                    className="shrink-0 w-36 md:w-44 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 hover:border-purple-400/50 hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 overflow-hidden group"
-                  >
-                    {/* 封面图 */}
-                    <div className="aspect-[3/4] relative overflow-hidden bg-black/30">
-                      {game.coverImage?.startsWith('http') ? (
-                        <img
-                          src={game.coverImage}
-                          alt={game.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-4xl opacity-40">🎮</div>
-                      )}
-                      {/* 渐变遮罩 */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                      {/* 名称浮在底部 */}
-                      <div className="absolute bottom-0 left-0 right-0 p-2.5">
-                        <h3 className="text-xs md:text-sm font-bold text-white line-clamp-2 leading-tight drop-shadow">{game.name}</h3>
+
+              {/* 滚动容器 */}
+              <div className="relative">
+                {/* 左箭头 */}
+                <button
+                  onClick={() => scrollGames('left')}
+                  aria-label="向左滚动"
+                  className={`absolute left-0 top-1/2 -translate-y-1/2 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/15 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 hover:bg-black/70 transition-all duration-200 shadow-lg -ml-1 ${canScrollLeft ? '' : 'pointer-events-none'}`}
+                  style={{ opacity: canScrollLeft ? undefined : 0 }}
+                >
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+
+                {/* 右箭头 */}
+                <button
+                  onClick={() => scrollGames('right')}
+                  aria-label="向右滚动"
+                  className={`absolute right-0 top-1/2 -translate-y-1/2 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/15 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 hover:bg-black/70 transition-all duration-200 shadow-lg -mr-1 ${canScrollRight ? '' : 'pointer-events-none'}`}
+                  style={{ opacity: canScrollRight ? undefined : 0 }}
+                >
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </button>
+
+                {/* 左侧渐变遮罩（提示可向左滚） */}
+                <div
+                  className={`absolute left-0 top-0 bottom-3 w-8 md:w-12 z-10 pointer-events-none transition-opacity duration-300 bg-gradient-to-r from-slate-900/90 to-transparent ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`}
+                  aria-hidden="true"
+                />
+
+                {/* 卡片列表 */}
+                <div
+                  ref={gameScrollRef}
+                  className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' as any }}
+                >
+                  {games.slice(0, 12).map(game => (
+                    <Link
+                      key={game.id}
+                      data-game-card
+                      href={`/game-resource?id=${game.id}`}
+                      className="shrink-0 w-36 md:w-44 snap-start rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 hover:border-purple-400/50 hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 overflow-hidden group/card"
+                    >
+                      {/* 封面图 */}
+                      <div className="aspect-[3/4] relative overflow-hidden bg-black/30">
+                        {game.coverImage?.startsWith('http') ? (
+                          <img
+                            src={game.coverImage}
+                            alt={game.name}
+                            className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-4xl opacity-40">🎮</div>
+                        )}
+                        {/* 渐变遮罩 */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                        {/* 名称浮在底部 */}
+                        <div className="absolute bottom-0 left-0 right-0 p-2.5">
+                          <h3 className="text-xs md:text-sm font-bold text-white line-clamp-2 leading-tight drop-shadow">{game.name}</h3>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* 右侧渐变遮罩（提示可向右滚） */}
+                <div
+                  className={`absolute right-0 top-0 bottom-3 w-12 md:w-16 z-10 pointer-events-none transition-opacity duration-300 bg-gradient-to-l from-slate-900/90 to-transparent ${canScrollRight ? 'opacity-100' : 'opacity-0'}`}
+                  aria-hidden="true"
+                />
               </div>
             </div>
           )}
