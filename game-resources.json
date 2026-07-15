@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-15 18:11:30",
-  "count": 376,
+  "updated": "2026-07-15 22:00:39",
+  "count": 394,
   "resources": [
     {
       "id": "7297cd43",
@@ -51,13 +51,13 @@
     {
       "id": "def405c9",
       "name": "暗黑破坏神2 狱火重生 重制炼狱版",
-      "category": "动作",
+      "category": "角色扮演",
       "desc": "中字-国语|V3.2.92777-术士君临+术士MOD整合-永恒战火-英灵之魂+存档|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/cb97dd23c07c",
       "baiduLink": "https://pan.baidu.com/s/1A0DkMv1hcSQI24BLLHhSDA?pwd=4xnh",
       "tags": [
-        "动作"
+        "角色扮演"
       ],
       "netdisk": {
         "showQuark": true,
@@ -69,7 +69,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "bebef1c7",
@@ -97,13 +97,13 @@
     {
       "id": "e1ad6ffc",
       "name": "侠盗猎车手V 增强版",
-      "category": "竞速",
+      "category": "动作",
       "desc": "中字-国语|V1.0.1013.34-黑龙狂袭-怒血夺命+全DLC|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/7c5f8c3c6a70",
       "baiduLink": "https://pan.baidu.com/s/19A2eEFf94MuJKArBwoOMuA?pwd=t21w",
       "tags": [
-        "竞速"
+        "动作"
       ],
       "netdisk": {
         "showQuark": true,
@@ -115,7 +115,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "b924791c",
@@ -316,13 +316,13 @@
     {
       "id": "c84b270a",
       "name": "战锤40K 行商浪人",
-      "category": "动作",
+      "category": "策略",
       "desc": "官方中文|V1.6.0.482+无限缪斯翁DLC+季票+预购特典+全DLC+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/59cd4fde046e",
       "baiduLink": "https://pan.baidu.com/s/1umc55q7zmbHLRLlqS3_X9Q?pwd=5tmi",
       "tags": [
-        "动作"
+        "策略"
       ],
       "netdisk": {
         "showQuark": true,
@@ -345,7 +345,7 @@
         "游戏类型": "冒险 / 独立 / 角色扮演 / 策略",
         "语言支持": "简体中文 / 多国语言"
       },
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "c916a4c4",
@@ -368,7 +368,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "d56f78d2",
@@ -430,13 +430,13 @@
     {
       "id": "f9eb559a",
       "name": "帝国时代2 重置决定版",
-      "category": "动作",
+      "category": "策略",
       "desc": "中字-国语|Build.23768810+最后的酋长DLC+全DLC+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/4aa971f88c01",
       "baiduLink": "https://pan.baidu.com/s/1xe4hqyuKv4l0S2zCAcwuIQ?pwd=gf4j",
       "tags": [
-        "动作"
+        "策略"
       ],
       "netdisk": {
         "showQuark": true,
@@ -448,7 +448,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "44119006",
@@ -545,13 +545,13 @@
     {
       "id": "79491dfa",
       "name": "杀戮尖塔2",
-      "category": "动作",
+      "category": "策略",
       "desc": "豪华中文|Build.23811903+全DLC+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/53b046067b04",
       "baiduLink": "https://pan.baidu.com/s/1D18-wg62oVWLlsqaZdeTbA?pwd=fgkt",
       "tags": [
-        "动作"
+        "策略"
       ],
       "netdisk": {
         "showQuark": true,
@@ -563,7 +563,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "da54e1c0",
@@ -655,7 +655,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "7e6b446a",
@@ -1041,18 +1041,18 @@
         "游戏类型": "竞速 / 模拟 / 体育",
         "语言支持": "简体中文 / 多国语言"
       },
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "911431df",
       "name": "奇迹时代4 高级版",
-      "category": "动作",
+      "category": "策略",
       "desc": "豪华中文|V.1.015.003.123307+大法师的秘辛DLC-全扩展+全季票+全DLC+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/d2e28003a85c",
       "baiduLink": "https://pan.baidu.com/s/1rwKJikMFX5VrFgTopF3-cw?pwd=ix7y",
       "tags": [
-        "动作"
+        "策略"
       ],
       "netdisk": {
         "showQuark": true,
@@ -1075,7 +1075,7 @@
         "游戏类型": "策略",
         "语言支持": "简体中文 / 多国语言"
       },
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "fac0a815",
@@ -1114,14 +1114,12 @@
     {
       "id": "57ed7cde",
       "name": "天外世界2 高级版",
-      "category": "动作",
+      "category": "其他",
       "desc": "豪华中文|V1.2.0.0+全DLC+预购奖励包+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/644350b5aca9",
       "baiduLink": "https://pan.baidu.com/s/1qPs1rtPs7wDVMoRGTNH69Q?pwd=7ddl",
-      "tags": [
-        "动作"
-      ],
+      "tags": [],
       "netdisk": {
         "showQuark": true,
         "showBaidu": true
@@ -1143,7 +1141,7 @@
         "游戏类型": "动作 / 冒险 / 角色扮演",
         "语言支持": "简体中文 / 多国语言"
       },
-      "genreSource": "steam"
+      "genreSource": "other"
     },
     {
       "id": "ba791f8b",
@@ -1262,7 +1260,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "4835cddc",
@@ -1392,13 +1390,13 @@
     {
       "id": "256ef8e0",
       "name": "合金装备3 重制版",
-      "category": "角色扮演",
+      "category": "动作",
       "desc": "豪华中文|V1.2.4Fix+预购特典+全DLC-支持手柄+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/b884b94256e9",
       "baiduLink": "https://pan.baidu.com/s/14O1b5I36_7XqqylhmmBucw?pwd=6evo",
       "tags": [
-        "角色扮演"
+        "动作"
       ],
       "netdisk": {
         "showQuark": true,
@@ -1410,18 +1408,18 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "b5d2f969",
       "name": "三国志8 威力加强重制版",
-      "category": "动作",
+      "category": "策略",
       "desc": "中字-国语|V1.1.3Fix-双袁之争-四雄决战+预购特典+全DLC+季票+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/4700513637c4",
       "baiduLink": "https://pan.baidu.com/s/1HpkVQK5AMVierSHQWRuzIg?pwd=ok2q",
       "tags": [
-        "动作"
+        "策略"
       ],
       "netdisk": {
         "showQuark": true,
@@ -1433,18 +1431,18 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "fdf04c47",
       "name": "流放者柯南 虚幻5增强版",
-      "category": "竞速",
+      "category": "动作",
       "desc": "豪华中文|Build.23919682-孤狼战者-影逝战士+预购特典+全DLC|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/5e49801461f4",
       "baiduLink": "https://pan.baidu.com/s/1Il8YhES5gbyHmkadIFOweQ?pwd=y19e",
       "tags": [
-        "竞速"
+        "动作"
       ],
       "netdisk": {
         "showQuark": true,
@@ -1456,7 +1454,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "ebad3533",
@@ -1650,12 +1648,14 @@
     {
       "id": "ecfdc157",
       "name": "阿西, 美女室友竟然&#8230;？2",
-      "category": "其他",
+      "category": "角色扮演",
       "desc": "豪华中文|Build.23853773-耳畔呢喃-暗夜轻偎+全DLC解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/d413c91f6199",
       "baiduLink": "https://pan.baidu.com/s/1VKL_YHIRdopJLI0Rc4WCrQ?pwd=p0mq",
-      "tags": [],
+      "tags": [
+        "角色扮演"
+      ],
       "netdisk": {
         "showQuark": true,
         "showBaidu": true
@@ -1666,7 +1666,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "other"
+      "genreSource": "steam"
     },
     {
       "id": "11dc5453",
@@ -1869,13 +1869,13 @@
     {
       "id": "3c699045",
       "name": "泰坦之旅2",
-      "category": "动作",
+      "category": "角色扮演",
       "desc": "豪华中文|Build.23936057-第四章:荒野之地优化+预购特典+全DLC+修改器-支持手柄|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/e19e8f65521a",
       "baiduLink": "https://pan.baidu.com/s/1nRwDDo6-TQbwLYq42FgBTQ?pwd=p52g",
       "tags": [
-        "动作"
+        "角色扮演"
       ],
       "netdisk": {
         "showQuark": true,
@@ -1898,18 +1898,18 @@
         "游戏类型": "动作 / 角色扮演 / 抢先体验",
         "语言支持": "简体中文 / 多国语言"
       },
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "260b6349",
       "name": "REPLACED",
-      "category": "策略",
+      "category": "动作",
       "desc": "豪华中文|Build.23920604-赛博破晓-机械黎明+预购特典+全DLC|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/b9e4b9f43e03",
       "baiduLink": "https://pan.baidu.com/s/1DmMJV5gqD5fjhtJHfm4F1A?pwd=kear",
       "tags": [
-        "策略"
+        "动作"
       ],
       "netdisk": {
         "showQuark": true,
@@ -2590,7 +2590,7 @@
         "游戏类型": "冒险 / 模拟 / 抢先体验",
         "语言支持": "简体中文 / 多国语言"
       },
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "5093d7dc",
@@ -2900,13 +2900,13 @@
     {
       "id": "c8b3cfa1",
       "name": "为了吾王2",
-      "category": "动作",
+      "category": "角色扮演",
       "desc": "豪华中文|V1.13.4+野径归寂角色包DLC-王者之志-战君之勇+全DLC+原声带|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/814412fb06d7",
       "baiduLink": "https://pan.baidu.com/s/1BZ6MMvfqJpMp2cEU1kDwiw?pwd=a5m5",
       "tags": [
-        "动作"
+        "角色扮演"
       ],
       "netdisk": {
         "showQuark": true,
@@ -3066,7 +3066,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "c8a3ee4f",
@@ -3219,13 +3219,13 @@
     {
       "id": "b4361100",
       "name": "战锤40K 战争黎明 终极版",
-      "category": "动作",
+      "category": "策略",
       "desc": "豪华中文|Build.23818449+预购特典+全DLC|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/9c63acdb51b2",
       "baiduLink": "https://pan.baidu.com/s/1JgrPo-je4x7r7rtXICfMDQ?pwd=cle9",
       "tags": [
-        "动作"
+        "策略"
       ],
       "netdisk": {
         "showQuark": true,
@@ -3237,7 +3237,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "0e71410b",
@@ -3823,7 +3823,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "01c1f5bc",
@@ -6090,14 +6090,14 @@
     {
       "id": "d04e5fdc",
       "name": "骑马与砍杀2 霸主",
-      "category": "动作",
+      "category": "策略",
       "desc": "豪华中文|Build.24127665-破军征程-重整帝国+全DLC+修改器|解压即撸|",
       "versionInfo": "豪华中文|Build.24127665-破军征程-重整帝国+全DLC+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/9722c6db3523",
       "baiduLink": "https://pan.baidu.com/s/1ITxm-gTwgW03R-AHhIDXUg?pwd=cqd7",
       "tags": [
-        "动作"
+        "策略"
       ],
       "netdisk": {
         "showQuark": true,
@@ -6111,7 +6111,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "bf3ad5b4",
@@ -7096,14 +7096,14 @@
     {
       "id": "a346b2c5",
       "name": "欧陆风云5 高级白金版",
-      "category": "竞速",
+      "category": "策略",
       "desc": "豪华中文|V1.3.10+凤凰天命DCL+预购特典+全DLC+修改器|解压即撸|",
       "versionInfo": "豪华中文|V1.3.10+凤凰天命DCL+预购特典+全DLC+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/0370db1a98e5",
       "baiduLink": "https://pan.baidu.com/s/1C9lMy27VsViwjB6DLFKNww?pwd=yrp1",
       "tags": [
-        "竞速"
+        "策略"
       ],
       "netdisk": {
         "showQuark": true,
@@ -7117,7 +7117,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "fbed213e",
@@ -7146,15 +7146,13 @@
     {
       "id": "f2e4e72a",
       "name": "遵命 陛下2:寒冬",
-      "category": "动作",
+      "category": "其他",
       "desc": "官方中文|Build.24072576-寒霜王座-王权御令+全DLC|解压即撸|",
       "versionInfo": "官方中文|Build.24072576-寒霜王座-王权御令+全DLC|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/84952508f6f6",
       "baiduLink": "",
-      "tags": [
-        "动作"
-      ],
+      "tags": [],
       "netdisk": {
         "showQuark": true,
         "showBaidu": false
@@ -7167,7 +7165,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "other"
     },
     {
       "id": "aa022baf",
@@ -7762,14 +7760,14 @@
     {
       "id": "133dbc61",
       "name": "深海迷航2",
-      "category": "动作",
+      "category": "冒险",
       "desc": "豪华中文|Build.23923591+预购特典+全DLC|解压即撸|",
       "versionInfo": "豪华中文|Build.23923591+预购特典+全DLC|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/04bd031bfdb8",
       "baiduLink": "https://pan.baidu.com/s/1lOrlxLAx_FdYOg3P5D2kyA?pwd=okkb",
       "tags": [
-        "动作"
+        "冒险"
       ],
       "netdisk": {
         "showQuark": true,
@@ -9355,15 +9353,13 @@
     {
       "id": "ee0f34b7",
       "name": "龙珠 超宇宙2",
-      "category": "动作",
+      "category": "其他",
       "desc": "官方中文|V1.26.0+未来之歌第4章-龙魂再燃-破限怒涛+全季票+全DLC-支持手柄+修改器|解压即撸|",
       "versionInfo": "官方中文|V1.26.0+未来之歌第4章-龙魂再燃-破限怒涛+全季票+全DLC-支持手柄+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/6afa2dab3c5b",
       "baiduLink": "https://pan.baidu.com/s/1YhMgtIlk6Wqn6lCngQ7MdQ?pwd=qtnu",
-      "tags": [
-        "动作"
-      ],
+      "tags": [],
       "netdisk": {
         "showQuark": true,
         "showBaidu": true
@@ -9376,7 +9372,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "other"
     },
     {
       "id": "d32ce9e4",
@@ -9726,15 +9722,13 @@
     {
       "id": "417b6bb2",
       "name": "消失的光芒 10周年决定版",
-      "category": "角色扮演",
+      "category": "其他",
       "desc": "豪华中文|V1.55.0+信徒DLC-波扎克部落-终极幸存者礼包-地狱突袭+全DLC|解压即撸|",
       "versionInfo": "豪华中文|V1.55.0+信徒DLC-波扎克部落-终极幸存者礼包-地狱突袭+全DLC|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/ac423ff27ead",
       "baiduLink": "https://pan.baidu.com/s/1Poxai7rN_ocOr1a7FZoCJA?pwd=omhk",
-      "tags": [
-        "角色扮演"
-      ],
+      "tags": [],
       "netdisk": {
         "showQuark": true,
         "showBaidu": true
@@ -9747,7 +9741,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "other"
     },
     {
       "id": "824455b5",
@@ -9978,14 +9972,14 @@
     {
       "id": "ea6fda75",
       "name": "洛克人X DiVE 离线版",
-      "category": "动作",
+      "category": "角色扮演",
       "desc": "《ROCKMAN X DiVE》是基于“洛克人 X”系列重新构建的外传，以离线版重新亮相！ 此游戏拥有丰富的培养要素，可以强化角色和武器，打造出专属于自己的角色！！ 进入洛克人X的“if”世界，尽情享受横向滚动条动作带来的乐趣！！",
       "versionInfo": "官方中文|20397159+全DLC-支持手柄|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/24795133dcd2",
       "baiduLink": "https://pan.baidu.com/s/1GfGBAOQeG-2CG5akIayjOQ?pwd=n0y5",
       "tags": [
-        "动作"
+        "角色扮演"
       ],
       "netdisk": {
         "showQuark": true,
@@ -10372,14 +10366,14 @@
     {
       "id": "d4aac89c",
       "name": "圣剑传说3 重制版",
-      "category": "角色扮演",
+      "category": "冒险",
       "desc": "官方中文|Build.20136103+全DLC+修改器|解压即撸|",
       "versionInfo": "官方中文|Build.20136103+全DLC+修改器|解压即撸|",
       "code": "laoquzhang.com",
       "quarkLink": "https://pan.quark.cn/s/5bb92698d42c",
       "baiduLink": "https://pan.baidu.com/s/1QZm31lc30_HjApdsKo06Uw?pwd=g41h",
       "tags": [
-        "角色扮演"
+        "冒险"
       ],
       "netdisk": {
         "showQuark": true,
@@ -10393,7 +10387,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "613235a3",
@@ -10800,7 +10794,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "335d0cab",
@@ -10876,7 +10870,7 @@
       "screenshots": [],
       "details": "",
       "info": {},
-      "genreSource": "steam"
+      "genreSource": "name"
     },
     {
       "id": "d4c6ad14",
@@ -11511,6 +11505,512 @@
         "语言支持": "简体中文 / 多国语言"
       },
       "genreSource": "steam"
+    },
+    {
+      "id": "935d9c05",
+      "name": "使命召唤14 二战",
+      "category": "射击",
+      "desc": "豪华中文|Build.22081346+预购特典+全DLC|解压即撸|",
+      "versionInfo": "豪华中文|Build.22081346+预购特典+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/da1df9c6f3fd",
+      "baiduLink": "https://pan.baidu.com/s/1hj6-C2iC-dfyT4lzanPzyg?pwd=qva9",
+      "tags": [
+        "射击"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "117355",
+      "sourceUrl": "https://www.gamer520.com/117355.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/011205132695",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1Eii9ZZJgxlGMfe2nje_p4Q?pwd=7942",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/476600/capsule_616x353.jpg?t=1780963893",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "name-sub"
+    },
+    {
+      "id": "186bec26",
+      "name": "使命召唤13 无限战争",
+      "category": "射击",
+      "desc": "豪华中文|Build.2715288+预购特典+全DLC|解压即撸|",
+      "versionInfo": "豪华中文|Build.2715288+预购特典+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/997b297824a2",
+      "baiduLink": "https://pan.baidu.com/s/1LigkTbZBjPwx1oYUBpTtRA?pwd=ttxf",
+      "tags": [
+        "射击"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "117353",
+      "sourceUrl": "https://www.gamer520.com/117353.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/b0b6e2c23ff1",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1J5CUGVpkqQAu5cGpc2EJEw?pwd=4t7w",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/292730/capsule_616x353.jpg?t=1755558170",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "name-sub"
+    },
+    {
+      "id": "f29b58c6",
+      "name": "高塔之下 放置",
+      "category": "独立",
+      "desc": "在这款3D放置点击冒险游戏中，建造、扩张并自动化你的岛屿帝国。收集资源，训练部队，征服危险的地下城。",
+      "versionInfo": "官方中文|Build.24057718+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/c0b948830ba3",
+      "baiduLink": "https://pan.baidu.com/s/1698xe3SCa1gbn5y-8xdv3g?pwd=45q1",
+      "tags": [
+        "独立"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "117376",
+      "sourceUrl": "https://www.gamer520.com/117376.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/0d130ed52345",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1PxrMavMY9lbdfIunWwUDaA?pwd=ffbr",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/4694530/16d368e06a80ddcd15d656088f3bfd4656e07bca/header.jpg?t=1783095484",
+      "screenshots": [
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/4694530/3fc6ecdc03e04b13a85cb7e524dd27130e2e711c/ss_3fc6ecdc03e04b13a85cb7e524dd27130e2e711c.1920x1080.jpg?t=1783095484",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/4694530/60fbe70601c4a4a1e3af49aac28a09af282341ec/ss_60fbe70601c4a4a1e3af49aac28a09af282341ec.1920x1080.jpg?t=1783095484",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/4694530/55d1bb6adffeafb36b0af3a6e49e1dd77c08e74d/ss_55d1bb6adffeafb36b0af3a6e49e1dd77c08e74d.1920x1080.jpg?t=1783095484",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/4694530/e3c90cb99232b7cdac68942dfa0b1eb121d62235/ss_e3c90cb99232b7cdac68942dfa0b1eb121d62235.1920x1080.jpg?t=1783095484",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/4694530/63b408a78157975829ae53ab09f5c8b8941debf0/ss_63b408a78157975829ae53ab09f5c8b8941debf0.1920x1080.jpg?t=1783095484",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/4694530/591294aac08dfc54f2244ed26bdd411fb81d982a/ss_591294aac08dfc54f2244ed26bdd411fb81d982a.1920x1080.jpg?t=1783095484"
+      ],
+      "details": "从零开始建立一个繁荣的岛屿帝国。\n收集资源，解锁新的土地，并将生产扩展到多个岛屿。建立高效系统，招募士兵，并派遣军队进入充满宝藏与挑战的危险地下城。\n无论你是主动游玩，还是让经济在放置状态下持续成长，进度永不停歇。\n扩张到多个岛屿，将小型定居点发展成繁荣土地。收集木材、石头、黄金和稀有资源。\n建立高效生产链，见证经济不断发展。享受轻松放置玩法与持续成长。\n招募并升级强大战士，探索危险地下城获取奖励，并击败强大的泰坦。\n你的帝国永不沉睡。即使离开游戏，也能持续收集资源、训练军队并不断成长。",
+      "info": {
+        "发行日期": "2026 年 7 月 3 日",
+        "游戏类型": "休闲 / 独立 / 抢先体验",
+        "语言支持": "简体中文 / 多国语言"
+      },
+      "genreSource": "name"
+    },
+    {
+      "id": "11ee3f99",
+      "name": "妖精剑士F 和声重奏 豪华版",
+      "category": "角色扮演",
+      "desc": "豪华中文|Build.22156927+全DLC|解压即撸|",
+      "versionInfo": "豪华中文|Build.22156927+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/e593897be7bf",
+      "baiduLink": "https://pan.baidu.com/s/1G-dHn-j3nUiHq8r9tnVQPA?pwd=g425",
+      "tags": [
+        "角色扮演"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "58457",
+      "sourceUrl": "https://www.gamer520.com/58457.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/64f3dc0702b0",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1IkxWHu4Jy5YrELUTnWMBLQ?pwd=cnjc",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/524580/capsule_616x353_tchinese.jpg?t=1776728885",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "name"
+    },
+    {
+      "id": "85a2fbd1",
+      "name": "觉醒异刃",
+      "category": "动作",
+      "desc": "这是一款暗黑童话风格的银河恶魔城游戏。在游戏中，你可以根据喜好决定故事的走向。 与被异兽寄生的少女塔尼亚一同破除迷雾，揭秘关于她命运的真相。神秘黑暗的至险之地危机四伏，你们能否于绝境中搏得一线生机？",
+      "versionInfo": "官方中文|Build.23110061+金鳞套装DLC-破敌狂潮-觉醒时刻+全DLC-支持手柄|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/d0c62c209d3e",
+      "baiduLink": "https://pan.baidu.com/s/1vlT0ypd9pf7yqIJypleIWg?pwd=ely2",
+      "tags": [
+        "动作"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "83344",
+      "sourceUrl": "https://www.gamer520.com/83344.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/5e1bc53a645a",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1xsfmBw_Meincag6w_4G95Q?pwd=zjqe",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1716310/header_schinese.jpg?t=1775575840",
+      "screenshots": [
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1716310/ss_3d17ca258bf3e25a60881f6a64b363e79314fa50.1920x1080.jpg?t=1775575840",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1716310/ss_77e09c2cf3270dcd8d29c4e9f52cc51b190c37c1.1920x1080.jpg?t=1775575840",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1716310/ss_d2ff7ec630ddf4f2a4c081f8827a228ea5a2eb32.1920x1080.jpg?t=1775575840",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1716310/ss_869b799c85f2d15c1ac1128d846d4bc013fd0009.1920x1080.jpg?t=1775575840",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1716310/ss_78138947d8b653e43c9b09bd805e8cab02541034.1920x1080.jpg?t=1775575840",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1716310/ss_7a19eb3ba8c21d7932c30254449bd53bca8b3fcf.1920x1080.jpg?t=1775575840"
+      ],
+      "details": "世界正在崩塌……《AWAKEN - Astral Blade》是一款2.5D动作冒险类银河恶魔城游戏，你将扮演塔尼亚，一名在被卡帕斯能量扭曲的世界中战斗的仿生战士。原本的搜寻任务迅速演变成更加黑暗的局势，而失踪的调查小队仅仅只是开端。一股神秘力量腐化了大地本身，将动植物扭曲为充满敌意且不可预测的形态。然而，这个世界不会主动解释一切，你需要一步步揭开其隐藏的真相。\n掌握一套围绕速度、时机与操控打造的精准且流畅的战斗系统。衔接动态连招，在关键时刻进行格挡反击，将防御转化为进攻。使用Quick Rise迅速重返战斗，并穿越敌人以减缓时间流动，获得短暂的无敌窗口，并对成群敌人与强大Boss发起毁灭性的反击。\n探索一个结构紧密、相互连通的世界，在尊重玩家时间的同时鼓励深入探索。发现隐藏路径、失落叙事的碎片，以及前人留下的痕迹。随着不断深入，世界将逐渐展现其全貌——同时也变得更加危险。\n利用神秘的Aether——一种不稳定的能量资源，为自身所用。强化塔尼亚的能力与战斗力，解锁全新技能，或根据你的玩法风格进行升级投资。无论你偏好力量、机动性，还是战术灵活性——前进的道路由你决定。\n迎战高强度战斗与强大Boss，或根据需要调整难度并获得有益增益效果。体验会随之变化——但这段旅程始终属于你自己。\n🐾 当然……你也可以摸猫。/ᐠ｡ꞈ｡ᐟ",
+      "info": {
+        "发行日期": "2024 年 10 月 22 日",
+        "游戏类型": "动作 / 冒险 / 独立 / 角色扮演 / 策略",
+        "语言支持": "简体中文 / 多国语言"
+      },
+      "genreSource": "steam"
+    },
+    {
+      "id": "d5ad5b35",
+      "name": "梦幻魔法公主",
+      "category": "角色扮演",
+      "desc": "豪华中文|Build.23969428-沙盒-美少女养成+全DLC|解压即撸|",
+      "versionInfo": "豪华中文|Build.23969428-沙盒-美少女养成+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/5cce9d8e882b",
+      "baiduLink": "https://pan.baidu.com/s/1euOHmU8s2tv-BMyhKdWfHg?pwd=vrus",
+      "tags": [
+        "角色扮演"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "112551",
+      "sourceUrl": "https://www.gamer520.com/112551.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/f2418b2236e5",
+      "sourceBaiduLink": "https://pan.baidu.com/s/18-gZpFZVqIIh1kC_hzlDdg?pwd=x64m",
+      "coverImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3562120/eb0bf5acdeb13b3a990fbbfd10c39ec85fbfc780/capsule_616x353_schinese.jpg?t=1777115409",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "steam"
+    },
+    {
+      "id": "543b660e",
+      "name": "武装博弈",
+      "category": "策略",
+      "desc": "官方中文|Build.24044935+全DLC|解压即撸|",
+      "versionInfo": "官方中文|Build.24044935+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/e5c2d41e0234",
+      "baiduLink": "https://pan.baidu.com/s/1n4nS6LM3xU3PLhAN-IOSdQ?pwd=3z9x",
+      "tags": [
+        "策略"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "113129",
+      "sourceUrl": "https://www.gamer520.com/113129.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/5b64db862858",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1I4Uu69WO7odCorC74rOQNQ?pwd=mx4b",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3802470/ba29266e568784a8f0565a7e3709b533c4da0744/capsule_616x353_tchinese.jpg?t=1778060278",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "steam"
+    },
+    {
+      "id": "698c42c9",
+      "name": "X4 基石",
+      "category": "动作",
+      "desc": "豪华中文|Build.23660954+亥伯龙扩展包DLC+全DLC|解压即撸|",
+      "versionInfo": "豪华中文|Build.23660954+亥伯龙扩展包DLC+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/8ba4b07ba6bb",
+      "baiduLink": "https://pan.baidu.com/s/19GW8rcNbigPEehq_fsqF0w?pwd=q994",
+      "tags": [
+        "动作"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "39735",
+      "sourceUrl": "https://www.gamer520.com/39735.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/531150ae876f",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1ItfqBsP99aeB3IFcTH3mrw?pwd=wh9y",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3419300/b964a901b32e22e7ba05213d750ed5927f099ded/capsule_616x353.jpg?t=1740069088",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "steam"
+    },
+    {
+      "id": "aa3db603",
+      "name": "失落的天空",
+      "category": "其他",
+      "desc": "豪华中文|Build.23704476+全DLC|解压即撸|",
+      "versionInfo": "豪华中文|Build.23704476+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/faf3cf7c6575",
+      "baiduLink": "https://pan.baidu.com/s/1GIJf2Ay2hYPbVXG4sEDjJw?pwd=kzig",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "99573",
+      "sourceUrl": "https://www.gamer520.com/99573.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/286059d126c8",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1hbwJ4xEniwZr8IZsoZRMvA?pwd=mbbm",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1931180/937e33f988447d501c93f6e455dc17b5327caf88/capsule_616x353.jpg?t=1757711964",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "other"
+    },
+    {
+      "id": "30a84263",
+      "name": "终结者2D 无命运",
+      "category": "其他",
+      "desc": "以街机操控风格和超赞像素画面畅享《终结者2》的惊心动魄！本作将电影中广为人知的场景与原创游戏场景和多重结局融为一炉，为你讲述一个独一无二的故事，让你来决定人类命运的走向。",
+      "versionInfo": "豪华中文|Build.24040403-逆命突围-铁血绝境+全DCL-支持手柄|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/c33ed2e2cb98",
+      "baiduLink": "https://pan.baidu.com/s/1FjtngykxL8hbB5SEOqa2aA?pwd=pdlh",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "103704",
+      "sourceUrl": "https://www.gamer520.com/103704.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/90a4f895eefd",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1ZYPco1OD8zEf-0kJAjyxVA?pwd=d7cf",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1718460/header.jpg?t=1782137385",
+      "screenshots": [
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1718460/ss_f52dae9aa8fd6f5334cd1888ab350eb9711abcbb.1920x1080.jpg?t=1782137385",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1718460/ss_b270fc9397f154b1c14a22de352ead4466ee7825.1920x1080.jpg?t=1782137385",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1718460/ss_8c8d277afa97c892d4550aa3dcff008cfd5c717a.1920x1080.jpg?t=1782137385",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1718460/ss_5c8cffe41a6422050bf627f35396cb35805a8100.1920x1080.jpg?t=1782137385",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1718460/ss_79c790d012d697a5fb4d830576d722d21a5d9693.1920x1080.jpg?t=1782137385",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/1718460/ss_3e420e92f4bd59fbf80b03c04677789239e90a38.1920x1080.jpg?t=1782137385"
+      ],
+      "details": "通过紧张刺激的街机式游戏操控与美妙绝伦的像素美术风格，体验《终结者2：审判日》的剧情！扮演莎拉·康纳与T-800，完成一系列扣人心弦的任务，与T-1000展开较量，阻止天网对人类的清除计划。扮演约翰·康纳，率领未来世界的反抗军，并作为人类的仅存希望，在与机器作战的前线奋勇拼杀。本作将《终结者2：审判日》中广为人知的电影场景与原创游戏场景和多重结局融为一炉，为你讲述一个独一无二的故事，让你来决定人类命运的走向。\n主要特色\n踏上一段经典的街机游戏之旅，畅享我们为致敬《终结者》世界而全新打造的原汁原味的街机游戏体验、音乐与视觉效果。\n重温那些“名场面”，扮演莎拉、约翰以及T-800，在融合了《终结者2：审判日》经典场景与其他不为人知的终结者故事的冒险中开拓全新旅程。\n与实力强大、武器众多的塞伯坦企业和天网展开战斗，迎击多种类型的敌人，进行令人肾上腺素狂飙的首领战。\n在五花八门的关卡中射击、潜行并躲避T-1000的利刃；扮演约翰·康纳，在关键的未来战争任务中率领反抗军。\n在每个关卡中都尽力获得最高排名，称霸高分排行榜，铸就不朽的街机传奇。\n聆听比肩电影原声大碟的游戏音乐，包含重制版的《终结者2：审判日》音乐以及全新曲目。\n更有多种不同游戏模式等你来挑战：故事模式、街机模式、无限模式、首领突袭、未来之母以及关卡训练！",
+      "info": {
+        "发行日期": "2025 年 12 月 12 日",
+        "游戏类型": "动作",
+        "语言支持": "简体中文 / 多国语言"
+      },
+      "genreSource": "other"
+    },
+    {
+      "id": "8609fbc5",
+      "name": "猎杀时刻 加班行动",
+      "category": "动作",
+      "desc": "官方中文|Build.24026371+全DLC|解压即撸|",
+      "versionInfo": "官方中文|Build.24026371+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/8e580a5ed893",
+      "baiduLink": "https://pan.baidu.com/s/1GCMoJfR-7tfoao1EBx_peA?pwd=gwzl",
+      "tags": [
+        "动作"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "113230",
+      "sourceUrl": "https://www.gamer520.com/113230.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/d181477601d1",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1r9BJAtLwnQTVXvnNBJF3fQ?pwd=93jy",
+      "coverImage": "https://v1.imagehub.cc/images/2026/05/10/5614e4ca2b94c6ed0429aeb1117f5135.jpg",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "name"
+    },
+    {
+      "id": "982444e4",
+      "name": "勒芒巅峰 终极版",
+      "category": "其他",
+      "desc": "豪华中文|Build.23771736-破晓狂飙-疾风战线+预购特典+全DLC-支持手柄|解压即撸|",
+      "versionInfo": "豪华中文|Build.23771736-破晓狂飙-疾风战线+预购特典+全DLC-支持手柄|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/d8a3b5323c2d",
+      "baiduLink": "https://pan.baidu.com/s/1G8hK8itGSaYj64ZK2_qasg?pwd=zpg9",
+      "tags": [],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "103485",
+      "sourceUrl": "https://www.gamer520.com/103485.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/71b6306ae6c5",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1jcINpEpBjb30DWKxCNwI4A?pwd=b3kf",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/2399420/eefeee37cce081143c54630d2b29879499eba20e/capsule_616x353.jpg?t=1765276010",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "other"
+    },
+    {
+      "id": "c27502da",
+      "name": "数字魅影 极限竞赛",
+      "category": "动作",
+      "desc": "官方中文|Build.24033557-暗影突袭-混沌漩涡|解压即撸|",
+      "versionInfo": "官方中文|Build.24033557-暗影突袭-混沌漩涡|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/737f8c4f8ec2",
+      "baiduLink": "https://pan.baidu.com/s/11A9kCCCG9M5hRb6E_-nu7Q?pwd=in6u",
+      "tags": [
+        "动作"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "76242",
+      "sourceUrl": "https://www.gamer520.com/76242.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/42c0d71acc5d",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1vyvqcNV5KE7RmYJ1jFPf0g?pwd=usxg",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/2507980/capsule_616x353_schinese.jpg?t=1714532797",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "steam"
+    },
+    {
+      "id": "3813c29b",
+      "name": "丧尸末世 地底全是财 挖宝造炮台",
+      "category": "恐怖",
+      "desc": "官方中文|Build.24042964+全DLC|解压即撸|",
+      "versionInfo": "官方中文|Build.24042964+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/b7d68e9baf0d",
+      "baiduLink": "https://pan.baidu.com/s/1rCvA3rpPDWzRzyB1kdUvkQ?pwd=vde9",
+      "tags": [
+        "恐怖"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "111513",
+      "sourceUrl": "https://www.gamer520.com/111513.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/bf8761b6a393",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1Ut80qR1jKg6jJ1lVZOsjhA?pwd=7vkh",
+      "coverImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3976500/84e5d236057ba6d10adeee2f91b31af786fcadd5/capsule_616x353_schinese.jpg?t=1774951479",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "name-sub"
+    },
+    {
+      "id": "c2102c66",
+      "name": "北欧之烬 诸神黄昏幸存者",
+      "category": "独立",
+      "desc": "官方中文|Build.24025658+世界树的黄昏DLC-天命终结-黄昏裁决+全DLC|解压即撸|",
+      "versionInfo": "官方中文|Build.24025658+世界树的黄昏DLC-天命终结-黄昏裁决+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/5f055f110347",
+      "baiduLink": "https://pan.baidu.com/s/1Jewvd_s3qLEkws5UsvEc9g?pwd=vve9",
+      "tags": [
+        "独立"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "48186",
+      "sourceUrl": "https://www.gamer520.com/48186.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/30beca9b1834",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1sD-8TwwRMXfeL0txqioSMg?pwd=n3it",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/4501990/a8df6f0547e6b8c2c34dba41d127cfb1598a8ee9/capsule_616x353.jpg?t=1779555555",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "name"
+    },
+    {
+      "id": "7324f2f1",
+      "name": "虫族幸存者 无尽围攻",
+      "category": "角色扮演",
+      "desc": "《虫族幸存者：无尽围攻》是一款轻度Rougelike弹幕射击放置肉鸽游戏。你将化身虫族最后的幸存者，在外星舰队的无尽围攻中奋力求生，构建强大战力，迎接一波又一波的挑战。",
+      "versionInfo": "官方中文|Build.23152367+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/462bb337cc6a",
+      "baiduLink": "https://pan.baidu.com/s/1y1clr0DD8qt3c9i_0KYCuw?pwd=94fp",
+      "tags": [
+        "角色扮演"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "117367",
+      "sourceUrl": "https://www.gamer520.com/117367.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/7f911578bf76",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1thhauyhA0x-G3Lh6Dbmn4w?pwd=dqpb",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3745020/143f9371bbe894d154cde27e6ce1bef4acc57274/header_schinese.jpg?t=1782101857",
+      "screenshots": [
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3745020/fcf29d71ce2bce9610c052f8fb41e034bdb7ee08/ss_fcf29d71ce2bce9610c052f8fb41e034bdb7ee08.1920x1080.jpg?t=1782101857",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3745020/a741e934e761f12103210689474e13d76a052d99/ss_a741e934e761f12103210689474e13d76a052d99.1920x1080.jpg?t=1782101857",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3745020/4ea3707e425343adfbc917adad84f21935d33b52/ss_4ea3707e425343adfbc917adad84f21935d33b52.1920x1080.jpg?t=1782101857",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3745020/e7322d6f143a6e945d47fdf3a95fb84a6993fd62/ss_e7322d6f143a6e945d47fdf3a95fb84a6993fd62.1920x1080.jpg?t=1782101857",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3745020/41dcb6f570809c062f9ec8d19b444c8292f9b117/ss_41dcb6f570809c062f9ec8d19b444c8292f9b117.1920x1080.jpg?t=1782101857",
+        "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3745020/86d0010d75f290db1c8bb0d1aa7e32cdd20c22c5/ss_86d0010d75f290db1c8bb0d1aa7e32cdd20c22c5.1920x1080.jpg?t=1782101857"
+      ],
+      "details": "一款轻操作、爽快割草的太空题材弹幕射击·放置·肉鸽游戏\n你是虫族最后的希望：面对无止尽的舰队洪流，你还能撑多久？\n极简操作\n无需走位、无需手捡，战斗全自动，专心享受割草反馈。\n构筑丰富\n20+ 技能，多样角色与敌人；不同星球、遗物与词条掉落，每局都有新组合。\n可调倍速\n整场战斗场景支持 1～4 倍速流畅运行\n支持桌面小屏模式\n可挂机在屏幕一角运行，工作或浏览时也能顺带推进一局。\n无尽与挑战\n无尽模式下调配局内资源，在高压敌浪里测试你能存活多长时间。",
+      "info": {
+        "发行日期": "2026 年 4 月 30 日",
+        "游戏类型": "休闲 / 独立 / 角色扮演 / 策略",
+        "语言支持": "简体中文 / 多国语言"
+      },
+      "genreSource": "steam"
+    },
+    {
+      "id": "e40a71cb",
+      "name": "东方幕华祭 永夜篇",
+      "category": "动作",
+      "desc": "豪华中文|Build.24014363-月相狂舞-星雨禁阵+全DLC|解压即撸|",
+      "versionInfo": "豪华中文|Build.24014363-月相狂舞-星雨禁阵+全DLC|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/03c97326e4a0",
+      "baiduLink": "https://pan.baidu.com/s/18FMqGxZIhG4cd37mCAduOw?pwd=7zmq",
+      "tags": [
+        "动作"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "99938",
+      "sourceUrl": "https://www.gamer520.com/99938.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/d92886bce868",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1gKEEXECO7srO5_H8ehx0vA?pwd=wvg7",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/2877170/capsule_616x353_schinese.jpg?t=1758413070",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "steam"
+    },
+    {
+      "id": "ee32b314",
+      "name": "生化危机9 安魂曲",
+      "category": "射击",
+      "desc": "中字-国语|Build.22898177+预购特典+全DLC+修改器|解压即撸|",
+      "versionInfo": "中字-国语|Build.22898177+预购特典+全DLC+修改器|解压即撸|",
+      "code": "laoquzhang.com",
+      "quarkLink": "https://pan.quark.cn/s/51f25cd6b25a",
+      "baiduLink": "https://pan.baidu.com/s/1A7i7m4WXuuOj7ZPSXMj7EA?pwd=f1pj",
+      "tags": [
+        "射击"
+      ],
+      "netdisk": {
+        "showQuark": true,
+        "showBaidu": true
+      },
+      "sourcePostId": "109515",
+      "sourceUrl": "https://www.gamer520.com/109515.html",
+      "sourceQuarkLink": "https://pan.quark.cn/s/378059d52249",
+      "sourceBaiduLink": "https://pan.baidu.com/s/1caA1qQCMxnA6CUjyDJPhhQ?pwd=3uuw",
+      "coverImage": "https://shared.cdn.queniuqe.com/store_item_assets/steam/apps/3764200/0731e32e73a1311c20a71199f4e4fd78ee9e9411/capsule_616x353.jpg?t=1772168710",
+      "screenshots": [],
+      "details": "",
+      "info": {},
+      "genreSource": "name-sub"
     }
   ]
 }

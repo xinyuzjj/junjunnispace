@@ -71,8 +71,28 @@ def normalize(name: str) -> str:
     return n
 
 
+def _name_score(term: str, cand: str) -> float:
+    """名字相似度：包含关系给满分，否则用字符 Jaccard 重叠率。"""
+    t = re.sub(r"\s+", "", term.lower())
+    c = re.sub(r"\s+", "", cand.lower())
+    if not t or not c:
+        return 0.0
+    if t in c or c in t:
+        return 1.0
+    # 去掉常见符号再算重叠
+    t2 = re.sub(r"[®©:·\-_']", "", t)
+    c2 = re.sub(r"[®©:·\-_']", "", c)
+    if t2 and (t2 in c or c in t2):
+        return 1.0
+    st, sc = set(t2), set(c2)
+    if not st or not sc:
+        return 0.0
+    return len(st & sc) / len(st | sc)
+
+
 def steam_search(term: str):
-    """返回 (matched_name, [genres]) 或 None。带缓存。"""
+    """返回 (matched_name, [genres]) 或 None。带缓存。
+    从候选列表里挑名字最像的那款（而非死用第 1 条）。"""
     cache = load_cache()
     if term in cache:
         return cache[term]
@@ -84,13 +104,18 @@ def steam_search(term: str):
         if not items:
             res = None
         else:
-            aid = items[0]["id"]
-            durl = "https://store.steampowered.com/api/appdetails?appids=%s&cc=us&l=schinese" % aid
-            req2 = urllib.request.Request(durl, headers=UA)
-            det = json.load(urllib.request.urlopen(req2, timeout=15))
-            gd = det.get(str(aid), {}).get("data", {})
-            genres = [g["description"] for g in gd.get("genres", [])]
-            res = (items[0]["name"], genres)
+            # 挑相似度最高的候选
+            best = max(items, key=lambda it: _name_score(term, it.get("name", "")))
+            if _name_score(term, best.get("name", "")) < 0.15:
+                res = None  # 没有像样的匹配，交给名称兜底
+            else:
+                aid = best["id"]
+                durl = "https://store.steampowered.com/api/appdetails?appids=%s&cc=us&l=schinese" % aid
+                req2 = urllib.request.Request(durl, headers=UA)
+                det = json.load(urllib.request.urlopen(req2, timeout=15))
+                gd = det.get(str(aid), {}).get("data", {})
+                genres = [g["description"] for g in gd.get("genres", [])]
+                res = (best["name"], genres)
     except Exception:
         res = None
     cache[term] = res
@@ -145,10 +170,18 @@ def name_subcat(name: str):
 
 def classify_game(g):
     name = g.get("name", "")
-    # 1) Steam 检索（先用清洗名，失败再用原名，再试英文名）
+    # 1) Steam 检索（先用清洗名，失败再用原名）
     info = steam_search(normalize(name)) or steam_search(name)
+    # 2) 去掉阿拉伯数字后用系列名再搜（续作/重制版靠同系列前作定类型）
     if not info:
-        latin = " ".join(re.findall(r"[A-Za-z0-9]+", name))
+        base = re.sub(r"\d+", "", normalize(name)).strip()
+        base = re.sub(r"\s+", " ", base)
+        # 至少保留 2 个中文字/字母，避免搜到空泛词
+        if len(re.sub(r"\s", "", base)) >= 2:
+            info = steam_search(base)
+    # 3) 英文名兜底（仅取字母词，排除纯数字 token，避免 "2" 命中 CS2）
+    if not info:
+        latin = " ".join(re.findall(r"[A-Za-z]{3,}", name))
         if latin:
             info = steam_search(latin)
     steam_genres = info[1] if info else []
@@ -176,6 +209,16 @@ def save_data(data):
 
 
 def main():
+    # 清掉“匹配名对不上”的旧缓存，强制用改进匹配重查
+    cache = load_cache()
+    bad_terms = [t for t, v in cache.items()
+                 if v and _name_score(t, v[0]) < 0.15]
+    for t in bad_terms:
+        del cache[t]
+    if bad_terms:
+        save_cache(cache)
+        print("已清理 %d 条错误匹配缓存，将重新检索" % len(bad_terms), flush=True)
+
     # 以 public 为权威来源读取
     data = json.load(open("public/game-resources.json", encoding="utf-8"))
     res = data["resources"]
