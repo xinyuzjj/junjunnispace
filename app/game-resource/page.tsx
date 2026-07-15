@@ -49,6 +49,12 @@ const CATEGORY_CONFIG: Record<string, { color: string; bg: string; border: strin
   '策略': { color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-200', icon: '♟️', gradient: 'from-blue-500 to-cyan-500' },
   '模拟': { color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200', icon: '🏗️', gradient: 'from-green-500 to-emerald-500' },
   '竞速': { color: 'text-yellow-600', bg: 'bg-yellow-50', border: 'border-yellow-200', icon: '🏎️', gradient: 'from-yellow-500 to-amber-500' },
+  '射击': { color: 'text-orange-600', bg: 'bg-orange-50', border: 'border-orange-200', icon: '🔫', gradient: 'from-orange-500 to-red-500' },
+  '格斗': { color: 'text-rose-600', bg: 'bg-rose-50', border: 'border-rose-200', icon: '🥊', gradient: 'from-rose-500 to-pink-500' },
+  '解谜': { color: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-200', icon: '🧩', gradient: 'from-indigo-500 to-violet-500' },
+  '恐怖': { color: 'text-gray-700', bg: 'bg-gray-100', border: 'border-gray-300', icon: '👻', gradient: 'from-gray-700 to-slate-800' },
+  '冒险': { color: 'text-cyan-600', bg: 'bg-cyan-50', border: 'border-cyan-200', icon: '🗺️', gradient: 'from-cyan-500 to-sky-500' },
+  '独立': { color: 'text-pink-600', bg: 'bg-pink-50', border: 'border-pink-200', icon: '💎', gradient: 'from-pink-500 to-rose-400' },
   '休闲': { color: 'text-teal-600', bg: 'bg-teal-50', border: 'border-teal-200', icon: '🎯', gradient: 'from-teal-500 to-cyan-500' },
   '其他': { color: 'text-slate-600', bg: 'bg-slate-50', border: 'border-slate-200', icon: '🎮', gradient: 'from-slate-500 to-gray-500' },
 };
