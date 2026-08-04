@@ -782,5 +782,22 @@
     ],
     "quarkLink": "https://pan.quark.cn/s/8c8b9afecd7e",
     "baiduLink": "https://pan.baidu.com/s/1oyllB7s0-CWL32cKi6SUWg?pwd=oulk"
+  },
+  {
+    "id": "78",
+    "title": "Ghost Downloader 3 v4.2.5 跨平台下载管理器",
+    "desc": "AI 加持的跨平台多线程并发下载器，基于 Python & Qt 打造，采用 Fluent Design 流畅设计风格界面。支持 HTTP/HTTPS、FTP、磁力链接(BT)、HTTP3/QUIC 等多协议，多线程分段加速、断点续传、批量链接导入与任务管理。已打包：Windows 安装版/便携版、macOS arm64/x86_64 dmg、Android arm64 apk。",
+    "quarkLink": "https://pan.quark.cn/s/cfac367051b9",
+    "baiduLink": "",
+    "tags": [
+      "下载工具",
+      "多线程",
+      "跨平台",
+      "Windows",
+      "macOS",
+      "安卓",
+      "开源",
+      "GhostDownloader"
+    ]
   }
 ]
