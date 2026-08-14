@@ -799,5 +799,22 @@
       "开源",
       "GhostDownloader"
     ]
+  },
+  {
+    "id": "79",
+    "title": "MangoDisk v1.0.2 磁盘清理与空间分析工具",
+    "desc": "安全第一的磁盘清理与空间分析工具（Windows / macOS），基于 Rust + Tauri 打造。支持重复文件查找、大文件清理、应用卸载，并用 Treemap 可视化磁盘占用。已打包：Windows 安装版 / 命令行版、macOS dmg / 命令行 tar 包。",
+    "quarkLink": "https://pan.quark.cn/s/8d99933c31e9",
+    "baiduLink": "",
+    "tags": [
+      "磁盘清理",
+      "空间分析",
+      "重复文件",
+      "Windows",
+      "macOS",
+      "卸载工具",
+      "开源",
+      "MangoDisk"
+    ]
   }
 ]
