@@ -59,3 +59,34 @@ body {
     background-clip: text;
   }
 }
+
+/* ================= 游戏资源库 · 薄荷白＋松针绿 辅助 ================= */
+
+@layer components {
+  .dot-grid {
+    background-image: radial-gradient(#C5D6C7 0.8px, transparent 0.8px);
+    background-size: 20px 20px;
+  }
+}
+
+@keyframes pineFadeUp {
+  from { opacity: 0; transform: translateY(12px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes pineFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.anim-in { animation: pineFadeUp 0.22s ease-out both; }
+.anim-fade { animation: pineFade 0.18s ease-out both; }
+
+.green-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.green-scroll::-webkit-scrollbar-thumb { background: #BFD2C1; border-radius: 8px; }
+.green-scroll::-webkit-scrollbar-track { background: #EFF6F0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-in, .anim-fade { animation: none; }
+}
+
