@@ -926,10 +926,12 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
               {projects.filter(p => p.featured).map(p => <FeaturedProjectCard key={p.name} p={p} />)}
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-3.5 mt-3.5">
-              {projects.filter(p => !p.featured).map(p => <ProjectCard key={p.name} p={p} />)}
-            </div>
-            <p className="text-[11px] text-moss mt-2">只改变呈现，不改变资源本身。</p>
+            {projects.some(p => !p.featured) && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-3.5 mt-3.5">
+                {projects.filter(p => !p.featured).map(p => <ProjectCard key={p.name} p={p} />)}
+              </div>
+            )}
+            <p className="text-[11px] text-moss mt-2">点卡片直达 GitHub 仓库。</p>
           </section>
         )}
       </main>

@@ -18,7 +18,7 @@
     "stack": "FastAPI · React · Electron · SQLite",
     "stars": 1,
     "emoji": "🤖",
-    "icon": ""
+    "icon": "/projects/bazz-agent.png"
   },
   {
     "name": "Ant-Browser",
@@ -42,105 +42,6 @@
     "stack": "Windows · Linux · macOS",
     "stars": 0,
     "emoji": "🐜",
-    "icon": ""
-  },
-  {
-    "name": "cocos-mcp-server",
-    "description": "Cocos Creator AI MCP Server — 让 AI 辅助开发 Cocos Creator 项目，支持场景管理、组件操作、资源管理。",
-    "url": "https://github.com/xinyuzjj/cocos-mcp-server",
-    "language": "TypeScript",
-    "stars": 9,
-    "emoji": "🎮",
-    "icon": "/projects/cocos-mcp-server.png"
-  },
-  {
-    "name": "superpowers-mcp",
-    "description": "增强型 MCP 工具集，为 AI Agent 提供超能力级别的扩展能力。",
-    "url": "https://github.com/xinyuzjj/superpowers-mcp",
-    "language": "Shell",
-    "stars": 5,
-    "emoji": "⚡",
-    "icon": "/projects/superpowers-mcp.png"
-  },
-  {
-    "name": "ai-novel-generator",
-    "description": "基于 Electron 的 AI 小说生成器，支持多模型、章节管理、角色设定，一键生成完整小说。",
-    "url": "https://github.com/xinyuzjj/ai-novel-generator",
-    "language": "JavaScript",
-    "stars": 4,
-    "emoji": "📖",
-    "icon": "/projects/ai-novel-generator.png"
-  },
-  {
-    "name": "trae-godot-mcp",
-    "description": "增强版 Godot 引擎 MCP 服务，让 AI 直接操作场景树、脚本与资源，辅助游戏开发。",
-    "url": "https://github.com/xinyuzjj/trae-godot-mcp",
-    "language": "JavaScript",
-    "stars": 2,
-    "emoji": "🎯",
-    "icon": ""
-  },
-  {
-    "name": "miniapp-template-studio",
-    "description": "浏览器里可视化搭建微信小程序，一键导出可直接运行的完整源码。15 套行业模板 · 34 个业务组件 · 零命令行部署。",
-    "url": "https://github.com/xinyuzjj/miniapp-template-studio",
-    "language": "TypeScript",
-    "stars": 1,
-    "emoji": "🧩",
-    "icon": ""
-  },
-  {
-    "name": "moye-novel",
-    "description": "墨页 · 本地轻量小说写作桌面软件，纯本地不联网，基于 Neutralinojs，专注写作本身。",
-    "url": "https://github.com/xinyuzjj/moye-novel",
-    "language": "JavaScript",
-    "stars": 0,
-    "emoji": "📝",
-    "icon": ""
-  },
-  {
-    "name": "code-analyzer",
-    "description": "端到端代码分析管道：增量解析 → AST 查询 → 声明式规则引擎 → 诊断/自动修复 → 多格式报告。",
-    "url": "https://github.com/xinyuzjj/code-analyzer",
-    "language": "Python",
-    "stars": 0,
-    "emoji": "🔍",
-    "icon": "/projects/code-analyzer.png"
-  },
-  {
-    "name": "hermes-skills",
-    "description": "Hermes Agent 技能库集合，包含增量解析、Lint 引擎、CLI 框架、GitHub 挖掘等多个技能包。",
-    "url": "https://github.com/xinyuzjj/hermes-skills",
-    "language": "Python",
-    "stars": 0,
-    "emoji": "🛠️",
-    "icon": "/projects/hermes-skills.png"
-  },
-  {
-    "name": "WEIX",
-    "description": "从 GitHub Trending 到全平台发布的内容分发管道。抓热点→存网盘→写文章→发微信→同步网站→多平台分发，一句话全自动搞定。",
-    "url": "https://github.com/xinyuzjj/WEIX",
-    "language": "Python",
-    "stars": 0,
-    "emoji": "🚀",
-    "icon": "/projects/weix.png"
-  },
-  {
-    "name": "godot-mcp",
-    "description": "Godot 游戏引擎增强 MCP Server，支持场景管理、脚本编辑、项目分析。",
-    "url": "https://github.com/xinyuzjj/godot-mcp",
-    "language": "JavaScript",
-    "stars": 0,
-    "emoji": "🕹️",
-    "icon": "/projects/godot-mcp.png"
-  },
-  {
-    "name": "war3-rpg-platform",
-    "description": "魔兽争霸 3 RPG 平台 — 基于 Vue 的在线 RPG 地图管理与对战平台。",
-    "url": "https://github.com/xinyuzjj/war3-rpg-platform",
-    "language": "Vue",
-    "stars": 0,
-    "emoji": "⚔️",
-    "icon": "/projects/war3-rpg-platform.png"
+    "icon": "/projects/ant-browser.png"
   }
 ]
