@@ -34,35 +34,204 @@ interface Game {
 /** 模块级标记：一次页面加载只上报一次浏览，避免 React 重渲染重复计数 */
 let homeCounted = false;
 
+/* ======================== 派生逻辑 ======================== */
+
+/** 票券左侧缩写：优先取标题「：」后的主名首两个字母（Mineradio → Mi） */
+function stubSymbol(title: string): string {
+  const main = title.includes('：') ? title.split('：').pop()!.trim() : title;
+  const latin = main.match(/[A-Za-z][A-Za-z0-9+\-_.]*/);
+  if (latin) {
+    const w = latin[0];
+    return w.length >= 2 ? w.slice(0, 2) : w.toUpperCase();
+  }
+  return main.slice(0, 2) || '资';
+}
+
+/** 票券左侧分类标签：优先用非 github 的首个标签 */
+const TAG_LABEL: Record<string, string> = {
+  github: '开源', pc: 'PC', mac: 'Mac', windows: 'Windows',
+  linux: 'Linux', ios: 'iOS', android: '安卓', web: 'Web',
+};
+function stubLabel(tags?: string[]): string {
+  if (!tags?.length) return '资源';
+  const pick = tags.find(t => t.toLowerCase() !== 'github') || tags[0];
+  return TAG_LABEL[pick.toLowerCase()] || pick;
+}
+
+/** 取出真实提取码（百度/夸克链接里的 pwd 参数），没有就不显示 */
+function getPwd(item: Resource): string | null {
+  const pick = (url?: string) => {
+    if (!url) return null;
+    const m = url.match(/[?&]pwd=([A-Za-z0-9]{4})/);
+    return m ? m[1] : null;
+  };
+  return pick(item.baiduLink) || pick(item.quarkLink);
+}
+
 /* ======================== 小组件 ======================== */
 
-function StatCard({ value, label }: { value: string; label: string }) {
+/** 区块标题：编号徽章 + 标题 + 右侧链接/说明 */
+function SectionHead({ index, title, right }: { index: string; title: string; right?: React.ReactNode }) {
   return (
-    <div className="rounded-xl bg-white border-2 border-ink shadow-hard-sm px-3.5 py-2 text-center min-w-[88px]">
-      <span className="block text-[21px] leading-tight font-black tracking-tight tabular-nums text-ink">{value}</span>
-      <span className="text-[10.5px] text-moss">{label}</span>
+    <div className="flex items-center justify-between gap-4 mb-4">
+      <h2 className="flex items-center gap-2.5 text-[19px] md:text-xl font-black tracking-tight">
+        <span className="font-mono text-[11px] font-bold tracking-[1px] text-pine-deep border border-sage rounded px-1.5 py-1">
+          {index}
+        </span>
+        {title}
+      </h2>
+      {right}
     </div>
   );
 }
 
-/** 主页浏览次数卡片（松针绿填充，视觉上独立于其他统计） */
-function VisitCard({ value }: { value: number | null }) {
+/** 游戏卡：16:10 封面 + 角标，标题在封面下方，底部虚线行 */
+function GameCard({ game }: { game: Game }) {
+  const hasCover = !!game.coverImage?.startsWith('http');
   return (
-    <div
-      className="rounded-xl bg-pine text-white border-2 border-ink shadow-hard-sm px-3.5 py-2 text-center min-w-[104px]"
-      title={value === null ? '统计服务待启用' : '主页累计被浏览的次数'}
+    <Link
+      data-game-card
+      href={`/game-resource?id=${game.id}`}
+      className="group/card block min-w-0 bg-white border-2 border-ink rounded-[10px] shadow-hard overflow-hidden transition-colors duration-200 hover:border-pine"
     >
-      <span className="flex items-center justify-center gap-1 text-[21px] leading-tight font-black tracking-tight tabular-nums">
-        <svg className="w-4 h-4 opacity-80" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M2.04 12.32a1 1 0 010-.64C3.42 7.51 7.36 4.5 12 4.5s8.58 3.01 9.96 7.18a1 1 0 010 .64C20.58 16.49 16.64 19.5 12 19.5s-8.58-3.01-9.96-7.18z" />
-          <circle cx="12" cy="12" r="3" />
-        </svg>
-        {value === null ? '—' : value.toLocaleString()}
-      </span>
-      <span className="text-[10.5px] opacity-85">主页浏览次数</span>
-    </div>
+      <div className="relative aspect-[16/10] border-b-2 border-ink bg-pine-light overflow-hidden">
+        {hasCover ? (
+          <img
+            src={game.coverImage}
+            alt={`${game.name} 封面`}
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="dot-grid absolute inset-0 grid place-items-center">
+            <span className="text-[42px] font-black text-pine-deep/35 select-none">{game.name.slice(0, 1)}</span>
+          </div>
+        )}
+        <span className="absolute top-2.5 left-2.5 bg-white border-[1.5px] border-ink rounded px-2 py-[2px] text-[10px] font-extrabold text-ink">
+          游戏推荐
+        </span>
+      </div>
+      <div className="px-3.5 py-3">
+        <h3 className="text-sm font-extrabold leading-[1.55] min-h-[44px] line-clamp-2">{game.name}</h3>
+        <div className="flex items-center justify-between gap-2 border-t border-dashed border-sage pt-2 text-[11px]">
+          <span className="text-moss truncate">{game.category}</span>
+          <span className="font-bold text-pine-deep whitespace-nowrap">查看详情 ↗</span>
+        </div>
+      </div>
+    </Link>
   );
 }
+
+/** 票券式资源卡：左侧 stub（撕票缺口）＋ 中部内容 ＋ 右侧网盘按钮列 */
+function Ticket({ item, featured }: { item: Resource; featured: boolean }) {
+  const pwd = getPwd(item);
+  const tags = item.tags || [];
+  return (
+    <article className="ticket group/ticket grid grid-cols-[59px_minmax(0,1fr)] md:grid-cols-[96px_minmax(0,1fr)_165px] bg-white border-2 border-ink rounded-xl shadow-hard overflow-hidden transition-colors duration-200 hover:border-pine">
+      {/* 左侧票根 */}
+      <div
+        className={`relative flex flex-col items-center justify-center gap-2 border-r-2 border-dashed border-ink py-4 md:py-0 row-span-2 md:row-span-1 ${
+          featured ? 'bg-pine text-white' : 'bg-pine-light text-ink'
+        }`}
+      >
+        <span className="text-[19px] md:text-[25px] leading-none font-black tracking-tight">
+          {stubSymbol(item.title)}
+        </span>
+        <span className="font-mono text-[10px] md:text-[11px] font-bold tracking-wide">
+          {stubLabel(tags)}
+        </span>
+        {/* 撕票缺口（配合父级 overflow-hidden 形成打孔效果） */}
+        <span className="absolute w-[18px] h-[18px] rounded-full border-2 border-ink bg-paper -right-[10px] -top-[11px]" />
+        <span className="absolute w-[18px] h-[18px] rounded-full border-2 border-ink bg-paper -right-[10px] -bottom-[11px]" />
+      </div>
+
+      {/* 中部内容 */}
+      <div className="px-3.5 pt-3.5 md:px-6 md:pt-5 md:pb-4 min-w-0">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <h3 className="text-[15px] md:text-[18px] leading-[1.5] font-extrabold min-w-0 break-words">
+            {item.title}
+          </h3>
+          {pwd && (
+            <span className="font-mono text-[12px] text-moss whitespace-nowrap">提取码 {pwd}</span>
+          )}
+        </div>
+        <p className="text-[12px] md:text-[13px] text-moss leading-relaxed mt-1.5 mb-2.5">
+          {item.desc}
+        </p>
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {tags.map((t, i) => (
+              <span
+                key={t}
+                className={`text-[11px] leading-[1.5] border rounded px-1.5 py-[1px] ${
+                  i === 0 ? 'bg-pine-light text-pine-deep border-sage' : 'bg-paper text-moss border-sage'
+                }`}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* 右侧网盘按钮 */}
+      <div className="col-start-2 md:col-auto flex flex-row md:flex-col md:justify-center gap-2 px-3.5 pb-3.5 md:px-0 md:py-5 md:pr-[18px]">
+        {item.quarkLink && (
+          <a
+            href={item.quarkLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 md:flex-none inline-flex items-center justify-between gap-2 rounded-md border-[1.5px] border-ink bg-pine-light text-pine-deep text-[11px] md:text-xs font-extrabold px-2.5 py-2 min-h-[36px] transition-all duration-150 hover:translate-x-[1px] hover:translate-y-[1px]"
+          >
+            夸克网盘 <span>↗</span>
+          </a>
+        )}
+        {item.baiduLink && (
+          <a
+            href={item.baiduLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 md:flex-none inline-flex items-center justify-between gap-2 rounded-md border-[1.5px] border-ink bg-white text-ink text-[11px] md:text-xs font-extrabold px-2.5 py-2 min-h-[36px] transition-all duration-150 hover:translate-x-[1px] hover:translate-y-[1px] hover:bg-pine-light"
+          >
+            百度网盘 <span>↗</span>
+          </a>
+        )}
+      </div>
+    </article>
+  );
+}
+
+/** 开源项目卡：顶部图标 + ↗，名称，语言 */
+function ProjectCard({ p }: { p: Project }) {
+  const [iconOk, setIconOk] = useState(true);
+  return (
+    <a
+      href={p.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-white border-2 border-ink rounded-[10px] shadow-hard-sm px-3.5 py-4 transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-xs"
+    >
+      <div className="flex items-center justify-between mb-3">
+        <span className="grid place-items-center w-[30px] h-[30px] rounded-md border-[1.5px] border-ink bg-paper overflow-hidden shrink-0">
+          {iconOk ? (
+            <img src={p.icon} alt="" className="w-full h-full object-cover" loading="lazy" onError={() => setIconOk(false)} />
+          ) : (
+            <span className="text-[15px] leading-none">{p.emoji}</span>
+          )}
+        </span>
+        <span className="font-bold text-pine-deep">↗</span>
+      </div>
+      <h3 className="text-sm font-extrabold leading-[1.5] mb-2 break-words">{p.name}</h3>
+      <p className="font-mono text-[11px] leading-[1.5] text-moss flex items-center gap-1.5 flex-wrap">
+        <span className="inline-block w-1.5 h-1.5 rounded-full bg-pine shrink-0" />
+        {p.language}
+        {p.stars > 0 && <span className="text-pine-deep font-bold">· ★{p.stars}</span>}
+      </p>
+    </a>
+  );
+}
+
+/* ======================== 主页面 ======================== */
 
 export default function HomePage() {
   const [resources, setResources] = useState<Resource[]>([]);
@@ -86,11 +255,16 @@ export default function HomePage() {
     }
   }, []);
 
-  // 页面底色跟随薄荷白，避免回弹时露出深色
+  // 页面底色与锚点滚动跟随薄荷白主题
   useEffect(() => {
-    const prev = document.body.style.background;
+    const prevBg = document.body.style.background;
+    const prevScroll = document.documentElement.style.scrollBehavior;
     document.body.style.background = '#EFF6F0';
-    return () => { document.body.style.background = prev; };
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.body.style.background = prevBg;
+      document.documentElement.style.scrollBehavior = prevScroll;
+    };
   }, []);
 
   /* ---- 主页浏览计数：一次加载只 POST 一次 ---- */
@@ -157,8 +331,8 @@ export default function HomePage() {
   const scrollGames = (dir: 'left' | 'right') => {
     const el = gameScrollRef.current;
     if (!el) return;
-    const cardWidth = el.querySelector('[data-game-card]')?.clientWidth || 176;
-    const scrollAmount = dir === 'left' ? -cardWidth * 2.5 : cardWidth * 2.5;
+    const cardWidth = el.querySelector('[data-game-card]')?.clientWidth || 267;
+    const scrollAmount = dir === 'left' ? -cardWidth * 2 : cardWidth * 2;
     el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     // 手动点击后暂停5秒再恢复自动滚动
     setAutoPaused(true);
@@ -175,8 +349,7 @@ export default function HomePage() {
         setResources(Array.isArray(resourcesData) ? resourcesData : []);
         setProjects(Array.isArray(projectsData) ? projectsData : []);
         const gamesData: Game[] = gameData?.resources || [];
-        if (typeof gameData?.count === 'number') setGameTotal(gameData.count);
-        else setGameTotal(gamesData.length);
+        setGameTotal(typeof gameData?.count === 'number' ? gameData.count : gamesData.length);
         // 取有封面图的游戏，优先展示，最多12个
         const withCover = gamesData.filter((g: Game) => g.coverImage && g.coverImage.startsWith('http'));
         const featured = withCover.length >= 8 ? withCover : gamesData.slice(0, 12);
@@ -197,332 +370,291 @@ export default function HomePage() {
     return sortOrder === 'asc' ? parseInt(a.id) - parseInt(b.id) : parseInt(b.id) - parseInt(a.id);
   });
 
-  const getLangColor = (lang: string) => {
-    const colors: Record<string, string> = {
-      'TypeScript': '#3178c6',
-      'JavaScript': '#f7df1e',
-      'Python': '#3776ab',
-      'Vue': '#4fc08d',
-      'Shell': '#89e051',
-    };
-    return colors[lang] || '#586A5D';
-  };
-
-  const num = (n: number) => (loading ? '—' : n.toLocaleString());
+  const viewsText = homeViews === null ? '—' : homeViews.toLocaleString();
 
   return (
     <div className="min-h-screen bg-paper text-ink">
 
-      {/* ========== 顶部导航栏（固定在最顶部）========== */}
+      {/* ========== 顶栏 ========== */}
       <header className="sticky top-0 z-40 bg-white border-b-2 border-ink">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4 py-2.5 md:py-0 md:min-h-[68px]">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 font-black text-lg md:text-xl whitespace-nowrap">
-              <span className="grid place-items-center w-8 h-[34px] rounded-lg bg-pine text-white border-2 border-ink shadow-hard-xs text-[18px]">
+        <div className="max-w-[1120px] mx-auto px-4 md:px-6">
+          <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-2 md:gap-6 py-3.5 md:py-0 md:min-h-[78px]">
+            {/* 站名 */}
+            <Link href="/" className="flex items-center gap-2.5 font-black text-[18px] md:text-[23px] whitespace-nowrap">
+              <span className="grid place-items-center w-[29px] h-[31px] md:w-[34px] md:h-[36px] rounded-lg bg-pine text-white border-2 border-ink shadow-hard-xs text-[17px] md:text-[21px]">
                 峻
               </span>
               <span>峻峻尼分享</span>
-              <span className="font-mono text-[10px] tracking-[1.4px] text-moss font-semibold hidden sm:inline">ARCHIVE</span>
+              <span className="hidden md:inline-block font-bold text-[11px] bg-pine-light border-[1.5px] border-ink rounded px-2 py-[2px] -rotate-3 ml-1">
+                发现 · 整理 · 分享
+              </span>
             </Link>
 
-            {/* 搜索 + 按钮 */}
-            <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-              <div className="relative flex-1 min-w-0 md:w-60">
-                <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-pine pointer-events-none" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <input
-                  type="text"
-                  placeholder="搜索资源…"
-                  className="w-full bg-paper border-2 border-ink rounded-lg py-2.5 pl-10 pr-3 text-sm font-medium text-ink placeholder-moss/70 outline-none focus:bg-white focus:border-pine shadow-hard-xs transition-colors"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-              <nav className="flex items-center gap-2 text-[13px] font-bold">
-                <Link
-                  href="/game-resource"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-pine text-white border-2 border-ink shadow-hard-xs hover:bg-pine-deep transition-colors whitespace-nowrap"
-                >
-                  🎮 游戏资源
-                </Link>
-                <a
-                  href="https://github.com/xinyuzjj"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hidden sm:inline-flex px-3 py-2 rounded-lg bg-white border-2 border-ink shadow-hard-xs hover:bg-pine-light transition-colors whitespace-nowrap"
-                >
-                  GitHub ↗
-                </a>
-              </nav>
-            </div>
+            {/* 导航 */}
+            <nav className="flex items-center gap-1.5 md:gap-2.5 text-[11px] md:text-sm font-bold">
+              <Link
+                href="/game-resource"
+                className="px-[7px] md:px-3 py-[7px] md:py-2 rounded-lg bg-pine text-white border-2 border-ink shadow-hard-xs whitespace-nowrap hover:bg-pine-deep transition-colors"
+              >
+                游戏库 ↗
+              </Link>
+              <a href="#resources" className="hidden md:inline-block px-3 py-2 rounded-lg border-2 border-transparent hover:bg-paper transition-colors">
+                最新资源
+              </a>
+              <a href="#projects" className="hidden md:inline-block px-3 py-2 rounded-lg border-2 border-transparent hover:bg-paper transition-colors">
+                开源项目
+              </a>
+              <a
+                href="https://github.com/xinyuzjj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-[7px] md:px-3 py-[7px] md:py-2 rounded-lg bg-white border-2 border-ink shadow-hard-xs whitespace-nowrap hover:bg-pine-light transition-colors"
+              >
+                GitHub ↗
+              </a>
+            </nav>
           </div>
         </div>
       </header>
 
-      {/* ========== Hero ========== */}
-      <section className="dot-grid border-b-2 border-ink">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-11">
-          <div className="grid lg:grid-cols-[1fr_auto] gap-7 lg:items-end">
+      {/* ========== 轻首屏 ========== */}
+      <section className="dot-grid border-b border-sage">
+        <div className="max-w-[1120px] mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-[1fr_278px] gap-7 md:gap-16 items-center py-8 md:py-12">
             <div>
-              <p className="font-mono text-[11px] tracking-[1.8px] text-moss font-semibold">RESOURCE ARCHIVE</p>
-              <h1 className="mt-2.5 mb-3 text-[32px] md:text-[40px] leading-[1.2] font-black tracking-tight">
-                <span className="shadow-[inset_0_-0.34em_#B5D4B8]">峻峻尼资源分享</span>
-              </h1>
-              <p className="text-sm text-moss max-w-xl leading-relaxed">
-                PC 游戏 · 开源项目 · 实用工具 · 夸克 / 百度双网盘。全部免费直链，无充值、无会员。
+              <p className="font-mono text-[10px] md:text-xs font-semibold tracking-[1.5px] text-moss">
+                游戏资源 · 开源项目 · 实用工具
               </p>
+              <h1 className="mt-3.5 mb-4 text-[33px] md:text-[46px] leading-[1.25] font-black tracking-[-1px] md:tracking-[-1.7px]">
+                好玩的，好用的，
+                <br />
+                <span className="shadow-[inset_0_-0.35em_#B5D4B8]">都在这里发现。</span>
+              </h1>
+              <p className="text-[13px] md:text-[15px] text-moss leading-[1.85] max-w-[555px]">
+                从值得一玩的游戏，到顺手的工具与开源项目。
+                <br className="hidden md:block" />
+                认真整理，简单分享。
+              </p>
+              <div className="flex gap-2.5 mt-5 md:mt-6">
+                <a
+                  href="#games"
+                  className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2 rounded-lg bg-pine text-white border-2 border-ink font-extrabold text-[13px] md:text-sm shadow-hard-sm transition-all duration-150 hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-hard-xs"
+                >
+                  发现热门游戏 <span>↓</span>
+                </a>
+                <a
+                  href="#resources"
+                  className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2 rounded-lg bg-white border-2 border-ink font-extrabold text-[13px] md:text-sm shadow-hard-sm transition-all duration-150 hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-hard-xs"
+                >
+                  浏览实用资源 <span>↓</span>
+                </a>
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-2.5">
-              <StatCard value={num(gameTotal)} label="款 PC 游戏" />
-              <StatCard value={num(resources.length)} label="条精选资源" />
-              <StatCard value={num(projects.length)} label="个开源项目" />
-              <VisitCard value={homeViews} />
-            </div>
+            {/* 内容定位便签 */}
+            <aside className="hidden md:block bg-white border-2 border-ink rounded-[14px] px-[22px] py-[20px] shadow-[5px_5px_0_#202922] rotate-2">
+              <div className="flex items-center justify-between text-xs text-moss">
+                <span>峻峻尼的分享清单</span>
+                <span className="w-2.5 h-2.5 rounded-full bg-pine" />
+              </div>
+              <div className="text-[25px] font-black mt-2.5 mb-1">好玩，也好用。</div>
+              <ul className="mt-2.5 text-[13px]">
+                <li className="flex justify-between border-t border-dashed border-sage pt-2 pb-1">
+                  <span>游戏资源</span>
+                  <span className="text-pine-deep font-bold">{loading ? '—' : `${gameTotal} 款`}</span>
+                </li>
+                <li className="flex justify-between border-t border-dashed border-sage pt-2 pb-1">
+                  <span>实用工具</span>
+                  <span className="text-pine-deep font-bold">{loading ? '—' : `${resources.length} 条`}</span>
+                </li>
+                <li className="flex justify-between border-t border-dashed border-sage pt-2 pb-1">
+                  <span>开源项目</span>
+                  <span className="text-pine-deep font-bold">{loading ? '—' : `${projects.length} 个`}</span>
+                </li>
+                <li className="flex justify-between border-t border-dashed border-sage pt-2 pb-0.5">
+                  <span>主页浏览次数</span>
+                  <span className="text-pine-deep font-bold tabular-nums">{viewsText} 次</span>
+                </li>
+              </ul>
+            </aside>
           </div>
         </div>
       </section>
 
-      <main className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <main className="max-w-[1120px] mx-auto px-4 md:px-6 pt-7 md:pt-8 pb-11">
 
-        {/* ========== 热门游戏横向滚动轮播 ========== */}
-        {games.length > 0 && (
-          <section className="pt-7">
-            <div className="flex items-center justify-between mb-3.5">
-              <h2 className="text-base font-bold flex items-center gap-2">
-                <span className="text-lg">🔥</span> 热门游戏推荐
-              </h2>
-              <Link
-                href="/game-resource"
-                className="text-xs font-bold text-pine underline underline-offset-4 hover:text-pine-deep transition-colors flex items-center gap-1 group/link"
-              >
-                查看全部
-                <svg className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth={2.4} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
+        {/* ========== 01 热门游戏 ========== */}
+        <section id="games" className="scroll-mt-[88px] mb-9">
+          <SectionHead
+            index="01"
+            title="热门游戏"
+            right={
+              <Link href="/game-resource" className="text-[11px] md:text-[13px] font-bold text-pine-deep whitespace-nowrap">
+                查看全部游戏 ↗
               </Link>
-            </div>
+            }
+          />
 
-            <div className="relative group/carousel">
-              {/* 左箭头 */}
-              <button
-                onClick={() => scrollGames('left')}
-                aria-label="向左滚动"
-                className={`absolute left-0 top-1/2 -translate-y-1/2 z-20 grid place-items-center w-9 h-9 md:w-10 md:h-10 rounded-lg bg-white border-2 border-ink shadow-hard-sm text-ink hover:bg-pine hover:text-white transition-colors duration-200 -ml-1 ${canScrollLeft ? '' : 'pointer-events-none'}`}
-                style={{ opacity: canScrollLeft ? undefined : 0 }}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-              </button>
+          <div className="relative group/carousel">
+            {/* 左箭头 */}
+            <button
+              onClick={() => scrollGames('left')}
+              aria-label="向左滚动"
+              className={`absolute left-0 top-[38%] -translate-y-1/2 z-20 grid place-items-center w-9 h-9 md:w-10 md:h-10 rounded-lg bg-white border-2 border-ink shadow-hard-sm text-ink hover:bg-pine hover:text-white transition-colors -ml-1 ${canScrollLeft ? '' : 'pointer-events-none'}`}
+              style={{ opacity: canScrollLeft ? undefined : 0 }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            {/* 右箭头 */}
+            <button
+              onClick={() => scrollGames('right')}
+              aria-label="向右滚动"
+              className={`absolute right-0 top-[38%] -translate-y-1/2 z-20 grid place-items-center w-9 h-9 md:w-10 md:h-10 rounded-lg bg-white border-2 border-ink shadow-hard-sm text-ink hover:bg-pine hover:text-white transition-colors -mr-1 ${canScrollRight ? '' : 'pointer-events-none'}`}
+              style={{ opacity: canScrollRight ? undefined : 0 }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
 
-              {/* 右箭头 */}
-              <button
-                onClick={() => scrollGames('right')}
-                aria-label="向右滚动"
-                className={`absolute right-0 top-1/2 -translate-y-1/2 z-20 grid place-items-center w-9 h-9 md:w-10 md:h-10 rounded-lg bg-white border-2 border-ink shadow-hard-sm text-ink hover:bg-pine hover:text-white transition-colors duration-200 -mr-1 ${canScrollRight ? '' : 'pointer-events-none'}`}
-                style={{ opacity: canScrollRight ? undefined : 0 }}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.6} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-              </button>
-
-              {/* 卡片列表 */}
-              <div
-                ref={gameScrollRef}
-                className="flex gap-3.5 overflow-x-auto pb-4 -mx-4 px-4"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' as any }}
-                onMouseEnter={() => setAutoPaused(true)}
-                onMouseLeave={() => setAutoPaused(false)}
-              >
-                {games.map(game => (
-                  <Link
-                    key={game.id}
-                    data-game-card
-                    href={`/game-resource?id=${game.id}`}
-                    className="group/card shrink-0 w-36 md:w-44 snap-start rounded-xl bg-white border-2 border-ink shadow-hard overflow-hidden cursor-pointer transition-all duration-200 hover:translate-x-[-3px] hover:translate-y-[-3px] hover:shadow-hard-lg"
-                  >
-                    <div className="relative aspect-[3/4] overflow-hidden bg-pine-light border-b-2 border-ink">
-                      {game.coverImage?.startsWith('http') ? (
-                        <img
-                          src={game.coverImage}
-                          alt={game.name}
-                          className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500 ease-out"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="dot-grid absolute inset-0 grid place-items-center">
-                          <span className="text-[40px] font-black text-pine-deep/35 select-none">{game.name.slice(0, 1)}</span>
-                        </div>
-                      )}
-                      {/* 分类角标 */}
-                      <span className="absolute top-2 left-2 z-10 rounded-md bg-pine text-white border-[1.5px] border-ink shadow-hard-xs px-1.5 py-[2px] text-[10px] font-bold">
-                        {game.category}
-                      </span>
-                      {/* 渐变遮罩 + 名称 */}
-                      <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-                      <h3 className="absolute bottom-0 left-0 right-0 p-2 text-[11px] md:text-xs font-bold text-white line-clamp-2 leading-tight">
-                        {game.name}
-                      </h3>
+            <div
+              ref={gameScrollRef}
+              role="region"
+              aria-label="游戏推荐，手机端可左右滑动"
+              className="flex gap-3.5 md:gap-[17px] overflow-x-auto pb-2.5 pt-0.5"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' as any, scrollSnapType: 'x mandatory' }}
+              onMouseEnter={() => setAutoPaused(true)}
+              onMouseLeave={() => setAutoPaused(false)}
+            >
+              {loading
+                ? Array.from({ length: 4 }).map((_, i) => (
+                    <div key={i} className="shrink-0 w-[76%] md:w-[calc((100%-51px)/4)] bg-white border-2 border-ink rounded-[10px] shadow-hard overflow-hidden">
+                      <div className="aspect-[16/10] bg-pine-light border-b-2 border-ink animate-pulse" />
+                      <div className="px-3.5 py-3 space-y-2.5">
+                        <div className="h-4 bg-pine-light rounded animate-pulse" />
+                        <div className="h-3 w-2/3 bg-pine-light rounded animate-pulse" />
+                      </div>
                     </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* ========== 开源项目 ========== */}
-        {projects.length > 0 && (
-          <section className="pt-5">
-            <div className="flex items-center justify-between mb-3.5">
-              <h2 className="text-base font-bold flex items-center gap-2">
-                <svg className="w-4 h-4 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                开源项目
-              </h2>
-              <a
-                href="https://github.com/xinyuzjj?tab=repositories"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-bold text-pine underline underline-offset-4 hover:text-pine-deep transition-colors"
-              >
-                GitHub →
-              </a>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              {projects.map(p => (
-                <a
-                  key={p.name}
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-2.5 p-2.5 rounded-xl bg-white border-2 border-ink shadow-hard-sm hover:bg-pine-light hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-hard transition-all duration-200"
-                >
-                  <div className="w-9 h-9 rounded-lg overflow-hidden shrink-0 border-2 border-ink bg-paper">
-                    <img src={p.icon} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-xs font-bold text-ink truncate group-hover:text-pine-deep transition-colors">{p.name}</h3>
-                    <div className="flex items-center gap-2 mt-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full shrink-0 ring-1 ring-ink/25" style={{ backgroundColor: getLangColor(p.language) }} />
-                      <span className="text-[10px] text-moss truncate">{p.language}</span>
-                      {p.stars > 0 && (
-                        <span className="text-[10px] text-moss shrink-0 ml-auto">★{p.stars}</span>
-                      )}
+                  ))
+                : games.map(game => (
+                    <div key={game.id} className="shrink-0 w-[76%] md:w-[calc((100%-51px)/4)] snap-start">
+                      <GameCard game={game} />
                     </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* ========== 最新资源 ========== */}
-        <section className="pt-8">
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl font-black tracking-tight">最新资源</h2>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-                className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border-2 border-ink shadow-hard-xs hover:bg-pine-light transition-colors cursor-pointer"
-              >
-                顺序 {sortOrder === 'asc' ? '↑' : '↓'}
-              </button>
-              <span className="text-xs text-moss">共 {filteredResources.length} 条记录</span>
+                  ))}
             </div>
           </div>
 
+          <p className="text-[11px] text-moss mt-1.5">
+            保留现站游戏内容与入口 · 手机端可左右滑动 · 共 {loading ? '—' : gameTotal} 款
+          </p>
+        </section>
+
+        {/* ========== 02 最新资源 ========== */}
+        <section id="resources" className="scroll-mt-[88px]">
+          <SectionHead
+            index="02"
+            title="最新资源"
+            right={<span className="text-[11px] md:text-[13px] text-moss whitespace-nowrap">工具与灵感，都在这里</span>}
+          />
+
+          {/* 搜索与排序 */}
+          <div className="flex gap-2.5 md:gap-3 mb-3.5">
+            <label className="flex items-center gap-2.5 flex-1 min-w-0 bg-white border-2 border-ink rounded-[9px] min-h-[45px] md:min-h-[47px] px-3 md:px-4 shadow-hard-xs text-moss focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-pine">
+              <svg className="w-[18px] h-[18px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} aria-hidden="true">
+                <circle cx="10" cy="10" r="6.5" />
+                <path d="m15 15 5 5" />
+              </svg>
+              <input
+                type="text"
+                aria-label="搜索资源"
+                placeholder="搜索资源名称、描述或标签…"
+                className="border-0 outline-none bg-transparent w-full min-w-0 text-[13px] md:text-sm text-ink placeholder-moss/70"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  aria-label="清空搜索"
+                  className="shrink-0 text-moss hover:text-ink text-lg leading-none px-1"
+                >
+                  ×
+                </button>
+              )}
+            </label>
+            <button
+              onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+              className="bg-white border-2 border-ink rounded-lg shadow-hard-xs min-h-[45px] md:min-h-[47px] px-2.5 md:px-4 text-[11px] md:text-[13px] font-extrabold whitespace-nowrap hover:bg-pine-light transition-colors"
+            >
+              顺序 {sortOrder === 'asc' ? '↑' : '↓'}
+            </button>
+          </div>
+
           {loading ? (
-            <div className="space-y-4">
-              {[1, 2, 3, 4, 5].map(i => (
-                <div key={`skeleton-${i}`} className="p-5 rounded-xl bg-white border-2 border-ink shadow-hard">
-                  <div className="flex items-start gap-3 mb-4">
-                    <div className="w-7 h-7 rounded-lg bg-pine-light animate-pulse" />
-                    <div className="flex-1">
-                      <div className="w-3/4 h-5 bg-pine-light rounded animate-pulse mb-3" />
-                      <div className="h-4 bg-pine-light rounded animate-pulse mb-2" />
-                      <div className="h-4 w-2/3 bg-pine-light rounded animate-pulse" />
-                    </div>
+            <div className="grid gap-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="grid grid-cols-[59px_minmax(0,1fr)] md:grid-cols-[96px_minmax(0,1fr)_165px] bg-white border-2 border-ink rounded-xl shadow-hard overflow-hidden">
+                  <div className="bg-pine-light border-r-2 border-dashed border-ink animate-pulse" />
+                  <div className="p-4 space-y-2.5">
+                    <div className="h-5 w-3/4 bg-pine-light rounded animate-pulse" />
+                    <div className="h-4 w-full bg-pine-light rounded animate-pulse" />
+                    <div className="h-4 w-1/2 bg-pine-light rounded animate-pulse" />
                   </div>
-                  <div className="flex gap-2.5 justify-end pt-3.5 border-t border-dashed border-sage">
-                    <div className="w-20 h-8 bg-paper border border-sage rounded-lg animate-pulse" />
-                    <div className="w-20 h-8 bg-paper border border-sage rounded-lg animate-pulse" />
+                  <div className="hidden md:block p-4 space-y-2">
+                    <div className="h-8 bg-paper border border-sage rounded animate-pulse" />
+                    <div className="h-8 bg-paper border border-sage rounded animate-pulse" />
                   </div>
                 </div>
               ))}
             </div>
-          ) : (
-            <div className="space-y-4">
-              {filteredResources.map(resource => (
-                <div
-                  key={resource.id}
-                  className="rounded-xl bg-white border-2 border-ink shadow-hard p-5 transition-all duration-200 hover:translate-x-[-3px] hover:translate-y-[-3px] hover:shadow-hard-lg"
-                >
-                  <div className="flex items-start gap-3">
-                    <span className="grid place-items-center w-7 h-7 rounded-lg bg-pine text-white border-2 border-ink shadow-hard-xs text-[13px] font-black shrink-0 mt-0.5">
-                      峻
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-extrabold leading-snug mb-2">
-                        {resource.title}
-                      </h3>
-                      {resource.tags && resource.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 mb-2.5">
-                          {resource.tags.map(tag => (
-                            <span key={tag} className="rounded-full px-2 py-0.5 text-[11px] font-bold bg-paper text-moss border border-sage">
-                              #{tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                      <p className="text-sm text-moss leading-relaxed">
-                        {resource.desc}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2.5 mt-4 pt-3.5 border-t border-dashed border-sage justify-end">
-                    {resource.quarkLink && (
-                      <a
-                        href={resource.quarkLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-lg border-2 border-ink bg-pine text-white shadow-hard-sm px-4 py-2 text-xs font-bold transition-all duration-150 hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-hard-xs"
-                      >
-                        🔴 夸克网盘
-                      </a>
-                    )}
-                    {resource.baiduLink && (
-                      <a
-                        href={resource.baiduLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-lg border-2 border-ink bg-white text-ink shadow-hard-sm px-4 py-2 text-xs font-bold transition-all duration-150 hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-hard-xs hover:bg-pine-light"
-                      >
-                        🔵 百度网盘
-                      </a>
-                    )}
-                  </div>
-                </div>
+          ) : filteredResources.length > 0 ? (
+            <div className="grid gap-4">
+              {filteredResources.map((item, i) => (
+                <Ticket key={item.id} item={item} featured={i === 0} />
               ))}
+            </div>
+          ) : (
+            <div className="rounded-xl bg-white border-2 border-ink shadow-hard-sm px-5 py-8 text-center text-sm text-moss">
+              没有匹配「{searchTerm}」的资源
             </div>
           )}
         </section>
 
-        {/* ========== 页脚 ========== */}
-        <footer className="mt-14 pb-10">
-          <div className="border-t-2 border-ink pt-7">
-            <p className="text-center text-xs text-moss">
-              © 2026 峻峻尼分享 · 优质资源分享平台 · 仅供个人学习交流
-            </p>
-            <p className="text-center font-mono text-[11px] tracking-wider text-moss/80 mt-2">
-              本页已被浏览 <span className="font-bold text-pine tabular-nums">{homeViews === null ? '—' : homeViews.toLocaleString()}</span> 次
-            </p>
-          </div>
-        </footer>
+        {/* ========== 03 开源项目 ========== */}
+        {projects.length > 0 && (
+          <section id="projects" className="scroll-mt-[88px] mt-9">
+            <SectionHead
+              index="03"
+              title="开源项目"
+              right={
+                <a
+                  href="https://github.com/xinyuzjj?tab=repositories"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] md:text-[13px] font-bold text-pine-deep whitespace-nowrap"
+                >
+                  查看 GitHub ↗
+                </a>
+              }
+            />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-3.5">
+              {projects.map(p => <ProjectCard key={p.name} p={p} />)}
+            </div>
+            <p className="text-[11px] text-moss mt-2">只改变呈现，不改变资源本身。</p>
+          </section>
+        )}
       </main>
+
+      {/* ========== 页脚 ========== */}
+      <footer className="border-t-2 border-ink bg-white">
+        <div className="max-w-[1120px] mx-auto px-4 md:px-6 py-4 md:py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-1.5 min-h-[83px] justify-center">
+          <p className="font-extrabold text-sm text-ink">峻峻尼分享</p>
+          <p className="font-mono text-[11px] text-moss">
+            本页已被浏览 <span className="font-bold text-pine-deep tabular-nums">{viewsText}</span> 次 · © 2026 · 仅供个人学习交流
+          </p>
+        </div>
+      </footer>
 
       {/* ========== 悬浮公众号关注窗（始终可见） ========== */}
       <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
-        {/* 展开后的二维码卡片 */}
         {wechatOpen && (
           <div className="anim-in bg-white rounded-xl border-2 border-ink shadow-hard-lg p-3 w-72 origin-bottom-right">
             <div className="flex items-center justify-between mb-2">
@@ -546,7 +678,6 @@ export default function HomePage() {
             <p className="text-xs text-center text-pine-deep font-bold mt-2">微信搜索「峻峻尼」关注</p>
           </div>
         )}
-        {/* 触发按钮 */}
         <button
           onClick={() => setWechatOpen(v => !v)}
           className="group flex items-center gap-2 bg-pine hover:bg-pine-deep text-white rounded-xl border-2 border-ink shadow-hard px-4 py-3 transition-all duration-150 hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-hard-sm"
@@ -560,7 +691,6 @@ export default function HomePage() {
       {/* ========== 入站公众号关注弹窗 ========== */}
       {showWechatModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          {/* 背景遮罩 */}
           <div
             className="absolute inset-0 bg-ink/50 backdrop-blur-sm"
             onClick={() => {
@@ -569,9 +699,7 @@ export default function HomePage() {
             }}
             aria-hidden="true"
           />
-          {/* 弹窗卡片 */}
           <div className="anim-in relative bg-white rounded-2xl border-2 border-ink shadow-hard-xl max-w-sm w-full overflow-hidden">
-            {/* 关闭按钮 */}
             <button
               onClick={() => {
                 setShowWechatModal(false);
@@ -583,10 +711,8 @@ export default function HomePage() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.4} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
 
-            {/* 顶部装饰条 */}
             <div className="h-1.5 bg-pine" />
 
-            {/* 内容区 */}
             <div className="p-7 pt-5 flex flex-col items-center">
               <div className="flex items-center gap-2 mb-1">
                 <svg className="w-7 h-7 text-pine" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 4C5.36 4 2 6.69 2 10c0 1.89 1.08 3.56 2.78 4.66L4 17l2.5-1.5c.86.26 1.77.41 2.72.45A5.63 5.63 0 019 14c0-3.31 3.13-6 7-6 .55 0 1.09.06 1.61.16C16.79 5.18 13.47 4 9.5 4zm-2 5a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2zM16 9c-3.31 0-6 2.24-6 5s2.69 5 6 5c.67 0 1.32-.1 1.93-.27L20 20l-.62-1.87C20.95 17.22 22 15.71 22 14c0-2.76-2.69-5-6-5zm-2.5 3a1 1 0 110-2 1 1 0 010 2zm5 0a1 1 0 110-2 1 1 0 010 2z"/></svg>
