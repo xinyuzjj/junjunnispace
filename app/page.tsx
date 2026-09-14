@@ -19,6 +19,16 @@ interface Project {
   stars: number;
   emoji: string;
   icon: string;
+  /** 重点项目：在开源项目区顶部用大卡片 + 详细介绍呈现 */
+  featured?: boolean;
+  /** 一句话定位 */
+  tagline?: string;
+  /** 版本号 */
+  version?: string;
+  /** 技术栈 / 平台 */
+  stack?: string;
+  /** 亮点清单 */
+  highlights?: string[];
 }
 
 interface Game {
@@ -421,6 +431,65 @@ function ProjectCard({ p }: { p: Project }) {
         {p.language}
         {p.stars > 0 && <span className="text-pine-deep font-bold">· ★{p.stars}</span>}
       </p>
+    </a>
+  );
+}
+
+/** 重点项目卡：大卡片 + 详细介绍（定位 / 正文 / 亮点清单 / 版本 / 技术栈） */
+function FeaturedProjectCard({ p }: { p: Project }) {
+  const [iconOk, setIconOk] = useState(true);
+  return (
+    <a
+      href={p.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex flex-col bg-white border-2 border-ink rounded-[12px] shadow-hard px-5 py-5 transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-sm"
+    >
+      {/* 头部：图标 + 名称 + 版本 + 一句话定位 */}
+      <div className="flex items-start gap-3.5 mb-3.5">
+        <span className="grid place-items-center w-12 h-12 rounded-xl border-2 border-ink bg-paper overflow-hidden shrink-0">
+          {p.icon && iconOk ? (
+            <img src={p.icon} alt="" className="w-full h-full object-cover" loading="lazy" onError={() => setIconOk(false)} />
+          ) : (
+            <span className="text-[22px] leading-none">{p.emoji}</span>
+          )}
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <h3 className="text-[17px] font-black tracking-tight break-words">{p.name}</h3>
+            {p.version && (
+              <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light rounded-full px-2 py-[2px]">
+                {p.version}
+              </span>
+            )}
+          </div>
+          {p.tagline && <p className="text-[12px] font-bold text-pine mt-1">{p.tagline}</p>}
+        </div>
+        <span className="font-bold text-pine-deep group-hover:text-ink transition-colors shrink-0">↗</span>
+      </div>
+
+      {/* 详细介绍 */}
+      <p className="text-[12.5px] leading-[1.75] text-moss mb-4">{p.description}</p>
+
+      {/* 亮点清单 */}
+      {p.highlights && p.highlights.length > 0 && (
+        <ul className="flex flex-col gap-2 mb-4">
+          {p.highlights.map(h => (
+            <li key={h} className="flex items-start gap-2 text-[12px] leading-[1.6] text-ink">
+              <span className="mt-[6px] inline-block w-1.5 h-1.5 rounded-full bg-pine shrink-0" />
+              <span>{h}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* 底部：技术栈 + 语言与星标 */}
+      <div className="mt-auto pt-3 border-t border-dashed border-sage flex items-center justify-between gap-2 flex-wrap">
+        <span className="font-mono text-[11px] text-moss">{p.stack || p.language}</span>
+        <span className="font-mono text-[11px] text-pine-deep font-bold">
+          {p.language}{p.stars > 0 ? ` · ★${p.stars}` : ''}
+        </span>
+      </div>
     </a>
   );
 }
@@ -854,8 +923,11 @@ export default function HomePage() {
                 </a>
               }
             />
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-3.5">
-              {projects.map(p => <ProjectCard key={p.name} p={p} />)}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              {projects.filter(p => p.featured).map(p => <FeaturedProjectCard key={p.name} p={p} />)}
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-3.5 mt-3.5">
+              {projects.filter(p => !p.featured).map(p => <ProjectCard key={p.name} p={p} />)}
             </div>
             <p className="text-[11px] text-moss mt-2">只改变呈现，不改变资源本身。</p>
           </section>

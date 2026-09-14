@@ -1,5 +1,50 @@
 [
   {
+    "name": "bazz.agent",
+    "featured": true,
+    "tagline": "Binance AI 副驾驶 · 桌面端 Agent OS",
+    "version": "v1.5.29",
+    "description": "把 MCP、Agentic Wallet、x402 支付与 Skill Hub 四条 Binance Agent OS 原生能力，收进同一套真实可执行的交易闭环：扫描 → 分析 → 提案 → 你确认 → 执行。不是又一个套在 REST API 外面的聊天壳——每一笔下单、转账与签名支付都必须等你在对话里点下确认，全程留痕可审计。",
+    "highlights": [
+      "全市场雷达：成交量 top-300 异动扫描，资金费率 / 持仓量 / 多空比 / 恐慌贪婪指数，免 API Key",
+      "人在环默认：所有敏感操作弹出确认卡，可信流程可加白名单跳过点击",
+      "长期记忆：跨会话记住你的偏好与风险锚点，越用越顺手",
+      "19 个技能 + MCP / Agentic Wallet / x402 / Skill Hub 四协议齐备",
+      "Hermes 级三栏交易台：左导航 · 中对话 · 右信号，深浅色与中英双语一键切换",
+      "SSE / NDJSON 流式对话、实时工具卡、文件与语音输入，多模型可切换并带离线规则引擎兜底"
+    ],
+    "url": "https://github.com/xinyuzjj/bazz.agent",
+    "language": "Python",
+    "stack": "FastAPI · React · Electron · SQLite",
+    "stars": 1,
+    "emoji": "🤖",
+    "icon": ""
+  },
+  {
+    "name": "Ant-Browser",
+    "featured": true,
+    "tagline": "多账号隔离 · 指纹浏览器",
+    "version": "v1.8.2",
+    "description": "在一台桌面设备上稳定管理多个彼此隔离的浏览器实例，配合代理池、浏览器内核与快捷启动完成日常运营或测试。适合多账号环境隔离、跨境电商与社媒账号运营、需要独立代理出口的本地测试。每个账号一个独立实例、一条独立代理，配置与运行数据全部落在本地，自己完全掌控。",
+    "highlights": [
+      "实例隔离管理：创建 / 编辑 / 启停 / 重启 / 克隆 / 删除，窗口带 1-10、A-Z 角标便于辨识",
+      "代理池配置：统一维护代理节点并分配到具体实例，支持 Clash 导入与 HTTPS 代理桥接",
+      "内核管理：多个 Chrome 指纹内核共存可切换并设置默认，基于开源 fingerprint-chromium",
+      "快捷启动：实例 Code 配合 Ctrl + K 秒开目标实例",
+      "插件管理：插件安装、导入、启停与实例限制，实例启动自动恢复，安装失败可自愈回滚",
+      "备份与恢复：本地 / OpenList / S3 三渠道，支持全量与按实例选择性备份、远程历史扫描恢复",
+      "代理与 VPN 检测：连接栈预热、测速，出口 IP / ASN / 多源归属冲突一目了然",
+      "自动化脚本：脚本导入、运行、目标实例选择、执行记录与外部接口调用",
+      "实例迁移：实例配置与完整浏览器用户数据目录可打包为 ZIP，导入为新实例"
+    ],
+    "url": "https://github.com/xinyuzjj/Ant-Browser",
+    "language": "Go",
+    "stack": "Windows · Linux · macOS",
+    "stars": 0,
+    "emoji": "🐜",
+    "icon": ""
+  },
+  {
     "name": "cocos-mcp-server",
     "description": "Cocos Creator AI MCP Server — 让 AI 辅助开发 Cocos Creator 项目，支持场景管理、组件操作、资源管理。",
     "url": "https://github.com/xinyuzjj/cocos-mcp-server",
@@ -33,15 +78,6 @@
     "language": "JavaScript",
     "stars": 2,
     "emoji": "🎯",
-    "icon": ""
-  },
-  {
-    "name": "bazz.agent",
-    "description": "Binance AI 副驾驶：桌面端 Agent OS，集成 MCP、Agentic Wallet 与 x402 支付，FastAPI + React + Electron。",
-    "url": "https://github.com/xinyuzjj/bazz.agent",
-    "language": "Python",
-    "stars": 1,
-    "emoji": "🤖",
     "icon": ""
   },
   {
