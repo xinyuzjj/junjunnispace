@@ -816,5 +816,22 @@
       "开源",
       "MangoDisk"
     ]
+  },
+  {
+    "id": "80",
+    "title": "Cmbok v2.0.6 跨平台阅读软件",
+    "desc": "「你的下一款阅读软件」。开源跨平台阅读 App（Android / Windows / iOS），基于 Flutter 打造，界面清爽，支持本地书籍导入、书架管理、阅读进度记录。已打包：安卓 apk、Windows 安装版、iOS ipa（未签名）。",
+    "quarkLink": "https://pan.quark.cn/s/c98add88064b",
+    "baiduLink": "https://pan.baidu.com/s/1yV7LWjYXW9-9ZdpWDS7N5w?pwd=osfe",
+    "tags": [
+      "阅读",
+      "阅读器",
+      "Flutter",
+      "安卓",
+      "Windows",
+      "iOS",
+      "开源",
+      "Cmbok"
+    ]
   }
 ]
