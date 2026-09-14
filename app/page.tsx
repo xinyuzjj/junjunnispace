@@ -916,7 +916,7 @@ export default function HomePage() {
                 <img
                   src="/wechat-qr-square.png"
                   alt="微信扫码关注公众号「峻峻尼」"
-                  className="w-full h-auto rounded-md"
+                  className="block w-full h-auto rounded-md"
                   draggable="false"
                 />
               </div>
@@ -977,7 +977,7 @@ export default function HomePage() {
                 <img
                   src="/wechat-qr-square.png"
                   alt="微信扫码关注公众号「峻峻尼」"
-                  className="w-52 h-auto rounded-lg"
+                  className="block w-52 h-auto rounded-lg"
                   draggable="false"
                 />
               </div>
