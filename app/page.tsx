@@ -68,6 +68,188 @@ function getPwd(item: Resource): string | null {
   return pick(item.baiduLink) || pick(item.quarkLink);
 }
 
+/* ======================== 浏览次数 ======================== */
+
+type ViewSource = 'kv' | 'ext' | null;
+
+interface ViewStat {
+  count: number;
+  today: number | null;
+  source: ViewSource;
+}
+
+/** 零配置兜底服务（自建 KV 未绑定时使用） */
+const EXT_NS = 'xyjunjunni-space';
+const EXT_KEY = 'home';
+
+/** 读取（不自增）：自建 KV 优先，失败则降级到第三方 */
+async function readViews(): Promise<ViewStat | null> {
+  try {
+    const r = await fetch('/api/visits', { cache: 'no-store' });
+    if (r.ok) {
+      const d = await r.json();
+      if (d?.ok && typeof d.count === 'number') {
+        return { count: d.count, today: typeof d.today === 'number' ? d.today : null, source: 'kv' };
+      }
+    }
+  } catch { /* 继续降级 */ }
+
+  try {
+    const r = await fetch(`https://abacus.jasoncameron.dev/get/${EXT_NS}/${EXT_KEY}`, { cache: 'no-store' });
+    const d = await r.json();
+    if (typeof d?.value === 'number') return { count: d.value, today: null, source: 'ext' };
+  } catch { /* 放弃 */ }
+
+  return null;
+}
+
+/** 上报一次浏览：自建 KV 优先，失败则降级到第三方 */
+async function bumpViews(): Promise<ViewStat | null> {
+  try {
+    const r = await fetch('/api/visits', { method: 'POST' });
+    if (r.ok) {
+      const d = await r.json();
+      if (d?.ok && typeof d.count === 'number') {
+        return { count: d.count, today: typeof d.today === 'number' ? d.today : null, source: 'kv' };
+      }
+    }
+  } catch { /* 继续降级 */ }
+
+  try {
+    const r = await fetch(`https://abacus.jasoncameron.dev/hit/${EXT_NS}/${EXT_KEY}`, { cache: 'no-store' });
+    const d = await r.json();
+    if (typeof d?.value === 'number') return { count: d.value, today: null, source: 'ext' };
+  } catch { /* 放弃 */ }
+
+  return null;
+}
+
+/** 数字滚动：从 0（或上一次的值）缓动到目标，rAF 驱动 */
+function useCountUp(target: number | null, duration = 1500) {
+  const [cur, setCur] = useState(0);
+  const fromRef = useRef(0);
+
+  useEffect(() => {
+    if (target === null) return;
+    const from = fromRef.current;
+    if (from === target) return;
+
+    // 第一次出现：从 0 开始滚；后续变化：从当前值滚，时长按变化量收敛
+    const span = Math.max(1, Math.abs(target - from));
+    const dur = Math.min(duration, Math.max(420, span * 6));
+
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setCur(Math.round(from + (target - from) * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+      else fromRef.current = target;
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration]);
+
+  // target 从 null 变成数字时，fromRef 还是 0，正好是「从 0 滚起」
+  return cur;
+}
+
+const DIGITS = Array.from({ length: 10 }, (_, i) => i);
+
+/** 单个数字滚筒 */
+function DigitRoller({ d, height }: { d: number; height: string }) {
+  return (
+    <span className="relative inline-block overflow-hidden align-baseline" style={{ height, width: '0.62em' }}>
+      <span
+        className="absolute inset-x-0 top-0 will-change-transform"
+        style={{ transform: `translateY(-${d * 10}%)` }}
+      >
+        {DIGITS.map(n => (
+          <span
+            key={n}
+            className="block text-center tabular-nums font-black"
+            style={{ height, lineHeight: height }}
+          >
+            {n}
+          </span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
+/** 数字滚筒显示器 */
+function Odometer({ value, height }: { value: number; height: string }) {
+  const text = value.toLocaleString('en-US');
+  return (
+    <span className="inline-flex items-baseline leading-none">
+      {text.split('').map((ch, i) =>
+        ch === ',' ? (
+          <span key={`s${i}`} className="font-black tabular-nums" style={{ height, lineHeight: height }}>,</span>
+        ) : (
+          <DigitRoller key={`d${i}`} d={Number(ch)} height={height} />
+        )
+      )}
+    </span>
+  );
+}
+
+/** 实时候车条：LIVE 脉冲 + 滚动的浏览次数 */
+function LiveVisits({ stat, ready }: { stat: ViewStat | null; ready: boolean }) {
+  const count = stat?.count ?? null;
+  const shown = useCountUp(count);
+  const [pulse, setPulse] = useState(false);
+
+  useEffect(() => {
+    if (count === null) return;
+    setPulse(true);
+    const t = setTimeout(() => setPulse(false), 1200);
+    return () => clearTimeout(t);
+  }, [count]);
+
+  return (
+    <section className="relative overflow-hidden bg-pine text-white border-b-2 border-ink">
+      {/* 背景点阵 + 顶部高光 */}
+      <div className="absolute inset-0 opacity-[0.14]" style={{ backgroundImage: 'radial-gradient(#FFFFFF 0.8px, transparent 0.8px)', backgroundSize: '18px 18px' }} />
+      <div className="absolute inset-x-0 top-0 h-px bg-white/25" />
+
+      <div className="relative max-w-[1120px] mx-auto px-4 md:px-6 py-3 md:py-3.5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 md:gap-x-4">
+        {/* LIVE 指示 */}
+        <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold tracking-[1.6px]">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-70" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
+          </span>
+          LIVE
+        </span>
+
+        <span className="text-[12px] md:text-[13px] opacity-85 whitespace-nowrap">主页已被浏览</span>
+
+        {count === null ? (
+          <span className="font-mono text-[22px] md:text-[26px] font-black leading-none opacity-70">
+            {ready ? '—' : '···'}
+          </span>
+        ) : (
+          <span
+            className={`text-[24px] md:text-[28px] leading-none transition-opacity duration-500 ${pulse ? 'opacity-100' : 'opacity-95'}`}
+          >
+            <Odometer value={shown} height="1.06em" />
+          </span>
+        )}
+
+        <span className="text-[12px] md:text-[13px] opacity-85">次</span>
+
+        {stat?.today != null && stat.today > 0 && (
+          <span className="font-mono text-[10px] md:text-[11px] bg-white/15 border border-white/25 rounded-full px-2 py-[3px] tracking-wide">
+            今日 +{stat.today}
+          </span>
+        )}
+      </div>
+    </section>
+  );
+}
+
 /* ======================== 小组件 ======================== */
 
 /** 区块标题：编号徽章 + 标题 + 右侧链接/说明 */
@@ -213,7 +395,7 @@ function ProjectCard({ p }: { p: Project }) {
     >
       <div className="flex items-center justify-between mb-3">
         <span className="grid place-items-center w-[30px] h-[30px] rounded-md border-[1.5px] border-ink bg-paper overflow-hidden shrink-0">
-          {iconOk ? (
+          {p.icon && iconOk ? (
             <img src={p.icon} alt="" className="w-full h-full object-cover" loading="lazy" onError={() => setIconOk(false)} />
           ) : (
             <span className="text-[15px] leading-none">{p.emoji}</span>
@@ -243,7 +425,8 @@ export default function HomePage() {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [wechatOpen, setWechatOpen] = useState(false);
   const [showWechatModal, setShowWechatModal] = useState(false);
-  const [homeViews, setHomeViews] = useState<number | null>(null);
+  const [viewStat, setViewStat] = useState<ViewStat | null>(null);
+  const [viewsReady, setViewsReady] = useState(false);
 
   // 入站弹窗：首次访问显示公众号关注（localStorage 记录，关闭后不再弹）
   useEffect(() => {
@@ -267,14 +450,35 @@ export default function HomePage() {
     };
   }, []);
 
-  /* ---- 主页浏览计数：一次加载只 POST 一次 ---- */
+  /* ---- 主页浏览计数：一次加载只 POST 一次，之后定时只读刷新 ---- */
   useEffect(() => {
-    if (homeCounted) return;
-    homeCounted = true;
-    fetch('/api/visits', { method: 'POST' })
-      .then(r => (r.ok ? r.json() : null))
-      .then(d => setHomeViews(d && d.ok && typeof d.count === 'number' ? d.count : null))
-      .catch(() => setHomeViews(null));
+    let alive = true;
+
+    const report = async () => {
+      if (homeCounted) {
+        const s = await readViews();
+        if (alive && s) setViewStat(s);
+        return;
+      }
+      homeCounted = true;
+      const s = await bumpViews();
+      if (!alive) return;
+      if (s) setViewStat(s);
+      setViewsReady(true);
+    };
+
+    report();
+
+    // 定时只读刷新，让数字保持「活」的
+    const timer = setInterval(report, 30000);
+    const onVisible = () => { if (document.visibilityState === 'visible') report(); };
+    document.addEventListener('visibilitychange', onVisible);
+
+    return () => {
+      alive = false;
+      clearInterval(timer);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, []);
 
   const gameScrollRef = useRef<HTMLDivElement>(null);
@@ -369,8 +573,6 @@ export default function HomePage() {
   }).sort((a, b) => {
     return sortOrder === 'asc' ? parseInt(a.id) - parseInt(b.id) : parseInt(b.id) - parseInt(a.id);
   });
-
-  const viewsText = homeViews === null ? '—' : homeViews.toLocaleString();
 
   return (
     <div className="min-h-screen bg-paper text-ink">
@@ -471,15 +673,14 @@ export default function HomePage() {
                   <span>开源项目</span>
                   <span className="text-pine-deep font-bold">{loading ? '—' : `${projects.length} 个`}</span>
                 </li>
-                <li className="flex justify-between border-t border-dashed border-sage pt-2 pb-0.5">
-                  <span>主页浏览次数</span>
-                  <span className="text-pine-deep font-bold tabular-nums">{viewsText} 次</span>
-                </li>
               </ul>
             </aside>
           </div>
         </div>
       </section>
+
+      {/* ========== 实时浏览统计条 ========== */}
+      <LiveVisits stat={viewStat} ready={viewsReady} />
 
       <main className="max-w-[1120px] mx-auto px-4 md:px-6 pt-7 md:pt-8 pb-11">
 
@@ -648,7 +849,11 @@ export default function HomePage() {
         <div className="max-w-[1120px] mx-auto px-4 md:px-6 py-4 md:py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-1.5 min-h-[83px] justify-center">
           <p className="font-extrabold text-sm text-ink">峻峻尼分享</p>
           <p className="font-mono text-[11px] text-moss">
-            本页已被浏览 <span className="font-bold text-pine-deep tabular-nums">{viewsText}</span> 次 · © 2026 · 仅供个人学习交流
+            本页已被浏览{' '}
+            <span className="font-bold text-pine-deep tabular-nums">
+              {viewStat ? viewStat.count.toLocaleString() : '—'}
+            </span>{' '}
+            次 · © 2026 · 仅供个人学习交流
           </p>
         </div>
       </footer>
