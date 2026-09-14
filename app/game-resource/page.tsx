@@ -43,23 +43,6 @@ interface GameData {
 
 const PAGE_SIZE = 16;
 
-/** 分类图标：只用于筛选标签，帮助快速扫视 */
-const CATEGORY_ICON: Record<string, string> = {
-  '动作': '⚔️',
-  '角色扮演': '🧙',
-  '策略': '♟️',
-  '模拟': '🏗️',
-  '竞速': '🏎️',
-  '射击': '🔫',
-  '格斗': '🥊',
-  '解谜': '🧩',
-  '恐怖': '👻',
-  '冒险': '🗺️',
-  '独立': '💎',
-  '休闲': '🎯',
-  '其他': '🎮',
-};
-
 /* ======================== Helpers ======================== */
 
 /**
@@ -401,7 +384,7 @@ export default function GameResourcePage() {
                   key={cat}
                   active={selectedCategory === cat}
                   onClick={() => setSelectedCategory(cat === selectedCategory ? null : cat)}
-                  label={`${CATEGORY_ICON[cat] || ''} ${cat}`}
+                  label={cat}
                   count={count}
                 />
               ))}
