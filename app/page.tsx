@@ -289,6 +289,15 @@ function WechatGlyph({ className }: { className?: string }) {
   );
 }
 
+/** 放大镜图标（找项目入口用） */
+function SearchGlyph({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  );
+}
+
 /** 游戏卡：16:10 封面 + 角标，标题在封面下方，底部虚线行 */
 function GameCard({ game }: { game: Game }) {
   const hasCover = !!game.coverImage?.startsWith('http');
@@ -687,6 +696,13 @@ export default function HomePage() {
               >
                 游戏库 ↗
               </Link>
+              <Link
+                href="/gh-search"
+                title="用大白话搜 GitHub 项目 · TypeSafe 语义排序"
+                className="px-[7px] md:px-3 py-[7px] md:py-2 rounded-lg bg-pine-light text-pine-deep border-2 border-ink shadow-hard-xs whitespace-nowrap hover:bg-white transition-colors"
+              >
+                找项目 ↗
+              </Link>
               <a href="#resources" className="hidden md:inline-block px-3 py-2 rounded-lg border-2 border-transparent hover:bg-paper transition-colors">
                 最新资源
               </a>
@@ -932,6 +948,32 @@ export default function HomePage() {
               </div>
             )}
             <p className="text-[11px] text-moss mt-2">点卡片直达 GitHub 仓库。</p>
+
+            {/* 找不到想要的？跳去 TypeSafe 语义搜索 */}
+            <Link
+              href="/gh-search"
+              className="group mt-3.5 flex items-center gap-3.5 bg-white border-2 border-ink rounded-[12px] shadow-hard px-4 py-4 md:px-5 transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-sm"
+            >
+              <span className="grid place-items-center w-[42px] h-[42px] rounded-xl border-2 border-ink bg-pine text-white shrink-0">
+                <SearchGlyph className="w-5 h-5" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="flex items-center gap-2 flex-wrap">
+                  <span className="text-[15px] md:text-[16px] font-black tracking-tight break-words">
+                    GitHub 项目搜索器
+                  </span>
+                  <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light border border-sage rounded-full px-2 py-[2px] whitespace-nowrap">
+                    TypeSafe 语义排序
+                  </span>
+                </span>
+                <span className="block text-[11px] md:text-[12px] font-bold text-pine mt-1 leading-[1.6]">
+                  用一句人话描述你要什么 —— GitHub 负责找得到，TypeSafe 负责挑得对
+                </span>
+              </span>
+              <span className="hidden sm:inline-block font-mono text-[11px] font-bold text-moss group-hover:text-pine-deep transition-colors shrink-0">
+                去搜一个 →
+              </span>
+            </Link>
           </section>
         )}
       </main>
