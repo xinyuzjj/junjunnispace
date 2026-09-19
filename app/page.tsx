@@ -851,6 +851,32 @@ export default function HomePage() {
           </p>
         </section>
 
+        {/* ========== TypeSafe GitHub 项目搜索器入口 ========== */}
+        <Link
+          href="/gh-search"
+          className="group mb-9 flex items-center gap-3.5 bg-white border-2 border-ink rounded-[12px] shadow-hard px-4 py-4 md:px-5 transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-sm"
+        >
+          <span className="grid place-items-center w-[42px] h-[42px] rounded-xl border-2 border-ink bg-pine text-white shrink-0">
+            <SearchGlyph className="w-5 h-5" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="flex items-center gap-2 flex-wrap">
+              <span className="text-[15px] md:text-[16px] font-black tracking-tight break-words">
+                GitHub 项目搜索器
+              </span>
+              <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light border border-sage rounded-full px-2 py-[2px] whitespace-nowrap">
+                TypeSafe 语义排序
+              </span>
+            </span>
+            <span className="block text-[11px] md:text-[12px] font-bold text-pine mt-1 leading-[1.6]">
+              用一句人话描述你要什么 —— GitHub 负责找得到，TypeSafe 负责挑得对
+            </span>
+          </span>
+          <span className="hidden sm:inline-block font-mono text-[11px] font-bold text-moss group-hover:text-pine-deep transition-colors shrink-0">
+            去搜一个 →
+          </span>
+        </Link>
+
         {/* ========== 02 最新资源 ========== */}
         <section id="resources" className="scroll-mt-[88px]">
           <SectionHead
@@ -948,32 +974,6 @@ export default function HomePage() {
               </div>
             )}
             <p className="text-[11px] text-moss mt-2">点卡片直达 GitHub 仓库。</p>
-
-            {/* 找不到想要的？跳去 TypeSafe 语义搜索 */}
-            <Link
-              href="/gh-search"
-              className="group mt-3.5 flex items-center gap-3.5 bg-white border-2 border-ink rounded-[12px] shadow-hard px-4 py-4 md:px-5 transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-sm"
-            >
-              <span className="grid place-items-center w-[42px] h-[42px] rounded-xl border-2 border-ink bg-pine text-white shrink-0">
-                <SearchGlyph className="w-5 h-5" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[15px] md:text-[16px] font-black tracking-tight break-words">
-                    GitHub 项目搜索器
-                  </span>
-                  <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light border border-sage rounded-full px-2 py-[2px] whitespace-nowrap">
-                    TypeSafe 语义排序
-                  </span>
-                </span>
-                <span className="block text-[11px] md:text-[12px] font-bold text-pine mt-1 leading-[1.6]">
-                  用一句人话描述你要什么 —— GitHub 负责找得到，TypeSafe 负责挑得对
-                </span>
-              </span>
-              <span className="hidden sm:inline-block font-mono text-[11px] font-bold text-moss group-hover:text-pine-deep transition-colors shrink-0">
-                去搜一个 →
-              </span>
-            </Link>
           </section>
         )}
       </main>
