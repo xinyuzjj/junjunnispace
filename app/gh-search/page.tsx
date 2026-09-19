@@ -151,6 +151,15 @@ export default function GhSearchPage() {
   const [showLanes, setShowLanes] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
 
+  // 页面底色跟随薄荷白主题（globals.css 的 --background 仍是深色）
+  useEffect(() => {
+    const prevBg = document.body.style.background;
+    document.body.style.background = '#EFF6F0';
+    return () => {
+      document.body.style.background = prevBg;
+    };
+  }, []);
+
   // 看看本站有没有配共享 key，没有就提示访客填自己的
   useEffect(() => {
     let alive = true;
