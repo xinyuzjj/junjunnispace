@@ -1,0 +1,28 @@
+{
+  "base": "https://video.xyjunjunni.space/",
+  "course": {
+    "title": "掌握价格行为 · 训练营",
+    "titleEn": "Master Price Action — Bootcamp",
+    "subtitle": "17 集系统课：从市场结构、供需区，到流动性扫荡与溢价折价区间，讲透价格行为交易。",
+    "totalEpisodes": 17
+  },
+  "episodes": [
+    { "ep": 1,  "id": "ep01", "title": "价格行为总览：建立你的交易框架",       "titleEn": "Master Price Action",                       "file": "bootcamp/ep01.mp4", "sizeMB": 55.4 },
+    { "ep": 2,  "id": "ep02", "title": "市场结构：赢家与输家的分水岭",         "titleEn": "Market Structure: The Skill That Separates Winners", "file": "bootcamp/ep02.mp4", "sizeMB": 99.3 },
+    { "ep": 3,  "id": "ep03", "title": "供需区：订单流的源头",               "titleEn": "Supply & Demand",                           "file": "bootcamp/ep03.mp4", "sizeMB": 94.4 },
+    { "ep": 4,  "id": "ep04", "title": "失衡：价格为何快速推进",             "titleEn": "Imbalance",                                 "file": "bootcamp/ep04.mp4", "sizeMB": 74.3 },
+    { "ep": 5,  "id": "ep05", "title": "有效区间",                         "titleEn": "Efficient Ranges",                          "file": "bootcamp/ep05.mp4", "sizeMB": 58.0 },
+    { "ep": 6,  "id": "ep06", "title": "等高等低：流动性的聚集地",            "titleEn": "Equal High & Equal Low Liquidity",          "file": "bootcamp/ep06.mp4", "sizeMB": 76.3 },
+    { "ep": 7,  "id": "ep07", "title": "趋势中的流动性",                    "titleEn": "Trend Liquidity",                           "file": "bootcamp/ep07.mp4", "sizeMB": 50.7 },
+    { "ep": 8,  "id": "ep08", "title": "读懂 K 线动能",                     "titleEn": "How to Read Candle Momentum",               "file": "bootcamp/ep08.mp4", "sizeMB": 54.3 },
+    { "ep": 9,  "id": "ep09", "title": "多根 K 线下的动能解读",              "titleEn": "Reading Markets with Multi-Candle Momentum","file": "bootcamp/ep09.mp4", "sizeMB": 23.1 },
+    { "ep": 10, "id": "ep10", "title": "该交易哪个时间周期",                 "titleEn": "What Timeframes Should You Trade",          "file": "bootcamp/ep10.mp4", "sizeMB": 29.2 },
+    { "ep": 11, "id": "ep11", "title": "伦敦与纽约盘日内交易",               "titleEn": "How to Day Trade London & NY Session",      "file": "bootcamp/ep11.mp4", "sizeMB": 67.5 },
+    { "ep": 12, "id": "ep12", "title": "市场在讲故事，如何读懂它",            "titleEn": "Markets Tell a Story: How You Read It",     "file": "bootcamp/ep12.mp4", "sizeMB": 84.9 },
+    { "ep": 13, "id": "ep13", "title": "吸筹与派发",                        "titleEn": "Accumulation & Distribution",               "file": "bootcamp/ep13.mp4", "sizeMB": 65.9 },
+    { "ep": 14, "id": "ep14", "title": "如何交易诱因",                       "titleEn": "How to Trade Inducements",                  "file": "bootcamp/ep14.mp4", "sizeMB": 56.7 },
+    { "ep": 15, "id": "ep15", "title": "当供需区失效时",                     "titleEn": "When Supply & Demand Zones Fail",           "file": "bootcamp/ep15.mp4", "sizeMB": 64.9 },
+    { "ep": 16, "id": "ep16", "title": "结构突破还是流动性扫荡",              "titleEn": "BoS or Liquidity Sweep",                    "file": "bootcamp/ep16.mp4", "sizeMB": 50.6 },
+    { "ep": 17, "id": "ep17", "title": "溢价与折价区间",                     "titleEn": "Premium & Discount Price Ranges",           "file": "bootcamp/ep17.mp4", "sizeMB": 64.5 }
+  ]
+}
