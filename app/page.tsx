@@ -705,7 +705,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/video"
-                title="掌握价格行为 · 训练营 · 17 集交易教学视频"
+                title="交易教学视频合集 · 系统化交易课程在线播放"
                 className="px-[7px] md:px-3 py-[7px] md:py-2 rounded-lg bg-pine-light text-pine-deep border-2 border-ink shadow-hard-xs whitespace-nowrap hover:bg-white transition-colors"
               >
                 交易教学 ↗
@@ -900,11 +900,14 @@ export default function HomePage() {
                 交易教学视频
               </span>
               <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light border border-sage rounded-full px-2 py-[2px] whitespace-nowrap">
-                掌握价格行为 · 训练营
+                视频合集 · 持续更新
               </span>
             </span>
             <span className="block text-[11px] md:text-[12px] font-bold text-pine mt-1 leading-[1.6]">
-              17 集系统课 · 在线播放 · 永久免费
+              多套系统化交易课程 · 在线播放 · 永久免费
+            </span>
+            <span className="block text-[11px] md:text-[12px] text-moss mt-0.5 leading-[1.6]">
+              还有更多教学翻译视频在 B 站
             </span>
           </span>
           <span className="hidden sm:inline-block font-mono text-[11px] font-bold text-moss group-hover:text-pine-deep transition-colors shrink-0">
