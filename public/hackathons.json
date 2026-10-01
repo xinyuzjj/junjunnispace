@@ -1,0 +1,69 @@
+{
+  "intro": {
+    "title": "AI 黑客松",
+    "subtitle": "参加过的 AI 黑客松与提交项目。每一个都是真协议、真部署、真上线，不是 PPT。",
+    "builder": {
+      "github": "https://github.com/xinyuzjj",
+      "note": "全部代码开源在 GitHub"
+    }
+  },
+  "stats": [
+    { "label": "参赛赛事", "value": "2" },
+    { "label": "提交项目", "value": "2" },
+    { "label": "首个赛事", "value": "2026-09" }
+  ],
+  "events": [
+    {
+      "id": "binance-agent-os",
+      "event": "Binance Agent OS Mini Hackathon",
+      "track": "Track A · Build an AI Agent on Agent OS",
+      "period": "2026-09",
+      "deadline": "2026-09-08",
+      "status": "已提交",
+      "accent": "#F0B90B",
+      "project": {
+        "name": "BAZZ.AGENT",
+        "tagline": "你的币安副驾驶 —— 出手之前，先问你",
+        "desc": "桌面端 AI 交易 Agent，把币安 Agent OS 的四大原生能力（MCP · Agentic Wallet · x402 · Skill Hub）熔进一条真实交易闭环：扫描 → 分析 → 提案 → 确认 → 执行。不是套在 REST API 上的聊天皮肤，每一枪都等你点头。",
+        "tech": ["Electron", "Python", "FastAPI", "React", "TypeScript", "MCP", "x402"],
+        "highlights": [
+          "真雷达：全市场扫描 + 资金费率 / 持仓量 / 大户多空 / 恐惧贪婪，零 API Key",
+          "人在环中：流程每一步留痕，以 Confirm 确认卡收尾，点头才打真实订单",
+          "长期记忆：跨会话学习你的偏好与风险锚点，会话结束不归零",
+          "有 88 秒实拍演示与在线落地页，另有 setup.exe 可下载安装"
+        ],
+        "links": [
+          { "label": "在线演示", "url": "https://xinyuzjj.github.io/bazz.agent/", "primary": true },
+          { "label": "GitHub 仓库", "url": "https://github.com/xinyuzjj/bazz.agent" }
+        ]
+      }
+    },
+    {
+      "id": "arc-microgrants",
+      "event": "Arc Microgrants",
+      "track": "$500 USDC 微资助 · 20 个名额",
+      "period": "2026-10",
+      "deadline": "2026-10-14",
+      "status": "已提交",
+      "accent": "#2775CA",
+      "project": {
+        "name": "TipJar on Arc",
+        "tagline": "让每一个微小创作都能立刻收到回报",
+        "desc": "跑在 Arc 主网上的零托管打赏 + 永久链上微博。帖子与留言只写进事件日志、不进存储槽，单条成本约 $0.0014；打赏由合约直接转给作者，平台不碰钱、零抽成、无资金池。",
+        "tech": ["Solidity", "Cloudflare Workers", "viem", "Arc mainnet", "USDC", "KV"],
+        "highlights": [
+          "Arc gas 约 $0.0014，把可变现内容的颗粒度拉低 100–1000 倍 —— $0.01 的打赏第一次在经济上成立",
+          "零托管：tipPost 直接 call{value:} 把 USDC 转给作者，合约不持币，没有跑路动机",
+          "发帖写事件日志而非 SSTORE，成本比存储便宜约 10 倍，且永久可读（eth_getLogs）",
+          "链上唯一用户名 + OAuth 身份绑定；积分、20 项成就、每日签到全部由链上事实推导，无 admin 接口",
+          "合约已真实部署 Arc 主网：0x005a5a60…350e，前端与索引器均已上线"
+        ],
+        "links": [
+          { "label": "线上应用", "url": "https://tipjar-glx.pages.dev/", "primary": true },
+          { "label": "链上合约", "url": "https://explorer.arc.io/address/0x005a5a60054e56d082ed0de3ccc6cb72c2a3350e" },
+          { "label": "GitHub 仓库", "url": "https://github.com/xinyuzjj/tipjar" }
+        ]
+      }
+    }
+  ]
+}

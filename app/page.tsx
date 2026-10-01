@@ -710,6 +710,13 @@ export default function HomePage() {
               >
                 交易教学 ↗
               </Link>
+              <Link
+                href="/hackathon"
+                title="AI 黑客松参加历史 · 参赛项目记录"
+                className="px-[7px] md:px-3 py-[7px] md:py-2 rounded-lg bg-pine-light text-pine-deep border-2 border-ink shadow-hard-xs whitespace-nowrap hover:bg-white transition-colors"
+              >
+                黑客松 ↗
+              </Link>
               <a href="#resources" className="hidden md:inline-block px-3 py-2 rounded-lg border-2 border-transparent hover:bg-paper transition-colors">
                 最新资源
               </a>
@@ -884,36 +891,68 @@ export default function HomePage() {
           </span>
         </Link>
 
-        {/* ========== 交易教学视频入口 ========== */}
-        <Link
-          href="/video"
-          className="group mb-9 flex items-center gap-3.5 bg-white border-2 border-ink rounded-[12px] shadow-hard px-4 py-4 md:px-5 transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-sm"
-        >
-          <span className="grid place-items-center w-[42px] h-[42px] rounded-xl border-2 border-ink bg-pine text-white shrink-0">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M8 5.5v13l11-6.5-11-6.5z" />
-            </svg>
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="flex items-center gap-2 flex-wrap">
-              <span className="text-[15px] md:text-[16px] font-black tracking-tight break-words">
-                交易教学视频
+        {/* ========== 交易教学 / 黑客松 入口 ========== */}
+        <div className="grid sm:grid-cols-2 gap-4 mb-9">
+          <Link
+            href="/video"
+            className="group flex items-center gap-3.5 bg-white border-2 border-ink rounded-[12px] shadow-hard px-4 py-4 md:px-5 transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-sm"
+          >
+            <span className="grid place-items-center w-[42px] h-[42px] rounded-xl border-2 border-ink bg-pine text-white shrink-0">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8 5.5v13l11-6.5-11-6.5z" />
+              </svg>
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="flex items-center gap-2 flex-wrap">
+                <span className="text-[15px] md:text-[16px] font-black tracking-tight break-words">
+                  交易教学视频
+                </span>
+                <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light border border-sage rounded-full px-2 py-[2px] whitespace-nowrap">
+                  视频合集 · 持续更新
+                </span>
               </span>
-              <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light border border-sage rounded-full px-2 py-[2px] whitespace-nowrap">
-                视频合集 · 持续更新
+              <span className="block text-[11px] md:text-[12px] font-bold text-pine mt-1 leading-[1.6]">
+                多套系统化交易课程 · 在线播放 · 永久免费
+              </span>
+              <span className="block text-[11px] md:text-[12px] text-moss mt-0.5 leading-[1.6]">
+                还有更多教学翻译视频在 B 站
               </span>
             </span>
-            <span className="block text-[11px] md:text-[12px] font-bold text-pine mt-1 leading-[1.6]">
-              多套系统化交易课程 · 在线播放 · 永久免费
+            <span className="hidden md:inline-block font-mono text-[11px] font-bold text-moss group-hover:text-pine-deep transition-colors shrink-0">
+              去看课程 →
             </span>
-            <span className="block text-[11px] md:text-[12px] text-moss mt-0.5 leading-[1.6]">
-              还有更多教学翻译视频在 B 站
+          </Link>
+
+          <Link
+            href="/hackathon"
+            className="group flex items-center gap-3.5 bg-white border-2 border-ink rounded-[12px] shadow-hard px-4 py-4 md:px-5 transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-sm"
+          >
+            <span className="grid place-items-center w-[42px] h-[42px] rounded-xl border-2 border-ink bg-ink text-white shrink-0">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+                <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5M13.5 5l-3 14" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </span>
-          </span>
-          <span className="hidden sm:inline-block font-mono text-[11px] font-bold text-moss group-hover:text-pine-deep transition-colors shrink-0">
-            去看课程 →
-          </span>
-        </Link>
+            <span className="min-w-0 flex-1">
+              <span className="flex items-center gap-2 flex-wrap">
+                <span className="text-[15px] md:text-[16px] font-black tracking-tight break-words">
+                  AI 黑客松
+                </span>
+                <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light border border-sage rounded-full px-2 py-[2px] whitespace-nowrap">
+                  参赛记录 · 持续更新
+                </span>
+              </span>
+              <span className="block text-[11px] md:text-[12px] font-bold text-pine mt-1 leading-[1.6]">
+                Binance Agent OS · Arc Microgrants
+              </span>
+              <span className="block text-[11px] md:text-[12px] text-moss mt-0.5 leading-[1.6]">
+                2 个提交项目 · 真部署 · 不是 PPT
+              </span>
+            </span>
+            <span className="hidden md:inline-block font-mono text-[11px] font-bold text-moss group-hover:text-pine-deep transition-colors shrink-0">
+              看记录 →
+            </span>
+          </Link>
+        </div>
 
         {/* ========== 02 最新资源 ========== */}
         <section id="resources" className="scroll-mt-[88px]">

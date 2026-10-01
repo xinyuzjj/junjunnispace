@@ -34,5 +34,58 @@
         { "ep": 17, "id": "ep17", "title": "溢价与折价区间",                     "titleEn": "Premium & Discount Price Ranges",           "file": "bootcamp/ep17.mp4", "sizeMB": 64.5 }
       ]
     }
+  ],
+  "bilibiliCollections": [
+    {
+      "id": "bili-translate",
+      "seasonId": 9186623,
+      "title": "翻译合集",
+      "titleEn": "Curated Translations",
+      "count": 9,
+      "cover": "https://archive.biliimg.com/bfs/archive/31b92c0e7bbd31c0594e9b4582c022b1d2919a65.jpg",
+      "desc": "英文交易课程的中文翻译精选，覆盖供需、动量、行情解读等主题。",
+      "onSite": false
+    },
+    {
+      "id": "bili-smart-risk",
+      "seasonId": 9179944,
+      "title": "聪明钱概念课程 · Smart Risk",
+      "titleEn": "Smart Money Concepts — Smart Risk",
+      "count": 36,
+      "cover": "https://archive.biliimg.com/bfs/archive/ff1bba3ac3027f605899ff6693380f123eae49aa.jpg",
+      "desc": "Smart Risk 的聪明钱概念系统课，从高级市场结构、订单块，到做市商模型与结构变化，成体系。",
+      "onSite": false
+    },
+    {
+      "id": "bili-ttrades",
+      "seasonId": 9139895,
+      "title": "TTrades 免费分形模型课程",
+      "titleEn": "TTrades Fractal Model",
+      "count": 44,
+      "cover": "https://archive.biliimg.com/bfs/archive/a4a650892b7cfb9b9f6ce4b06ff51274c7e78fa7.jpg",
+      "desc": "TTrades 分形模型公开课，含指标与图表设置、流动性、公平价值缺口（FVG）、订单块与交付状态变化。",
+      "onSite": false
+    },
+    {
+      "id": "bili-faiz-smc",
+      "seasonId": 9133002,
+      "title": "Faiz SMC · 订单流训练营",
+      "titleEn": "Faiz SMC — Order Flow Bootcamp",
+      "count": 9,
+      "cover": "https://archive.biliimg.com/bfs/archive/b507b444a01dd55cde95e38e44df0826622f8068.jpg",
+      "desc": "Faiz 的 SMC 订单流训练营，把成交量轮廓、成交量分布与 ICT 概念结合，讲高概率的进场打法。",
+      "onSite": false
+    },
+    {
+      "id": "bili-jeafx-pa",
+      "seasonId": 9118523,
+      "title": "JeaFx · 掌握价格行为 - 训练营",
+      "titleEn": "JeaFx — Master Price Action",
+      "count": 17,
+      "cover": "https://archive.biliimg.com/bfs/archive/437ce95889619583d44c04e98e0e34e857f2de29.jpg",
+      "desc": "JeaFx 价格行为训练营，从市场结构、供需区到流动性扫荡与溢价折价区间，17 集系统课。本站另有可在线播放版本。",
+      "onSite": true,
+      "onSiteCollectionId": "price-action-bootcamp"
+    }
   ]
 }

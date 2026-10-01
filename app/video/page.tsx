@@ -31,10 +31,24 @@ interface SiteInfo {
   bilibiliNote: string;
 }
 
+/** B 站上的合集（本站不托管视频，只做跳转） */
+interface BiliCollection {
+  id: string;
+  seasonId: number;
+  title: string;
+  titleEn: string;
+  count: number;
+  cover: string;
+  desc: string;
+  onSite?: boolean;
+  onSiteCollectionId?: string;
+}
+
 interface CourseData {
   base: string;
   site: SiteInfo;
   collections: Collection[];
+  bilibiliCollections?: BiliCollection[];
 }
 
 /* ======================== 小组件 ======================== */
@@ -148,6 +162,7 @@ export default function VideoPage() {
   }, []);
 
   const collections = data?.collections ?? [];
+  const biliCollections = data?.bilibiliCollections ?? [];
   const active = useMemo(
     () => collections.find((c) => c.id === activeId) ?? null,
     [collections, activeId],
@@ -237,6 +252,12 @@ export default function VideoPage() {
             <span className="px-[7px] md:px-3 py-[7px] md:py-2 rounded-lg bg-pine text-white border-2 border-ink shadow-hard-xs whitespace-nowrap">
               交易教学
             </span>
+            <Link
+              href="/hackathon"
+              className="px-[7px] md:px-3 py-[7px] md:py-2 rounded-lg bg-pine-light text-pine-deep border-2 border-ink shadow-hard-xs whitespace-nowrap hover:bg-white transition-colors"
+            >
+              黑客松 ↗
+            </Link>
             <a
               href="https://github.com/xinyuzjj"
               target="_blank"
@@ -431,6 +452,93 @@ export default function VideoPage() {
               </p>
             </div>
           </div>
+
+          {/* ========== B 站合集（只做跳转，本站不托管视频） ========== */}
+          {biliCollections.length > 0 && (
+            <section className="mt-12 md:mt-14">
+              <SectionHead
+                index="02"
+                title="B 站视频合集"
+                right={
+                  <a
+                    href={site?.bilibili}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[11px] md:text-[13px] font-bold hover:underline whitespace-nowrap"
+                    style={{ color: '#FB7299' }}
+                  >
+                    <BiliGlyph className="w-4 h-4" />
+                    全部合集在 B 站 ↗
+                  </a>
+                }
+              />
+              <p className="text-[12.5px] text-moss leading-[1.8] mb-5 max-w-[760px]">
+                以下合集托管在 B 站，点击卡片直接跳转观看，不占用本站流量。{site?.bilibiliNote}
+              </p>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                {biliCollections.map((b) => {
+                  const url = `${(site?.bilibili || '').replace(/\/$/, '')}/lists/${b.seasonId}?type=season`;
+                  return (
+                    <div
+                      key={b.id}
+                      className="group bg-white border-2 border-ink rounded-[12px] shadow-hard-sm hover:shadow-hard transition-all duration-150 overflow-hidden flex flex-col"
+                    >
+                      <a href={url} target="_blank" rel="noopener noreferrer" className="flex flex-col flex-1">
+                        <div className="relative aspect-[16/9] bg-pine overflow-hidden border-b-2 border-ink">
+                          <div className="absolute inset-0 dot-grid opacity-60" />
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={b.cover}
+                            alt={b.title}
+                            loading="lazy"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                            className="absolute inset-0 w-full h-full object-cover"
+                          />
+                          <span
+                            className="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 font-mono text-[10px] font-bold text-white rounded px-2 py-1 border border-ink"
+                            style={{ background: '#FB7299' }}
+                          >
+                            <BiliGlyph className="w-3 h-3" />
+                            B 站 · {b.count} 集
+                          </span>
+                          {b.onSite && (
+                            <span className="absolute top-2.5 right-2.5 font-mono text-[10px] font-bold text-pine-deep bg-white border border-ink rounded px-2 py-1">
+                              站内可播
+                            </span>
+                          )}
+                        </div>
+                        <div className="p-3.5 md:p-4 flex-1 flex flex-col">
+                          <h3 className="text-[14.5px] md:text-[15.5px] font-black leading-[1.4]">{b.title}</h3>
+                          <p className="font-mono text-[10px] text-moss font-medium mt-1 truncate">{b.titleEn}</p>
+                          <p className="text-[12px] text-moss leading-[1.7] mt-2.5 flex-1">{b.desc}</p>
+                          <span
+                            className="inline-flex items-center gap-1.5 mt-3 text-[12px] font-extrabold"
+                            style={{ color: '#FB7299' }}
+                          >
+                            去 B 站看
+                            <span className="group-hover:translate-x-0.5 transition-transform">↗</span>
+                          </span>
+                        </div>
+                      </a>
+                      {b.onSite && b.onSiteCollectionId && (
+                        <div className="px-3.5 md:px-4 pb-3.5 md:pb-4">
+                          <button
+                            onClick={() => openCollection(b.onSiteCollectionId as string)}
+                            className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-pine-light text-pine-deep border-2 border-ink shadow-hard-xs text-[12px] font-extrabold hover:bg-white transition-colors"
+                          >
+                            <PlayGlyph className="w-3.5 h-3.5" />
+                            本站在线播放
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          )}
         </main>
 
         {Footer}
