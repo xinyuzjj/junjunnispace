@@ -43,5 +43,27 @@
     "stars": 0,
     "emoji": "🐜",
     "icon": "/projects/ant-browser.png"
+  },
+  {
+    "name": "junlive",
+    "featured": true,
+    "tagline": "七个直播平台 · 装进同一个窗口",
+    "version": "v1.2.1",
+    "description": "把斗鱼、虎牙、B站、抖音、YouTube、SOOP、Twitch 七个直播平台收进同一个桌面客户端的 Tauri 2 + Vue 3 应用。每个平台一套浅色卡片流界面、顶栏一键切换，左侧关注列表按在播状态排序。难点不在聚合而在播放：国内平台的流都带 Referer / UA / Cookie 防盗链且浏览器里改不了请求头，所以做了一个内置的本地流代理——每个上游地址在本地注册成短 id，前端只播 127.0.0.1，由 Rust 侧带正确请求头回源并逐行重写 m3u8 分片。弹幕七个平台全部自建通道，不是 iframe 转发。Windows / macOS / Linux / Android 四端出包，免费、无广告、不收集数据。",
+    "highlights": [
+      "七平台聚合：斗鱼 · 虎牙 · B站 · 抖音 · YouTube · SOOP · Twitch，顶栏一键切换，分区浏览与搜索齐备",
+      "弹幕七平台全部自建通道：B站 WBI 签名、斗鱼自有 TCP 协议、虎牙 WS（uid 取房间页）、抖音 X-Bogus 签名、Twitch IRC over WS、YouTube live_chat 长轮询",
+      "内置 Rust / axum 本地流代理：前端只播 127.0.0.1，回源时带上正确的 Referer / UA / Cookie，m3u8 播放列表逐行重写、分片同样走代理",
+      "跨平台关注列表：绿点=直播中 / 灰点=未开播 / 黄点=未知，在线状态持久化在记录里，进页面顺序即正确",
+      "弹幕渲染走 requestAnimationFrame 批量合并 + GPU 合成，高频房间不拖累视频解码；可调不透明度 / 字号 / 速度 / 区域 / 屏蔽词 / 颜色",
+      "窗口级 CSS 全屏（不与官方 iframe 抢系统全屏、弹幕层保留）、自绘无边框标题栏、同画质多 CDN 线路实时测速切换",
+      "推一个 tag 触发 GitHub Actions 自动构建三平台安装包并创建 Release；README 附命令行自测（--test 系列）可直接验证接口连通性"
+    ],
+    "url": "https://github.com/xinyuzjj/junlive",
+    "language": "Rust",
+    "stack": "Tauri 2 · Vue 3 · hls.js · mpegts.js · axum",
+    "stars": 0,
+    "emoji": "📺",
+    "icon": "/projects/junlive.png"
   }
 ]
