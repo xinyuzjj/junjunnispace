@@ -836,9 +836,9 @@
   },
   {
     "id": "81",
-    "title": "JunLive v1.2.1 多平台直播聚合客户端",
+    "title": "JunLive v1.2.5 多平台直播聚合客户端",
     "desc": "「把七个直播平台装进同一个窗口」。开源跨平台直播客户端（Tauri 2 + Rust + Vue 3），聚合斗鱼 / 虎牙 / B站 / 抖音 / YouTube / SOOP / Twitch，顶栏一键切换。七个平台的弹幕全部自建通道（不是 iframe 转发），可调透明度 / 字号 / 速度 / 显示区域 / 屏蔽词；内置本地流代理，解决国内平台的 Referer / Cookie 防盗链与跨域限制。另有跨平台关注列表（按在播状态排序）、同画质多 CDN 线路测速切换、无边框全屏与自绘标题栏。已打包：Windows 安装版（exe / msi）、macOS（Intel / Apple Silicon dmg）、Linux（AppImage / deb / rpm）、安卓 apk（arm64，侧载安装）。",
-    "quarkLink": "https://pan.quark.cn/s/14ab1986250b",
+    "quarkLink": "https://pan.quark.cn/s/9361e4342c4b",
     "baiduLink": "",
     "tags": [
       "直播",

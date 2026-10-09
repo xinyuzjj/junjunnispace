@@ -48,7 +48,7 @@
     "name": "junlive",
     "featured": true,
     "tagline": "七个直播平台 · 装进同一个窗口",
-    "version": "v1.2.1",
+    "version": "v1.2.5",
     "description": "把斗鱼、虎牙、B站、抖音、YouTube、SOOP、Twitch 七个直播平台收进同一个桌面客户端的 Tauri 2 + Vue 3 应用。每个平台一套浅色卡片流界面、顶栏一键切换，左侧关注列表按在播状态排序。难点不在聚合而在播放：国内平台的流都带 Referer / UA / Cookie 防盗链且浏览器里改不了请求头，所以做了一个内置的本地流代理——每个上游地址在本地注册成短 id，前端只播 127.0.0.1，由 Rust 侧带正确请求头回源并逐行重写 m3u8 分片。弹幕七个平台全部自建通道，不是 iframe 转发。Windows / macOS / Linux / Android 四端出包，免费、无广告、不收集数据。",
     "highlights": [
       "七平台聚合：斗鱼 · 虎牙 · B站 · 抖音 · YouTube · SOOP · Twitch，顶栏一键切换，分区浏览与搜索齐备",
