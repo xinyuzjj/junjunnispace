@@ -5,7 +5,7 @@
     "subtitle": "系统化的交易课程视频合集，在线播放、永久免费。",
     "bilibili": "https://space.bilibili.com/486593729",
     "bilibiliName": "B 站主页",
-    "bilibiliNote": "共 11 个合集，交易课程与开源项目推荐都在里面，持续更新。"
+    "bilibiliNote": "共 9 个交易课程合集，持续更新。"
   },
   "collections": [
     {
@@ -126,26 +126,6 @@
       "desc": "JeaFx 价格行为训练营，从市场结构、供需区到流动性扫荡与溢价折价区间，17 集系统课。本站另有可在线播放版本。",
       "onSite": true,
       "onSiteCollectionId": "price-action-bootcamp"
-    },
-    {
-      "id": "bili-opensource",
-      "seasonId": 9239522,
-      "title": "开源项目推荐",
-      "titleEn": "Open Source Picks",
-      "count": 88,
-      "cover": "https://archive.biliimg.com/bfs/archive/0c1b5a01419f34c80064a0532071531fb332a5f0.jpg",
-      "desc": "88 集开源项目实拍实装，开发工具、命令行、桌面应用、自部署方案都有，和本站「开源项目」栏目同源。",
-      "onSite": false
-    },
-    {
-      "id": "bili-web3-archive",
-      "seasonId": 9239507,
-      "title": "早期视频 web3",
-      "titleEn": "Early Web3 Archive",
-      "count": 43,
-      "cover": "https://archive.biliimg.com/bfs/archive/26cfc57bb56127480dd22e1e5d4f66e8fa34d37f.jpg",
-      "desc": "早期 web3 / 加密方向的视频存档，43 集，内容偏早，留作回看。",
-      "onSite": false
     }
   ]
 }
