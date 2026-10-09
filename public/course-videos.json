@@ -5,7 +5,7 @@
     "subtitle": "系统化的交易课程视频合集，在线播放、永久免费。",
     "bilibili": "https://space.bilibili.com/486593729",
     "bilibiliName": "B 站主页",
-    "bilibiliNote": "B 站有更多教学翻译视频，持续更新中"
+    "bilibiliNote": "共 11 个合集，交易课程与开源项目推荐都在里面，持续更新。"
   },
   "collections": [
     {
@@ -36,6 +36,46 @@
     }
   ],
   "bilibiliCollections": [
+    {
+      "id": "bili-mete-smc",
+      "seasonId": 9257133,
+      "title": "Mete Kaplan · 价格行为与 SMC 聪明钱策略",
+      "titleEn": "Mete Kaplan — Price Action & SMC",
+      "count": 125,
+      "cover": "https://archive.biliimg.com/bfs/archive/b90a2ffaefe248b079886d3a74edad1436150e7c.jpg",
+      "desc": "Mete Kaplan 的长篇系统课，125 集把价格行为与 SMC 聪明钱概念串成一条线：市场结构、订单块、流动性、溢价折价区，一路讲到实盘执行。",
+      "onSite": false
+    },
+    {
+      "id": "bili-mete-life",
+      "seasonId": 9257156,
+      "title": "Mete Kaplan · 一生的交易策略系列",
+      "titleEn": "Mete Kaplan — Lifetime Trading Playbook",
+      "count": 15,
+      "cover": "https://archive.biliimg.com/bfs/archive/b0651197ba2482009aef55f584f730388ac4a0a9.jpg",
+      "desc": "Mete Kaplan 的另一条线，15 集讲他自己长期在用的交易策略与决策流程，偏思维框架而非招式。",
+      "onSite": false
+    },
+    {
+      "id": "bili-21day",
+      "seasonId": 9232440,
+      "title": "21-Day Bootcamp",
+      "titleEn": "21-Day Bootcamp",
+      "count": 20,
+      "cover": "https://archive.biliimg.com/bfs/archive/eab1619f29f62b31f7a2e66218b442c23ab73a70.jpg",
+      "desc": "21 天训练营，按天推进的实操节奏，从看盘习惯到进场、加仓、离场，适合照着跟练。",
+      "onSite": false
+    },
+    {
+      "id": "bili-10pct",
+      "seasonId": 9224126,
+      "title": "The 10% Enterprise",
+      "titleEn": "The 10% Enterprise",
+      "count": 20,
+      "cover": "https://archive.biliimg.com/bfs/archive/d7ab531034c9a17e6ed75a0855c43583f498b35d.jpg",
+      "desc": "20 集，把交易当成一门稳定产出的生意来做：资金管理、期望值、复盘方法与心态控制。",
+      "onSite": false
+    },
     {
       "id": "bili-translate",
       "seasonId": 9186623,
@@ -86,6 +126,26 @@
       "desc": "JeaFx 价格行为训练营，从市场结构、供需区到流动性扫荡与溢价折价区间，17 集系统课。本站另有可在线播放版本。",
       "onSite": true,
       "onSiteCollectionId": "price-action-bootcamp"
+    },
+    {
+      "id": "bili-opensource",
+      "seasonId": 9239522,
+      "title": "开源项目推荐",
+      "titleEn": "Open Source Picks",
+      "count": 88,
+      "cover": "https://archive.biliimg.com/bfs/archive/0c1b5a01419f34c80064a0532071531fb332a5f0.jpg",
+      "desc": "88 集开源项目实拍实装，开发工具、命令行、桌面应用、自部署方案都有，和本站「开源项目」栏目同源。",
+      "onSite": false
+    },
+    {
+      "id": "bili-web3-archive",
+      "seasonId": 9239507,
+      "title": "早期视频 web3",
+      "titleEn": "Early Web3 Archive",
+      "count": 43,
+      "cover": "https://archive.biliimg.com/bfs/archive/26cfc57bb56127480dd22e1e5d4f66e8fa34d37f.jpg",
+      "desc": "早期 web3 / 加密方向的视频存档，43 集，内容偏早，留作回看。",
+      "onSite": false
     }
   ]
 }
