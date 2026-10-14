@@ -9,6 +9,12 @@ interface Category {
   color: string;
 }
 
+interface PurchaseLink {
+  label: string;
+  value?: string;
+  url: string;
+}
+
 interface Resource {
   id: string;
   category: string;
@@ -16,6 +22,7 @@ interface Resource {
   desc: string;
   quarkLink?: string;
   baiduLink?: string;
+  purchase?: PurchaseLink[];
   tags?: string[];
 }
 
@@ -189,7 +196,19 @@ export default function SharePage() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex gap-3 mt-4 border-t border-gray-100 pt-4 justify-end">
+                    <div className="flex gap-3 mt-4 border-t border-gray-100 pt-4 justify-end flex-wrap">
+                      {resource.purchase && resource.purchase.map(link => (
+                        <a
+                          key={link.label}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-1.5 rounded-md bg-amber-500 text-white text-sm font-medium hover:bg-amber-600 transition-colors flex items-center gap-1"
+                        >
+                          🛒 {link.label}
+                          {link.value && <span className="text-amber-100 font-normal">· {link.value}</span>}
+                        </a>
+                      ))}
                       {resource.quarkLink && (
                         <a 
                           href={resource.quarkLink} 

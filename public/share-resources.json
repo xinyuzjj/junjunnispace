@@ -1,16 +1,16 @@
 {
   "categories": [
     {
-      "id": "study",
-      "name": "学习资源",
-      "icon": "📚",
-      "color": "blue"
-    },
-    {
       "id": "ai",
       "name": "AI资源",
       "icon": "🤖",
       "color": "purple"
+    },
+    {
+      "id": "study",
+      "name": "学习资源",
+      "icon": "📚",
+      "color": "blue"
     },
     {
       "id": "game",
@@ -26,6 +26,25 @@
     }
   ],
   "resources": [
+    {
+      "id": "4",
+      "category": "ai",
+      "title": "TV-Agent · 电视端 AI 智能助手（付费）",
+      "desc": "运行在电视 / 电视盒子上的 AI 智能助手，语音对话、内容推荐、家居控制一站搞定。付费项目，购买与授权请走下面两个渠道：闲鱼搜索「峻峻尼」，或直接在爱发电下单。",
+      "purchase": [
+        {
+          "label": "闲鱼",
+          "value": "搜索「峻峻尼」",
+          "url": "https://www.goofish.com/search?q=%E5%B3%BB%E5%B3%BB%E5%B0%BC"
+        },
+        {
+          "label": "爱发电",
+          "value": "ifdian.net/a/junjunni",
+          "url": "https://ifdian.net/a/junjunni"
+        }
+      ],
+      "tags": ["TV-Agent", "AI", "电视端", "付费"]
+    },
     {
       "id": "2",
       "category": "study",
