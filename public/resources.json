@@ -854,8 +854,8 @@
   },
   {
     "id": "82",
-    "title": "TV-Agent · 电脑端 AI 智能助手",
-    "desc": "Windows / macOS / Linux 桌面端 AI 智能助手应用。付费项目，购买与授权请走右侧渠道：闲鱼搜索「峻峻尼」，或在爱发电直接下单。",
+    "title": "TV-Agent · TradingView 智能交易助手",
+    "desc": "为 TradingView 打造的 AI 交易助手，在图表里直接提问、生成策略、解读行情。付费项目，购买与授权请走右侧渠道：闲鱼搜索「峻峻尼」，或在爱发电直接下单。",
     "purchase": [
       {
         "label": "闲鱼购买",
@@ -870,9 +870,9 @@
     ],
     "tags": [
       "TV-Agent",
+      "TradingView",
       "AI",
-      "电脑端",
-      "PC",
+      "交易",
       "付费"
     ]
   }
