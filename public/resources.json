@@ -851,5 +851,28 @@
       "安卓",
       "开源"
     ]
+  },
+  {
+    "id": "82",
+    "title": "TV-Agent · 电视端 AI 智能助手",
+    "desc": "运行在电视 / 电视盒子上的 AI 智能助手。付费项目，购买与授权请走右侧渠道：闲鱼搜索「峻峻尼」，或在爱发电直接下单。",
+    "purchase": [
+      {
+        "label": "闲鱼购买",
+        "value": "搜索「峻峻尼」",
+        "url": "https://www.goofish.com/search?q=%E5%B3%BB%E5%B3%BB%E5%B0%BC"
+      },
+      {
+        "label": "爱发电",
+        "value": "ifdian.net/a/junjunni",
+        "url": "https://ifdian.net/a/junjunni"
+      }
+    ],
+    "tags": [
+      "TV-Agent",
+      "AI",
+      "电视端",
+      "付费"
+    ]
   }
 ]

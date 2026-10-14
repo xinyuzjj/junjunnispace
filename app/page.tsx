@@ -8,6 +8,8 @@ interface Resource {
   desc: string;
   quarkLink?: string;
   baiduLink?: string;
+  /** 付费项目购买渠道 */
+  purchase?: { label: string; value?: string; url: string }[];
   tags?: string[];
 }
 
@@ -399,6 +401,18 @@ function Ticket({ item, featured }: { item: Resource; featured: boolean }) {
             夸克网盘 <span>↗</span>
           </a>
         )}
+        {item.purchase?.map(pl => (
+          <a
+            key={pl.label}
+            href={pl.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={pl.value ? `${pl.label} · ${pl.value}` : pl.label}
+            className="flex-1 md:flex-none inline-flex items-center justify-between gap-2 rounded-md border-[1.5px] border-ink bg-amber-400 text-ink text-[11px] md:text-xs font-extrabold px-2.5 py-2 min-h-[36px] transition-all duration-150 hover:translate-x-[1px] hover:translate-y-[1px] hover:bg-amber-300"
+          >
+            🛒 {pl.label} <span>↗</span>
+          </a>
+        ))}
         {item.baiduLink && (
           <a
             href={item.baiduLink}
