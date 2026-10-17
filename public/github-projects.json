@@ -1,5 +1,25 @@
 [
   {
+    "name": "folia-major",
+    "featured": true,
+    "tagline": "全屏歌词动画 · AI 配色的沉浸式音乐播放器",
+    "version": "v0.7.20",
+    "description": "把「听歌」做成「看歌」的开源播放器：全屏沉浸式歌词是主舞台，浮名 / 流光 / 心象 / 群唱等多套文字 PV 级动画引擎负责排版，AI 再按歌曲情绪与歌词内容生成专属配色主题。音源接网易云、QQ、酷狗、Navidrome 与本地曲库，本地歌曲自动匹配在线歌词与封面，吃 .lrc/.ttml/.qrc/.yrc/.krc 逐字歌词。Electron 桌面端覆盖 Windows / macOS / Linux，Web 版可一键部署 Vercel / Cloudflare 并安装为 PWA；桌面版还有实验性的 Folium 模组系统，可从官方签名市场装新动画与背景。",
+    "highlights": [
+      "歌词即主角：浮名 / 流光 / 心象 / 群唱 / 镜台 / 时计等多套全屏歌词动画，文字 PV 级排版氛围，参数可调、响应式自适应窗口",
+      "AI 主题生成：按歌曲情绪与歌词内容生成沉浸式背景与视觉参数；可选自托管 Sync Server（Cloudflare Workers / Docker / Node）跨设备同步主题库",
+      "多源播放与匹配：网易云 / QQ / 酷狗在线搜索播放，Navidrome 与本地曲库导入，自动匹配歌词封面（网易云→QQ→酷狗回退），支持逐字歌词与 LDDC 增强格式",
+      "部署形态齐全：Electron 桌面端（Win/macOS/Linux）+ Web 一键部署 Vercel / Cloudflare + PWA 移动端，另有 Docker Compose、AUR、Flatpak",
+      "Folium 模组系统（实验性）：官方签名市场安装新歌词动画、背景与播放页图层，模组以可信代码运行、启用前需人工确认"
+    ],
+    "url": "https://github.com/chthollyphile/folia-major",
+    "language": "TypeScript",
+    "stack": "React + Electron + TypeScript · AGPL-3.0",
+    "stars": 7281,
+    "emoji": "🎵",
+    "icon": "/projects/folia.png"
+  },
+  {
     "name": "bazz.agent",
     "featured": true,
     "tagline": "Binance AI 副驾驶 · 桌面端 Agent OS",

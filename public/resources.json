@@ -875,5 +875,18 @@
       "交易",
       "付费"
     ]
+  },
+  {
+    "id": "83",
+    "title": "Folia v0.7.20 全屏歌词音乐播放器",
+    "desc": "以全屏沉浸式歌词为核心的多源音乐播放器：网易云 / QQ / 酷狗 / Navidrome / 本地曲库，智能歌词匹配 + AI 生成配色主题 + 多套文字 PV 级歌词动画。Win / macOS / Linux 桌面端全平台安装包。",
+    "quarkLink": "https://pan.quark.cn/s/b7f97464512f",
+    "tags": [
+      "github",
+      "音乐",
+      "PC",
+      "Mac",
+      "Linux"
+    ]
   }
 ]
