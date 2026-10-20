@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="zh-CN" data-page-node-id="6EekovN9jMhcjC5X1fY8q0">
+<head data-page-node-id="YGZmlrWqtkkO83M4h604PT">
+  <meta charset="UTF-8" data-page-node-id="a7dwnB3sDaUAnPMpw9NAX1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="UDTCnvhqP76y21SvGFLTUw">
   <title>ETH/USDT 15M SMC 全自动策略交易终端</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <!-- TradingView Official Lightweight Charts v4.1.3 -->
   <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" data-page-node-id="CHkP2QXa5QUvFDZ799J4Y4">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin data-page-node-id="kSvEQeqLKc3shHSlhOOHTB">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" data-page-node-id="jY8puF2yZIqwFAUhP2BmUP">
   <style>
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -72,91 +72,91 @@
     #idle-hint.show { display: flex; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
+<body class="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900" data-page-node-id="MC8B1OLfZzTJrDnLTixCH5">
 
   <!-- Top Executive Navigation Bar -->
-  <header class="border-b border-slate-200/80 bg-white/95 backdrop-blur-md px-5 py-3 sticky top-0 z-30 shadow-xs">
-    <div class="max-w-[1780px] mx-auto flex flex-wrap items-center justify-between gap-4">
+  <header class="border-b border-slate-200/80 bg-white/95 backdrop-blur-md px-5 py-3 sticky top-0 z-30 shadow-xs" data-page-node-id="fpa3QUCDBvfOvkGAwuazHG">
+    <div class="max-w-[1780px] mx-auto flex flex-wrap items-center justify-between gap-4" data-page-node-id="NAMAdijapnvinCoEgEtcgl">
       
       <!-- Brand & Asset Identity -->
-      <div class="flex items-center gap-3.5">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+      <div class="flex items-center gap-3.5" data-page-node-id="WvlvvxAPCFRgpt6xEjdRvo">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20" data-page-node-id="hCSYO4EGl35WxNINArcxJ9">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="L97AgsH0plGyFVl1e6kCgq"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" data-page-node-id="X7mpuzRBqeNz5xnpqLUmXJ"></path></svg>
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="font-extrabold text-slate-900 text-base tracking-tight">ETH / USDT 永续</h1>
-            <span class="px-2 py-0.5 rounded-full text-[12px] font-mono font-bold bg-blue-100 text-blue-700">15m</span>
-            <span class="px-2 py-0.5 rounded-full text-[12px] font-mono font-bold badge-soft-green flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+        <div data-page-node-id="eyU3MrgUyBGGfbIDp8xJyt">
+          <div class="flex items-center gap-2" data-page-node-id="7ZTLYS0ii4As2wCGEDi5y6">
+            <h1 class="font-extrabold text-slate-900 text-base tracking-tight" data-page-node-id="CWpgbeN9o1OjYnm8Gcd7BF">ETH / USDT 永续</h1>
+            <span class="px-2 py-0.5 rounded-full text-[12px] font-mono font-bold bg-blue-100 text-blue-700" data-page-node-id="pgzV6DIvWSK727RBGC4gOX">15m</span>
+            <span class="px-2 py-0.5 rounded-full text-[12px] font-mono font-bold badge-soft-green flex items-center gap-1.5" data-page-node-id="JBgIPKDvYRaoChxKEPS8df">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" data-page-node-id="dfDstsZ9BDL1ErmREMp8qH"></span>
               全自动策略执行中
             </span>
           </div>
-          <div class="text-[12px] text-slate-700 font-semibold mt-0.5">
+          <div class="text-[12px] text-slate-700 font-semibold mt-0.5" data-page-node-id="oMJPbX3Un0ZXDXIXhu3Wrl">
             SMC 结构驱动 · 外部/内部进场均为 OTE 或 OB · 止盈各自前高 · 100% 自动止盈止损
           </div>
         </div>
       </div>
 
       <!-- Live Ticker & Market Metrics: 外部宏观 vs 内部微观严格分离与双仓监控 -->
-      <div class="flex items-center gap-3.5 pl-4 border-l border-slate-200 hidden md:flex font-mono">
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-slate-600 font-semibold">最新标记价</div>
-          <div id="tickerPrice" class="text-base font-bold text-slate-900 tracking-tight">$0.00</div>
+      <div class="flex items-center gap-3.5 pl-4 border-l border-slate-200 hidden md:flex font-mono" data-page-node-id="XSWqaEKTfwGxnT1GGxj6l6">
+        <div data-page-node-id="BeT9DQD6EHDdQlocCMj8zv">
+          <div class="text-[11px] uppercase tracking-wider text-slate-600 font-semibold" data-page-node-id="lPTkuCFPTwnSOPkTh84X1e">最新标记价</div>
+          <div id="tickerPrice" class="text-base font-bold text-slate-900 tracking-tight" data-page-node-id="wGf7bBQv7ksTeEsBtcTU0M">$0.00</div>
         </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-slate-600 font-semibold">24h 涨跌</div>
-          <div id="tickerChange" class="text-xs font-bold text-slate-700">+0.00%</div>
+        <div data-page-node-id="ErskJQQDgOeDvPJFECjhYp">
+          <div class="text-[11px] uppercase tracking-wider text-slate-600 font-semibold" data-page-node-id="i1NNB9FhVOT0Bukcf0pQRM">24h 涨跌</div>
+          <div id="tickerChange" class="text-xs font-bold text-slate-700" data-page-node-id="9PVW0t1omxrs1LfQTNMc1S">+0.00%</div>
         </div>
         
         <!-- 外部宏观指标 -->
-        <div class="border-l border-slate-200 pl-2.5">
-          <div class="text-[11px] uppercase tracking-wider text-emerald-700 font-semibold">外部 Strong Low</div>
-          <div id="headerExtStrongLow" class="text-xs font-bold text-emerald-600">$0.00</div>
+        <div class="border-l border-slate-200 pl-2.5" data-page-node-id="CcsrjciE2l2CU1jQ0VwWYT">
+          <div class="text-[11px] uppercase tracking-wider text-emerald-700 font-semibold" data-page-node-id="bYtoTojwAAz3jPskFuKDz0">外部 Strong Low</div>
+          <div id="headerExtStrongLow" class="text-xs font-bold text-emerald-600" data-page-node-id="VvoblJNNf7W0O8ikJp6EDx">$0.00</div>
         </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-blue-700 font-semibold">外部 Weak High</div>
-          <div id="headerExtWeakHigh" class="text-xs font-bold text-blue-600">$0.00</div>
+        <div data-page-node-id="GRpvjB96tTsJnu5ZEWKduF">
+          <div class="text-[11px] uppercase tracking-wider text-blue-700 font-semibold" data-page-node-id="Gy6s1X3bbeFAIGUs1IROax">外部 Weak High</div>
+          <div id="headerExtWeakHigh" class="text-xs font-bold text-blue-600" data-page-node-id="s1iri00sCt0rAgdjZ5tokG">$0.00</div>
         </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-amber-700 font-semibold">外部 0.5 EQ (折价界)</div>
-          <div id="headerExtEQ" class="text-xs font-bold text-amber-600">$0.00</div>
+        <div data-page-node-id="P4EjZPCV7Xr5kgIIf6Y03Y">
+          <div class="text-[11px] uppercase tracking-wider text-amber-700 font-semibold" data-page-node-id="nQEGd6B7CSAp8NyHPs8DV4">外部 0.5 EQ (折价界)</div>
+          <div id="headerExtEQ" class="text-xs font-bold text-amber-600" data-page-node-id="Kj2j541JGp10KaZRlMKQvK">$0.00</div>
         </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-amber-700 font-semibold">外部 OTE</div>
-          <div id="headerExtOTE" class="text-xs font-bold text-amber-600">$0.00 - $0.00</div>
+        <div data-page-node-id="tTbO0SWnQ5p8TJwv4RA1a5">
+          <div class="text-[11px] uppercase tracking-wider text-amber-700 font-semibold" data-page-node-id="wZSL9i2ZO9GN6DDxsMy5mF">外部 OTE</div>
+          <div id="headerExtOTE" class="text-xs font-bold text-amber-600" data-page-node-id="ZMPWneZ5rvWBi074B34Kwl">$0.00 - $0.00</div>
         </div>
 
         <!-- 内部微观指标 -->
-        <div class="border-l border-slate-200 pl-2.5">
-          <div class="text-[11px] uppercase tracking-wider text-sky-700 font-semibold">内部前高 (止盈)</div>
-          <div id="headerIntHigh" class="text-xs font-bold text-sky-600">$0.00</div>
+        <div class="border-l border-slate-200 pl-2.5" data-page-node-id="yo1vQ8CZG0GGOmC1BpUtai">
+          <div class="text-[11px] uppercase tracking-wider text-sky-700 font-semibold" data-page-node-id="gGTBSTbJpLnTIVdql2kzvW">内部前高 (止盈)</div>
+          <div id="headerIntHigh" class="text-xs font-bold text-sky-600" data-page-node-id="fsvavg1KcAELwX8xSPHnSx">$0.00</div>
         </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-cyan-700 font-semibold">内部 OTE (进场)</div>
-          <div id="headerIntOTE" class="text-xs font-bold text-cyan-600">$0.00 - $0.00</div>
+        <div data-page-node-id="qgfBYRTOkb5g4kUnAHxxTJ">
+          <div class="text-[11px] uppercase tracking-wider text-cyan-700 font-semibold" data-page-node-id="CGOTLFHGlRvVtBsh34Vdr2">内部 OTE (进场)</div>
+          <div id="headerIntOTE" class="text-xs font-bold text-cyan-600" data-page-node-id="jkEAgWhH0g0ZFzUN4LzU4C">$0.00 - $0.00</div>
         </div>
 
         <!-- 双仓协同状态 -->
-        <div class="border-l border-slate-200 pl-2.5">
-          <div class="text-[11px] uppercase tracking-wider text-purple-700 font-semibold">双仓持仓状态</div>
-          <div id="headerDualPosTag" class="text-xs font-bold text-purple-700">0/2 空仓监控</div>
+        <div class="border-l border-slate-200 pl-2.5" data-page-node-id="FNFSnEaPWC91ZLoAbzoXKU">
+          <div class="text-[11px] uppercase tracking-wider text-purple-700 font-semibold" data-page-node-id="1ppNSZhqJ8DLZtw8046sA7">双仓持仓状态</div>
+          <div id="headerDualPosTag" class="text-xs font-bold text-purple-700" data-page-node-id="BrxF6RGqGgSkYi9MKJgpj8">0/2 空仓监控</div>
         </div>
       </div>
 
       <!-- System Status Indicators -->
-      <div class="flex items-center gap-2.5">
-        <div class="flex items-center gap-2 bg-slate-50 border border-slate-200/90 rounded-lg px-3 py-1.5 text-xs shadow-2xs font-mono">
-          <span id="dataStatusDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span id="dataSourceLabel" class="text-slate-700 font-semibold">Binance 15M 实时</span>
-          <button id="btnToggleSource" class="text-slate-600 hover:text-blue-600 transition" title="切换数据源">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+      <div class="flex items-center gap-2.5" data-page-node-id="mkfE4d9JruAfXBlCIjKFFy">
+        <div class="flex items-center gap-2 bg-slate-50 border border-slate-200/90 rounded-lg px-3 py-1.5 text-xs shadow-2xs font-mono" data-page-node-id="jEK2U5e4rdwhW48SRTrSH0">
+          <span id="dataStatusDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" data-page-node-id="v5OSVImey9WlywjFadBj9h"></span>
+          <span id="dataSourceLabel" class="text-slate-700 font-semibold" data-page-node-id="JMmVHGHQDOzAqiITjfKYdq">Binance 15M 实时</span>
+          <button id="btnToggleSource" class="text-slate-600 hover:text-blue-600 transition" title="切换数据源" data-page-node-id="piidR7gbqd0wCKaHZ5Hlov">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="9CPXAcowoWGqENgtyadedp"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" data-page-node-id="e2PJNmwMmHyKg27nZKyBki"></path></svg>
           </button>
         </div>
 
-        <button id="btnSoundToggle" class="bg-white border border-slate-200 rounded-lg p-2 text-slate-800 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition" title="提示音开/关">
-          <svg id="iconSoundOn" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
-          <svg id="iconSoundOff" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z m12 0l-6-6m6 0l-6 6"></path></svg>
+        <button id="btnSoundToggle" class="bg-white border border-slate-200 rounded-lg p-2 text-slate-800 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition" title="提示音开/关" data-page-node-id="dE2HYgs5cNFgHQVI2cwZEj">
+          <svg id="iconSoundOn" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="ccwlBDCShF3xcrKy3FAG6I"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" data-page-node-id="9jlueP2M4gJQDfTKDPxyYl"></path></svg>
+          <svg id="iconSoundOff" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="jyhavEZ6yGwnnNuHGEOvOk"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z m12 0l-6-6m6 0l-6 6" data-page-node-id="Qe4lhgag80DTwPKaBGdqJF"></path></svg>
         </button>
       </div>
 
@@ -164,61 +164,61 @@
   </header>
 
   <!-- Account Capital & Strategy Overview Bar -->
-  <section class="bg-white border-b border-slate-200/80 px-5 py-3 shadow-2xs">
-    <div class="max-w-[1780px] mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 text-xs">
+  <section class="bg-white border-b border-slate-200/80 px-5 py-3 shadow-2xs" data-page-node-id="z4X2PX1inxZtQhJc3pKu1N">
+    <div class="max-w-[1780px] mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 text-xs" data-page-node-id="wvJphZcuMA9JL0oX7jul53">
       
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>账户总权益 (Equity)</span>
-          <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between" data-page-node-id="kz2QzLFD7p7BE1uxA1lteZ">
+        <div class="flex items-center justify-between text-slate-700 font-semibold" data-page-node-id="XHDFP9FHaRTomGW6t93oMF">
+          <span data-page-node-id="Gxfbe6dp1HGDceeg8Gbr4T">账户总权益 (Equity)</span>
+          <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="SmbV7aXIepRpATF9s8cB8K"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" data-page-node-id="iQNGn9jJuMWVmQIXOSKNuL"></path></svg>
         </div>
-        <div class="flex items-baseline gap-1 mt-1.5">
-          <span id="accountEquity" class="text-lg font-bold font-mono text-slate-900">$1,000.00</span>
-          <span class="text-[12px] text-slate-600 font-mono">USDT</span>
-        </div>
-      </div>
-
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>可用保证金 (Available)</span>
-          <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        </div>
-        <div class="flex items-baseline gap-1 mt-1.5">
-          <span id="accountAvailable" class="text-lg font-bold font-mono text-blue-600">$1,000.00</span>
-          <span class="text-[12px] text-slate-600 font-mono">USDT</span>
+        <div class="flex items-baseline gap-1 mt-1.5" data-page-node-id="eYJyS5MkYaA8QcwWqSFQDH">
+          <span id="accountEquity" class="text-lg font-bold font-mono text-slate-900" data-page-node-id="onViITvB29JRXxGwjuBiVY">$1,000.00</span>
+          <span class="text-[12px] text-slate-600 font-mono" data-page-node-id="SzAcYPnFUEZy5gUDaEGG8W">USDT</span>
         </div>
       </div>
 
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>未实现盈亏 (Unrealized)</span>
-          <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between" data-page-node-id="eJ4pWSUnt9xdlx8Lsdd4Vh">
+        <div class="flex items-center justify-between text-slate-700 font-semibold" data-page-node-id="MWsSC49EBVGHvgpg5BQa7c">
+          <span data-page-node-id="dgXBRzEdVteWXFinjGEIiO">可用保证金 (Available)</span>
+          <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="OdjWta5TnL4dLRAn29zAP5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" data-page-node-id="bjcHBy4Pqn3QlCXa0MZkaf"></path></svg>
         </div>
-        <div class="flex items-baseline gap-1.5 mt-1.5">
-          <span id="accountUnrealizedPnL" class="text-lg font-bold font-mono text-slate-800">$0.00</span>
-          <span id="accountUnrealizedRate" class="text-[12px] font-mono text-slate-700 font-semibold">(0.00%)</span>
-        </div>
-      </div>
-
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>已实现累计净利润</span>
-          <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-        </div>
-        <div class="flex items-baseline gap-1 mt-1.5">
-          <span id="accountRealizedPnL" class="text-lg font-bold font-mono text-slate-800">$0.00</span>
-          <span id="accountRoi" class="text-[12px] font-mono text-slate-700 font-semibold">(0.00%)</span>
+        <div class="flex items-baseline gap-1 mt-1.5" data-page-node-id="diQA8BPQMD3bNPlDVaQIg3">
+          <span id="accountAvailable" class="text-lg font-bold font-mono text-blue-600" data-page-node-id="BlcvO4lS2jsKCrNFQhc4yZ">$1,000.00</span>
+          <span class="text-[12px] text-slate-600 font-mono" data-page-node-id="fccaeFK5hi7ejQTIuaYPuL">USDT</span>
         </div>
       </div>
 
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>策略执行参数</span>
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between" data-page-node-id="GSXiOWGBkqtgpAz7wcTmop">
+        <div class="flex items-center justify-between text-slate-700 font-semibold" data-page-node-id="jWDslUjWarMcbLZL31kPRO">
+          <span data-page-node-id="rBS99XTxeY3I66ZJGhkeDU">未实现盈亏 (Unrealized)</span>
+          <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="GbTagtX3NXKnLOwJCBggJR"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" data-page-node-id="yq24NUMXyy2iZzJQnGkXSa"></path></svg>
         </div>
-        <div class="text-[12px] font-mono text-slate-700 mt-1 leading-snug">
-          单仓规模: <span class="font-bold text-slate-900">100 USDT (30X)</span><br>
-          双仓机制: <span class="font-bold text-purple-700">外部仓看外部前高 · 内部仓看内部前高</span>
+        <div class="flex items-baseline gap-1.5 mt-1.5" data-page-node-id="Tq8i6aDOKnM7cZOkTbSQ0h">
+          <span id="accountUnrealizedPnL" class="text-lg font-bold font-mono text-slate-800" data-page-node-id="M2ZEpZADjtyfj25uN7WRz3">$0.00</span>
+          <span id="accountUnrealizedRate" class="text-[12px] font-mono text-slate-700 font-semibold" data-page-node-id="q60LQbg6csZqgGAVlFvYWN">(0.00%)</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between" data-page-node-id="NxJWmthGSRnW66rewmGfIq">
+        <div class="flex items-center justify-between text-slate-700 font-semibold" data-page-node-id="88bwAxRg6pKCS6yylsmAnF">
+          <span data-page-node-id="RA8jiyhKoHvmJcn9YB8wdc">已实现累计净利润</span>
+          <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-page-node-id="3BoBBYx2iqTnugM6S4nBKs"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" data-page-node-id="rAjCGFrtTz3KxyrF2hCMTp"></path></svg>
+        </div>
+        <div class="flex items-baseline gap-1 mt-1.5" data-page-node-id="H48skkopuR6SLrYCESyZBY">
+          <span id="accountRealizedPnL" class="text-lg font-bold font-mono text-slate-800" data-page-node-id="SVfK09d2BbUvelgu5KJIQV">$0.00</span>
+          <span id="accountRoi" class="text-[12px] font-mono text-slate-700 font-semibold" data-page-node-id="t9lBoS6tLlhHm3MtD2MRJh">(0.00%)</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between" data-page-node-id="jSPO7Wdh4wzHgXDPYEJubg">
+        <div class="flex items-center justify-between text-slate-700 font-semibold" data-page-node-id="3qg1fVMjMJlY6LEXH3AHur">
+          <span data-page-node-id="cDDYhJLu77iWO6DHZI89sO">策略执行参数</span>
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" data-page-node-id="vISaQe6F0REOQ1KIOCXK0Y"></span>
+        </div>
+        <div class="text-[12px] font-mono text-slate-700 mt-1 leading-snug" data-page-node-id="Uh8QrLPZv9ZD2IzhsS90Dg">
+          单仓规模: <span class="font-bold text-slate-900" data-page-node-id="pBcDp2yueBR7uBn4BCqZno">100 USDT (30X)</span><br data-page-node-id="uLL2Y0UrqILQ2zv6F9dDw8">
+          双仓机制: <span class="font-bold text-purple-700" data-page-node-id="rwB8cwOsJjMIExvKzj6GqH">外部仓看外部前高 · 内部仓看内部前高</span>
         </div>
       </div>
 
@@ -226,259 +226,259 @@
   </section>
 
   <!-- Main Trading Desk Layout -->
-  <main class="flex-1 max-w-[1780px] w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
+  <main class="flex-1 max-w-[1780px] w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-5 gap-4" data-page-node-id="usgmrsi15QmQmve2Rzzk21">
     
     <!-- Left 3 Columns: High Performance Lightweight Chart -->
-    <div class="lg:col-span-3 flex flex-col gap-3.5">
+    <div class="lg:col-span-3 flex flex-col gap-3.5" data-page-node-id="kTRwcTT2hkbhZhVhn7rHUS">
       
       <!-- Chart Card (Pure White Background) -->
-      <div class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden flex flex-col shadow-xs">
+      <div class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden flex flex-col shadow-xs" data-page-node-id="gLCiyg8neVL01rZGwtGtSE">
         
         <!-- Chart Toolbar (Indicators & View) -->
-        <div class="bg-slate-50/90 border-b border-slate-200/80 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="bg-slate-50/90 border-b border-slate-200/80 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs" data-page-node-id="luXYumvIskHqoEtyn6JYQN">
           
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-bold text-slate-800 text-[12px] uppercase tracking-wider mr-1">双层结构核心图层:</span>
+          <div class="flex items-center gap-2 flex-wrap" data-page-node-id="SMRQuPOZD3hTyeQlpOb2X4">
+            <span class="font-bold text-slate-800 text-[12px] uppercase tracking-wider mr-1" data-page-node-id="PIjeqqzHRz1FwJV79WR9RF">双层结构核心图层:</span>
 
             <!-- 外部结构组 (External) -->
-            <button id="toggleExtStruct" class="indicator-pill active px-2.5 py-1 rounded-lg border border-indigo-300 bg-indigo-50 text-indigo-800 font-bold flex items-center gap-1.5 shadow-2xs" title="外部宏观结构突破线 (BOS/CHoCH)">
-              <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
-              <span>结构线 BOS/CHoCH</span>
+            <button id="toggleExtStruct" class="indicator-pill active px-2.5 py-1 rounded-lg border border-indigo-300 bg-indigo-50 text-indigo-800 font-bold flex items-center gap-1.5 shadow-2xs" title="外部宏观结构突破线 (BOS/CHoCH)" data-page-node-id="3HDvLoAyNXGzISZoYCwbnQ">
+              <span class="w-1.5 h-1.5 rounded-full bg-indigo-600" data-page-node-id="UfgGHC7slixZ0VCaKCmN9N"></span>
+              <span data-page-node-id="vcbo0288zDmeZJ1Nbq567w">结构线 BOS/CHoCH</span>
             </button>
 
-            <button id="toggleExtOB" class="indicator-pill active px-2.5 py-1 rounded-lg border border-emerald-400 bg-emerald-100 text-emerald-900 font-bold flex items-center gap-1.5 shadow-2xs" title="外部主要看涨订单块 (External Major OB)">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-              <span>订单块 OB</span>
+            <button id="toggleExtOB" class="indicator-pill active px-2.5 py-1 rounded-lg border border-emerald-400 bg-emerald-100 text-emerald-900 font-bold flex items-center gap-1.5 shadow-2xs" title="外部主要看涨订单块 (External Major OB)" data-page-node-id="cmweHeKUSVLK37GEBGgghz">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600" data-page-node-id="a0tl3xcm9ptb6ZDJ8tqDOw"></span>
+              <span data-page-node-id="NNGHlxJjYiUDvssqOVyMJ4">订单块 OB</span>
             </button>
 
             <!-- 内部微观组 (Internal: 含内部次级结构突破与内部 OB) -->
-            <button id="toggleIntStruct" class="indicator-pill active px-2.5 py-1 rounded-lg border border-sky-300 bg-sky-50 text-sky-800 font-semibold flex items-center gap-1.5 shadow-2xs" title="内部微观次级结构突破线 (BOS/CHoCH)">
-              <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
-              <span>次级结构</span>
+            <button id="toggleIntStruct" class="indicator-pill active px-2.5 py-1 rounded-lg border border-sky-300 bg-sky-50 text-sky-800 font-semibold flex items-center gap-1.5 shadow-2xs" title="内部微观次级结构突破线 (BOS/CHoCH)" data-page-node-id="8LXVoqWeuoA4tCBtSEzkH6">
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-500" data-page-node-id="Hqr1BEv0WbSFT8XWIP31dF"></span>
+              <span data-page-node-id="NAxfFfy55QEEiYFO8j3TGF">次级结构</span>
             </button>
 
-            <button id="toggleIntOB" class="indicator-pill active px-2.5 py-1 rounded-lg border border-cyan-300 bg-cyan-50 text-cyan-800 font-semibold flex items-center gap-1.5 shadow-2xs" title="内部微观订单块 (Internal Minor OB)">
-              <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
-              <span>微观 OB</span>
+            <button id="toggleIntOB" class="indicator-pill active px-2.5 py-1 rounded-lg border border-cyan-300 bg-cyan-50 text-cyan-800 font-semibold flex items-center gap-1.5 shadow-2xs" title="内部微观订单块 (Internal Minor OB)" data-page-node-id="AjYGgMxr6tCSJEJizHF1bB">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-500" data-page-node-id="I02vReIxxOCB39IYdF6u2Y"></span>
+              <span data-page-node-id="dcMW7JzUBruLFbkhDiYaU7">微观 OB</span>
             </button>
 
             <!-- 均线指标 -->
-            <button id="toggleVegasEMA" class="indicator-pill active px-2.5 py-1 rounded-lg border border-slate-200 bg-white text-blue-700 font-semibold flex items-center gap-1.5 shadow-2xs">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
-              <span>EMA 30</span>
+            <button id="toggleVegasEMA" class="indicator-pill active px-2.5 py-1 rounded-lg border border-slate-200 bg-white text-blue-700 font-semibold flex items-center gap-1.5 shadow-2xs" data-page-node-id="p30bGNKmAx9qifwyBi69o3">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600" data-page-node-id="dNo3XyJR1R7CwcgeFUQy4G"></span>
+              <span data-page-node-id="S8uuDr2bl2Ip7xSYzErKi6">EMA 30</span>
             </button>
           </div>
 
           <!-- K-line Depth & Zoom Controls -->
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2" data-page-node-id="KLc5wYPHrBnTj8JklkN8lf">
             <!-- 深度 K 线数量快捷切换 -->
-            <div class="flex items-center gap-1 bg-slate-100/90 p-0.5 rounded-lg border border-slate-200/80 text-[12px] font-mono">
-              <span class="text-slate-600 px-1 text-[12px] font-sans font-semibold">数量:</span>
-              <button id="btnLimit300" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-800 hover:text-slate-900 font-semibold transition" data-limit="300" title="加载 300 根 15M K线 (~3.1 天)">300</button>
-              <button id="btnLimit500" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-800 hover:text-slate-900 font-semibold transition" data-limit="500" title="加载 500 根 15M K线 (~5.2 天)">500</button>
-              <button id="btnLimit1000" class="btn-kline-limit px-2 py-0.5 rounded-md bg-white text-blue-600 shadow-2xs border border-slate-200/90 font-bold transition active" data-limit="1000" title="加载 1000 根 15M 深度 K线 (~10.4 天)">1000</button>
+            <div class="flex items-center gap-1 bg-slate-100/90 p-0.5 rounded-lg border border-slate-200/80 text-[12px] font-mono" data-page-node-id="d9WpjEzFP1nBrodC0LtrWA">
+              <span class="text-slate-600 px-1 text-[12px] font-sans font-semibold" data-page-node-id="9B9yViGRzLqTEooO892KwV">数量:</span>
+              <button id="btnLimit300" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-800 hover:text-slate-900 font-semibold transition" data-limit="300" title="加载 300 根 15M K线 (~3.1 天)" data-page-node-id="CFWydZXoVhL4FPKMOTnloL">300</button>
+              <button id="btnLimit500" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-800 hover:text-slate-900 font-semibold transition" data-limit="500" title="加载 500 根 15M K线 (~5.2 天)" data-page-node-id="A5UBSQYtEysZBHT0blyQZV">500</button>
+              <button id="btnLimit1000" class="btn-kline-limit px-2 py-0.5 rounded-md bg-white text-blue-600 shadow-2xs border border-slate-200/90 font-bold transition active" data-limit="1000" title="加载 1000 根 15M 深度 K线 (~10.4 天)" data-page-node-id="35POoD2EOLHvUlpYanIVqt">1000</button>
             </div>
 
             <!-- 缩放与自适应 -->
-            <div class="flex items-center gap-1">
-              <button id="btnZoomIn" class="px-2 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 font-mono shadow-2xs font-semibold text-xs" title="放大图表">+</button>
-              <button id="btnZoomOut" class="px-2 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 font-mono shadow-2xs font-semibold text-xs" title="缩小图表">-</button>
-              <button id="btnResetView" class="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 shadow-2xs font-semibold text-xs" title="重置图表视角">重置视角</button>
+            <div class="flex items-center gap-1" data-page-node-id="wBJAF3dxjlebxNAhtPUzhF">
+              <button id="btnZoomIn" class="px-2 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 font-mono shadow-2xs font-semibold text-xs" title="放大图表" data-page-node-id="eZlo9zSFAkLMNn9VpSZciQ">+</button>
+              <button id="btnZoomOut" class="px-2 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 font-mono shadow-2xs font-semibold text-xs" title="缩小图表" data-page-node-id="Hsw9zrcwD3zyCEDSRV3p1C">-</button>
+              <button id="btnResetView" class="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 shadow-2xs font-semibold text-xs" title="重置图表视角" data-page-node-id="qLv5TI5BSFtqJ1yhPxuzRH">重置视角</button>
             </div>
           </div>
 
         </div>
 
         <!-- OHLC Data Strip & Realtime Candlestick Stats -->
-        <div id="chartInfoBar" class="bg-white border-b border-slate-100 px-4 py-2 text-[12px] font-mono text-slate-800 flex flex-wrap items-center gap-3.5">
-          <div>开: <span id="barOpen" class="text-slate-900 font-bold">--</span></div>
-          <div>高: <span id="barHigh" class="text-slate-900 font-bold">--</span></div>
-          <div>低: <span id="barLow" class="text-rose-600 font-bold">--</span></div>
-          <div>收: <span id="barClose" class="text-slate-900 font-bold">--</span></div>
-          <div>量: <span id="barVol" class="text-slate-700 font-semibold">--</span></div>
-          <div>涨跌: <span id="barChange" class="text-slate-900 font-bold">--</span></div>
-          <div class="text-slate-200">|</div>
-          <div>外部波段: <span id="smcExternalTag" class="text-indigo-600 font-bold">Strong Low → Weak High</span></div>
-          <div>外部 0.5 EQ: <span id="barExtEQ" class="text-amber-600 font-bold">--</span></div>
-          <div>外部 OTE: <span id="smcOteStatusTag" class="text-amber-600 font-bold">未触及</span></div>
-          <div>外部 OB: <span id="smcExtObTag" class="text-emerald-600 font-bold">--</span></div>
-          <div class="text-slate-200">|</div>
-          <div>内部结构: <span id="smcInternalTag" class="text-sky-600 font-bold">--</span></div>
-          <div>内部 OTE: <span id="smcIntOteTag" class="text-cyan-600 font-bold">--</span></div>
-          <div>内部 OB: <span id="smcIntObTag" class="text-cyan-600 font-bold">--</span></div>
-          <div class="text-slate-200">|</div>
-          <div>双仓模式: <span id="barDualPosTag" class="text-purple-700 font-bold">允许同时持有两仓</span></div>
-          <div class="text-slate-200">|</div>
-          <div>已载 K 线: <span id="barCandleCount" class="text-blue-700 font-bold font-mono">1000 根 (10.4天)</span></div>
+        <div id="chartInfoBar" class="bg-white border-b border-slate-100 px-4 py-2 text-[12px] font-mono text-slate-800 flex flex-wrap items-center gap-3.5" data-page-node-id="Mny9IbzbjffPu3ZViRJo1g">
+          <div data-page-node-id="vFgBFSlXzEHrhJkEU5MFYA">开: <span id="barOpen" class="text-slate-900 font-bold" data-page-node-id="fC4rKvbFHyw6NPx3rPfW6P">--</span></div>
+          <div data-page-node-id="RQHZa2YBfh732CmQqdjF8N">高: <span id="barHigh" class="text-slate-900 font-bold" data-page-node-id="rYnSNbtbRfu1OfcNuC2wSY">--</span></div>
+          <div data-page-node-id="gd2B1QcL9CirnsFVQfb2VG">低: <span id="barLow" class="text-rose-600 font-bold" data-page-node-id="uGLAtQYmJ7EEDREkI9kI1r">--</span></div>
+          <div data-page-node-id="agTVLdtqIWjZ92PFAcp99i">收: <span id="barClose" class="text-slate-900 font-bold" data-page-node-id="5FhalpT9rvvRnDUxFHCY5H">--</span></div>
+          <div data-page-node-id="Ccwq3TQhSt0YLDkhFWfSoj">量: <span id="barVol" class="text-slate-700 font-semibold" data-page-node-id="GwwV1WT34OU25eGnGqWgVP">--</span></div>
+          <div data-page-node-id="Dz71w8qysqhXhb0FqSS0Op">涨跌: <span id="barChange" class="text-slate-900 font-bold" data-page-node-id="uMPMEdNGLR9AnEqA7xkNSg">--</span></div>
+          <div class="text-slate-200" data-page-node-id="Vse4s0oXaPKz2bwWvRPFPg">|</div>
+          <div data-page-node-id="lxQh2nj5aLsdBCgP1u2fax">外部波段: <span id="smcExternalTag" class="text-indigo-600 font-bold" data-page-node-id="UH0CSataGbJxHzmetxd7Vv">Strong Low → Weak High</span></div>
+          <div data-page-node-id="CUP8pNUfkFjOqbNPXFkYYs">外部 0.5 EQ: <span id="barExtEQ" class="text-amber-600 font-bold" data-page-node-id="YcikIG8iOcP88ihgGXrm8z">--</span></div>
+          <div data-page-node-id="ERKBY4CEmytpAIEDAkRqKZ">外部 OTE: <span id="smcOteStatusTag" class="text-amber-600 font-bold" data-page-node-id="4dOjWS1uMB9xl1fITDK2ue">未触及</span></div>
+          <div data-page-node-id="JWgE8vIuyegNU27Hh5LTno">外部 OB: <span id="smcExtObTag" class="text-emerald-600 font-bold" data-page-node-id="jrHQTOAOGVjCBAjbxtJHFx">--</span></div>
+          <div class="text-slate-200" data-page-node-id="vTSK7IzgLNlsi4IVXDBlcP">|</div>
+          <div data-page-node-id="Lp386f9kwE3aFjmb8p0VhY">内部结构: <span id="smcInternalTag" class="text-sky-600 font-bold" data-page-node-id="AaOzk6Cz6EBdmKWZiimtKs">--</span></div>
+          <div data-page-node-id="LHGw5IizCKXFVNk4GTJSTZ">内部 OTE: <span id="smcIntOteTag" class="text-cyan-600 font-bold" data-page-node-id="qlixTPPluPxDswIDrPK8JR">--</span></div>
+          <div data-page-node-id="HUf2NrQhRxInlUtkZtHeS3">内部 OB: <span id="smcIntObTag" class="text-cyan-600 font-bold" data-page-node-id="QNk3kq703QLr4zoM4XmUhG">--</span></div>
+          <div class="text-slate-200" data-page-node-id="7Bda1a0UzbBdP8MZb0X2lX">|</div>
+          <div data-page-node-id="pkd3dmer9ZkYVLASmk5v4O">双仓模式: <span id="barDualPosTag" class="text-purple-700 font-bold" data-page-node-id="1TG2bw4iVpfMWlu076sKvu">允许同时持有两仓</span></div>
+          <div class="text-slate-200" data-page-node-id="KUK5bmUVtWNwROJCr81hjv">|</div>
+          <div data-page-node-id="vU274a9MDwu4b6EWQO1jL2">已载 K 线: <span id="barCandleCount" class="text-blue-700 font-bold font-mono" data-page-node-id="aibPpn5jVSg3F9zW7X1THf">1000 根 (10.4天)</span></div>
         </div>
 
         <!-- Chart Container: Pure White Canvas -->
-        <div class="relative w-full h-[520px] bg-white overflow-hidden select-none">
-          <div id="tvChartContainer" class="w-full h-full bg-white"></div>
-          <canvas id="smcCanvas" class="absolute inset-0 pointer-events-none z-10"></canvas>
+        <div class="relative w-full h-[520px] bg-white overflow-hidden select-none" data-page-node-id="NoESsGzpc21uYkKE4uNVSH">
+          <div id="tvChartContainer" class="w-full h-full bg-white" data-page-node-id="nJgBSMRyhhNuOnQDL2oUBF"></div>
+          <canvas id="smcCanvas" class="absolute inset-0 pointer-events-none z-10" data-page-node-id="mRqfZANVOifKxj2DMX9gdP"></canvas>
           
           <!-- Loading overlay -->
-          <div id="chartLoading" class="absolute inset-0 bg-white/80 backdrop-blur-xs flex flex-col items-center justify-center gap-2.5 z-30 hidden">
-            <div class="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            <span class="text-xs text-slate-700 font-mono font-semibold">从 Binance 实时拉取 ETH 15M 深度 K 线中...</span>
+          <div id="chartLoading" class="absolute inset-0 bg-white/80 backdrop-blur-xs flex flex-col items-center justify-center gap-2.5 z-30 hidden" data-page-node-id="dzaA2Hjyc3sE1wcH22IUBX">
+            <div class="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin" data-page-node-id="HI9SuucvxDx9DFUR3PZOoN"></div>
+            <span class="text-xs text-slate-700 font-mono font-semibold" data-page-node-id="7lJbuSxyUExHx1WbWBRGkZ">从 Binance 实时拉取 ETH 15M 深度 K 线中...</span>
           </div>
 
           <!-- Position HUD floating card on chart -->
-          <div id="chartPositionHud" class="absolute top-3 left-3 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl p-3 text-[12px] font-mono pointer-events-none hidden shadow-lg z-20">
-            <div class="flex items-center gap-2 mb-2">
-              <span id="hudPosType" class="px-2 py-0.5 rounded text-[12px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">LONG</span>
-              <span class="text-slate-900 font-bold">ETH/USDT 30X (15M 全自动持仓)</span>
+          <div id="chartPositionHud" class="absolute top-3 left-3 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl p-3 text-[12px] font-mono pointer-events-none hidden shadow-lg z-20" data-page-node-id="ljEFCVeoB5x5bwuYbRzREu">
+            <div class="flex items-center gap-2 mb-2" data-page-node-id="cr8ReeS2KeifsPN5mfkNIc">
+              <span id="hudPosType" class="px-2 py-0.5 rounded text-[12px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200" data-page-node-id="8gdOBEziHCfhIGAt0HMSLJ">LONG</span>
+              <span class="text-slate-900 font-bold" data-page-node-id="NswmdX45n4ZXWrfmHABD5K">ETH/USDT 30X (15M 全自动持仓)</span>
             </div>
-            <div class="grid grid-cols-2 gap-x-5 gap-y-1 text-slate-700 text-[12px]">
-              <div>开仓均价: <span id="hudEntryPrice" class="text-slate-900 font-bold">$0.00</span></div>
-              <div>未结盈亏: <span id="hudPnL" class="text-emerald-600 font-bold">+$0.00</span></div>
-              <div>策略止损 (SL): <span id="hudSLPrice" class="text-rose-600 font-bold">$0.00</span></div>
-              <div>前高止盈 (TP): <span id="hudTPPrice" class="text-emerald-600 font-bold">$0.00</span></div>
-              <div>强平预估: <span id="hudLiqPrice" class="text-purple-600 font-bold">$0.00</span></div>
-              <div>收益率 (ROE): <span id="hudRoe" class="text-emerald-600 font-bold">+0.00%</span></div>
+            <div class="grid grid-cols-2 gap-x-5 gap-y-1 text-slate-700 text-[12px]" data-page-node-id="uG3G7YG6pzrgk2GR3Mm0dZ">
+              <div data-page-node-id="QfCITZPrCBGW8CaB4AHZke">开仓均价: <span id="hudEntryPrice" class="text-slate-900 font-bold" data-page-node-id="TLZi1cbLI0DgteLCJPYVQU">$0.00</span></div>
+              <div data-page-node-id="tcI8XzQQ2oqZLUoT3CzZDN">未结盈亏: <span id="hudPnL" class="text-emerald-600 font-bold" data-page-node-id="YR9CUVqwsH2bEOS96Qhes9">+$0.00</span></div>
+              <div data-page-node-id="TjOCMbleTP3DHwPqLu8g1o">策略止损 (SL): <span id="hudSLPrice" class="text-rose-600 font-bold" data-page-node-id="4f9nDnlDNQo7kvw5EOaNMu">$0.00</span></div>
+              <div data-page-node-id="iEQGYAWSVGv1nvUSMITZrR">前高止盈 (TP): <span id="hudTPPrice" class="text-emerald-600 font-bold" data-page-node-id="1jn3Ik20gMeVsLeEY6hXEZ">$0.00</span></div>
+              <div data-page-node-id="MIEwV3BPeRZHiYmnnD2gNS">强平预估: <span id="hudLiqPrice" class="text-purple-600 font-bold" data-page-node-id="RI8ROWI0VfSoVZ3YF5zzfT">$0.00</span></div>
+              <div data-page-node-id="ckQVPiUhHkOlJRcabtdG76">收益率 (ROE): <span id="hudRoe" class="text-emerald-600 font-bold" data-page-node-id="UsshWENEShmIVuzvXDISoc">+0.00%</span></div>
             </div>
           </div>
         </div>
 
         <!-- Chart Legend & Indicator Guide -->
-        <div class="bg-slate-50/80 px-4 py-2.5 border-t border-slate-200/80 flex flex-wrap items-center gap-4 text-[12px] text-slate-800 font-semibold">
-          <span class="flex items-center gap-1.5"><span class="w-3.5 h-0.5 bg-blue-600"></span> EMA 30 核心均线</span>
-          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-white border border-slate-800"></span> 涨: 淡白 K 线 (立体描边)</span>
-          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-rose-500"></span> 跌: 红色 K 线</span>
-          <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-emerald-600"></span><span class="w-3 h-0.5 bg-rose-600 -ml-1"></span> 外部结构 (BOS/CHoCH · 涨绿/空红)</span>
-          <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-cyan-600 border-t border-dashed"></span> 内部结构 (Internal 虚线)</span>
-          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-emerald-100 border border-emerald-500"></span> 未穿透有效 OB 订单块</span>
-          <span class="text-slate-600 font-mono">[注: 止盈、止损、进场均价与 OTE 黄金带默认后台全自动执行，主图免标注保极简]</span>
+        <div class="bg-slate-50/80 px-4 py-2.5 border-t border-slate-200/80 flex flex-wrap items-center gap-4 text-[12px] text-slate-800 font-semibold" data-page-node-id="kYJwmnsFBjKNKh78pL9pfE">
+          <span class="flex items-center gap-1.5" data-page-node-id="K6XMI73DeFo8qZOoAKPDk1"><span class="w-3.5 h-0.5 bg-blue-600" data-page-node-id="FCbhvFr0Afw3nljPt7GQkc"></span> EMA 30 核心均线</span>
+          <span class="flex items-center gap-1.5" data-page-node-id="DB4eUP34bfIAJo1ZcGmYuU"><span class="w-2.5 h-2.5 rounded bg-white border border-slate-800" data-page-node-id="GOuAniDFjIQLzYP7VD6pvU"></span> 涨: 淡白 K 线 (立体描边)</span>
+          <span class="flex items-center gap-1.5" data-page-node-id="TPjOEUj9WVwBNJCURVjwjO"><span class="w-2.5 h-2.5 rounded bg-rose-500" data-page-node-id="hcnDTuH84bfi70rP7JiNSH"></span> 跌: 红色 K 线</span>
+          <span class="flex items-center gap-1.5" data-page-node-id="KEz5gwZBy7PYbyMWSJN1zK"><span class="w-3 h-0.5 bg-emerald-600" data-page-node-id="buUxPdNMTi1RqyCIBb22ao"></span><span class="w-3 h-0.5 bg-rose-600 -ml-1" data-page-node-id="PPVbVqpAUNmQCNFSgPb2Sm"></span> 外部结构 (BOS/CHoCH · 涨绿/空红)</span>
+          <span class="flex items-center gap-1.5" data-page-node-id="GpY3y6iFjDvyxrxArGRAyK"><span class="w-3 h-0.5 bg-cyan-600 border-t border-dashed" data-page-node-id="eskBRx6QFLkWpt5pcDMWde"></span> 内部结构 (Internal 虚线)</span>
+          <span class="flex items-center gap-1.5" data-page-node-id="jSfPpMAOYb8ztA2meW8UU7"><span class="w-2.5 h-2.5 rounded bg-emerald-100 border border-emerald-500" data-page-node-id="CfkdyXgCto8NfaeIwfCwrB"></span> 未穿透有效 OB 订单块</span>
+          <span class="text-slate-600 font-mono" data-page-node-id="BVkRHbl0N4nuNlB2d1HUTs">[注: 止盈、止损、进场均价与 OTE 黄金带默认后台全自动执行，主图免标注保极简]</span>
         </div>
 
       </div>
 
       <!-- Execution Panel: Active Positions, History & Algorithm Metrics -->
-      <div class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden flex flex-col shadow-xs">
+      <div class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden flex flex-col shadow-xs" data-page-node-id="9apeoCJL3Kct8DsIavrTdZ">
         
         <!-- Tabs -->
-        <div class="bg-slate-50/90 border-b border-slate-200/80 flex items-center justify-between px-4 text-xs">
-          <div class="flex items-center gap-2">
-            <button id="tab-positions" class="tab-btn py-3 px-3.5 border-b-2 border-blue-600 text-blue-600 font-bold flex items-center gap-2 transition">
-              <span>当前策略持仓</span>
-              <span id="badgeOpenPositions" class="px-2 py-0.2 rounded-full text-[12px] bg-blue-100 text-blue-700 font-mono font-bold">0</span>
+        <div class="bg-slate-50/90 border-b border-slate-200/80 flex items-center justify-between px-4 text-xs" data-page-node-id="2HgtKoNjuyyAcK7oIcoQN9">
+          <div class="flex items-center gap-2" data-page-node-id="FNTFCDGAR7B6mW3tlN3cNe">
+            <button id="tab-positions" class="tab-btn py-3 px-3.5 border-b-2 border-blue-600 text-blue-600 font-bold flex items-center gap-2 transition" data-page-node-id="2AGHCMsiwDI2ZAgnMDCzFD">
+              <span data-page-node-id="e9b11Q87UfeVkQAM5bSP4R">当前策略持仓</span>
+              <span id="badgeOpenPositions" class="px-2 py-0.2 rounded-full text-[12px] bg-blue-100 text-blue-700 font-mono font-bold" data-page-node-id="ZMqwpSwB3ziMeGo6EPdfjf">0</span>
             </button>
-            <button id="tab-history" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold flex items-center gap-2 transition">
-              <span>自动平仓历史 (TP / SL)</span>
-              <span id="badgeHistoryTrades" class="px-2 py-0.2 rounded-full text-[12px] bg-slate-200 text-slate-800 font-mono font-bold">0</span>
+            <button id="tab-history" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold flex items-center gap-2 transition" data-page-node-id="DrAX93uEKCZj8NRfuQpGzY">
+              <span data-page-node-id="MHkGxh7DZ7AWiJHyecVrwH">自动平仓历史 (TP / SL)</span>
+              <span id="badgeHistoryTrades" class="px-2 py-0.2 rounded-full text-[12px] bg-slate-200 text-slate-800 font-mono font-bold" data-page-node-id="1CIqatX4E5fEUsnvQTV4Mx">0</span>
             </button>
-            <button id="tab-stats" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold transition">
-              <span>实盘绩效统计</span>
+            <button id="tab-stats" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold transition" data-page-node-id="jBjKsn3Ui9UGK42vAsiQwc">
+              <span data-page-node-id="QmxMfZJ1k22cPp6rGm07HA">实盘绩效统计</span>
             </button>
-            <button id="tab-guide" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold transition">
-              <span>策略执行原则</span>
+            <button id="tab-guide" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold transition" data-page-node-id="hwWUfx3MafBXMHaIdXcEsc">
+              <span data-page-node-id="sRZUtlz2RF0H7BRGaqYTBi">策略执行原则</span>
             </button>
           </div>
 
-          <div class="text-[12px] text-slate-700 font-mono hidden sm:block">
+          <div class="text-[12px] text-slate-700 font-mono hidden sm:block" data-page-node-id="lsSJz8VUphCMtREPsNmW1B">
             全自动进退场模式 · 严格前高止盈 · 无人工平仓干预
           </div>
         </div>
 
         <!-- Panel 1: Current Automated Positions (NO manual close buttons) -->
-        <div id="panel-positions" class="p-4 text-xs overflow-x-auto min-h-[140px]">
-          <div id="emptyPositionsNotice" class="py-9 text-center text-slate-600 font-mono text-xs">
+        <div id="panel-positions" class="p-4 text-xs overflow-x-auto min-h-[140px]" data-page-node-id="4JiAMYbpYjC24A9511AYwj">
+          <div id="emptyPositionsNotice" class="py-9 text-center text-slate-600 font-mono text-xs" data-page-node-id="8RvLt07wUhDekRTsMide2m">
             🤖 策略引擎运行中：监控 15M 外部 OTE 回撤与内部微观结构。触及买点将全自动建仓，并严格在前高止盈或 OB 防守止损。
           </div>
-          <table id="tablePositions" class="w-full text-left font-mono text-[12px] hidden">
-            <thead>
-              <tr class="text-slate-600 border-b border-slate-200/80 pb-2 text-[12px] uppercase tracking-wider font-semibold">
-                <th class="py-2 px-2.5">标的/方向</th>
-                <th class="py-2 px-2.5">持仓数量</th>
-                <th class="py-2 px-2.5">开仓均价</th>
-                <th class="py-2 px-2.5">当前标记价</th>
-                <th class="py-2 px-2.5">前高止盈 (TP)</th>
-                <th class="py-2 px-2.5">保护止损 (SL)</th>
-                <th class="py-2 px-2.5">占用保证金</th>
-                <th class="py-2 px-2.5">未结盈亏 (ROE%)</th>
+          <table id="tablePositions" class="w-full text-left font-mono text-[12px] hidden" data-page-node-id="xVUIHHyvEueITGWB3qP8CN">
+            <thead data-page-node-id="hb73TUrKHQqjY8CXMH9aur">
+              <tr class="text-slate-600 border-b border-slate-200/80 pb-2 text-[12px] uppercase tracking-wider font-semibold" data-page-node-id="Hs8LlIV1n24mOyBTzHy78J">
+                <th class="py-2 px-2.5" data-page-node-id="x9mi5rMBCw2CQfpSnGzA7x">标的/方向</th>
+                <th class="py-2 px-2.5" data-page-node-id="mx8nPJH2yf6Bjvn2RQ6JXD">持仓数量</th>
+                <th class="py-2 px-2.5" data-page-node-id="THAafY9m8jQpKVtY4NG5j6">开仓均价</th>
+                <th class="py-2 px-2.5" data-page-node-id="HB9h57TSyLediLUzyQ789F">当前标记价</th>
+                <th class="py-2 px-2.5" data-page-node-id="5FJ6Lg2KU4mBflADAcMNER">前高止盈 (TP)</th>
+                <th class="py-2 px-2.5" data-page-node-id="yGzjWjYVMdXZvbHFBUq8QO">保护止损 (SL)</th>
+                <th class="py-2 px-2.5" data-page-node-id="XkirIMfDBnFraTOQ2Hcw5r">占用保证金</th>
+                <th class="py-2 px-2.5" data-page-node-id="sprWO95sys336QPo903zD4">未结盈亏 (ROE%)</th>
                 
               </tr>
             </thead>
-            <tbody id="tbodyPositions" class="divide-y divide-slate-100">
+            <tbody id="tbodyPositions" class="divide-y divide-slate-100" data-page-node-id="l5nKF4amlVPaVmgYDPfrAN">
               <!-- Dynamically rendered -->
             </tbody>
           </table>
         </div>
 
         <!-- Panel 2: Trade History (Closed strictly by strategy) -->
-        <div id="panel-history" class="p-4 text-xs overflow-x-auto min-h-[140px] hidden">
-          <div id="emptyHistoryNotice" class="py-9 text-center text-slate-600 font-mono text-xs">
+        <div id="panel-history" class="p-4 text-xs overflow-x-auto min-h-[140px] hidden" data-page-node-id="dTVx6wrAoNRjMabbB155Pz">
+          <div id="emptyHistoryNotice" class="py-9 text-center text-slate-600 font-mono text-xs" data-page-node-id="nVJbpyrX34BnjSG0RjosGv">
             暂无已平仓历史记录。
           </div>
-          <table id="tableHistory" class="w-full text-left font-mono text-[12px] hidden">
-            <thead>
-              <tr class="text-slate-600 border-b border-slate-200/80 pb-2 text-[12px] uppercase tracking-wider font-semibold">
-                <th class="py-2 px-2.5">触发时间</th>
-                <th class="py-2 px-2.5">标的/杠杆</th>
-                <th class="py-2 px-2.5">开仓价</th>
-                <th class="py-2 px-2.5">平仓价</th>
-                <th class="py-2 px-2.5">自动触发原因</th>
-                <th class="py-2 px-2.5 text-right">实现盈亏 (USDT)</th>
+          <table id="tableHistory" class="w-full text-left font-mono text-[12px] hidden" data-page-node-id="eY5BzAQNSOxycVHYA57ExT">
+            <thead data-page-node-id="czH8e7kjFX1p1Ylj7BvYDw">
+              <tr class="text-slate-600 border-b border-slate-200/80 pb-2 text-[12px] uppercase tracking-wider font-semibold" data-page-node-id="z50lvlMMTT98iNPLIjx55Q">
+                <th class="py-2 px-2.5" data-page-node-id="ew8rQfEt4LtZtTSv1jR1cL">触发时间</th>
+                <th class="py-2 px-2.5" data-page-node-id="ruSXPE1oKJtC3MEaMi2Jk7">标的/杠杆</th>
+                <th class="py-2 px-2.5" data-page-node-id="8BKlCk5n3FNfJUgyDMrOEn">开仓价</th>
+                <th class="py-2 px-2.5" data-page-node-id="Hgg9lEAgpZI8OQs55ZE5NT">平仓价</th>
+                <th class="py-2 px-2.5" data-page-node-id="JVWPePeleNsedWWz5qe9AV">自动触发原因</th>
+                <th class="py-2 px-2.5 text-right" data-page-node-id="Z8SWgKVftieRjSdwZC1s5d">实现盈亏 (USDT)</th>
               </tr>
             </thead>
-            <tbody id="tbodyHistory" class="divide-y divide-slate-100">
+            <tbody id="tbodyHistory" class="divide-y divide-slate-100" data-page-node-id="cDHpu5UWgI5LI247SvvkEl">
               <!-- Dynamically rendered -->
             </tbody>
           </table>
         </div>
 
         <!-- Panel 3: Performance Stats -->
-        <div id="panel-stats" class="p-5 text-xs hidden">
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono">
-            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold">策略总胜率</div>
-              <div id="statWinRate" class="text-xl font-bold text-emerald-600 mt-1">0.0%</div>
-              <div class="text-[12px] text-slate-600 mt-0.5"><span id="statWinCount">0</span> 胜 / <span id="statLossCount">0</span> 负</div>
+        <div id="panel-stats" class="p-5 text-xs hidden" data-page-node-id="InQEfRJEhP81ZbRAUyxLps">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono" data-page-node-id="BBOLcHZV3OqJJzTjimKF3i">
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5" data-page-node-id="FHiNBcTpIePuSBrNt32bAM">
+              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold" data-page-node-id="BGFfOEgdCDcyyDFRFvHuSy">策略总胜率</div>
+              <div id="statWinRate" class="text-xl font-bold text-emerald-600 mt-1" data-page-node-id="rzqetoAM25ZsMQrZjVQ1QA">0.0%</div>
+              <div class="text-[12px] text-slate-600 mt-0.5" data-page-node-id="7SzD7vae0QCeJBJ8qzUWox"><span id="statWinCount" data-page-node-id="qtz3y9AAktgHH6QhVrUrAW">0</span> 胜 / <span id="statLossCount" data-page-node-id="Rmyf3JCMM9VK19wWXue53a">0</span> 负</div>
             </div>
-            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold">累计净利润</div>
-              <div id="statNetProfit" class="text-xl font-bold text-slate-800 mt-1">$0.00</div>
-              <div class="text-[12px] text-slate-600 mt-0.5">本金 1,000.00 USDT</div>
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5" data-page-node-id="FpB9D7xbeOR3J3ZcUJL5Gg">
+              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold" data-page-node-id="vfmJKG6o6QaSqOVS3KKag1">累计净利润</div>
+              <div id="statNetProfit" class="text-xl font-bold text-slate-800 mt-1" data-page-node-id="Lga76hCZMJF8y8E76YtDt1">$0.00</div>
+              <div class="text-[12px] text-slate-600 mt-0.5" data-page-node-id="7LM1620R6Hxc1O4Tj4UuC9">本金 1,000.00 USDT</div>
             </div>
-            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold">盈亏比 (Profit Factor)</div>
-              <div id="statProfitFactor" class="text-xl font-bold text-blue-600 mt-1">0.00</div>
-              <div class="text-[12px] text-slate-600 mt-0.5">毛盈利 / 毛亏损</div>
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5" data-page-node-id="mxGzUeHVK0YBCwSYUXLwsB">
+              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold" data-page-node-id="GkMrENcUFybodQdPevcXuH">盈亏比 (Profit Factor)</div>
+              <div id="statProfitFactor" class="text-xl font-bold text-blue-600 mt-1" data-page-node-id="6dOwMh3OXOMBM4CA13jjRN">0.00</div>
+              <div class="text-[12px] text-slate-600 mt-0.5" data-page-node-id="bkrwF0jWW6nHFth4yj7tMm">毛盈利 / 毛亏损</div>
             </div>
-            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold">最大回撤率</div>
-              <div id="statMaxDrawdown" class="text-xl font-bold text-rose-600 mt-1">0.0%</div>
-              <div class="text-[12px] text-slate-600 mt-0.5">从最高权益回撤</div>
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5" data-page-node-id="BSLXn7T7Ymk6B9FudSns9w">
+              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold" data-page-node-id="aZpZ3qEjcrjUFIyvlAeFr9">最大回撤率</div>
+              <div id="statMaxDrawdown" class="text-xl font-bold text-rose-600 mt-1" data-page-node-id="oG416ufCS4CxyPcFThUeLr">0.0%</div>
+              <div class="text-[12px] text-slate-600 mt-0.5" data-page-node-id="CaQfSef0ubKQ5HDH2dKC1g">从最高权益回撤</div>
             </div>
           </div>
         </div>
 
         <!-- Panel 4: Strategy Guide -->
-        <div id="panel-guide" class="p-5 text-xs hidden leading-relaxed space-y-3">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-slate-700">
-            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <h4 class="font-bold text-indigo-700 mb-1 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-indigo-600"></span> 1. 外部 OTE 进场逻辑
+        <div id="panel-guide" class="p-5 text-xs hidden leading-relaxed space-y-3" data-page-node-id="Z88FVNIhYBJxnaUiNsi9Sa">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-slate-700" data-page-node-id="2MIlcU4ilPBn0iPZjWwbkj">
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5" data-page-node-id="ziTy8wQtklr3TkpHFvyIfm">
+              <h4 class="font-bold text-indigo-700 mb-1 flex items-center gap-1.5" data-page-node-id="yA444SbEhvsKWsVdfZDGN9">
+                <span class="w-2 h-2 rounded-full bg-indigo-600" data-page-node-id="qTufHIDe5FczHA9hETurXH"></span> 1. 外部 OTE 进场逻辑
               </h4>
-              <p class="text-[12px] text-slate-800">
-                以 15M 外部摆动波段为基准，测算黄金回撤带 (0.618 - 0.786)。当价格回撤至外部 OTE 黄金带时触发外部进场，<strong>默认止盈直接锁定外部前高</strong>！
+              <p class="text-[12px] text-slate-800" data-page-node-id="H63hiWOQUaTK6k2Z4rycQv">
+                以 15M 外部摆动波段为基准，测算黄金回撤带 (0.618 - 0.786)。当价格回撤至外部 OTE 黄金带时触发外部进场，<strong data-page-node-id="cvPEFrkZhEqtBFdQl7Ddf7">默认止盈直接锁定外部前高</strong>！
               </p>
             </div>
 
-            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <h4 class="font-bold text-cyan-700 mb-1 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-cyan-600"></span> 2. 内部结构进场逻辑
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5" data-page-node-id="PPJIags0LcVWaVxxrYwm8E">
+              <h4 class="font-bold text-cyan-700 mb-1 flex items-center gap-1.5" data-page-node-id="O4v9MEnDwqpHKBcHjY41y8">
+                <span class="w-2 h-2 rounded-full bg-cyan-600" data-page-node-id="LGHyqN3XaX5ZqADYBWv3dd"></span> 2. 内部结构进场逻辑
               </h4>
-              <p class="text-[12px] text-slate-800">
-                以 15M 内部微观波段 (leg 5) 为基准，当内部形成 CHoCH/BOS 反转并回踩内部看涨 OB 时触发内部进场，<strong>默认止盈直接锁定内部前高</strong>！
+              <p class="text-[12px] text-slate-800" data-page-node-id="fNGTTW0TVxTmDs1f2Lq1vd">
+                以 15M 内部微观波段 (leg 5) 为基准，当内部形成 CHoCH/BOS 反转并回踩内部看涨 OB 时触发内部进场，<strong data-page-node-id="7NS5RU1YiCxIdjh6ato50O">默认止盈直接锁定内部前高</strong>！
               </p>
             </div>
 
-            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <h4 class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-600"></span> 3. 100% 自动止盈止损
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5" data-page-node-id="g9jgVBQNofFaWwZm8PbXl5">
+              <h4 class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5" data-page-node-id="NjkOeMRRWmKJp2HlRqh4CY">
+                <span class="w-2 h-2 rounded-full bg-emerald-600" data-page-node-id="rCUMjpVoeB51poKIjwm4fq"></span> 3. 100% 自动止盈止损
               </h4>
-              <p class="text-[12px] text-slate-800">
+              <p class="text-[12px] text-slate-800" data-page-node-id="21egbdHhobULiXCHUk7EVn">
                 系统全自动判定开平仓，取消任何人工平仓按钮与金额重置。止盈严格锁定前高，止损紧贴 OB 下沿保护，执行纪律 100% 机械化。
               </p>
             </div>
@@ -490,150 +490,150 @@
     </div>
 
     <!-- Right 1 Column: Strategy Monitor & Decision Hub -->
-    <div class="lg:col-span-2 flex flex-col gap-3.5">
+    <div class="lg:col-span-2 flex flex-col gap-3.5" data-page-node-id="EooGiB4oEYqC9ACzZzoYcz">
       
       <!-- 15M SMC Structure & OTE Radar -->
-      <div id="panel-smc-radar" class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-3.5">
+      <div id="panel-smc-radar" class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-3.5" data-page-node-id="utph3Dl74duffpV7XxQjoq">
         
-        <div class="flex items-center justify-between border-b border-slate-200/80 pb-2.5">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-            <h3 class="font-extrabold text-slate-900 text-xs tracking-tight">15M SMC 结构与 OTE 雷达</h3>
+        <div class="flex items-center justify-between border-b border-slate-200/80 pb-2.5" data-page-node-id="hecJhjbCuTFm8T33H10rQR">
+          <div class="flex items-center gap-2" data-page-node-id="BA8IphbX0B0Mthd6zIuJV9">
+            <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse" data-page-node-id="5xlEcdjoCDFERGyMWvLaKl"></span>
+            <h3 class="font-extrabold text-slate-900 text-xs tracking-tight" data-page-node-id="TJsJKwGiVkeNu2Ef2hENIB">15M SMC 结构与 OTE 雷达</h3>
           </div>
-          <span class="text-[12px] px-2 py-0.5 rounded-full font-mono font-bold badge-soft-blue">
+          <span class="text-[12px] px-2 py-0.5 rounded-full font-mono font-bold badge-soft-blue" data-page-node-id="njgm2HY16hSMa8FGPPYj1C">
             15M PURE
           </span>
         </div>
 
         <!-- 15M 外部宏观结构与交易区间 (External Structure & Dealing Range) -->
-        <div class="bg-slate-50/90 border border-indigo-200/80 rounded-xl p-3.5 text-[12px] space-y-2.5 shadow-2xs">
-          <div class="flex items-center justify-between font-bold border-b border-indigo-100 pb-2">
-            <span class="text-indigo-900 flex items-center gap-1.5 font-bold">
-              <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> 15M 外部宏观结构 (External)
+        <div class="bg-slate-50/90 border border-indigo-200/80 rounded-xl p-3.5 text-[12px] space-y-2.5 shadow-2xs" data-page-node-id="w6n4ud3fewYCL3pGsCPPNM">
+          <div class="flex items-center justify-between font-bold border-b border-indigo-100 pb-2" data-page-node-id="uHVBr53uQBrEgWqvW4XnkO">
+            <span class="text-indigo-900 flex items-center gap-1.5 font-bold" data-page-node-id="LdUO4Xk1FYZSRSnqKUE9up">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-600" data-page-node-id="ZXj3z44rbOizaENWY1OP5D"></span> 15M 外部宏观结构 (External)
             </span>
-            <span id="mtfSwingTrend" class="font-mono text-indigo-700 font-bold px-1.5 py-0.5 rounded bg-indigo-100/80">Strong Low → Weak High</span>
+            <span id="mtfSwingTrend" class="font-mono text-indigo-700 font-bold px-1.5 py-0.5 rounded bg-indigo-100/80" data-page-node-id="egVhlDcoBX84sHJP0yGdTp">Strong Low → Weak High</span>
           </div>
 
           <!-- 外部高低点核心段 -->
-          <div class="space-y-1.5 font-mono text-[12px]">
-            <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2">
-              <span class="text-emerald-700 font-bold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> 外部 Strong Low:
+          <div class="space-y-1.5 font-mono text-[12px]" data-page-node-id="Y1rfU4gFlEly0iWGGQduyo">
+            <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2" data-page-node-id="dZv6PFdbLsw15RHpGGGObH">
+              <span class="text-emerald-700 font-bold flex items-center gap-1" data-page-node-id="EJ4JfJKnzf479FmDgRojwB">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600" data-page-node-id="WkR3YAB1SHQ94VMzgmkQwy"></span> 外部 Strong Low:
               </span>
-              <span id="statExtStrongLow" class="text-emerald-700 font-bold text-[12px]">$2,630.00</span>
+              <span id="statExtStrongLow" class="text-emerald-700 font-bold text-[12px]" data-page-node-id="fW28pUkgJ23g80qez05yH6">$2,630.00</span>
             </div>
             
-            <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2">
-              <span class="text-blue-700 font-bold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span> 外部 Weak High:
+            <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2" data-page-node-id="BFpyE7uVodcBnTNloK1AEq">
+              <span class="text-blue-700 font-bold flex items-center gap-1" data-page-node-id="CcoR8nXpU1dZuqCcb3qbhP">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600" data-page-node-id="O1H0p7928fRLX35Hxh3PYb"></span> 外部 Weak High:
               </span>
-              <span id="statExtWeakHigh" class="text-blue-700 font-bold text-[12px]">$2,695.00</span>
+              <span id="statExtWeakHigh" class="text-blue-700 font-bold text-[12px]" data-page-node-id="oJmB3Yqq6LmT35Sto7OJD7">$2,695.00</span>
             </div>
 
-            <div class="flex justify-between text-slate-700 px-1">
-              <span>外部结构段跨度 (Range):</span>
-              <span id="statExtRangeSpan" class="text-slate-800 font-semibold">$65.00 USDT</span>
+            <div class="flex justify-between text-slate-700 px-1" data-page-node-id="7JCxTXEoJ1Fk4w11PbOxTJ">
+              <span data-page-node-id="IkoO7csSC28SQckV3GYOAL">外部结构段跨度 (Range):</span>
+              <span id="statExtRangeSpan" class="text-slate-800 font-semibold" data-page-node-id="dhwowL2whcvmZh07Z7KQ8h">$65.00 USDT</span>
             </div>
 
-            <div class="flex justify-between border-t border-slate-200/80 pt-1.5 px-1">
-              <span class="font-bold text-amber-800">外部 0.5 均衡分界线 (EQ):</span>
-              <span id="statExtEQ" class="text-amber-700 font-bold text-[12px]">$2,662.50</span>
+            <div class="flex justify-between border-t border-slate-200/80 pt-1.5 px-1" data-page-node-id="EVBfZy8L5HgAUOHdjYBKRx">
+              <span class="font-bold text-amber-800" data-page-node-id="mjfqnLZRznrgv2zFzWCZFe">外部 0.5 均衡分界线 (EQ):</span>
+              <span id="statExtEQ" class="text-amber-700 font-bold text-[12px]" data-page-node-id="lYaMwN9hA8SgCvtWXMAHh4">$2,662.50</span>
             </div>
           </div>
 
           <!-- 外部折价区判定卡片 -->
-          <div id="discountStatusCard" class="rounded-lg p-2.5 bg-emerald-50 border border-emerald-200 transition-all space-y-1">
-            <div class="flex items-center justify-between text-xs font-bold">
-              <span class="text-slate-700 text-[12px]">外部 0.5 折价区准入:</span>
-              <span id="discountStatusBadge" class="font-mono text-[12px] text-emerald-700 font-bold">✔ 满足做多条件</span>
+          <div id="discountStatusCard" class="rounded-lg p-2.5 bg-emerald-50 border border-emerald-200 transition-all space-y-1" data-page-node-id="Big2Jfvt9UhY72xYJhaZpw">
+            <div class="flex items-center justify-between text-xs font-bold" data-page-node-id="aqYgOm45UIWnYqtLUPRLkB">
+              <span class="text-slate-700 text-[12px]" data-page-node-id="LFbX1KuhMD1WPVCKI0nOvZ">外部 0.5 折价区准入:</span>
+              <span id="discountStatusBadge" class="font-mono text-[12px] text-emerald-700 font-bold" data-page-node-id="k3CIhUhN0haLaauX7BV5HK">✔ 满足做多条件</span>
             </div>
-            <div id="discountStatusText" class="text-[12px] text-slate-800 leading-snug">
+            <div id="discountStatusText" class="text-[12px] text-slate-800 leading-snug" data-page-node-id="kQtcz0AV2MkIB2mg1kbiTs">
               当前价格处于外部 0.5 均衡位 ($2,662.50) 以下折价区，满足外部入场准则。
             </div>
           </div>
 
           <!-- 外部 OTE 黄金回撤带 -->
-          <div class="bg-amber-50/80 border border-amber-200/90 rounded-lg p-2.5 space-y-1 font-mono">
-            <div class="flex items-center justify-between text-amber-900 font-bold text-[12px]">
-              <span class="flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> 外部结构 OTE (0.618 - 0.786)
+          <div class="bg-amber-50/80 border border-amber-200/90 rounded-lg p-2.5 space-y-1 font-mono" data-page-node-id="00uLnyuKuIOT3rLSSt4uLm">
+            <div class="flex items-center justify-between text-amber-900 font-bold text-[12px]" data-page-node-id="mHatY55p6oKezPg6dW2tkv">
+              <span class="flex items-center gap-1" data-page-node-id="bWXXxUHr5orCUyvnDCUSel">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500" data-page-node-id="7lqqYzWWFKwOb5xASD9Gxh"></span> 外部结构 OTE (0.618 - 0.786)
               </span>
-              <span id="statOteTouchBadge" class="text-[11px] px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 font-bold">未触及</span>
+              <span id="statOteTouchBadge" class="text-[11px] px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 font-bold" data-page-node-id="uc4xkVQwngtpY9l5oIQIjq">未触及</span>
             </div>
-            <div class="flex justify-between text-slate-800 text-[12px]">
-              <span>Fib 0.618:</span>
-              <span id="statFib618" class="text-amber-800 font-semibold">$2,654.80</span>
+            <div class="flex justify-between text-slate-800 text-[12px]" data-page-node-id="BkPCahzq4Ds1BXVA3tJszv">
+              <span data-page-node-id="Ps3Qxnw1WGTqj8KRgE1Erp">Fib 0.618:</span>
+              <span id="statFib618" class="text-amber-800 font-semibold" data-page-node-id="Z7WJBnD725fwISeGN6gWom">$2,654.80</span>
             </div>
-            <div class="flex justify-between text-slate-800 text-[12px]">
-              <span class="font-bold text-amber-900">Fib 0.705 (甜蜜点):</span>
-              <span id="statFib705" class="text-amber-900 font-bold">$2,649.10</span>
+            <div class="flex justify-between text-slate-800 text-[12px]" data-page-node-id="9S3wZH5ZPW7wGruNMbzRSf">
+              <span class="font-bold text-amber-900" data-page-node-id="9dFfWx2pCLQByVNC8ByO6Z">Fib 0.705 (甜蜜点):</span>
+              <span id="statFib705" class="text-amber-900 font-bold" data-page-node-id="LSifJfYBFCXN5p6LHCjnQ4">$2,649.10</span>
             </div>
-            <div class="flex justify-between text-slate-800 text-[12px]">
-              <span>Fib 0.786:</span>
-              <span id="statFib786" class="text-amber-800 font-semibold">$2,643.90</span>
+            <div class="flex justify-between text-slate-800 text-[12px]" data-page-node-id="gtoAaiM9G5yJ99LspfoEMC">
+              <span data-page-node-id="IlmaEiE4duqtyxvGTJLKdc">Fib 0.786:</span>
+              <span id="statFib786" class="text-amber-800 font-semibold" data-page-node-id="J6vz8ynw1bA5TJOPs7ynNM">$2,643.90</span>
             </div>
           </div>
 
           <!-- 订单块 OB -->
-          <div class="bg-emerald-50/80 border border-emerald-300 rounded-lg p-2 font-mono flex justify-between items-center text-[12px]">
-            <span class="text-emerald-900 font-bold flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> 外部主要看涨 OB:
+          <div class="bg-emerald-50/80 border border-emerald-300 rounded-lg p-2 font-mono flex justify-between items-center text-[12px]" data-page-node-id="DTB8IZa5EiZGEd2pZSsqMV">
+            <span class="text-emerald-900 font-bold flex items-center gap-1" data-page-node-id="oWRskVM0Y9GR2VRhTmP3o5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600" data-page-node-id="BZGUMLubMRrCz64nX4dBew"></span> 外部主要看涨 OB:
             </span>
-            <span id="statExtOB" class="text-emerald-800 font-bold">$2,630.0 - $2,638.5</span>
+            <span id="statExtOB" class="text-emerald-800 font-bold" data-page-node-id="K9o9C3gF7JTa77rVVX62DQ">$2,630.0 - $2,638.5</span>
           </div>
         </div>
 
         <!-- 15M 内部微观次级结构 (Internal Sub-Structure: 严格独立) -->
-        <div id="panel-internal-struct" class="bg-slate-50/90 border border-cyan-200/80 rounded-xl p-3.5 text-[12px] space-y-2.5 shadow-2xs">
-          <div class="flex items-center justify-between font-bold border-b border-cyan-100 pb-2">
-            <span class="text-cyan-900 flex items-center gap-1.5 font-bold">
-              <span class="w-2.5 h-2.5 rounded-full bg-cyan-600"></span> 15M 内部微观结构 (Internal)
+        <div id="panel-internal-struct" class="bg-slate-50/90 border border-cyan-200/80 rounded-xl p-3.5 text-[12px] space-y-2.5 shadow-2xs" data-page-node-id="gG0hwDx04IubjVVNhSc3TP">
+          <div class="flex items-center justify-between font-bold border-b border-cyan-100 pb-2" data-page-node-id="FODpHYwOhGRGBO7zJJSIc0">
+            <span class="text-cyan-900 flex items-center gap-1.5 font-bold" data-page-node-id="cs26lKZFqTYGa3VHVNg5wo">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-600" data-page-node-id="wI4QbvwrGaOgGG7bQphjKB"></span> 15M 内部微观结构 (Internal)
             </span>
-            <span id="mtfIntTrend" class="font-mono text-cyan-700 font-bold px-1.5 py-0.5 rounded bg-cyan-100/80">内部实体反转</span>
+            <span id="mtfIntTrend" class="font-mono text-cyan-700 font-bold px-1.5 py-0.5 rounded bg-cyan-100/80" data-page-node-id="0EtVeZAJUhFe8NAHdrfX95">内部实体反转</span>
           </div>
 
-          <div class="space-y-1.5 font-mono text-[12px]">
-            <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2">
-              <span class="text-sky-700 font-bold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span> 内部结构 High (内部止盈):
+          <div class="space-y-1.5 font-mono text-[12px]" data-page-node-id="mnb6mXhMXeetFfmh0VAagV">
+            <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2" data-page-node-id="qS74Pj1F5RxwmfP3EiCWUu">
+              <span class="text-sky-700 font-bold flex items-center gap-1" data-page-node-id="E4cqseOqmhZgrkf8fVkUdG">
+                <span class="w-1.5 h-1.5 rounded-full bg-sky-500" data-page-node-id="YjNmDLQ99WTMYnQgLdfri4"></span> 内部结构 High (内部止盈):
               </span>
-              <span id="statIntHigh" class="text-sky-700 font-bold text-[12px]">$2,670.00</span>
+              <span id="statIntHigh" class="text-sky-700 font-bold text-[12px]" data-page-node-id="MeNxxF0IeETfqLUkx1pdz2">$2,670.00</span>
             </div>
 
-            <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2">
-              <span class="text-cyan-700 font-bold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> 内部结构 Low (内部防守):
+            <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2" data-page-node-id="PgC0L3HAJGI7EgmK4ULGGY">
+              <span class="text-cyan-700 font-bold flex items-center gap-1" data-page-node-id="0cs2FYdKUqaSiJEt3oOPL3">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-500" data-page-node-id="KQ0JFqP6mug4fMigqjdIpO"></span> 内部结构 Low (内部防守):
               </span>
-              <span id="statIntLow" class="text-cyan-700 font-bold text-[12px]">$2,640.00</span>
+              <span id="statIntLow" class="text-cyan-700 font-bold text-[12px]" data-page-node-id="CeV7GuShVU3Wa17zwZD4h1">$2,640.00</span>
             </div>
 
             <!-- 内部微观 OTE 黄金入场带 -->
-            <div class="bg-cyan-50/90 border border-cyan-200/90 rounded-lg p-2.5 space-y-1">
-              <div class="flex items-center justify-between text-cyan-900 font-bold text-[12px]">
-                <span class="flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> 内部微观 OTE (0.618 - 0.786)
+            <div class="bg-cyan-50/90 border border-cyan-200/90 rounded-lg p-2.5 space-y-1" data-page-node-id="nBpwA21qG6jLhafvB8mYHU">
+              <div class="flex items-center justify-between text-cyan-900 font-bold text-[12px]" data-page-node-id="zCWSyZe292PZ7A4gjW1WU4">
+                <span class="flex items-center gap-1" data-page-node-id="6x6hfn0lTwyw8MmR7VlXJA">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-500" data-page-node-id="EeIBWfU2iLHfDaj5vPQzxB"></span> 内部微观 OTE (0.618 - 0.786)
                 </span>
-                <span id="statIntOteTouchBadge" class="text-[11px] px-1.5 py-0.2 rounded bg-cyan-200 text-cyan-900 font-bold">未触及</span>
+                <span id="statIntOteTouchBadge" class="text-[11px] px-1.5 py-0.2 rounded bg-cyan-200 text-cyan-900 font-bold" data-page-node-id="4lASGtCWLY2PsK1Ym17B3x">未触及</span>
               </div>
-              <div class="flex justify-between text-slate-800 text-[12px]">
-                <span>Fib 0.618:</span>
-                <span id="statIntFib618" class="text-cyan-800 font-semibold">$2,651.20</span>
+              <div class="flex justify-between text-slate-800 text-[12px]" data-page-node-id="43i8zPSA4me1UteHUgOkCk">
+                <span data-page-node-id="W1zHjVfISUwrPMGW936oaC">Fib 0.618:</span>
+                <span id="statIntFib618" class="text-cyan-800 font-semibold" data-page-node-id="AhFhVfdhWjH9w7VuCkI1BA">$2,651.20</span>
               </div>
-              <div class="flex justify-between text-slate-800 text-[12px]">
-                <span class="font-bold text-cyan-900">Fib 0.705 (内部甜蜜点):</span>
-                <span id="statIntFib705" class="text-cyan-900 font-bold">$2,648.50</span>
+              <div class="flex justify-between text-slate-800 text-[12px]" data-page-node-id="Nk5lMLaUw08h4QAC6XmPdC">
+                <span class="font-bold text-cyan-900" data-page-node-id="KMvNajxbeR4B5G17dPTiMX">Fib 0.705 (内部甜蜜点):</span>
+                <span id="statIntFib705" class="text-cyan-900 font-bold" data-page-node-id="VKzYU7vnzYDXux21WXqSQK">$2,648.50</span>
               </div>
-              <div class="flex justify-between text-slate-800 text-[12px]">
-                <span>Fib 0.786:</span>
-                <span id="statIntFib786" class="text-cyan-800 font-semibold">$2,646.10</span>
+              <div class="flex justify-between text-slate-800 text-[12px]" data-page-node-id="tSJEiI3TcbndfDvizRGvF3">
+                <span data-page-node-id="OmOmbBB198mHNKbK2kEZgd">Fib 0.786:</span>
+                <span id="statIntFib786" class="text-cyan-800 font-semibold" data-page-node-id="b2NVcAxQ5PaGvukKljThDw">$2,646.10</span>
               </div>
             </div>
 
-            <div class="flex justify-between bg-cyan-50/80 border border-cyan-300 rounded-lg p-2 items-center">
-              <span class="text-cyan-900 font-bold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-600"></span> 内部未穿透微观 OB:
+            <div class="flex justify-between bg-cyan-50/80 border border-cyan-300 rounded-lg p-2 items-center" data-page-node-id="oQGGdQNIbcUoGhvO5xK7Oc">
+              <span class="text-cyan-900 font-bold flex items-center gap-1" data-page-node-id="brnJS17Ic4KhWC3R3XbFTE">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-600" data-page-node-id="bH93MPe6pbgoH6JAEWcYdU"></span> 内部未穿透微观 OB:
               </span>
-              <span id="statIntOB" class="text-cyan-800 font-bold text-[12px]">$2,644 - $2,652</span>
+              <span id="statIntOB" class="text-cyan-800 font-bold text-[12px]" data-page-node-id="YOsgIqJ2D1XQVjBPugAqSO">$2,644 - $2,652</span>
             </div>
           </div>
         </div>
@@ -641,52 +641,52 @@
       </div>
 
       <!-- Autonomous Execution & Target Card -->
-      <div class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-3">
+      <div class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-3" data-page-node-id="sCmzgoZRKvP1SHN65fsMVi">
         
-        <div class="flex items-center justify-between border-b border-slate-200/80 pb-2.5">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-            <h3 class="font-extrabold text-slate-900 text-xs tracking-tight">全自动策略进退场引擎</h3>
+        <div class="flex items-center justify-between border-b border-slate-200/80 pb-2.5" data-page-node-id="iSa8SShLuaoWTpWxG0it05">
+          <div class="flex items-center gap-2" data-page-node-id="YHkeMPiu1BPfNZE4sU502F">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping" data-page-node-id="1A40rfWj7Bu6ckCeBVDlE2"></span>
+            <h3 class="font-extrabold text-slate-900 text-xs tracking-tight" data-page-node-id="MoIsvRYQDKp9jh2zUJIeB4">全自动策略进退场引擎</h3>
           </div>
-          <span class="text-[12px] px-2 py-0.5 rounded-full font-mono font-bold badge-soft-green">
+          <span class="text-[12px] px-2 py-0.5 rounded-full font-mono font-bold badge-soft-green" data-page-node-id="BFzSdtyhlJNMQolQ8E7bZ5">
             自动止盈止损
           </span>
         </div>
 
         <!-- Strategy Parameters & Action Plan -->
-        <div class="bg-slate-50/90 border border-slate-200/80 rounded-xl p-3 text-[12px] space-y-2 font-mono">
-          <div class="flex justify-between text-slate-700">
-            <span>实时策略判定:</span>
-            <span id="statActionAdvice" class="text-emerald-700 font-bold">15M OTE 进场做多</span>
+        <div class="bg-slate-50/90 border border-slate-200/80 rounded-xl p-3 text-[12px] space-y-2 font-mono" data-page-node-id="YzExtFpg4qre3DJHs2kyAn">
+          <div class="flex justify-between text-slate-700" data-page-node-id="SHJscP3dFlh8OcUSuFQ1Oc">
+            <span data-page-node-id="mXtnk7G8UL6OrgucIABei4">实时策略判定:</span>
+            <span id="statActionAdvice" class="text-emerald-700 font-bold" data-page-node-id="cYCmfouFQ9aEnRPqwenZDC">15M OTE 进场做多</span>
           </div>
 
-          <div class="flex justify-between text-slate-700">
-            <span>外部进场默认目标:</span>
-            <span id="statExtTargetTP" class="text-blue-700 font-bold">外部前高 ($2,695.0)</span>
+          <div class="flex justify-between text-slate-700" data-page-node-id="t8nJ36xpHgPDPimdU1EAQ7">
+            <span data-page-node-id="D59NqgdHIXXqwM8FV9uw7c">外部进场默认目标:</span>
+            <span id="statExtTargetTP" class="text-blue-700 font-bold" data-page-node-id="zh2OPd6QMp0IDKAwh3qkqe">外部前高 ($2,695.0)</span>
           </div>
 
-          <div class="flex justify-between text-slate-700">
-            <span>内部进场默认目标:</span>
-            <span id="statIntTargetTP" class="text-cyan-700 font-bold">内部前高 ($2,670.0)</span>
+          <div class="flex justify-between text-slate-700" data-page-node-id="5VrOGUfjjoRzhJYqaS6pFC">
+            <span data-page-node-id="kDK45pGViwXKocW2qsAcJr">内部进场默认目标:</span>
+            <span id="statIntTargetTP" class="text-cyan-700 font-bold" data-page-node-id="eoKOmcohHBS6j2vEPEwDsJ">内部前高 ($2,670.0)</span>
           </div>
 
-          <div class="flex justify-between text-slate-700">
-            <span>预设保护止损 (SL):</span>
-            <span id="statTargetSL" class="text-rose-600 font-bold">OB 下沿保护 ($2,638.5)</span>
+          <div class="flex justify-between text-slate-700" data-page-node-id="G687ObgXSYvFNk8vQEW8bk">
+            <span data-page-node-id="nUcs6aNBDv4AD9F1cCiVaE">预设保护止损 (SL):</span>
+            <span id="statTargetSL" class="text-rose-600 font-bold" data-page-node-id="MnXd2OQKIaCw3yopFoBaZt">OB 下沿保护 ($2,638.5)</span>
           </div>
 
-          <div class="flex justify-between text-slate-700">
-            <span>预估盈亏比 (RR):</span>
-            <span id="statEstRR" class="text-slate-900 font-bold">1 : 2.6</span>
+          <div class="flex justify-between text-slate-700" data-page-node-id="Brbge35smNseQUXw05umm1">
+            <span data-page-node-id="6gHF2gCJcJ8d0hVDFPPxpx">预估盈亏比 (RR):</span>
+            <span id="statEstRR" class="text-slate-900 font-bold" data-page-node-id="yt365pKJiWgOP8lknopRyq">1 : 2.6</span>
           </div>
         </div>
 
-        <div class="flex items-center justify-between bg-slate-50/90 border border-slate-200/80 rounded-xl p-3 text-xs">
-          <div>
-            <div class="font-bold text-slate-800 text-[12px]">全自动执行状态</div>
-            <div class="text-[12px] text-slate-600 mt-0.5">触发进场条件自动开仓，触及前高自动止盈</div>
+        <div class="flex items-center justify-between bg-slate-50/90 border border-slate-200/80 rounded-xl p-3 text-xs" data-page-node-id="xUTgVejO25Cj0VnimzHG00">
+          <div data-page-node-id="lnQtI1cFRh98qbfb5G4PQs">
+            <div class="font-bold text-slate-800 text-[12px]" data-page-node-id="0zHsC3KeWEBjFK7B1ln12b">全自动执行状态</div>
+            <div class="text-[12px] text-slate-600 mt-0.5" data-page-node-id="oXZAPX6n68eLr2wHJAIzC1">触发进场条件自动开仓，触及前高自动止盈</div>
           </div>
-          <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-mono font-bold text-[12px] border border-emerald-300">
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-mono font-bold text-[12px] border border-emerald-300" data-page-node-id="YHLUnvCj8iHpn0mcBaWmUZ">
             ACTIVE
           </span>
         </div>
@@ -694,22 +694,22 @@
       </div>
 
       <!-- 空状态引导：没有持仓时告诉用户引擎在等什么 -->
-      <div id="idle-hint" class="items-center gap-2 bg-amber-50 border border-amber-200/90 rounded-xl px-3.5 py-2.5 text-[12px] text-amber-900 font-semibold shadow-2xs">
-        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0"></span>
-        <span>引擎待机中 · 等待价格进入 <b>外部 0.5 EQ 折价区</b>，并触及 <b>OTE 黄金带 (0.618-0.786)</b> 或 <b>订单块</b> 才自动建仓</span>
+      <div id="idle-hint" class="items-center gap-2 bg-amber-50 border border-amber-200/90 rounded-xl px-3.5 py-2.5 text-[12px] text-amber-900 font-semibold shadow-2xs" data-page-node-id="F7dH24rZ9FJdwAKXH3FiHU">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0" data-page-node-id="MItOBL2T1jBDTSuydJMNkE"></span>
+        <span data-page-node-id="PHjdqJUEy2zBF1lcFntU1W">引擎待机中 · 等待价格进入 <b data-page-node-id="EiEYGUFmh2wCD0gimBC1BN">外部 0.5 EQ 折价区</b>，并触及 <b data-page-node-id="a5SvW8y5cjmoEF8SCQG6m7">OTE 黄金带 (0.618-0.786)</b> 或 <b data-page-node-id="boologGqaHCEOwKCT7CeJC">订单块</b> 才自动建仓</span>
       </div>
 
       <!-- Strategy Decision Log Feed -->
-      <div id="panel-decision-log" class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-2.5">
-        <div class="flex items-center justify-between border-b border-slate-200/80 pb-2">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-            <h3 id="h3-decision-log" class="font-extrabold text-slate-900 text-xs tracking-tight">自动决策执行流水</h3>
+      <div id="panel-decision-log" class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-2.5" data-page-node-id="ZV2vVLwFNDDmabhlStA5Rn">
+        <div class="flex items-center justify-between border-b border-slate-200/80 pb-2" data-page-node-id="GxKAzjE76nAILiSBIBKjJ1">
+          <div class="flex items-center gap-2" data-page-node-id="bhpF1yM05xEBpsskgkcke6">
+            <span class="w-2 h-2 rounded-full bg-blue-600" data-page-node-id="jMNCsX7v4ZR5IH5xF81wO8"></span>
+            <h3 id="h3-decision-log" class="font-extrabold text-slate-900 text-xs tracking-tight" data-page-node-id="Li93ch3bYdlIfSkELQvGGj">自动决策执行流水</h3>
           </div>
-          <span class="text-[12px] text-slate-600 font-mono font-semibold">15M Live</span>
+          <span class="text-[12px] text-slate-600 font-mono font-semibold" data-page-node-id="0HYy2JVRok3UfIGIzB5KqB">15M Live</span>
         </div>
-        <div id="autoTradeLogContainer" class="h-44 overflow-y-auto space-y-1.5 font-mono text-[12px] text-slate-700 pr-1">
-          <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 text-slate-700">
+        <div id="autoTradeLogContainer" class="h-44 overflow-y-auto space-y-1.5 font-mono text-[12px] text-slate-700 pr-1" data-page-node-id="Eh6uljQHv2uxFeU87zZstx">
+          <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 text-slate-700" data-page-node-id="0zp8P1esO1YteImqj1rBaN">
             [系统就绪] 引擎运行于服务器容器，关闭本页面不影响交易。
           </div>
         </div>
@@ -720,7 +720,7 @@
   </main>
 
   <!-- In-Page Toast Notification Container -->
-  <div id="toastContainer" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+  <div id="toastContainer" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm pointer-events-none" data-page-node-id="eOJ9WhbPCfUpHcDR9o6IMT"></div>
 
   <!-- Audio Context (Web Audio API) -->
   <script>
@@ -963,7 +963,6 @@
       let tvChart = null;
       let candleSeries = null;
       let emaSeries = null;
-      let volumeSeries = null;
       let positionPriceLines = [];
       let openPriceLines = [];
       let swingHighPriceLine = null;
@@ -977,14 +976,14 @@
           width: rect.width || 800,
           height: rect.height || 520,
           layout: {
-            background: { type: 'solid', color: '#fcfcfd' },
-            textColor: '#1e293b',
+            background: { type: 'solid', color: '#ffffff' }, // 纯白背景
+            textColor: '#334155',
             fontFamily: "'JetBrains Mono', 'Plus Jakarta Sans', sans-serif",
-            fontSize: 12
+            fontSize: 11
           },
           grid: {
-            vertLines: { color: '#e9eef4', style: LightweightCharts.LineStyle.Solid },
-            horzLines: { color: '#e9eef4', style: LightweightCharts.LineStyle.Solid }
+            vertLines: { color: '#f1f5f9', style: LightweightCharts.LineStyle.Solid },
+            horzLines: { color: '#f1f5f9', style: LightweightCharts.LineStyle.Solid }
           },
           crosshair: {
             mode: LightweightCharts.CrosshairMode.Normal,
@@ -1002,12 +1001,12 @@
             }
           },
           rightPriceScale: {
-            borderColor: '#dbe3ec',
+            borderColor: '#e2e8f0',
             scaleMargins: { top: 0.08, bottom: 0.1 },
             autoScale: true
           },
           timeScale: {
-            borderColor: '#dbe3ec',
+            borderColor: '#e2e8f0',
             timeVisible: true,
             secondsVisible: false,
             rightOffset: 12,
@@ -1027,22 +1026,13 @@
           wickDownColor: '#dc2626'
         });
 
-        // 成交量柱（覆盖在价格区底部，不占独立价格轴）
-        volumeSeries = tvChart.addHistogramSeries({
-          priceScaleId: '',
-          scaleMargins: { top: 0.84, bottom: 0 },
-          color: '#cbd5e1',
-          lastValueVisible: false,
-          priceLineVisible: false
-        });
-
-        // EMA 30 核心均线（琥珀色，与红/绿蜡烛都区分得开）
+        // Vegas EMA 30 核心均线
         emaSeries = tvChart.addLineSeries({
-          color: '#f59e0b',
+          color: '#2563eb',
           lineWidth: 1.8,
           priceLineVisible: false,
           lastValueVisible: true,
-          title: 'EMA 30'
+          title: 'Vegas EMA 30'
         });
 
         tvChart.timeScale().subscribeVisibleTimeRangeChange(() => drawPineOverlay());
@@ -1914,14 +1904,6 @@
 
         candleSeries.setData(chartData);
 
-        if (volumeSeries) {
-          volumeSeries.setData(candles.map(c => ({
-            time: Math.floor(c.time / 1000),
-            value: c.volume || 0,
-            color: c.close >= c.open ? 'rgba(30, 41, 59, 0.22)' : 'rgba(239, 68, 68, 0.22)'
-          })));
-        }
-
         if (state.toggles.vegasEMA && emaSeries) {
           const emaData = calculateEMA(candles, 30);
           emaSeries.setData(emaData);
@@ -1945,17 +1927,19 @@
         elChartLoading.classList.remove('hidden');
         let success = false;
 
+        // 默认走 Binance 真实行情；多端点互为备份，任一成功即用
         const endpoints = [
           `https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`,
-          `https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`,
+          `https://data-api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`,
           `https://fapi.binance.com/fapi/v1/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`,
+          `https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`,
           `https://api.binance.us/api/v3/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`
         ];
 
         for (const url of endpoints) {
           try {
             const controller = new AbortController();
-            const tid = setTimeout(() => controller.abort(), 3500);
+            const tid = setTimeout(() => controller.abort(), 12000);
             const resp = await fetch(url, { signal: controller.signal });
             clearTimeout(tid);
             if (resp.ok) {
@@ -1985,9 +1969,15 @@
 
         elChartLoading.classList.add('hidden');
         if (!success) {
-          elDataSourceLabel.textContent = '高仿 15M 引擎';
-          elDataStatusDot.className = 'w-2 h-2 rounded-full bg-amber-500';
-          generateSimulated15mKlines();
+          // 保持 Binance 为默认数据源：不切「高仿」，明确告知并 10s 后自动重试
+          elDataSourceLabel.textContent = 'Binance 连接中…';
+          elDataStatusDot.className = 'w-2 h-2 rounded-full bg-amber-500 animate-pulse';
+          if (!window.__klineRetry) {
+            window.__klineRetry = setTimeout(() => {
+              window.__klineRetry = null;
+              fetch15mData();
+            }, 10000);
+          }
         }
       }
 
