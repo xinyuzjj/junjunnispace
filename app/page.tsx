@@ -905,6 +905,46 @@ export default function HomePage() {
           </span>
         </Link>
 
+        {/* ========== SMC 交易策略终端入口 ========== */}
+        <Link
+          href="/smc/"
+          className="group mb-9 flex items-center gap-3.5 bg-white border-2 border-ink rounded-[12px] shadow-hard px-4 py-4 md:px-5 transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-sm"
+        >
+          <span className="grid place-items-center w-[42px] h-[42px] rounded-xl border-2 border-ink bg-pine text-white shrink-0">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+              <path d="M4 19h16" strokeLinecap="round" />
+              <rect x="5.5" y="9" width="3" height="7" rx="0.6" fill="currentColor" stroke="none" />
+              <path d="M7 6.5v5M7 16v2.5" strokeLinecap="round" />
+              <rect x="10.8" y="12" width="3" height="6" rx="0.6" fill="currentColor" stroke="none" />
+              <path d="M12.3 9.5V12M12.3 18v1.5" strokeLinecap="round" />
+              <rect x="16.1" y="6" width="3" height="9" rx="0.6" fill="currentColor" stroke="none" />
+              <path d="M17.6 3.5V6M17.6 15v3" strokeLinecap="round" />
+            </svg>
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="flex items-center gap-2 flex-wrap">
+              <span className="text-[15px] md:text-[16px] font-black tracking-tight break-words">
+                SMC 交易策略终端
+              </span>
+              <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light border border-sage rounded-full px-2 py-[2px] whitespace-nowrap">
+                ETH/USDT · 15M
+              </span>
+              <span className="font-mono text-[10px] font-bold text-pine-deep bg-pine-light border border-sage rounded-full px-2 py-[2px] whitespace-nowrap">
+                7×24 运行中
+              </span>
+            </span>
+            <span className="block text-[11px] md:text-[12px] font-bold text-pine mt-1 leading-[1.6]">
+              外部/内部双仓 · OTE 或 OB 自动进场 · 前高自动止盈
+            </span>
+            <span className="block text-[11px] md:text-[12px] text-moss mt-0.5 leading-[1.6]">
+              引擎跑在 Botkeep 容器里 —— 关掉页面机器人照样跑
+            </span>
+          </span>
+          <span className="hidden sm:inline-block font-mono text-[11px] font-bold text-moss group-hover:text-pine-deep transition-colors shrink-0">
+            进入终端 →
+          </span>
+        </Link>
+
         {/* ========== 交易教学 / 黑客松 入口 ========== */}
         <div className="grid sm:grid-cols-2 gap-4 mb-9">
           <Link
