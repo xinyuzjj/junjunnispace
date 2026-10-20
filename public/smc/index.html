@@ -98,49 +98,61 @@
         </div>
       </div>
 
-      <!-- Live Ticker & Market Metrics: 外部宏观 vs 内部微观严格分离与双仓监控 -->
-      <div class="flex items-center gap-3.5 pl-4 border-l border-slate-200 hidden md:flex font-mono">
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-slate-600 font-semibold">最新标记价</div>
-          <div id="tickerPrice" class="text-base font-bold text-slate-900 tracking-tight">$0.00</div>
-        </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-slate-600 font-semibold">24h 涨跌</div>
-          <div id="tickerChange" class="text-xs font-bold text-slate-700">+0.00%</div>
-        </div>
-        
-        <!-- 外部宏观指标 -->
-        <div class="border-l border-slate-200 pl-2.5">
-          <div class="text-[11px] uppercase tracking-wider text-emerald-700 font-semibold">外部 Strong Low</div>
-          <div id="headerExtStrongLow" class="text-xs font-bold text-emerald-600">$0.00</div>
-        </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-blue-700 font-semibold">外部 Weak High</div>
-          <div id="headerExtWeakHigh" class="text-xs font-bold text-blue-600">$0.00</div>
-        </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-amber-700 font-semibold">外部 0.5 EQ (折价界)</div>
-          <div id="headerExtEQ" class="text-xs font-bold text-amber-600">$0.00</div>
-        </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-amber-700 font-semibold">外部 OTE</div>
-          <div id="headerExtOTE" class="text-xs font-bold text-amber-600">$0.00 - $0.00</div>
+      <!-- Account Cards（原在下方独立 section，上移至顶栏；原顶部行情条已删除） -->
+      <div class="order-3 lg:order-none w-full lg:w-auto lg:flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs min-w-0">
+        <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-slate-700 font-semibold">
+            <span>账户总权益 (Equity)</span>
+            <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div class="flex items-baseline gap-1 mt-1.5">
+            <span id="accountEquity" class="text-lg font-bold font-mono text-slate-900">$1,000.00</span>
+            <span class="text-[12px] text-slate-600 font-mono">USDT</span>
+          </div>
         </div>
 
-        <!-- 内部微观指标 -->
-        <div class="border-l border-slate-200 pl-2.5">
-          <div class="text-[11px] uppercase tracking-wider text-sky-700 font-semibold">内部前高 (止盈)</div>
-          <div id="headerIntHigh" class="text-xs font-bold text-sky-600">$0.00</div>
-        </div>
-        <div>
-          <div class="text-[11px] uppercase tracking-wider text-cyan-700 font-semibold">内部 OTE (进场)</div>
-          <div id="headerIntOTE" class="text-xs font-bold text-cyan-600">$0.00 - $0.00</div>
+        <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-slate-700 font-semibold">
+            <span>可用保证金 (Available)</span>
+            <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div class="flex items-baseline gap-1 mt-1.5">
+            <span id="accountAvailable" class="text-lg font-bold font-mono text-blue-600">$1,000.00</span>
+            <span class="text-[12px] text-slate-600 font-mono">USDT</span>
+          </div>
         </div>
 
-        <!-- 双仓协同状态 -->
-        <div class="border-l border-slate-200 pl-2.5">
-          <div class="text-[11px] uppercase tracking-wider text-purple-700 font-semibold">双仓持仓状态</div>
-          <div id="headerDualPosTag" class="text-xs font-bold text-purple-700">0/2 空仓监控</div>
+        <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-slate-700 font-semibold">
+            <span>未实现盈亏 (Unrealized)</span>
+            <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          </div>
+          <div class="flex items-baseline gap-1.5 mt-1.5">
+            <span id="accountUnrealizedPnL" class="text-lg font-bold font-mono text-slate-800">$0.00</span>
+            <span id="accountUnrealizedRate" class="text-[12px] font-mono text-slate-700 font-semibold">(0.00%)</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-slate-700 font-semibold">
+            <span>已实现累计净利润</span>
+            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          </div>
+          <div class="flex items-baseline gap-1 mt-1.5">
+            <span id="accountRealizedPnL" class="text-lg font-bold font-mono text-slate-800">$0.00</span>
+            <span id="accountRoi" class="text-[12px] font-mono text-slate-700 font-semibold">(0.00%)</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-slate-700 font-semibold">
+            <span>策略执行参数</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          </div>
+          <div class="text-[12px] font-mono text-slate-700 mt-1 leading-snug">
+            单仓规模: <span class="font-bold text-slate-900">100 USDT (30X)</span><br>
+            双仓机制: <span class="font-bold text-purple-700">外部仓看外部前高 · 内部仓看内部前高</span>
+          </div>
         </div>
       </div>
 
@@ -163,73 +175,12 @@
     </div>
   </header>
 
-  <!-- Account Capital & Strategy Overview Bar -->
-  <section class="bg-white border-b border-slate-200/80 px-5 py-3 shadow-2xs">
-    <div class="max-w-[1780px] mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 text-xs">
-      
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>账户总权益 (Equity)</span>
-          <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        </div>
-        <div class="flex items-baseline gap-1 mt-1.5">
-          <span id="accountEquity" class="text-lg font-bold font-mono text-slate-900">$1,000.00</span>
-          <span class="text-[12px] text-slate-600 font-mono">USDT</span>
-        </div>
-      </div>
-
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>可用保证金 (Available)</span>
-          <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        </div>
-        <div class="flex items-baseline gap-1 mt-1.5">
-          <span id="accountAvailable" class="text-lg font-bold font-mono text-blue-600">$1,000.00</span>
-          <span class="text-[12px] text-slate-600 font-mono">USDT</span>
-        </div>
-      </div>
-
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>未实现盈亏 (Unrealized)</span>
-          <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-        </div>
-        <div class="flex items-baseline gap-1.5 mt-1.5">
-          <span id="accountUnrealizedPnL" class="text-lg font-bold font-mono text-slate-800">$0.00</span>
-          <span id="accountUnrealizedRate" class="text-[12px] font-mono text-slate-700 font-semibold">(0.00%)</span>
-        </div>
-      </div>
-
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>已实现累计净利润</span>
-          <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-        </div>
-        <div class="flex items-baseline gap-1 mt-1.5">
-          <span id="accountRealizedPnL" class="text-lg font-bold font-mono text-slate-800">$0.00</span>
-          <span id="accountRoi" class="text-[12px] font-mono text-slate-700 font-semibold">(0.00%)</span>
-        </div>
-      </div>
-
-      <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-700 font-semibold">
-          <span>策略执行参数</span>
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        </div>
-        <div class="text-[12px] font-mono text-slate-700 mt-1 leading-snug">
-          单仓规模: <span class="font-bold text-slate-900">100 USDT (30X)</span><br>
-          双仓机制: <span class="font-bold text-purple-700">外部仓看外部前高 · 内部仓看内部前高</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
 
   <!-- Main Trading Desk Layout -->
-  <main class="flex-1 max-w-[1780px] w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
+  <main class="flex-1 max-w-[1780px] w-full mx-auto p-4 grid grid-cols-1 gap-4">
     
     <!-- Left 3 Columns: High Performance Lightweight Chart -->
-    <div class="lg:col-span-3 flex flex-col gap-3.5">
+    <div class="flex flex-col gap-3.5">
       
       <!-- Chart Card (Pure White Background) -->
       <div class="bg-white border border-slate-200/90 rounded-2xl overflow-hidden flex flex-col shadow-xs">
@@ -274,9 +225,6 @@
             <!-- 深度 K 线数量快捷切换 -->
             <div class="flex items-center gap-1 bg-slate-100/90 p-0.5 rounded-lg border border-slate-200/80 text-[12px] font-mono">
               <span class="text-slate-600 px-1 text-[12px] font-sans font-semibold">数量:</span>
-              <button id="btnLimit300" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-800 hover:text-slate-900 font-semibold transition" data-limit="300" title="加载 300 根 15M K线 (~3.1 天)">300</button>
-              <button id="btnLimit500" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-800 hover:text-slate-900 font-semibold transition" data-limit="500" title="加载 500 根 15M K线 (~5.2 天)">500</button>
-              <button id="btnLimit1000" class="btn-kline-limit px-2 py-0.5 rounded-md bg-white text-blue-600 shadow-2xs border border-slate-200/90 font-bold transition active" data-limit="1000" title="加载 1000 根 15M 深度 K线 (~10.4 天)">1000</button>
             </div>
 
             <!-- 缩放与自适应 -->
@@ -490,7 +438,7 @@
     </div>
 
     <!-- Right 1 Column: Strategy Monitor & Decision Hub -->
-    <div class="lg:col-span-2 flex flex-col gap-3.5">
+    <div class="lg:grid lg:grid-cols-2 gap-3.5">
       
       <!-- 15M SMC Structure & OTE Radar -->
       <div id="panel-smc-radar" class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-3.5">
@@ -823,7 +771,7 @@
         currentPrice: 2650.0,
         priceChange24h: 1.45,
         useBinance: true,
-        klineLimit: 1000, // 深度 K 线数量，支持 300 / 500 / 1000 根
+        klineLimit: 1000, // 固定 1000 根 K 线（不提供数量切换）
         klines15m: [],
         // 15M SMC Structures
         smc15m: {
@@ -1791,6 +1739,10 @@
         const externalOB = activeSwingOBs.find(ob => ob.bias === 1) || activeSwingOBs[0];
 
         // H. 严格映射 x.txt 内部结构 (internalHigh / internalLow)
+        const intHigh = (internalHigh.currentLevel !== null) ? internalHigh.currentLevel : highs[n - 1];
+        const intLow = (internalLow.currentLevel !== null) ? internalLow.currentLevel : lows[n - 1];
+        const intRange = Math.max(5.0, Math.abs(intHigh - intLow));
+
   // ---- 内部 OTE：必须由「最近一次内部 BOS/CHoCH」推导 ----
   // 先有结构突破，才画对应的 OTE；没有突破就没有 OTE、不进场。
   // （旧写法直接用当前 internalHigh/Low 算 OTE，与突破无关 ⇒ 乱进）
@@ -1920,27 +1872,26 @@
 
       // --- MTF Data Retrieval: Binance 15m ---
       async function fetch15mData(limitOverride = null) {
-        if (limitOverride) state.klineLimit = limitOverride;
-        const limit = state.klineLimit || 1000;
-        updateKlineLimitButtonsUI(limit);
+        state.klineLimit = 1000;                 // 固定 1000 根，不提供切换
+        const limit = state.klineLimit;
 
         elChartLoading.classList.remove('hidden');
         let success = false;
 
-        // 默认走 Binance 真实行情；多端点互为备份，任一成功即用
+        // 优先走自己域名的 /api/klines 代理（Cloudflare Pages Function / Botkeep 容器都实现了），
+        // 彻底绕开 CORS 与 Binance 按 IP 的 418 限流；代理不可用时再直连 Binance 兜底。
+        const q = `symbol=ETHUSDT&interval=15m&limit=${limit}`;
         const endpoints = [
-          `https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`,
-          `https://data-api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`,
-          `https://fapi.binance.com/fapi/v1/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`,
-          `https://api.binance.com/api/v3/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`,
-          `https://api.binance.us/api/v3/klines?symbol=ETHUSDT&interval=15m&limit=${limit}`
+          `/api/klines?${q}`,
+          `https://etuthw.bot-keep.xyz/api/klines?${q}`,
+          `https://data-api.binance.vision/api/v3/klines?${q}`
         ];
 
         for (const url of endpoints) {
           try {
             const controller = new AbortController();
             const tid = setTimeout(() => controller.abort(), 12000);
-            const resp = await fetch(url, { signal: controller.signal });
+            const resp = await fetch(url, { signal: controller.signal, cache: 'no-store' });
             clearTimeout(tid);
             if (resp.ok) {
               const data = await resp.json();
@@ -2171,9 +2122,11 @@
       // ===================================================================
 
       function updateUI() {
-        elTickerPrice.textContent = `$${state.currentPrice.toFixed(2)}`;
-        elTickerChange.textContent = `${state.priceChange24h >= 0 ? '+' : ''}${state.priceChange24h.toFixed(2)}%`;
-        elTickerChange.className = state.priceChange24h >= 0 ? 'text-xs font-bold text-slate-800' : 'text-xs font-bold text-rose-600';
+        if (elTickerPrice) elTickerPrice.textContent = `$${state.currentPrice.toFixed(2)}`;
+        if (elTickerChange) {
+          elTickerChange.textContent = `${state.priceChange24h >= 0 ? '+' : ''}${state.priceChange24h.toFixed(2)}%`;
+          elTickerChange.className = state.priceChange24h >= 0 ? 'text-xs font-bold text-slate-800' : 'text-xs font-bold text-rose-600';
+        }
 
         const smc = state.smc15m;
 
