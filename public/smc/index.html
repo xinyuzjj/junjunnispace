@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ETH/USDT 15M SMC 全自动策略交易终端 · 峻峻尼</title>
+  <title>ETH/USDT 15M SMC 全自动策略交易终端</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <!-- TradingView Official Lightweight Charts v4.1.3 -->
@@ -61,6 +61,15 @@
       color: #b45309;
       border: 1px solid #fde68a;
     }
+    /* 隐藏两个面板：功能保留（JS 照常计算/渲染数据），仅不显示 */
+    #panel-smc-radar, #panel-internal-struct { display: none !important; }
+    /* 右列重排：决策流水置顶（DOM 不动，只用 flex order） */
+    #panel-decision-log { order: -1; }
+    /* 顶栏次要数字弱化 */
+    .hdr-dim { opacity: .72; }
+    /* 空状态提示 */
+    #idle-hint { display: none; }
+    #idle-hint.show { display: flex; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
@@ -77,13 +86,13 @@
         <div>
           <div class="flex items-center gap-2">
             <h1 class="font-extrabold text-slate-900 text-base tracking-tight">ETH / USDT 永续</h1>
-            <span class="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold bg-blue-100 text-blue-700">15m</span>
-            <span class="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold badge-soft-green flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded-full text-[12px] font-mono font-bold bg-blue-100 text-blue-700">15m</span>
+            <span class="px-2 py-0.5 rounded-full text-[12px] font-mono font-bold badge-soft-green flex items-center gap-1.5">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
               全自动策略执行中
             </span>
           </div>
-          <div class="text-[11px] text-slate-500 font-medium mt-0.5">
+          <div class="text-[12px] text-slate-700 font-semibold mt-0.5">
             SMC 结构驱动 · 外部/内部进场均为 OTE 或 OB · 止盈各自前高 · 100% 自动止盈止损
           </div>
         </div>
@@ -92,45 +101,45 @@
       <!-- Live Ticker & Market Metrics: 外部宏观 vs 内部微观严格分离与双仓监控 -->
       <div class="flex items-center gap-3.5 pl-4 border-l border-slate-200 hidden md:flex font-mono">
         <div>
-          <div class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold">最新标记价</div>
+          <div class="text-[11px] uppercase tracking-wider text-slate-600 font-semibold">最新标记价</div>
           <div id="tickerPrice" class="text-base font-bold text-slate-900 tracking-tight">$0.00</div>
         </div>
         <div>
-          <div class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold">24h 涨跌</div>
+          <div class="text-[11px] uppercase tracking-wider text-slate-600 font-semibold">24h 涨跌</div>
           <div id="tickerChange" class="text-xs font-bold text-slate-700">+0.00%</div>
         </div>
         
         <!-- 外部宏观指标 -->
         <div class="border-l border-slate-200 pl-2.5">
-          <div class="text-[9px] uppercase tracking-wider text-emerald-700 font-semibold">外部 Strong Low</div>
+          <div class="text-[11px] uppercase tracking-wider text-emerald-700 font-semibold">外部 Strong Low</div>
           <div id="headerExtStrongLow" class="text-xs font-bold text-emerald-600">$0.00</div>
         </div>
         <div>
-          <div class="text-[9px] uppercase tracking-wider text-blue-700 font-semibold">外部 Weak High</div>
+          <div class="text-[11px] uppercase tracking-wider text-blue-700 font-semibold">外部 Weak High</div>
           <div id="headerExtWeakHigh" class="text-xs font-bold text-blue-600">$0.00</div>
         </div>
         <div>
-          <div class="text-[9px] uppercase tracking-wider text-amber-700 font-semibold">外部 0.5 EQ (折价界)</div>
+          <div class="text-[11px] uppercase tracking-wider text-amber-700 font-semibold">外部 0.5 EQ (折价界)</div>
           <div id="headerExtEQ" class="text-xs font-bold text-amber-600">$0.00</div>
         </div>
         <div>
-          <div class="text-[9px] uppercase tracking-wider text-amber-700 font-semibold">外部 OTE</div>
+          <div class="text-[11px] uppercase tracking-wider text-amber-700 font-semibold">外部 OTE</div>
           <div id="headerExtOTE" class="text-xs font-bold text-amber-600">$0.00 - $0.00</div>
         </div>
 
         <!-- 内部微观指标 -->
         <div class="border-l border-slate-200 pl-2.5">
-          <div class="text-[9px] uppercase tracking-wider text-sky-700 font-semibold">内部前高 (止盈)</div>
+          <div class="text-[11px] uppercase tracking-wider text-sky-700 font-semibold">内部前高 (止盈)</div>
           <div id="headerIntHigh" class="text-xs font-bold text-sky-600">$0.00</div>
         </div>
         <div>
-          <div class="text-[9px] uppercase tracking-wider text-cyan-700 font-semibold">内部 OTE (进场)</div>
+          <div class="text-[11px] uppercase tracking-wider text-cyan-700 font-semibold">内部 OTE (进场)</div>
           <div id="headerIntOTE" class="text-xs font-bold text-cyan-600">$0.00 - $0.00</div>
         </div>
 
         <!-- 双仓协同状态 -->
         <div class="border-l border-slate-200 pl-2.5">
-          <div class="text-[9px] uppercase tracking-wider text-purple-700 font-semibold">双仓持仓状态</div>
+          <div class="text-[11px] uppercase tracking-wider text-purple-700 font-semibold">双仓持仓状态</div>
           <div id="headerDualPosTag" class="text-xs font-bold text-purple-700">0/2 空仓监控</div>
         </div>
       </div>
@@ -140,12 +149,12 @@
         <div class="flex items-center gap-2 bg-slate-50 border border-slate-200/90 rounded-lg px-3 py-1.5 text-xs shadow-2xs font-mono">
           <span id="dataStatusDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span id="dataSourceLabel" class="text-slate-700 font-semibold">Binance 15M 实时</span>
-          <button id="btnToggleSource" class="text-slate-400 hover:text-blue-600 transition" title="切换数据源">
+          <button id="btnToggleSource" class="text-slate-600 hover:text-blue-600 transition" title="切换数据源">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
           </button>
         </div>
 
-        <button id="btnSoundToggle" class="bg-white border border-slate-200 rounded-lg p-2 text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition" title="提示音开/关">
+        <button id="btnSoundToggle" class="bg-white border border-slate-200 rounded-lg p-2 text-slate-800 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition" title="提示音开/关">
           <svg id="iconSoundOn" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
           <svg id="iconSoundOff" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z m12 0l-6-6m6 0l-6 6"></path></svg>
         </button>
@@ -159,55 +168,55 @@
     <div class="max-w-[1780px] mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 text-xs">
       
       <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-500 font-medium">
+        <div class="flex items-center justify-between text-slate-700 font-semibold">
           <span>账户总权益 (Equity)</span>
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
         <div class="flex items-baseline gap-1 mt-1.5">
           <span id="accountEquity" class="text-lg font-bold font-mono text-slate-900">$1,000.00</span>
-          <span class="text-[10px] text-slate-400 font-mono">USDT</span>
+          <span class="text-[12px] text-slate-600 font-mono">USDT</span>
         </div>
       </div>
 
       <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-500 font-medium">
+        <div class="flex items-center justify-between text-slate-700 font-semibold">
           <span>可用保证金 (Available)</span>
           <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
         <div class="flex items-baseline gap-1 mt-1.5">
           <span id="accountAvailable" class="text-lg font-bold font-mono text-blue-600">$1,000.00</span>
-          <span class="text-[10px] text-slate-400 font-mono">USDT</span>
+          <span class="text-[12px] text-slate-600 font-mono">USDT</span>
         </div>
       </div>
 
       <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-500 font-medium">
+        <div class="flex items-center justify-between text-slate-700 font-semibold">
           <span>未实现盈亏 (Unrealized)</span>
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
         </div>
         <div class="flex items-baseline gap-1.5 mt-1.5">
-          <span id="accountUnrealizedPnL" class="text-lg font-bold font-mono text-slate-600">$0.00</span>
-          <span id="accountUnrealizedRate" class="text-[11px] font-mono text-slate-500 font-semibold">(0.00%)</span>
+          <span id="accountUnrealizedPnL" class="text-lg font-bold font-mono text-slate-800">$0.00</span>
+          <span id="accountUnrealizedRate" class="text-[12px] font-mono text-slate-700 font-semibold">(0.00%)</span>
         </div>
       </div>
 
       <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-500 font-medium">
+        <div class="flex items-center justify-between text-slate-700 font-semibold">
           <span>已实现累计净利润</span>
           <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
         </div>
         <div class="flex items-baseline gap-1 mt-1.5">
-          <span id="accountRealizedPnL" class="text-lg font-bold font-mono text-slate-600">$0.00</span>
-          <span id="accountRoi" class="text-[11px] font-mono text-slate-500 font-semibold">(0.00%)</span>
+          <span id="accountRealizedPnL" class="text-lg font-bold font-mono text-slate-800">$0.00</span>
+          <span id="accountRoi" class="text-[12px] font-mono text-slate-700 font-semibold">(0.00%)</span>
         </div>
       </div>
 
       <div class="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between text-slate-500 font-medium">
+        <div class="flex items-center justify-between text-slate-700 font-semibold">
           <span>策略执行参数</span>
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
         </div>
-        <div class="text-[11px] font-mono text-slate-700 mt-1 leading-snug">
+        <div class="text-[12px] font-mono text-slate-700 mt-1 leading-snug">
           单仓规模: <span class="font-bold text-slate-900">100 USDT (30X)</span><br>
           双仓机制: <span class="font-bold text-purple-700">外部仓看外部前高 · 内部仓看内部前高</span>
         </div>
@@ -217,7 +226,7 @@
   </section>
 
   <!-- Main Trading Desk Layout -->
-  <main class="flex-1 max-w-[1780px] w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-4 gap-4">
+  <main class="flex-1 max-w-[1780px] w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
     
     <!-- Left 3 Columns: High Performance Lightweight Chart -->
     <div class="lg:col-span-3 flex flex-col gap-3.5">
@@ -229,44 +238,44 @@
         <div class="bg-slate-50/90 border-b border-slate-200/80 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs">
           
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-bold text-slate-800 text-[11px] uppercase tracking-wider mr-1">双层结构核心图层:</span>
+            <span class="font-bold text-slate-800 text-[12px] uppercase tracking-wider mr-1">双层结构核心图层:</span>
 
             <!-- 外部结构组 (External) -->
             <button id="toggleExtStruct" class="indicator-pill active px-2.5 py-1 rounded-lg border border-indigo-300 bg-indigo-50 text-indigo-800 font-bold flex items-center gap-1.5 shadow-2xs" title="外部宏观结构突破线 (BOS/CHoCH)">
               <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
-              <span>外部结构 (BOS/CHoCH)</span>
+              <span>结构线 BOS/CHoCH</span>
             </button>
 
             <button id="toggleExtOB" class="indicator-pill active px-2.5 py-1 rounded-lg border border-emerald-400 bg-emerald-100 text-emerald-900 font-bold flex items-center gap-1.5 shadow-2xs" title="外部主要看涨订单块 (External Major OB)">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-              <span>外部主要 OB</span>
+              <span>订单块 OB</span>
             </button>
 
             <!-- 内部微观组 (Internal: 含内部次级结构突破与内部 OB) -->
-            <button id="toggleIntStruct" class="indicator-pill active px-2.5 py-1 rounded-lg border border-sky-300 bg-sky-50 text-sky-800 font-medium flex items-center gap-1.5 shadow-2xs" title="内部微观次级结构突破线 (BOS/CHoCH)">
+            <button id="toggleIntStruct" class="indicator-pill active px-2.5 py-1 rounded-lg border border-sky-300 bg-sky-50 text-sky-800 font-semibold flex items-center gap-1.5 shadow-2xs" title="内部微观次级结构突破线 (BOS/CHoCH)">
               <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
-              <span>内部结构 (次级 BOS/CHoCH)</span>
+              <span>次级结构</span>
             </button>
 
-            <button id="toggleIntOB" class="indicator-pill active px-2.5 py-1 rounded-lg border border-cyan-300 bg-cyan-50 text-cyan-800 font-medium flex items-center gap-1.5 shadow-2xs" title="内部微观订单块 (Internal Minor OB)">
+            <button id="toggleIntOB" class="indicator-pill active px-2.5 py-1 rounded-lg border border-cyan-300 bg-cyan-50 text-cyan-800 font-semibold flex items-center gap-1.5 shadow-2xs" title="内部微观订单块 (Internal Minor OB)">
               <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
-              <span>内部微观 OB</span>
+              <span>微观 OB</span>
             </button>
 
             <!-- 均线指标 -->
-            <button id="toggleVegasEMA" class="indicator-pill active px-2.5 py-1 rounded-lg border border-slate-200 bg-white text-blue-700 font-medium flex items-center gap-1.5 shadow-2xs">
+            <button id="toggleVegasEMA" class="indicator-pill active px-2.5 py-1 rounded-lg border border-slate-200 bg-white text-blue-700 font-semibold flex items-center gap-1.5 shadow-2xs">
               <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
-              <span>Vegas EMA 30</span>
+              <span>EMA 30</span>
             </button>
           </div>
 
           <!-- K-line Depth & Zoom Controls -->
           <div class="flex items-center gap-2">
             <!-- 深度 K 线数量快捷切换 -->
-            <div class="flex items-center gap-1 bg-slate-100/90 p-0.5 rounded-lg border border-slate-200/80 text-[11px] font-mono">
-              <span class="text-slate-400 px-1 text-[10px] font-sans font-medium">数量:</span>
-              <button id="btnLimit300" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-600 hover:text-slate-900 font-semibold transition" data-limit="300" title="加载 300 根 15M K线 (~3.1 天)">300</button>
-              <button id="btnLimit500" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-600 hover:text-slate-900 font-semibold transition" data-limit="500" title="加载 500 根 15M K线 (~5.2 天)">500</button>
+            <div class="flex items-center gap-1 bg-slate-100/90 p-0.5 rounded-lg border border-slate-200/80 text-[12px] font-mono">
+              <span class="text-slate-600 px-1 text-[12px] font-sans font-semibold">数量:</span>
+              <button id="btnLimit300" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-800 hover:text-slate-900 font-semibold transition" data-limit="300" title="加载 300 根 15M K线 (~3.1 天)">300</button>
+              <button id="btnLimit500" class="btn-kline-limit px-2 py-0.5 rounded-md text-slate-800 hover:text-slate-900 font-semibold transition" data-limit="500" title="加载 500 根 15M K线 (~5.2 天)">500</button>
               <button id="btnLimit1000" class="btn-kline-limit px-2 py-0.5 rounded-md bg-white text-blue-600 shadow-2xs border border-slate-200/90 font-bold transition active" data-limit="1000" title="加载 1000 根 15M 深度 K线 (~10.4 天)">1000</button>
             </div>
 
@@ -274,19 +283,19 @@
             <div class="flex items-center gap-1">
               <button id="btnZoomIn" class="px-2 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 font-mono shadow-2xs font-semibold text-xs" title="放大图表">+</button>
               <button id="btnZoomOut" class="px-2 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 font-mono shadow-2xs font-semibold text-xs" title="缩小图表">-</button>
-              <button id="btnResetView" class="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 shadow-2xs font-medium text-xs" title="重置图表视角">重置视角</button>
+              <button id="btnResetView" class="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-700 shadow-2xs font-semibold text-xs" title="重置图表视角">重置视角</button>
             </div>
           </div>
 
         </div>
 
         <!-- OHLC Data Strip & Realtime Candlestick Stats -->
-        <div id="chartInfoBar" class="bg-white border-b border-slate-100 px-4 py-2 text-[11px] font-mono text-slate-600 flex flex-wrap items-center gap-3.5">
+        <div id="chartInfoBar" class="bg-white border-b border-slate-100 px-4 py-2 text-[12px] font-mono text-slate-800 flex flex-wrap items-center gap-3.5">
           <div>开: <span id="barOpen" class="text-slate-900 font-bold">--</span></div>
           <div>高: <span id="barHigh" class="text-slate-900 font-bold">--</span></div>
           <div>低: <span id="barLow" class="text-rose-600 font-bold">--</span></div>
           <div>收: <span id="barClose" class="text-slate-900 font-bold">--</span></div>
-          <div>量: <span id="barVol" class="text-slate-500 font-medium">--</span></div>
+          <div>量: <span id="barVol" class="text-slate-700 font-semibold">--</span></div>
           <div>涨跌: <span id="barChange" class="text-slate-900 font-bold">--</span></div>
           <div class="text-slate-200">|</div>
           <div>外部波段: <span id="smcExternalTag" class="text-indigo-600 font-bold">Strong Low → Weak High</span></div>
@@ -311,16 +320,16 @@
           <!-- Loading overlay -->
           <div id="chartLoading" class="absolute inset-0 bg-white/80 backdrop-blur-xs flex flex-col items-center justify-center gap-2.5 z-30 hidden">
             <div class="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            <span class="text-xs text-slate-700 font-mono font-medium">从 Binance 实时拉取 ETH 15M 深度 K 线中...</span>
+            <span class="text-xs text-slate-700 font-mono font-semibold">从 Binance 实时拉取 ETH 15M 深度 K 线中...</span>
           </div>
 
           <!-- Position HUD floating card on chart -->
-          <div id="chartPositionHud" class="absolute top-3 left-3 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl p-3 text-[11px] font-mono pointer-events-none hidden shadow-lg z-20">
+          <div id="chartPositionHud" class="absolute top-3 left-3 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl p-3 text-[12px] font-mono pointer-events-none hidden shadow-lg z-20">
             <div class="flex items-center gap-2 mb-2">
-              <span id="hudPosType" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">LONG</span>
+              <span id="hudPosType" class="px-2 py-0.5 rounded text-[12px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">LONG</span>
               <span class="text-slate-900 font-bold">ETH/USDT 30X (15M 全自动持仓)</span>
             </div>
-            <div class="grid grid-cols-2 gap-x-5 gap-y-1 text-slate-500 text-[10px]">
+            <div class="grid grid-cols-2 gap-x-5 gap-y-1 text-slate-700 text-[12px]">
               <div>开仓均价: <span id="hudEntryPrice" class="text-slate-900 font-bold">$0.00</span></div>
               <div>未结盈亏: <span id="hudPnL" class="text-emerald-600 font-bold">+$0.00</span></div>
               <div>策略止损 (SL): <span id="hudSLPrice" class="text-rose-600 font-bold">$0.00</span></div>
@@ -332,14 +341,14 @@
         </div>
 
         <!-- Chart Legend & Indicator Guide -->
-        <div class="bg-slate-50/80 px-4 py-2.5 border-t border-slate-200/80 flex flex-wrap items-center gap-4 text-[10px] text-slate-600 font-medium">
-          <span class="flex items-center gap-1.5"><span class="w-3.5 h-0.5 bg-blue-600"></span> Vegas EMA 30 核心均线</span>
+        <div class="bg-slate-50/80 px-4 py-2.5 border-t border-slate-200/80 flex flex-wrap items-center gap-4 text-[12px] text-slate-800 font-semibold">
+          <span class="flex items-center gap-1.5"><span class="w-3.5 h-0.5 bg-blue-600"></span> EMA 30 核心均线</span>
           <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-white border border-slate-800"></span> 涨: 淡白 K 线 (立体描边)</span>
           <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-rose-500"></span> 跌: 红色 K 线</span>
-          <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-indigo-600"></span> 外部结构 (Swing BOS/CHoCH 实线)</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-emerald-600"></span><span class="w-3 h-0.5 bg-rose-600 -ml-1"></span> 外部结构 (BOS/CHoCH · 涨绿/空红)</span>
           <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-cyan-600 border-t border-dashed"></span> 内部结构 (Internal 虚线)</span>
           <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-emerald-100 border border-emerald-500"></span> 未穿透有效 OB 订单块</span>
-          <span class="text-slate-400 font-mono">[注: 止盈、止损、进场均价与 OTE 黄金带默认后台全自动执行，主图免标注保极简]</span>
+          <span class="text-slate-600 font-mono">[注: 止盈、止损、进场均价与 OTE 黄金带默认后台全自动执行，主图免标注保极简]</span>
         </div>
 
       </div>
@@ -352,33 +361,33 @@
           <div class="flex items-center gap-2">
             <button id="tab-positions" class="tab-btn py-3 px-3.5 border-b-2 border-blue-600 text-blue-600 font-bold flex items-center gap-2 transition">
               <span>当前策略持仓</span>
-              <span id="badgeOpenPositions" class="px-2 py-0.2 rounded-full text-[10px] bg-blue-100 text-blue-700 font-mono font-bold">0</span>
+              <span id="badgeOpenPositions" class="px-2 py-0.2 rounded-full text-[12px] bg-blue-100 text-blue-700 font-mono font-bold">0</span>
             </button>
-            <button id="tab-history" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-medium flex items-center gap-2 transition">
+            <button id="tab-history" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold flex items-center gap-2 transition">
               <span>自动平仓历史 (TP / SL)</span>
-              <span id="badgeHistoryTrades" class="px-2 py-0.2 rounded-full text-[10px] bg-slate-200 text-slate-600 font-mono font-bold">0</span>
+              <span id="badgeHistoryTrades" class="px-2 py-0.2 rounded-full text-[12px] bg-slate-200 text-slate-800 font-mono font-bold">0</span>
             </button>
-            <button id="tab-stats" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-medium transition">
+            <button id="tab-stats" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold transition">
               <span>实盘绩效统计</span>
             </button>
-            <button id="tab-guide" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-medium transition">
+            <button id="tab-guide" class="tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold transition">
               <span>策略执行原则</span>
             </button>
           </div>
 
-          <div class="text-[11px] text-slate-500 font-mono hidden sm:block">
+          <div class="text-[12px] text-slate-700 font-mono hidden sm:block">
             全自动进退场模式 · 严格前高止盈 · 无人工平仓干预
           </div>
         </div>
 
         <!-- Panel 1: Current Automated Positions (NO manual close buttons) -->
         <div id="panel-positions" class="p-4 text-xs overflow-x-auto min-h-[140px]">
-          <div id="emptyPositionsNotice" class="py-9 text-center text-slate-400 font-mono text-xs">
+          <div id="emptyPositionsNotice" class="py-9 text-center text-slate-600 font-mono text-xs">
             🤖 策略引擎运行中：监控 15M 外部 OTE 回撤与内部微观结构。触及买点将全自动建仓，并严格在前高止盈或 OB 防守止损。
           </div>
-          <table id="tablePositions" class="w-full text-left font-mono text-[11px] hidden">
+          <table id="tablePositions" class="w-full text-left font-mono text-[12px] hidden">
             <thead>
-              <tr class="text-slate-400 border-b border-slate-200/80 pb-2 text-[10px] uppercase tracking-wider font-semibold">
+              <tr class="text-slate-600 border-b border-slate-200/80 pb-2 text-[12px] uppercase tracking-wider font-semibold">
                 <th class="py-2 px-2.5">标的/方向</th>
                 <th class="py-2 px-2.5">持仓数量</th>
                 <th class="py-2 px-2.5">开仓均价</th>
@@ -387,7 +396,7 @@
                 <th class="py-2 px-2.5">保护止损 (SL)</th>
                 <th class="py-2 px-2.5">占用保证金</th>
                 <th class="py-2 px-2.5">未结盈亏 (ROE%)</th>
-                <th class="py-2 px-2.5 text-right">执行模式</th>
+                
               </tr>
             </thead>
             <tbody id="tbodyPositions" class="divide-y divide-slate-100">
@@ -398,12 +407,12 @@
 
         <!-- Panel 2: Trade History (Closed strictly by strategy) -->
         <div id="panel-history" class="p-4 text-xs overflow-x-auto min-h-[140px] hidden">
-          <div id="emptyHistoryNotice" class="py-9 text-center text-slate-400 font-mono text-xs">
+          <div id="emptyHistoryNotice" class="py-9 text-center text-slate-600 font-mono text-xs">
             暂无已平仓历史记录。
           </div>
-          <table id="tableHistory" class="w-full text-left font-mono text-[11px] hidden">
+          <table id="tableHistory" class="w-full text-left font-mono text-[12px] hidden">
             <thead>
-              <tr class="text-slate-400 border-b border-slate-200/80 pb-2 text-[10px] uppercase tracking-wider font-semibold">
+              <tr class="text-slate-600 border-b border-slate-200/80 pb-2 text-[12px] uppercase tracking-wider font-semibold">
                 <th class="py-2 px-2.5">触发时间</th>
                 <th class="py-2 px-2.5">标的/杠杆</th>
                 <th class="py-2 px-2.5">开仓价</th>
@@ -422,24 +431,24 @@
         <div id="panel-stats" class="p-5 text-xs hidden">
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono">
             <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <div class="text-slate-500 text-[10px] uppercase tracking-wider font-semibold">策略总胜率</div>
+              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold">策略总胜率</div>
               <div id="statWinRate" class="text-xl font-bold text-emerald-600 mt-1">0.0%</div>
-              <div class="text-[10px] text-slate-400 mt-0.5"><span id="statWinCount">0</span> 胜 / <span id="statLossCount">0</span> 负</div>
+              <div class="text-[12px] text-slate-600 mt-0.5"><span id="statWinCount">0</span> 胜 / <span id="statLossCount">0</span> 负</div>
             </div>
             <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <div class="text-slate-500 text-[10px] uppercase tracking-wider font-semibold">累计净利润</div>
+              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold">累计净利润</div>
               <div id="statNetProfit" class="text-xl font-bold text-slate-800 mt-1">$0.00</div>
-              <div class="text-[10px] text-slate-400 mt-0.5">本金 1,000.00 USDT</div>
+              <div class="text-[12px] text-slate-600 mt-0.5">本金 1,000.00 USDT</div>
             </div>
             <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <div class="text-slate-500 text-[10px] uppercase tracking-wider font-semibold">盈亏比 (Profit Factor)</div>
+              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold">盈亏比 (Profit Factor)</div>
               <div id="statProfitFactor" class="text-xl font-bold text-blue-600 mt-1">0.00</div>
-              <div class="text-[10px] text-slate-400 mt-0.5">毛盈利 / 毛亏损</div>
+              <div class="text-[12px] text-slate-600 mt-0.5">毛盈利 / 毛亏损</div>
             </div>
             <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-              <div class="text-slate-500 text-[10px] uppercase tracking-wider font-semibold">最大回撤率</div>
+              <div class="text-slate-700 text-[12px] uppercase tracking-wider font-semibold">最大回撤率</div>
               <div id="statMaxDrawdown" class="text-xl font-bold text-rose-600 mt-1">0.0%</div>
-              <div class="text-[10px] text-slate-400 mt-0.5">从最高权益回撤</div>
+              <div class="text-[12px] text-slate-600 mt-0.5">从最高权益回撤</div>
             </div>
           </div>
         </div>
@@ -451,7 +460,7 @@
               <h4 class="font-bold text-indigo-700 mb-1 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-indigo-600"></span> 1. 外部 OTE 进场逻辑
               </h4>
-              <p class="text-[11px] text-slate-600">
+              <p class="text-[12px] text-slate-800">
                 以 15M 外部摆动波段为基准，测算黄金回撤带 (0.618 - 0.786)。当价格回撤至外部 OTE 黄金带时触发外部进场，<strong>默认止盈直接锁定外部前高</strong>！
               </p>
             </div>
@@ -460,7 +469,7 @@
               <h4 class="font-bold text-cyan-700 mb-1 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-cyan-600"></span> 2. 内部结构进场逻辑
               </h4>
-              <p class="text-[11px] text-slate-600">
+              <p class="text-[12px] text-slate-800">
                 以 15M 内部微观波段 (leg 5) 为基准，当内部形成 CHoCH/BOS 反转并回踩内部看涨 OB 时触发内部进场，<strong>默认止盈直接锁定内部前高</strong>！
               </p>
             </div>
@@ -469,7 +478,7 @@
               <h4 class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-emerald-600"></span> 3. 100% 自动止盈止损
               </h4>
-              <p class="text-[11px] text-slate-600">
+              <p class="text-[12px] text-slate-800">
                 系统全自动判定开平仓，取消任何人工平仓按钮与金额重置。止盈严格锁定前高，止损紧贴 OB 下沿保护，执行纪律 100% 机械化。
               </p>
             </div>
@@ -481,23 +490,23 @@
     </div>
 
     <!-- Right 1 Column: Strategy Monitor & Decision Hub -->
-    <div class="lg:col-span-1 flex flex-col gap-3.5">
+    <div class="lg:col-span-2 flex flex-col gap-3.5">
       
       <!-- 15M SMC Structure & OTE Radar -->
-      <div class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-3.5">
+      <div id="panel-smc-radar" class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-3.5">
         
         <div class="flex items-center justify-between border-b border-slate-200/80 pb-2.5">
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
             <h3 class="font-extrabold text-slate-900 text-xs tracking-tight">15M SMC 结构与 OTE 雷达</h3>
           </div>
-          <span class="text-[10px] px-2 py-0.5 rounded-full font-mono font-bold badge-soft-blue">
+          <span class="text-[12px] px-2 py-0.5 rounded-full font-mono font-bold badge-soft-blue">
             15M PURE
           </span>
         </div>
 
         <!-- 15M 外部宏观结构与交易区间 (External Structure & Dealing Range) -->
-        <div class="bg-slate-50/90 border border-indigo-200/80 rounded-xl p-3.5 text-[11px] space-y-2.5 shadow-2xs">
+        <div class="bg-slate-50/90 border border-indigo-200/80 rounded-xl p-3.5 text-[12px] space-y-2.5 shadow-2xs">
           <div class="flex items-center justify-between font-bold border-b border-indigo-100 pb-2">
             <span class="text-indigo-900 flex items-center gap-1.5 font-bold">
               <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> 15M 外部宏观结构 (External)
@@ -506,67 +515,67 @@
           </div>
 
           <!-- 外部高低点核心段 -->
-          <div class="space-y-1.5 font-mono text-[10px]">
+          <div class="space-y-1.5 font-mono text-[12px]">
             <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2">
               <span class="text-emerald-700 font-bold flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> 外部 Strong Low:
               </span>
-              <span id="statExtStrongLow" class="text-emerald-700 font-bold text-[11px]">$2,630.00</span>
+              <span id="statExtStrongLow" class="text-emerald-700 font-bold text-[12px]">$2,630.00</span>
             </div>
             
             <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2">
               <span class="text-blue-700 font-bold flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span> 外部 Weak High:
               </span>
-              <span id="statExtWeakHigh" class="text-blue-700 font-bold text-[11px]">$2,695.00</span>
+              <span id="statExtWeakHigh" class="text-blue-700 font-bold text-[12px]">$2,695.00</span>
             </div>
 
-            <div class="flex justify-between text-slate-500 px-1">
+            <div class="flex justify-between text-slate-700 px-1">
               <span>外部结构段跨度 (Range):</span>
               <span id="statExtRangeSpan" class="text-slate-800 font-semibold">$65.00 USDT</span>
             </div>
 
             <div class="flex justify-between border-t border-slate-200/80 pt-1.5 px-1">
               <span class="font-bold text-amber-800">外部 0.5 均衡分界线 (EQ):</span>
-              <span id="statExtEQ" class="text-amber-700 font-bold text-[11px]">$2,662.50</span>
+              <span id="statExtEQ" class="text-amber-700 font-bold text-[12px]">$2,662.50</span>
             </div>
           </div>
 
           <!-- 外部折价区判定卡片 -->
           <div id="discountStatusCard" class="rounded-lg p-2.5 bg-emerald-50 border border-emerald-200 transition-all space-y-1">
             <div class="flex items-center justify-between text-xs font-bold">
-              <span class="text-slate-700 text-[10px]">外部 0.5 折价区准入:</span>
-              <span id="discountStatusBadge" class="font-mono text-[10px] text-emerald-700 font-bold">✔ 满足做多条件</span>
+              <span class="text-slate-700 text-[12px]">外部 0.5 折价区准入:</span>
+              <span id="discountStatusBadge" class="font-mono text-[12px] text-emerald-700 font-bold">✔ 满足做多条件</span>
             </div>
-            <div id="discountStatusText" class="text-[10px] text-slate-600 leading-snug">
+            <div id="discountStatusText" class="text-[12px] text-slate-800 leading-snug">
               当前价格处于外部 0.5 均衡位 ($2,662.50) 以下折价区，满足外部入场准则。
             </div>
           </div>
 
           <!-- 外部 OTE 黄金回撤带 -->
           <div class="bg-amber-50/80 border border-amber-200/90 rounded-lg p-2.5 space-y-1 font-mono">
-            <div class="flex items-center justify-between text-amber-900 font-bold text-[10px]">
+            <div class="flex items-center justify-between text-amber-900 font-bold text-[12px]">
               <span class="flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> 外部结构 OTE (0.618 - 0.786)
               </span>
-              <span id="statOteTouchBadge" class="text-[9px] px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 font-bold">未触及</span>
+              <span id="statOteTouchBadge" class="text-[11px] px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 font-bold">未触及</span>
             </div>
-            <div class="flex justify-between text-slate-600 text-[10px]">
+            <div class="flex justify-between text-slate-800 text-[12px]">
               <span>Fib 0.618:</span>
               <span id="statFib618" class="text-amber-800 font-semibold">$2,654.80</span>
             </div>
-            <div class="flex justify-between text-slate-600 text-[10px]">
+            <div class="flex justify-between text-slate-800 text-[12px]">
               <span class="font-bold text-amber-900">Fib 0.705 (甜蜜点):</span>
               <span id="statFib705" class="text-amber-900 font-bold">$2,649.10</span>
             </div>
-            <div class="flex justify-between text-slate-600 text-[10px]">
+            <div class="flex justify-between text-slate-800 text-[12px]">
               <span>Fib 0.786:</span>
               <span id="statFib786" class="text-amber-800 font-semibold">$2,643.90</span>
             </div>
           </div>
 
-          <!-- 外部主要 OB -->
-          <div class="bg-emerald-50/80 border border-emerald-300 rounded-lg p-2 font-mono flex justify-between items-center text-[10px]">
+          <!-- 订单块 OB -->
+          <div class="bg-emerald-50/80 border border-emerald-300 rounded-lg p-2 font-mono flex justify-between items-center text-[12px]">
             <span class="text-emerald-900 font-bold flex items-center gap-1">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> 外部主要看涨 OB:
             </span>
@@ -575,7 +584,7 @@
         </div>
 
         <!-- 15M 内部微观次级结构 (Internal Sub-Structure: 严格独立) -->
-        <div class="bg-slate-50/90 border border-cyan-200/80 rounded-xl p-3.5 text-[11px] space-y-2.5 shadow-2xs">
+        <div id="panel-internal-struct" class="bg-slate-50/90 border border-cyan-200/80 rounded-xl p-3.5 text-[12px] space-y-2.5 shadow-2xs">
           <div class="flex items-center justify-between font-bold border-b border-cyan-100 pb-2">
             <span class="text-cyan-900 flex items-center gap-1.5 font-bold">
               <span class="w-2.5 h-2.5 rounded-full bg-cyan-600"></span> 15M 内部微观结构 (Internal)
@@ -583,38 +592,38 @@
             <span id="mtfIntTrend" class="font-mono text-cyan-700 font-bold px-1.5 py-0.5 rounded bg-cyan-100/80">内部实体反转</span>
           </div>
 
-          <div class="space-y-1.5 font-mono text-[10px]">
+          <div class="space-y-1.5 font-mono text-[12px]">
             <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2">
               <span class="text-sky-700 font-bold flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span> 内部结构 High (内部止盈):
               </span>
-              <span id="statIntHigh" class="text-sky-700 font-bold text-[11px]">$2,670.00</span>
+              <span id="statIntHigh" class="text-sky-700 font-bold text-[12px]">$2,670.00</span>
             </div>
 
             <div class="flex justify-between bg-white border border-slate-200/90 rounded-lg p-2">
               <span class="text-cyan-700 font-bold flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> 内部结构 Low (内部防守):
               </span>
-              <span id="statIntLow" class="text-cyan-700 font-bold text-[11px]">$2,640.00</span>
+              <span id="statIntLow" class="text-cyan-700 font-bold text-[12px]">$2,640.00</span>
             </div>
 
             <!-- 内部微观 OTE 黄金入场带 -->
             <div class="bg-cyan-50/90 border border-cyan-200/90 rounded-lg p-2.5 space-y-1">
-              <div class="flex items-center justify-between text-cyan-900 font-bold text-[10px]">
+              <div class="flex items-center justify-between text-cyan-900 font-bold text-[12px]">
                 <span class="flex items-center gap-1">
                   <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> 内部微观 OTE (0.618 - 0.786)
                 </span>
-                <span id="statIntOteTouchBadge" class="text-[9px] px-1.5 py-0.2 rounded bg-cyan-200 text-cyan-900 font-bold">未触及</span>
+                <span id="statIntOteTouchBadge" class="text-[11px] px-1.5 py-0.2 rounded bg-cyan-200 text-cyan-900 font-bold">未触及</span>
               </div>
-              <div class="flex justify-between text-slate-600 text-[10px]">
+              <div class="flex justify-between text-slate-800 text-[12px]">
                 <span>Fib 0.618:</span>
                 <span id="statIntFib618" class="text-cyan-800 font-semibold">$2,651.20</span>
               </div>
-              <div class="flex justify-between text-slate-600 text-[10px]">
+              <div class="flex justify-between text-slate-800 text-[12px]">
                 <span class="font-bold text-cyan-900">Fib 0.705 (内部甜蜜点):</span>
                 <span id="statIntFib705" class="text-cyan-900 font-bold">$2,648.50</span>
               </div>
-              <div class="flex justify-between text-slate-600 text-[10px]">
+              <div class="flex justify-between text-slate-800 text-[12px]">
                 <span>Fib 0.786:</span>
                 <span id="statIntFib786" class="text-cyan-800 font-semibold">$2,646.10</span>
               </div>
@@ -624,7 +633,7 @@
               <span class="text-cyan-900 font-bold flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-600"></span> 内部未穿透微观 OB:
               </span>
-              <span id="statIntOB" class="text-cyan-800 font-bold text-[10px]">$2,644 - $2,652</span>
+              <span id="statIntOB" class="text-cyan-800 font-bold text-[12px]">$2,644 - $2,652</span>
             </div>
           </div>
         </div>
@@ -639,34 +648,34 @@
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
             <h3 class="font-extrabold text-slate-900 text-xs tracking-tight">全自动策略进退场引擎</h3>
           </div>
-          <span class="text-[10px] px-2 py-0.5 rounded-full font-mono font-bold badge-soft-green">
+          <span class="text-[12px] px-2 py-0.5 rounded-full font-mono font-bold badge-soft-green">
             自动止盈止损
           </span>
         </div>
 
         <!-- Strategy Parameters & Action Plan -->
-        <div class="bg-slate-50/90 border border-slate-200/80 rounded-xl p-3 text-[11px] space-y-2 font-mono">
-          <div class="flex justify-between text-slate-500">
+        <div class="bg-slate-50/90 border border-slate-200/80 rounded-xl p-3 text-[12px] space-y-2 font-mono">
+          <div class="flex justify-between text-slate-700">
             <span>实时策略判定:</span>
             <span id="statActionAdvice" class="text-emerald-700 font-bold">15M OTE 进场做多</span>
           </div>
 
-          <div class="flex justify-between text-slate-500">
+          <div class="flex justify-between text-slate-700">
             <span>外部进场默认目标:</span>
             <span id="statExtTargetTP" class="text-blue-700 font-bold">外部前高 ($2,695.0)</span>
           </div>
 
-          <div class="flex justify-between text-slate-500">
+          <div class="flex justify-between text-slate-700">
             <span>内部进场默认目标:</span>
             <span id="statIntTargetTP" class="text-cyan-700 font-bold">内部前高 ($2,670.0)</span>
           </div>
 
-          <div class="flex justify-between text-slate-500">
+          <div class="flex justify-between text-slate-700">
             <span>预设保护止损 (SL):</span>
             <span id="statTargetSL" class="text-rose-600 font-bold">OB 下沿保护 ($2,638.5)</span>
           </div>
 
-          <div class="flex justify-between text-slate-500">
+          <div class="flex justify-between text-slate-700">
             <span>预估盈亏比 (RR):</span>
             <span id="statEstRR" class="text-slate-900 font-bold">1 : 2.6</span>
           </div>
@@ -674,27 +683,33 @@
 
         <div class="flex items-center justify-between bg-slate-50/90 border border-slate-200/80 rounded-xl p-3 text-xs">
           <div>
-            <div class="font-bold text-slate-800 text-[11px]">全自动执行状态</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">触发进场条件自动开仓，触及前高自动止盈</div>
+            <div class="font-bold text-slate-800 text-[12px]">全自动执行状态</div>
+            <div class="text-[12px] text-slate-600 mt-0.5">触发进场条件自动开仓，触及前高自动止盈</div>
           </div>
-          <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-mono font-bold text-[11px] border border-emerald-300">
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-mono font-bold text-[12px] border border-emerald-300">
             ACTIVE
           </span>
         </div>
 
       </div>
 
+      <!-- 空状态引导：没有持仓时告诉用户引擎在等什么 -->
+      <div id="idle-hint" class="items-center gap-2 bg-amber-50 border border-amber-200/90 rounded-xl px-3.5 py-2.5 text-[12px] text-amber-900 font-semibold shadow-2xs">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0"></span>
+        <span>引擎待机中 · 等待价格进入 <b>外部 0.5 EQ 折价区</b>，并触及 <b>OTE 黄金带 (0.618-0.786)</b> 或 <b>订单块</b> 才自动建仓</span>
+      </div>
+
       <!-- Strategy Decision Log Feed -->
-      <div class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-2.5">
+      <div id="panel-decision-log" class="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col gap-2.5">
         <div class="flex items-center justify-between border-b border-slate-200/80 pb-2">
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-            <h3 class="font-extrabold text-slate-900 text-xs tracking-tight">自动决策执行流水</h3>
+            <h3 id="h3-decision-log" class="font-extrabold text-slate-900 text-xs tracking-tight">自动决策执行流水</h3>
           </div>
-          <span class="text-[10px] text-slate-400 font-mono font-semibold">15M Live</span>
+          <span class="text-[12px] text-slate-600 font-mono font-semibold">15M Live</span>
         </div>
-        <div id="autoTradeLogContainer" class="h-44 overflow-y-auto space-y-1.5 font-mono text-[10px] text-slate-700 pr-1">
-          <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 text-slate-500">
+        <div id="autoTradeLogContainer" class="h-44 overflow-y-auto space-y-1.5 font-mono text-[12px] text-slate-700 pr-1">
+          <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 text-slate-700">
             [系统就绪] 引擎运行于服务器容器，关闭本页面不影响交易。
           </div>
         </div>
@@ -774,7 +789,7 @@
         <div class="mt-0.5">${type === 'success' ? '🟢' : type === 'danger' ? '🔴' : type === 'warning' ? '⚠️' : 'ℹ️'}</div>
         <div class="flex-1">
           <div class="font-bold text-xs">${title}</div>
-          <div class="text-[11px] opacity-90 mt-0.5">${message}</div>
+          <div class="text-[12px] opacity-90 mt-0.5">${message}</div>
         </div>
       `;
       container.appendChild(el);
@@ -891,7 +906,7 @@
         if (type === 'tp') colorClass = 'text-emerald-700 font-bold bg-emerald-50/70 border-emerald-200';
         if (type === 'sl') colorClass = 'text-rose-700 font-bold bg-rose-50/70 border-rose-200';
         div.className = `p-2 rounded-lg bg-white border border-slate-200/90 shadow-2xs ${colorClass}`;
-        div.innerHTML = `<span class="text-slate-400 font-medium">[${timeStr}]</span> ${text}`;
+        div.innerHTML = `<span class="text-slate-600 font-semibold">[${timeStr}]</span> ${text}`;
         container.insertBefore(div, container.firstChild);
         if (container.children.length > 40) container.removeChild(container.lastChild);
       }
@@ -948,6 +963,7 @@
       let tvChart = null;
       let candleSeries = null;
       let emaSeries = null;
+      let volumeSeries = null;
       let positionPriceLines = [];
       let openPriceLines = [];
       let swingHighPriceLine = null;
@@ -961,14 +977,14 @@
           width: rect.width || 800,
           height: rect.height || 520,
           layout: {
-            background: { type: 'solid', color: '#ffffff' }, // 纯白背景
-            textColor: '#334155',
+            background: { type: 'solid', color: '#fcfcfd' },
+            textColor: '#1e293b',
             fontFamily: "'JetBrains Mono', 'Plus Jakarta Sans', sans-serif",
-            fontSize: 11
+            fontSize: 12
           },
           grid: {
-            vertLines: { color: '#f1f5f9', style: LightweightCharts.LineStyle.Solid },
-            horzLines: { color: '#f1f5f9', style: LightweightCharts.LineStyle.Solid }
+            vertLines: { color: '#e9eef4', style: LightweightCharts.LineStyle.Solid },
+            horzLines: { color: '#e9eef4', style: LightweightCharts.LineStyle.Solid }
           },
           crosshair: {
             mode: LightweightCharts.CrosshairMode.Normal,
@@ -986,12 +1002,12 @@
             }
           },
           rightPriceScale: {
-            borderColor: '#e2e8f0',
+            borderColor: '#dbe3ec',
             scaleMargins: { top: 0.08, bottom: 0.1 },
             autoScale: true
           },
           timeScale: {
-            borderColor: '#e2e8f0',
+            borderColor: '#dbe3ec',
             timeVisible: true,
             secondsVisible: false,
             rightOffset: 12,
@@ -1011,13 +1027,22 @@
           wickDownColor: '#dc2626'
         });
 
-        // Vegas EMA 30 核心均线
+        // 成交量柱（覆盖在价格区底部，不占独立价格轴）
+        volumeSeries = tvChart.addHistogramSeries({
+          priceScaleId: '',
+          scaleMargins: { top: 0.84, bottom: 0 },
+          color: '#cbd5e1',
+          lastValueVisible: false,
+          priceLineVisible: false
+        });
+
+        // EMA 30 核心均线（琥珀色，与红/绿蜡烛都区分得开）
         emaSeries = tvChart.addLineSeries({
-          color: '#2563eb',
+          color: '#f59e0b',
           lineWidth: 1.8,
           priceLineVisible: false,
           lastValueVisible: true,
-          title: 'Vegas EMA 30'
+          title: 'EMA 30'
         });
 
         tvChart.timeScale().subscribeVisibleTimeRangeChange(() => drawPineOverlay());
@@ -1146,8 +1171,8 @@
           swingLowPriceLine = null;
         }
 
-        // 图表右侧价格刻度轴严格不显示止盈、止损、进场均价、强弱高低点价格轴色块标签
-        // 策略后台默认自动运行全部止盈止损与仓位逻辑，免在主图价格轴堆叠标签
+        // 用户明确不需要在主图上画 进场/止盈/止损 线（保持极简）
+        // 止损的宽窄由服务器引擎决定，见 server.js 的止损算法
       }
 
       // --- Pine Visual Overlay (极简纯净图层：主图不绘制止盈、止损、进场与 OTE 黄金带，后台默认运行) ---
@@ -1171,7 +1196,7 @@
         // 仅保留未穿透有效看涨 OB 与结构突破线 (BOS/CHoCH)
         // ====================================================
 
-        // 1. 外部主要看涨订单块 (External Major OB: 绿色半透明矩形)
+        // 1. 外部订单块 (External OB: 看涨=蓝 / 看跌=红)
         if (state.toggles.extOB) {
           smc.externalOrderBlocks.forEach(ob => {
             if (ob.pierced) return;
@@ -1188,17 +1213,13 @@
               const topY = Math.min(yHigh, yLow);
               const boxHeight = Math.max(2, Math.abs(yLow - yHigh));
 
-              overlayCtx.fillStyle = 'rgba(16, 185, 129, 0.18)';
-              overlayCtx.strokeStyle = '#059669';
+              const _bull = (ob.bias === 1);
+              overlayCtx.fillStyle = _bull ? 'rgba(37, 99, 235, 0.14)' : 'rgba(220, 38, 38, 0.14)';
+              overlayCtx.strokeStyle = _bull ? '#2563eb' : '#dc2626';
               overlayCtx.lineWidth = 1.5;
               overlayCtx.setLineDash([]);
               overlayCtx.fillRect(startPixel, topY, boxWidth, boxHeight);
               overlayCtx.strokeRect(startPixel, topY, boxWidth, boxHeight);
-
-              overlayCtx.fillStyle = '#047857';
-              overlayCtx.font = 'bold 9px JetBrains Mono, sans-serif';
-              overlayCtx.textAlign = 'left';
-              overlayCtx.fillText('15M 外部看涨 OB', startPixel + 4, topY + 11);
             }
           });
         }
@@ -1214,7 +1235,7 @@
             const y = candleSeries.priceToCoordinate(c.price);
 
             if (y !== null && xStart !== null && xEnd !== null) {
-              overlayCtx.strokeStyle = '#7c3aed';
+              overlayCtx.strokeStyle = (c.dir > 0) ? '#16a34a' : '#dc2626';
               overlayCtx.lineWidth = 1.8;
               overlayCtx.setLineDash([]);
               overlayCtx.beginPath();
@@ -1222,14 +1243,11 @@
               overlayCtx.lineTo(xEnd, y);
               overlayCtx.stroke();
 
-              overlayCtx.fillStyle = '#7c3aed';
+              overlayCtx.fillStyle = (c.dir > 0) ? '#16a34a' : '#dc2626';
               overlayCtx.beginPath();
               overlayCtx.arc(xEnd, y, 2.5, 0, Math.PI * 2);
               overlayCtx.fill();
 
-              overlayCtx.font = 'bold 9.5px JetBrains Mono, sans-serif';
-              overlayCtx.textAlign = 'center';
-              overlayCtx.fillText('15M 外部 CHoCH', (xStart + xEnd) / 2, y - 4);
             }
           });
 
@@ -1242,7 +1260,7 @@
             const y = candleSeries.priceToCoordinate(b.price);
 
             if (y !== null && xStart !== null && xEnd !== null) {
-              overlayCtx.strokeStyle = '#4f46e5';
+              overlayCtx.strokeStyle = (b.dir > 0) ? '#16a34a' : '#dc2626';
               overlayCtx.lineWidth = 1.5;
               overlayCtx.setLineDash([]);
               overlayCtx.beginPath();
@@ -1250,14 +1268,11 @@
               overlayCtx.lineTo(xEnd, y);
               overlayCtx.stroke();
 
-              overlayCtx.fillStyle = '#4f46e5';
+              overlayCtx.fillStyle = (b.dir > 0) ? '#16a34a' : '#dc2626';
               overlayCtx.beginPath();
               overlayCtx.arc(xEnd, y, 2, 0, Math.PI * 2);
               overlayCtx.fill();
 
-              overlayCtx.font = 'bold 9px JetBrains Mono, sans-serif';
-              overlayCtx.textAlign = 'center';
-              overlayCtx.fillText('15M 外部 BOS', (xStart + xEnd) / 2, y - 4);
             }
           });
         }
@@ -1267,7 +1282,7 @@
         // 核心要求：不画内部高低点贯穿横线，不画内部 OTE 带，仅保留未穿透微观 OB 与内部结构突破
         // ====================================================
 
-        // 1. 内部微观订单块 (Internal Minor OB: 细虚线青框)
+        // 1. 内部订单块 (Internal OB: 看涨=蓝 / 看跌=红)
         if (state.toggles.intOB) {
           smc.internalOrderBlocks.forEach(ob => {
             if (ob.pierced) return;
@@ -1284,18 +1299,14 @@
               const topY = Math.min(yHigh, yLow);
               const boxHeight = Math.max(2, Math.abs(yLow - yHigh));
 
-              overlayCtx.fillStyle = 'rgba(8, 145, 178, 0.12)';
-              overlayCtx.strokeStyle = '#0891b2';
+              const _bullI = (ob.bias === 1);
+              overlayCtx.fillStyle = _bullI ? 'rgba(37, 99, 235, 0.14)' : 'rgba(220, 38, 38, 0.14)';
+              overlayCtx.strokeStyle = _bullI ? '#2563eb' : '#dc2626';
               overlayCtx.lineWidth = 1.2;
               overlayCtx.setLineDash([3, 2]);
               overlayCtx.fillRect(startPixel, topY, boxWidth, boxHeight);
               overlayCtx.strokeRect(startPixel, topY, boxWidth, boxHeight);
               overlayCtx.setLineDash([]);
-
-              overlayCtx.fillStyle = '#0891b2';
-              overlayCtx.font = 'bold 8.5px JetBrains Mono, sans-serif';
-              overlayCtx.textAlign = 'left';
-              overlayCtx.fillText('15M 内部微观 OB', startPixel + 4, topY + 10);
             }
           });
         }
@@ -1311,7 +1322,7 @@
             const y = candleSeries.priceToCoordinate(c.price);
 
             if (y !== null && xStart !== null && xEnd !== null) {
-              overlayCtx.strokeStyle = '#0891b2';
+              overlayCtx.strokeStyle = (c.dir > 0) ? '#16a34a' : '#dc2626';
               overlayCtx.lineWidth = 1.2;
               overlayCtx.setLineDash([4, 2]);
               overlayCtx.beginPath();
@@ -1320,14 +1331,10 @@
               overlayCtx.stroke();
               overlayCtx.setLineDash([]);
 
-              overlayCtx.fillStyle = '#0891b2';
+              overlayCtx.fillStyle = (c.dir > 0) ? '#16a34a' : '#dc2626';
               overlayCtx.beginPath();
               overlayCtx.arc(xEnd, y, 2, 0, Math.PI * 2);
               overlayCtx.fill();
-
-              overlayCtx.font = 'bold 8.5px JetBrains Mono, sans-serif';
-              overlayCtx.textAlign = 'center';
-              overlayCtx.fillText('15M 内部 CHoCH', (xStart + xEnd) / 2, y - 4);
             }
           });
 
@@ -1340,7 +1347,7 @@
             const y = candleSeries.priceToCoordinate(b.price);
 
             if (y !== null && xStart !== null && xEnd !== null) {
-              overlayCtx.strokeStyle = '#0284c7';
+              overlayCtx.strokeStyle = (b.dir > 0) ? '#16a34a' : '#dc2626';
               overlayCtx.lineWidth = 1.1;
               overlayCtx.setLineDash([3, 2]);
               overlayCtx.beginPath();
@@ -1349,10 +1356,7 @@
               overlayCtx.stroke();
               overlayCtx.setLineDash([]);
 
-              overlayCtx.fillStyle = '#0284c7';
-              overlayCtx.font = 'bold 8px JetBrains Mono, sans-serif';
-              overlayCtx.textAlign = 'center';
-              overlayCtx.fillText('15M 内部 BOS', (xStart + xEnd) / 2, y - 4);
+              overlayCtx.fillStyle = (b.dir > 0) ? '#16a34a' : '#dc2626';
             }
           });
         }
@@ -1663,7 +1667,7 @@
               const tag = (internalTrend === -1) ? 'CHoCH' : 'BOS';
               internalHigh.crossed = true;
               internalTrend = 1;
-              const item = { price: internalHigh.currentLevel, pivotIndex: internalHigh.barIndex, breakIndex: bar, time: times[bar] };
+              const item = { price: internalHigh.currentLevel, pivotIndex: internalHigh.barIndex, breakIndex: bar, time: times[bar], dir: 1 };
               if (tag === 'CHoCH') internalCHoCHList.push(item);
               else internalBOSList.push(item);
 
@@ -1689,7 +1693,7 @@
               const tag = (internalTrend === 1) ? 'CHoCH' : 'BOS';
               internalLow.crossed = true;
               internalTrend = -1;
-              const item = { price: internalLow.currentLevel, pivotIndex: internalLow.barIndex, breakIndex: bar, time: times[bar] };
+              const item = { price: internalLow.currentLevel, pivotIndex: internalLow.barIndex, breakIndex: bar, time: times[bar], dir: -1 };
               if (tag === 'CHoCH') internalCHoCHList.push(item);
               else internalBOSList.push(item);
 
@@ -1715,7 +1719,7 @@
               const tag = (swingTrend === -1) ? 'CHoCH' : 'BOS';
               swingHigh.crossed = true;
               swingTrend = 1;
-              const item = { price: swingHigh.currentLevel, pivotIndex: swingHigh.barIndex, breakIndex: bar, time: times[bar] };
+              const item = { price: swingHigh.currentLevel, pivotIndex: swingHigh.barIndex, breakIndex: bar, time: times[bar], dir: 1 };
               if (tag === 'CHoCH') swingCHoCHList.push(item);
               else swingBOSList.push(item);
 
@@ -1740,7 +1744,7 @@
               const tag = (swingTrend === 1) ? 'CHoCH' : 'BOS';
               swingLow.crossed = true;
               swingTrend = -1;
-              const item = { price: swingLow.currentLevel, pivotIndex: swingLow.barIndex, breakIndex: bar, time: times[bar] };
+              const item = { price: swingLow.currentLevel, pivotIndex: swingLow.barIndex, breakIndex: bar, time: times[bar], dir: -1 };
               if (tag === 'CHoCH') swingCHoCHList.push(item);
               else swingBOSList.push(item);
 
@@ -1797,21 +1801,38 @@
         const externalOB = activeSwingOBs.find(ob => ob.bias === 1) || activeSwingOBs[0];
 
         // H. 严格映射 x.txt 内部结构 (internalHigh / internalLow)
-        const intHigh = (internalHigh.currentLevel !== null) ? internalHigh.currentLevel : highs[n - 1];
-        const intLow = (internalLow.currentLevel !== null) ? internalLow.currentLevel : lows[n - 1];
-        const intRange = Math.max(5.0, Math.abs(intHigh - intLow));
+  // ---- 内部 OTE：必须由「最近一次内部 BOS/CHoCH」推导 ----
+  // 先有结构突破，才画对应的 OTE；没有突破就没有 OTE、不进场。
+  // （旧写法直接用当前 internalHigh/Low 算 OTE，与突破无关 ⇒ 乱进）
+  const lastIntBreak = internalCHoCHList.concat(internalBOSList)
+    .slice().sort((a, b) => (b.breakIndex || 0) - (a.breakIndex || 0))[0] || null;
 
-        // 内部 OTE (基于 x.txt 内部微观结构 High 与 Low 测算)
-        const intFib50 = intHigh - 0.500 * intRange;
-        const intFib618 = intHigh - 0.618 * intRange;
-        const intFib705 = intHigh - 0.705 * intRange;
-        const intFib786 = intHigh - 0.786 * intRange;
-        const isInsideIntOTE = (curPrice <= intFib618 * 1.002 && curPrice >= intFib786 * 0.998);
+  let intOteHigh = 0, intOteLow = 0;
+  if (lastIntBreak && lastIntBreak.dir > 0) {
+    // 看涨突破：OTE = 「突破前最近的摆动低点」→「被突破的那个高点」这段的 0.618-0.786 回撤
+    const hi = lastIntBreak.price;
+    let lo = Infinity;
+    const from = Math.max(0, (lastIntBreak.pivotIndex || 0) - 60);
+    for (let k = from; k < (lastIntBreak.pivotIndex || 0); k++) {
+      if (lows[k] < lo) lo = lows[k];
+    }
+    if (lo < hi) { intOteHigh = hi; intOteLow = lo; }
+  }
+
+  const intOteRange = (intOteHigh > intOteLow) ? (intOteHigh - intOteLow) : 0;
+  const intFib50 = intOteHigh - 0.500 * intOteRange;
+  const intFib618 = intOteHigh - 0.618 * intOteRange;
+  const intFib705 = intOteHigh - 0.705 * intOteRange;
+  const intFib786 = intOteHigh - 0.786 * intOteRange;
+  const isInsideIntOTE = (intOteRange > 0)
+    ? (curPrice <= intFib618 * 1.002 && curPrice >= intFib786 * 0.998)
+    : false;
+  const hasIntStructure = Boolean(lastIntBreak);
 
         // 内部有效订单块 (未穿透)
         const activeIntOBs = internalOrderBlocks.filter(ob => !ob.pierced);
         const activeIntBullishOB = activeIntOBs.find(ob => ob.bias === 1);
-        const inInternalOB = Boolean(activeIntBullishOB && (curPrice >= activeIntBullishOB.low * 0.999 && curPrice <= activeIntBullishOB.high * 1.002));
+        const inInternalOB = Boolean(hasIntStructure && activeIntBullishOB && (curPrice >= activeIntBullishOB.low * 0.999 && curPrice <= activeIntBullishOB.high * 1.002));
 
         // 状态更新
         state.smc15m = {
@@ -1892,6 +1913,14 @@
         }));
 
         candleSeries.setData(chartData);
+
+        if (volumeSeries) {
+          volumeSeries.setData(candles.map(c => ({
+            time: Math.floor(c.time / 1000),
+            value: c.volume || 0,
+            color: c.close >= c.open ? 'rgba(30, 41, 59, 0.22)' : 'rgba(239, 68, 68, 0.22)'
+          })));
+        }
 
         if (state.toggles.vegasEMA && emaSeries) {
           const emaData = calculateEMA(candles, 30);
@@ -2137,6 +2166,13 @@
             }
           }
 
+          // 空状态引导：无持仓时显示待机原因
+          const hint = document.getElementById('idle-hint');
+          if (hint) {
+            const idle = !state.positions || state.positions.length === 0;
+            hint.classList.toggle('show', idle);
+          }
+
           updateUI();
         } catch (e) { /* 网络抖动忽略 */ }
       }
@@ -2189,7 +2225,7 @@
             elHeaderDualPosTag.className = 'text-xs font-bold text-cyan-600';
           } else {
             elHeaderDualPosTag.textContent = '0/2 双仓待命中';
-            elHeaderDualPosTag.className = 'text-xs font-bold text-slate-500';
+            elHeaderDualPosTag.className = 'text-xs font-bold text-slate-700';
           }
         }
 
@@ -2232,7 +2268,7 @@
             elSmcIntOteTag.className = 'text-cyan-600 font-bold';
           } else {
             elSmcIntOteTag.textContent = `$${smc.internalOTE.fib786.toFixed(1)}-$${smc.internalOTE.fib618.toFixed(1)}`;
-            elSmcIntOteTag.className = 'text-slate-600 font-medium';
+            elSmcIntOteTag.className = 'text-slate-800 font-semibold';
           }
         }
 
@@ -2272,14 +2308,14 @@
 
         const unrealizedRate = state.usedMargin > 0 ? (totalUnrealized / state.usedMargin) * 100 : 0;
         elAccountUnrealizedRate.textContent = `(${unrealizedRate >= 0 ? '+' : ''}${unrealizedRate.toFixed(2)}%)`;
-        elAccountUnrealizedRate.className = unrealizedRate >= 0 ? 'text-[11px] font-mono text-emerald-600 font-semibold' : 'text-[11px] font-mono text-rose-600 font-semibold';
+        elAccountUnrealizedRate.className = unrealizedRate >= 0 ? 'text-[12px] font-mono text-emerald-600 font-semibold' : 'text-[12px] font-mono text-rose-600 font-semibold';
 
         elAccountRealizedPnL.textContent = `${state.realizedPnL >= 0 ? '+' : ''}$${state.realizedPnL.toFixed(2)}`;
         elAccountRealizedPnL.className = state.realizedPnL >= 0 ? 'text-lg font-bold font-mono text-emerald-600' : 'text-lg font-bold font-mono text-rose-600';
 
         const netRoi = ((currentEquity - INITIAL_CAPITAL) / INITIAL_CAPITAL) * 100;
         elAccountRoi.textContent = `(${netRoi >= 0 ? '+' : ''}${netRoi.toFixed(2)}%)`;
-        elAccountRoi.className = netRoi >= 0 ? 'text-[11px] font-mono text-emerald-600 font-semibold' : 'text-[11px] font-mono text-rose-600 font-semibold';
+        elAccountRoi.className = netRoi >= 0 ? 'text-[12px] font-mono text-emerald-600 font-semibold' : 'text-[12px] font-mono text-rose-600 font-semibold';
 
         // 4. 侧边栏 Card 1: 外部宏观结构与交易区间
         const elStatExtStrongLow = document.getElementById('statExtStrongLow');
@@ -2304,7 +2340,7 @@
           if (elDiscCard) elDiscCard.className = 'rounded-lg p-2.5 bg-emerald-50 border border-emerald-300 transition-all space-y-1';
           if (elDiscBadge) {
             elDiscBadge.textContent = '✔ 处于 0.5 折价区内 (准入做多)';
-            elDiscBadge.className = 'font-mono text-[10px] text-emerald-700 font-bold';
+            elDiscBadge.className = 'font-mono text-[12px] text-emerald-700 font-bold';
           }
           if (elDiscText) {
             elDiscText.textContent = `当前价格 ($${state.currentPrice.toFixed(2)}) 处于外部 0.5 均衡位 ($${smc.externalEQ.toFixed(2)}) 以下，满足做多准入法则（图表免画色块保持极简）。`;
@@ -2313,7 +2349,7 @@
           if (elDiscCard) elDiscCard.className = 'rounded-lg p-2.5 bg-rose-50 border border-rose-300 transition-all space-y-1';
           if (elDiscBadge) {
             elDiscBadge.textContent = '✖ 处于 0.5 溢价区 (禁止追多)';
-            elDiscBadge.className = 'font-mono text-[10px] text-rose-700 font-bold';
+            elDiscBadge.className = 'font-mono text-[12px] text-rose-700 font-bold';
           }
           if (elDiscText) {
             elDiscText.textContent = `当前价格 ($${state.currentPrice.toFixed(2)}) 高于外部 0.5 均衡位 ($${smc.externalEQ.toFixed(2)})，属于溢价区，严禁盲目追多！`;
@@ -2326,10 +2362,10 @@
 
         if (smc.externalOTE.isInsideOTE) {
           elStatOteTouchBadge.textContent = '🎯 处于 OTE 黄金带';
-          elStatOteTouchBadge.className = 'text-[9px] px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900 font-bold';
+          elStatOteTouchBadge.className = 'text-[11px] px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900 font-bold';
         } else {
           elStatOteTouchBadge.textContent = '未触及';
-          elStatOteTouchBadge.className = 'text-[9px] px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 font-bold';
+          elStatOteTouchBadge.className = 'text-[11px] px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 font-bold';
         }
 
         const elStatExtOB = document.getElementById('statExtOB');
@@ -2358,10 +2394,10 @@
         if (elStatIntOteTouchBadge && smc.internalOTE) {
           if (smc.internalOTE.isInsideOTE) {
             elStatIntOteTouchBadge.textContent = '🎯 处于内部 OTE';
-            elStatIntOteTouchBadge.className = 'text-[9px] px-1.5 py-0.2 rounded bg-cyan-200 text-cyan-900 font-bold';
+            elStatIntOteTouchBadge.className = 'text-[11px] px-1.5 py-0.2 rounded bg-cyan-200 text-cyan-900 font-bold';
           } else {
             elStatIntOteTouchBadge.textContent = '未触及';
-            elStatIntOteTouchBadge.className = 'text-[9px] px-1.5 py-0.2 rounded bg-slate-200 text-slate-700 font-medium';
+            elStatIntOteTouchBadge.className = 'text-[11px] px-1.5 py-0.2 rounded bg-slate-200 text-slate-700 font-semibold';
           }
         }
 
@@ -2390,7 +2426,7 @@
           elStatActionAdvice.className = 'text-cyan-700 font-bold';
         } else {
           elStatActionAdvice.textContent = `双仓监控中 (${hasExtPos ? '外部持仓中 ' : ''}${hasIntPos ? '内部持仓中' : ''}${!hasExtPos && !hasIntPos ? '等待回踩入场' : ''})`;
-          elStatActionAdvice.className = 'text-slate-600 font-medium';
+          elStatActionAdvice.className = 'text-slate-800 font-semibold';
         }
 
         // 7. 持仓列表与浮窗 HUD (支持展示双仓)
@@ -2411,11 +2447,11 @@
             tr.innerHTML = `
               <td class="py-2.5 px-2.5">
                 <div class="flex items-center gap-1.5 font-bold">
-                  <span class="px-1.5 py-0.5 rounded text-[10px] ${badgeColor} border font-bold">
+                  <span class="px-1.5 py-0.5 rounded text-[12px] ${badgeColor} border font-bold">
                     ${pos.scope === 'EXTERNAL' ? '外部宏观仓' : '内部微观仓'}
                   </span>
                   <span>ETH/USDT</span>
-                  <span class="text-blue-600 text-[10px] font-normal">30X</span>
+                  <span class="text-blue-600 text-[12px] font-normal">30X</span>
                 </div>
               </td>
               <td class="py-2.5 px-2.5 font-bold text-slate-900">${pos.size.toFixed(3)} ETH</td>
@@ -2423,16 +2459,16 @@
               <td class="py-2.5 px-2.5 font-bold font-mono ${state.currentPrice >= pos.entryPrice ? 'text-emerald-600' : 'text-rose-600'}">$${state.currentPrice.toFixed(2)}</td>
               <td class="py-2.5 px-2.5 text-emerald-600 font-bold font-mono">
                 $${pos.tp.toFixed(2)}
-                <span class="text-[9px] block text-slate-400 font-normal">[${pos.targetLabel}]</span>
+                <span class="text-[11px] block text-slate-600 font-normal">[${pos.targetLabel}]</span>
               </td>
               <td class="py-2.5 px-2.5 text-rose-600 font-bold font-mono">$${pos.sl.toFixed(2)}</td>
               <td class="py-2.5 px-2.5 text-amber-600 font-mono">${pos.margin.toFixed(2)} U</td>
               <td class="py-2.5 px-2.5 font-bold font-mono ${pos.unrealizedPnL >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
                 ${pos.unrealizedPnL >= 0 ? '+' : ''}$${pos.unrealizedPnL.toFixed(2)}
-                <span class="text-[10px] block font-normal">(${pos.roe >= 0 ? '+' : ''}${pos.roe.toFixed(2)}%)</span>
+                <span class="text-[12px] block font-normal">(${pos.roe >= 0 ? '+' : ''}${pos.roe.toFixed(2)}%)</span>
               </td>
-              <td class="py-2.5 px-2.5 text-right font-medium text-emerald-700">
-                <span class="px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-[10px]">前高自动止盈</span>
+              <td class="py-2.5 px-2.5 text-right font-semibold text-emerald-700">
+                <span class="px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-[12px]">前高自动止盈</span>
               </td>
             `;
             elTbodyPositions.appendChild(tr);
@@ -2467,18 +2503,18 @@
             const tr = document.createElement('tr');
             tr.className = 'hover:bg-slate-50/80 transition text-slate-700';
             tr.innerHTML = `
-              <td class="py-2 px-2.5 text-slate-500">${h.closeTime}</td>
+              <td class="py-2 px-2.5 text-slate-700">${h.closeTime}</td>
               <td class="py-2 px-2.5">
-                <span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${h.scope === 'EXTERNAL' ? 'bg-indigo-100 text-indigo-800 border border-indigo-200' : 'bg-cyan-100 text-cyan-800 border border-cyan-200'}">
+                <span class="px-1.5 py-0.5 rounded text-[12px] font-bold ${h.scope === 'EXTERNAL' ? 'bg-indigo-100 text-indigo-800 border border-indigo-200' : 'bg-cyan-100 text-cyan-800 border border-cyan-200'}">
                   ${h.scope === 'EXTERNAL' ? '外部仓' : '内部仓'}
                 </span>
               </td>
               <td class="py-2 px-2.5 font-mono">$${h.entryPrice.toFixed(2)}</td>
               <td class="py-2 px-2.5 font-mono">$${h.exitPrice.toFixed(2)}</td>
-              <td class="py-2 px-2.5 text-slate-600 text-[10px] font-medium">${h.reason}</td>
+              <td class="py-2 px-2.5 text-slate-800 text-[12px] font-semibold">${h.reason}</td>
               <td class="py-2 px-2.5 text-right font-bold font-mono ${h.pnl >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
                 ${h.pnl >= 0 ? '+' : ''}$${h.pnl.toFixed(2)}
-                <span class="text-[10px] block font-normal">(${h.returnRate >= 0 ? '+' : ''}${h.returnRate.toFixed(1)}%)</span>
+                <span class="text-[12px] block font-normal">(${h.returnRate >= 0 ? '+' : ''}${h.returnRate.toFixed(1)}%)</span>
               </td>
             `;
             elTbodyHistory.appendChild(tr);
@@ -2551,7 +2587,7 @@
           if (l === activeLimit) {
             btn.className = 'btn-kline-limit px-2 py-0.5 rounded-md bg-white text-blue-600 shadow-2xs border border-slate-200/90 font-bold transition active';
           } else {
-            btn.className = 'btn-kline-limit px-2 py-0.5 rounded-md text-slate-600 hover:text-slate-900 font-semibold transition';
+            btn.className = 'btn-kline-limit px-2 py-0.5 rounded-md text-slate-800 hover:text-slate-900 font-semibold transition';
           }
         });
       }
@@ -2632,7 +2668,7 @@
               btn.className = 'tab-btn py-3 px-3.5 border-b-2 border-blue-600 text-blue-600 font-bold flex items-center gap-2 transition';
               panel.classList.remove('hidden');
             } else {
-              btn.className = 'tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-500 hover:text-slate-900 font-medium flex items-center gap-2 transition';
+              btn.className = 'tab-btn py-3 px-3.5 border-b-2 border-transparent text-slate-700 hover:text-slate-900 font-semibold flex items-center gap-2 transition';
               panel.classList.add('hidden');
             }
           });
