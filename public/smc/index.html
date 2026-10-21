@@ -1447,6 +1447,46 @@
       // --- Dual Structure & External OTE Calculation ---
       // 严格分立：外部宏观结构 (Strong Low → Weak High) vs 内部微观结构 (次级高低点 & 内部 OTE)
       // 双仓进场机制：外部一仓看外部前高，内部一仓看内部前高，不画折价区
+      //
+      // 结构 OTE（外部/内部同一套口径，与服务器引擎 server.js 一致）：
+      //   dir>0 涨破：OTE = 被突破高点 → 突破前摆动低点的 0.618~0.786 回撤（带在下方）
+      //   dir<0 跌破：OTE = 被跌破低点 → 突破前摆动高点的 0.618~0.786 反抽（带在上方）
+      //   新突破一出现就是新的主 OTE；旧带只留 history 显示，不再作为进场依据。
+      function buildOteBand(brk, highs, lows) {
+        if (!brk) return null;
+        const pivot = brk.pivotIndex || 0;
+        const from = Math.max(0, pivot - 60);
+        if (brk.dir > 0) {
+          const hi = brk.price;
+          let lo = Infinity;
+          for (let k = from; k < pivot; k++) if (lows[k] < lo) lo = lows[k];
+          return (lo < hi) ? { hi: hi, lo: lo, dir: 1 } : null;
+        }
+        const lo = brk.price;
+        let hi = -Infinity;
+        for (let k = from; k < pivot; k++) if (highs[k] > hi) hi = highs[k];
+        return (hi > lo) ? { hi: hi, lo: lo, dir: -1 } : null;
+      }
+      function oteFibs(band) {
+        if (!band) return { range: 0, fib50: 0, fib618: 0, fib705: 0, fib786: 0 };
+        const r = band.hi - band.lo;
+        const base = band.dir > 0 ? band.hi : band.lo;
+        const sign = band.dir > 0 ? -1 : 1;
+        return {
+          range: r,
+          fib50: base + sign * 0.500 * r,
+          fib618: base + sign * 0.618 * r,
+          fib705: base + sign * 0.705 * r,
+          fib786: base + sign * 0.786 * r
+        };
+      }
+      function priceInOte(price, f) {
+        if (!f || !(f.range > 0)) return false;
+        const lo = Math.min(f.fib618, f.fib786);
+        const hi = Math.max(f.fib618, f.fib786);
+        return (price >= lo * 0.998 && price <= hi * 1.002);
+      }
+
       function calculateMTF_SMC() {
         const k15m = state.klines15m;
         if (!k15m || k15m.length < 25) return;
@@ -1713,12 +1753,22 @@
         const extEQ = (extStrongLow + extWeakHigh) / 2.0;
         const inDiscountForLong = curPrice < extEQ;
 
-        // 外部 OTE (基于 x.txt 宏观结构段 Strong Low -> Weak High 测算)
-        const fib50 = extEQ;
-        const fib618 = extWeakHigh - 0.618 * extRange;
-        const fib705 = extWeakHigh - 0.705 * extRange;
-        const fib786 = extWeakHigh - 0.786 * extRange;
-        const isInsideExtOTE = (curPrice <= fib618 * 1.002 && curPrice >= fib786 * 0.998);
+        // 外部 OTE：只认「最近一次外部 BOS/CHoCH」（旧写法用 trailing 极值 ⇒ 一直守着老结构）
+        const extBreaksAll = swingCHoCHList.map(b => Object.assign({ tag: 'CHoCH' }, b))
+          .concat(swingBOSList.map(b => Object.assign({ tag: 'BOS' }, b)))
+          .sort((a, b) => (a.breakIndex || 0) - (b.breakIndex || 0));
+        const lastExtBreak = extBreaksAll.length ? extBreaksAll[extBreaksAll.length - 1] : null;
+        const extBand = buildOteBand(lastExtBreak, highs, lows);
+        const extFibs = oteFibs(extBand);
+        const fib50 = extFibs.fib50;
+        const fib618 = extFibs.fib618;
+        const fib705 = extFibs.fib705;
+        const fib786 = extFibs.fib786;
+        const isInsideExtOTE = Boolean(lastExtBreak && extBand && lastExtBreak.dir > 0) && priceInOte(curPrice, extFibs);
+        const extOteHistory = extBreaksAll.slice(-4).map(function (b) {
+          const f = oteFibs(buildOteBand(b, highs, lows));
+          return { tag: b.tag, dir: b.dir, breakIndex: b.breakIndex, fib618: f.fib618, fib786: f.fib786 };
+        });
 
         // 外部有效订单块 (未穿透)
         const activeSwingOBs = swingOrderBlocks.filter(ob => !ob.pierced);
@@ -1729,33 +1779,25 @@
         const intLow = (internalLow.currentLevel !== null) ? internalLow.currentLevel : lows[n - 1];
         const intRange = Math.max(5.0, Math.abs(intHigh - intLow));
 
-  // ---- 内部 OTE：必须由「最近一次内部 BOS/CHoCH」推导 ----
-  // 先有结构突破，才画对应的 OTE；没有突破就没有 OTE、不进场。
-  // （旧写法直接用当前 internalHigh/Low 算 OTE，与突破无关 ⇒ 乱进）
-  const lastIntBreak = internalCHoCHList.concat(internalBOSList)
-    .slice().sort((a, b) => (b.breakIndex || 0) - (a.breakIndex || 0))[0] || null;
+  // ---- 内部 OTE：必须由「最近一次内部 BOS/CHoCH」推导（与外部同一套口径）----
+  // 先有结构突破，才画对应的 OTE；没有突破就没有 OTE、不进场。新突破立即换带。
+  const intBreaksAll = internalCHoCHList.map(b => Object.assign({ tag: 'CHoCH' }, b))
+    .concat(internalBOSList.map(b => Object.assign({ tag: 'BOS' }, b)))
+    .sort((a, b) => (a.breakIndex || 0) - (b.breakIndex || 0));
+  const lastIntBreak = intBreaksAll.length ? intBreaksAll[intBreaksAll.length - 1] : null;
 
-  let intOteHigh = 0, intOteLow = 0;
-  if (lastIntBreak && lastIntBreak.dir > 0) {
-    // 看涨突破：OTE = 「突破前最近的摆动低点」→「被突破的那个高点」这段的 0.618-0.786 回撤
-    const hi = lastIntBreak.price;
-    let lo = Infinity;
-    const from = Math.max(0, (lastIntBreak.pivotIndex || 0) - 60);
-    for (let k = from; k < (lastIntBreak.pivotIndex || 0); k++) {
-      if (lows[k] < lo) lo = lows[k];
-    }
-    if (lo < hi) { intOteHigh = hi; intOteLow = lo; }
-  }
-
-  const intOteRange = (intOteHigh > intOteLow) ? (intOteHigh - intOteLow) : 0;
-  const intFib50 = intOteHigh - 0.500 * intOteRange;
-  const intFib618 = intOteHigh - 0.618 * intOteRange;
-  const intFib705 = intOteHigh - 0.705 * intOteRange;
-  const intFib786 = intOteHigh - 0.786 * intOteRange;
-  const isInsideIntOTE = (intOteRange > 0)
-    ? (curPrice <= intFib618 * 1.002 && curPrice >= intFib786 * 0.998)
-    : false;
-  const hasIntStructure = Boolean(lastIntBreak);
+  const intBand = buildOteBand(lastIntBreak, highs, lows);
+  const intFibs = oteFibs(intBand);
+  const intFib50 = intFibs.fib50;
+  const intFib618 = intFibs.fib618;
+  const intFib705 = intFibs.fib705;
+  const intFib786 = intFibs.fib786;
+  const isInsideIntOTE = Boolean(lastIntBreak && intBand && lastIntBreak.dir > 0) && priceInOte(curPrice, intFibs);
+  const hasIntStructure = Boolean(lastIntBreak && intBand);
+  const intOteHistory = intBreaksAll.slice(-4).map(function (b) {
+    const f = oteFibs(buildOteBand(b, highs, lows));
+    return { tag: b.tag, dir: b.dir, breakIndex: b.breakIndex, fib618: f.fib618, fib786: f.fib786 };
+  });
 
         // 内部有效订单块 (未穿透)
         const activeIntOBs = internalOrderBlocks.filter(ob => !ob.pierced);
@@ -1781,7 +1823,11 @@
             fib618: fib618,
             fib705: fib705,
             fib786: fib786,
-            isInsideOTE: isInsideExtOTE
+            isInsideOTE: isInsideExtOTE,
+            source: lastExtBreak ? lastExtBreak.tag : null,
+            dir: lastExtBreak ? lastExtBreak.dir : 0,
+            breakIndex: lastExtBreak ? lastExtBreak.breakIndex : null,
+            history: extOteHistory
           },
           // 内部微观 (完全忠实于 x.txt)
           internalTrend: internalTrend === 1 ? 'BULLISH' : 'BEARISH',
@@ -1792,7 +1838,11 @@
             fib618: intFib618,
             fib705: intFib705,
             fib786: intFib786,
-            isInsideOTE: isInsideIntOTE
+            isInsideOTE: isInsideIntOTE,
+            source: lastIntBreak ? lastIntBreak.tag : null,
+            dir: lastIntBreak ? lastIntBreak.dir : 0,
+            breakIndex: lastIntBreak ? lastIntBreak.breakIndex : null,
+            history: intOteHistory
           },
           internalBosList: internalBOSList,
           internalChochList: internalCHoCHList,
@@ -1803,6 +1853,13 @@
           extTargetTP: extWeakHigh, // 外部进场默认看向外部 Weak High
           intTargetTP: intHigh      // 内部进场默认看向内部结构 High
         };
+
+        // 服务器 OTE 优先：/api/smc-status 每 2s 一次，本地这套只作兜底。
+        // 不这样做的话本地每次 tick 都会把服务器刚下发的新带覆盖回本地口径 ⇒ 两条带来回跳。
+        if (state.serverOteAt && (Date.now() - state.serverOteAt) < 30000 && state.serverOte) {
+          if (state.serverOte.externalOTE) state.smc15m.externalOTE = state.serverOte.externalOTE;
+          if (state.serverOte.internalOTE) state.smc15m.internalOTE = state.serverOte.internalOTE;
+        }
 
         // I. 全自动双仓协同进场触发机制
         const hasExternalPos = state.positions.some(p => p.scope === 'EXTERNAL');
@@ -2061,6 +2118,10 @@
           const m = state.smc15m;
           if (sv.externalOTE)      m.externalOTE      = sv.externalOTE;
           if (sv.internalOTE)      m.internalOTE      = sv.internalOTE;
+          // 存一份带时间戳的服务器 OTE：本地 calculateMTF_SMC 每 tick 会重算 state.smc15m，
+          // 靠这份快照把服务器的新带"钉住"，30s 内不丢。
+          state.serverOte = { externalOTE: sv.externalOTE, internalOTE: sv.internalOTE };
+          state.serverOteAt = Date.now();
           if (sv.externalStrongLow !== undefined) {
             m.externalRangeLow   = sv.externalStrongLow;
             m.externalStrongLow   = sv.externalStrongLow;
