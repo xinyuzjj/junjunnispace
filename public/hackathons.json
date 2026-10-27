@@ -8,9 +8,18 @@
     }
   },
   "stats": [
-    { "label": "参赛赛事", "value": "2" },
-    { "label": "提交项目", "value": "2" },
-    { "label": "首个赛事", "value": "2026-09" }
+    {
+      "label": "参赛赛事",
+      "value": "4"
+    },
+    {
+      "label": "提交项目",
+      "value": "4"
+    },
+    {
+      "label": "首个赛事",
+      "value": "2026-09"
+    }
   ],
   "events": [
     {
@@ -25,7 +34,15 @@
         "name": "BAZZ.AGENT",
         "tagline": "你的币安副驾驶 —— 出手之前，先问你",
         "desc": "桌面端 AI 交易 Agent，把币安 Agent OS 的四大原生能力（MCP · Agentic Wallet · x402 · Skill Hub）熔进一条真实交易闭环：扫描 → 分析 → 提案 → 确认 → 执行。不是套在 REST API 上的聊天皮肤，每一枪都等你点头。",
-        "tech": ["Electron", "Python", "FastAPI", "React", "TypeScript", "MCP", "x402"],
+        "tech": [
+          "Electron",
+          "Python",
+          "FastAPI",
+          "React",
+          "TypeScript",
+          "MCP",
+          "x402"
+        ],
         "highlights": [
           "真雷达：全市场扫描 + 资金费率 / 持仓量 / 大户多空 / 恐惧贪婪，零 API Key",
           "人在环中：流程每一步留痕，以 Confirm 确认卡收尾，点头才打真实订单",
@@ -33,8 +50,15 @@
           "有 88 秒实拍演示与在线落地页，另有 setup.exe 可下载安装"
         ],
         "links": [
-          { "label": "在线演示", "url": "https://xinyuzjj.github.io/bazz.agent/", "primary": true },
-          { "label": "GitHub 仓库", "url": "https://github.com/xinyuzjj/bazz.agent" }
+          {
+            "label": "在线演示",
+            "url": "https://xinyuzjj.github.io/bazz.agent/",
+            "primary": true
+          },
+          {
+            "label": "GitHub 仓库",
+            "url": "https://github.com/xinyuzjj/bazz.agent"
+          }
         ]
       }
     },
@@ -50,7 +74,14 @@
         "name": "TipJar on Arc",
         "tagline": "让每一个微小创作都能立刻收到回报",
         "desc": "跑在 Arc 主网上的零托管打赏 + 永久链上微博。帖子与留言只写进事件日志、不进存储槽，单条成本约 $0.0014；打赏由合约直接转给作者，平台不碰钱、零抽成、无资金池。",
-        "tech": ["Solidity", "Cloudflare Workers", "viem", "Arc mainnet", "USDC", "KV"],
+        "tech": [
+          "Solidity",
+          "Cloudflare Workers",
+          "viem",
+          "Arc mainnet",
+          "USDC",
+          "KV"
+        ],
         "highlights": [
           "Arc gas 约 $0.0014，把可变现内容的颗粒度拉低 100–1000 倍 —— $0.01 的打赏第一次在经济上成立",
           "零托管：tipPost 直接 call{value:} 把 USDC 转给作者，合约不持币，没有跑路动机",
@@ -59,9 +90,107 @@
           "合约已真实部署 Arc 主网：0x005a5a60…350e，前端与索引器均已上线"
         ],
         "links": [
-          { "label": "线上应用", "url": "https://tipjar-glx.pages.dev/", "primary": true },
-          { "label": "链上合约", "url": "https://explorer.arc.io/address/0x005a5a60054e56d082ed0de3ccc6cb72c2a3350e" },
-          { "label": "GitHub 仓库", "url": "https://github.com/xinyuzjj/tipjar" }
+          {
+            "label": "线上应用",
+            "url": "https://tipjar-glx.pages.dev/",
+            "primary": true
+          },
+          {
+            "label": "链上合约",
+            "url": "https://explorer.arc.io/address/0x005a5a60054e56d082ed0de3ccc6cb72c2a3350e"
+          },
+          {
+            "label": "GitHub 仓库",
+            "url": "https://github.com/xinyuzjj/tipjar"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bli-legaltech-2",
+      "event": "BLI Legal Tech Hackathon 2",
+      "track": "RWA · LegalTech & RegTech · AI × Blockchain（Chainlink CRE bounty）",
+      "period": "2026-10",
+      "deadline": "—",
+      "status": "已参赛",
+      "accent": "#375BD2",
+      "project": {
+        "name": "VeriLex",
+        "tagline": "让合规成为资产的运行时属性，而不是发行时的一份 PDF",
+        "desc": "面向代币化 RWA 的持续合规层：Chainlink CRE 工作流定时扫整个资产组合，用 DON 共识拉取托管储备、牌照、法律文件、审计与制裁筛查，再用 Chainlink Data Feeds 折算外币储备，按版本化策略算出 0–100 合规分并把结论锚上链。资产一旦进入 BREACH，代币自身冻结转账，直到合规恢复。",
+        "tech": [
+          "Chainlink CRE",
+          "Chainlink Data Feeds",
+          "Solidity",
+          "Hardhat",
+          "React",
+          "TypeScript"
+        ],
+        "highlights": [
+          "每个资产 7+ 项检查：储备覆盖率、牌照有效期、制裁筛查、法律文件哈希、证明与审计时效、覆盖率漂移，判决全部规则化可解释",
+          "结论可复算：分数、完整推理链哈希、策略哈希一起写进 ComplianceRegistry，任何历史判决都能按当时的规则集重推",
+          "BREACH 即冻结：TokenizedAsset 每次转账都查注册表，违规资产直接 revert，发行与赎回不拦",
+          "fail-closed：CRE forwarder 未配置前拒绝一切上报；价格必须为正、整轮、未过期，缺汇率的外币证明直接拒绝而不是当 USD"
+        ],
+        "links": [
+          {
+            "label": "在线演示",
+            "url": "https://xinyuzjj.github.io/verilex/",
+            "primary": true
+          },
+          {
+            "label": "演示视频",
+            "url": "https://xinyuzjj.github.io/verilex/verilex-demo-remotion.mp4"
+          },
+          {
+            "label": "GitHub 仓库",
+            "url": "https://github.com/xinyuzjj/verilex"
+          }
+        ]
+      }
+    },
+    {
+      "id": "arc-microgrants-2",
+      "event": "Arc Microgrants: Built with Arc Studio",
+      "track": "Round 2 · 8 × $500 USDC 微资助",
+      "period": "2026-10",
+      "deadline": "2026-11-01",
+      "status": "已参赛",
+      "accent": "#2775CA",
+      "project": {
+        "name": "MilePay",
+        "tagline": "按里程碑托管 USDC：交付才放款，逾期可退款",
+        "desc": "跑在 Arc 主网的里程碑式 USDC 托管：付款方把资金锁进带标题、收款地址、交付期限和复核窗口的托管合约；收款方标记交付后由付款方放款，付款方沉默则在复核窗口结束后由收款方自动领取，逾期未交付付款方可退款。合约由 Arc Studio 生成并部署，经外部安全审查后移除了 updatePayee —— 交付之后付款方不能再改收款地址。",
+        "tech": [
+          "Arc mainnet",
+          "USDC",
+          "Solidity",
+          "Foundry",
+          "Arc Studio",
+          "React",
+          "wagmi",
+          "viem"
+        ],
+        "highlights": [
+          "三条真实主网路径各 0.01 USDC 跑通：放款、退款、复核期后自动领取，交易哈希全部可查",
+          "合约已部署 Arc 主网 0x4154…8Df4，部署交易与三条演示交易都写在 README",
+          "安全修正：外部审查后移除 updatePayee 及其事件与错误，杜绝交付后重定向资金",
+          "五视图应用：创建托管、我的托管、陪审投票、工资流、Agent 页，全部直接读链上状态"
+        ],
+        "links": [
+          {
+            "label": "线上应用",
+            "url": "https://xinyuzjj.github.io/milepay/",
+            "primary": true
+          },
+          {
+            "label": "链上合约",
+            "url": "https://explorer.arc.io/address/0x4154268BEF790A1328407e4D80F109E110328Df4"
+          },
+          {
+            "label": "GitHub 仓库",
+            "url": "https://github.com/xinyuzjj/milepay"
+          }
         ]
       }
     }
